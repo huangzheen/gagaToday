@@ -1,0 +1,1686 @@
+ Pure Core 3
+
+
+Revision Notes
+
+
+
+
+                 June 2016
+Pure Core 3
+
+1       Algebraic fractions .................................................................................................3
+    Cancelling common factors .................................................................................................................. 3
+    Multiplying and dividing fractions ....................................................................................................... 3
+    Adding and subtracting fractions .......................................................................................................... 3
+    Equations .............................................................................................................................................. 4
+
+
+2       Functions ...............................................................................................................5
+    Notation ................................................................................................................................................ 5
+    Domain, range and graph ...................................................................................................................... 5
+        Defining functions ........................................................................................................................................................................... 6
+    Composite functions ............................................................................................................................. 7
+    Inverse functions and their graphs ........................................................................................................ 7
+      To find the inverse of a function x → y................................................................................................................................. 7
+    Domain and range of inverse functions ................................................................................................ 9
+    Modulus functions .............................................................................................................................. 10
+      Modulus functions y = |f (x)|.................................................................................................................................................10
+      Modulus functions y = f (|x|) ..................................................................................................................................................11
+    Standard graphs................................................................................................................................... 11
+    Combinations of transformations of graphs ........................................................................................ 12
+    Sketching curves ................................................................................................................................. 13
+
+
+3       Trigonometry ........................................................................................................ 14
+    Sec, cosec and cot ............................................................................................................................... 14
+        Graphs ................................................................................................................................................................................................14
+    Inverse trigonometrical functions ....................................................................................................... 15
+        Graphs ................................................................................................................................................................................................15
+    Trigonometrical identities ................................................................................................................... 16
+                                        𝑃+𝑄             𝑃−𝑄
+      Proof of sin P + sin Q = 2 sin � � cos � � .................................................................................................................16
+                                          2               2
+        Finding exact values.....................................................................................................................................................................17
+        Proving identities. .........................................................................................................................................................................17
+        Eliminating a variable between two equations ...............................................................................................................18
+        Solving equations ..........................................................................................................................................................................18
+    R cos(x + α) ........................................................................................................................................ 19
+
+
+4       Exponentials and logarithms ................................................................................ 21
+    Natural logarithms .............................................................................................................................. 21
+        Definition and graph ....................................................................................................................................................................21
+        Equations of the form eax + b = p ............................................................................................................................................22
+5      Differentiation ...................................................................................................... 23
+    Chain rule ............................................................................................................................................ 23
+    Product rule ......................................................................................................................................... 23
+    Quotient rule ........................................................................................................................................ 24
+    Derivatives of ex and logex ≡ ln x. ..................................................................................................... 25
+    𝒅𝒚          𝟏
+       =        𝒅𝒙   ............................................................................................................................................. 26
+    𝒅𝒙
+                𝐝𝐲
+
+    Derivative of ax................................................................................................................................... 26
+    Trigonometric differentiation .............................................................................................................. 27
+    Chain rule – further examples ............................................................................................................. 27
+    Trigonometry and the product and quotient rules ............................................................................... 28
+
+
+6      Numerical methods .............................................................................................. 30
+    Locating the roots of f(x) = 0 .............................................................................................................. 30
+    The iteration xn + 1 = g(xn) ................................................................................................................... 30
+    Conditions for convergence................................................................................................................. 31
+
+
+7      Appendix.............................................................................................................. 32
+    Derivatives of sin x and cos x .............................................................................................................. 32
+                     sinℎ
+       limℎ→0               = 1 ...............................................................................................................................................................................32
+                      ℎ
+       Alternative formula for derivative ........................................................................................................................................32
+       Derivatives of sin x and cos x ...................................................................................................................................................33
+
+
+Index ........................................................................................................................... 34
+
+
+
+
+2                                                                                                                                                                   C3 JUNE 2016 SDB
+1       Algebraic fractions
+Cancelling common factors
+                               x 3 − 2 x 2 − 3x
+    Example: Simplify                           .
+                                  4 x 2 − 36
+    Solution:    First factorise top and bottom fully –
+         x 3 − 2 x 2 − 3x   x( x 2 − 2 x − 3) x( x − 3)( x + 1)
+                          =                  =
+            4 x 2 − 36         4( x 2 − 9)     4( x − 3)( x + 3)
+        and now cancel all common factors, in this case (x – 3) to give
+                             x( x + 1)
+           Answer =                    .
+                             4( x + 3)
+
+Multiplying and dividing fractions
+    This is just like multiplying and dividing fractions with numbers and then cancelling common
+    factors as above.
+                          9 x 2 − 4 3x 2 − x − 2
+    Example:     Simplify            ÷
+                          3x 2 − 2 x   x3 + x2
+    Solution:    First turn the second fraction upside down and multiply
+                       9x 2 − 4     x3 + x2
+                 =               ×                                                                 factorise fully
+                       3x 2 − 2 x 3x 2 − x − 2
+
+                       (3 x − 2)(3 x + 2)      x ( x + 1)
+                                                    2
+                 =                        ×                                           cancel all common factors
+                           x(3 x − 2)       (3x + 2)( x − 1)
+                              x( x + 1)
+           Answer        =              .
+                               x −1
+
+Adding and subtracting fractions
+    Again this is like adding and subtracting fractions with numbers; but finding the Lowest
+    Common Denominator can save a lot of trouble later.
+                                   3x           5
+    Example: Simplify                      − 2          .
+                               x − 7 x + 12 x − 4 x + 3
+                                 2
+
+
+    Solution:    First factorise the denominators
+                3x               5
+    =                    −                                         we see that the L.C.D. is (x – 3)(x – 4)(x – 1)
+         ( x − 3)( x − 4) ( x − 3)( x − 1)
+                3x( x − 1)               5( x − 4)
+    =                            −
+         ( x − 3)( x − 4)( x − 1) ( x − 3)( x − 1)( x − 4)
+
+          3x 2 − 3x − 5 x + 20        3x 2 − 8 x + 20
+    =                            =                                  which cannot be simplified further.
+         ( x − 1)( x − 3)( x − 4) ( x − 1)( x − 3)( x − 4)
+
+
+
+
+    C3 JUNE 2016 SDB                                                                                             3
+Equations
+                          x    x −1 1
+    Example: Solve           −     =
+                        x +1     x   2
+    Solution:   First multiply both sides by the Lowest Common Denominator
+                  x    x −1 1
+                     −     =                                     multiply both sides by 2x(x + 1)
+                x +1     x   2
+        ⇒       x × 2x – (x – 1) × 2(x + 1) = x(x + 1)
+        ⇒       2x2 – 2x2 + 2 = x2 + x
+        ⇒       x2 + x – 2 = 0,
+        ⇒       (x + 2)(x – 1) = 0
+        ⇒       x = –2 or 1
+
+
+
+
+4                                                                        C3 JUNE 2016 SDB
+2       Functions
+    A function is an expression (often in x) which has only one value for each value of x.
+
+Notation
+    y = x2 – 3x + 7,      f (x) = x2 – 3x + 7    and      f : x → x2 – 3x + 7
+    are all ways of writing the same function.
+
+Domain, range and graph
+    The domain is the set of values which x can take:
+    this is sometimes specified in the definition
+    sometimes is evident from the function: e.g. for √x, x can only take positive x or zero values.
+    The range is that part of the y–axis which is used.
+
+
+    Example: Find the range of the function
+        f : x → 2x – 3 with domain      x ∈ ℜ: –2 < x ≤ 4.
+                                                                                               y
+                                                                                           6
+
+    Solution:    First sketch the graph for values of x between – 2                       4
+                                                                                      range                    y=2x−3
+        and 4 (the domain), and we can see that we are only using                          2
+
+        the y–axis from –7 to 5,                                                                        domain            x
+                                                                               −4    −2                 2    4        6
+        not including y = –7 (since x ≠ –2),                                              −2
+
+        but including y = 5 (since x can equal 4)                                         −4
+        and so the range is
+                                                                                          −6
+        y ∈ ℜ: –7 < y ≤ 5.
+                                                                                          −8
+
+
+    Example: Find the largest possible domain and the range for the function
+    f : x → x − 3 + 1.
+
+
+    Solution:    First notice that we cannot have the square root of a negative number and so
+        x – 3 cannot be negative
+        ⇒       x–3≥0
+
+        ⇒ largest possible domain is x ∈ ℜ: x ≥ 3.
+
+                                                                       y
+
+        To find the range we first sketch the graph                6
+
+        and we see that the graph will cover all of the            4                y=√(x−3)+1
+                                                              range
+        y-axis from 1 upwards                                      2
+                                                                                                   domain                 x
+
+        and so the range is    y ∈ ℜ: y ≥ 1.                  −2           2    4     6    8       10     12     14   16
+
+
+
+
+    C3 JUNE 2016 SDB                                                                                                          5
+    Example: Find the largest possible domain and the range for the function
+                        2x
+                f:x→        . Give the equations of its asymptotes.
+                       x +1
+    Solution:   The only problem occurs when the denominator is 0, and so x cannot be –1.
+        Thus the largest domain is x ∈ ℜ: x ≠ –1.
+
+                                                                                   y
+    To find the range we sketch the graph                                      8
+
+    and we see that y can take any value                                       6
+                                                              y=2x/(x+1)
+    except 2,                                                                      range
+                                                                               4
+                                                                                             asymptote y=2
+                                                                               2
+    so the range is y ∈ ℜ: y ≠ 2.                            domain                              domain          x
+                                                    0   −8    −6   −4   −2               2       4    6      8
+
+                                                                              −2
+    Asymptotes are x = –1 and y = 2                          asymptote x=−1        range
+                                                                              −4
+
+                                                                              −6
+
+
+
+
+    Defining functions
+    Some mappings can be made into functions by restricting the domain.
+    Examples:
+    1) The mapping x → √x where x ∈ ℜ is not a function as √–9 is not defined, but if we
+       restrict the domain to positive or zero real numbers then f : x → √ x where x ∈ ℜ, x ≥ 0
+       is a function.
+                1
+    2) x →          where x ∈ ℜ is not a function as the image of x = 3 is not defined,
+              x −3
+                       1
+        but f : x →       where x ∈ ℜ, x ≠ 3 is a function.
+                     x −3
+
+
+
+
+6                                                                                      C3 JUNE 2016 SDB
+Composite functions
+  To find the composite function fg we must do g first.
+  Example: f : x → 3x – 2               and     g : x → x2 + 1. Find fg and gf.
+
+
+  Solution:    Think of f and g as ‘rules’
+
+       f is       multiply by 3                 subtract 2
+
+
+       g is           square            add 1
+
+
+          ⇒ fg is              square           add 1        multiply by 3        subtract 2
+
+
+          giving (x2 + 1) × 3 – 2 = 3x2 + 1
+          ⇒ fg : x → 3x2 + 1             or      fg(x) = 3x2 + 1.
+
+
+          gf is   multiply by 3                 subtract 2          square     add 1
+
+
+          giving (3x – 2)2 + 1 = 9x2 – 12x + 5
+          ⇒ gf : x → 9x2 – 12x + 5                or gf (x) = 9x2 – 12x + 5.
+
+
+  Note that fg and gf are not the same.
+
+
+
+
+Inverse functions and their graphs
+  The inverse of f is the ‘opposite’ of f:
+       thus the inverse of ‘multiply by 3’ is ‘divide by 3’
+       and the inverse of ‘square’ is ‘square root’.
+
+  The inverse of f is written as f –1: note that this does not mean ‘1 over f ’.
+  The graph of y = f –1(x) is the reflection in y = x of the graph of y = f (x).
+
+
+To find the inverse of a function x → y
+  (i) interchange x and y
+  (ii) find y in terms of x.
+
+
+
+
+   C3 JUNE 2016 SDB                                                                            7
+    Example: Find the inverse of f : x → 3x – 2.
+
+
+    Solution:   We have x → y = 3x – 2                                                           4   y
+
+
+        (i)     interchanging x and y ⇒ x = 3y – 2                                                                       y=x
+
+
+                                                 x+2                                             2
+        (ii)    solving for y ⇒           y=
+                                                  3                         y = f –1(x)
+                                                                                                                                        x
+                             x+2
+        ⇒       f   –1
+                         :x→                                         −4           −2                                 2              4
+
+                              3
+                                                                                                −2       y = f (x)
+
+
+
+                                                                                                −4
+
+
+                                                    x+3
+    Example: Find the inverse of g : x →                  .
+                                                   2x − 5
+                                                                                            y
+                                 x+3
+    Solution:   We have x → y =                                                         6
+                                2x − 5                                                                                    y=x
+
+        (i)     interchanging x and y                                                   4
+                          y+3
+                ⇒ x =
+                         2y − 5                               y = g –1(x)
+                                                                                        2
+
+        (ii)    solving for y                                                                                             y = g (x) x
+
+                ⇒ x(2y – 5) = y + 3                                −4        −2                          2           4          6
+
+
+                ⇒          2xy – 5x = y + 3                                            −2
+
+                ⇒          2xy – y = 5x + 3
+                                                                                       −4
+                ⇒          y(2x – 1) = 5x + 3
+                                 5x + 3
+                ⇒          y =
+                                 2x − 1
+                                        5x + 3
+                ⇒          g –1 : x →
+                                        2x − 1
+
+
+Note that f f –1 (x) = f –1 f (x) = x.
+
+
+
+
+8                                                                                               C3 JUNE 2016 SDB
+Domain and range of inverse functions
+
+  Note that the domain of f (x) is the range of f –1(x),
+  and that the range of f (x) is the domain of f –1(x).
+  This is because the graph of y = f –1(x) is that of y = f (x) after a reflection in the line y = x.
+
+
+  Example: f (x) = (x – 3)2 + 4,     x ∈ ℜ, x ≤ 3.
+      (a)     Sketch the graph of y = f (x), and state its range.
+      (b)     Find the inverse function, f –1(x) and sketch its graph on the same diagram.
+              Show the line y = x on your diagram.
+      (c)     State the domain and range of f –1(x).
+
+
+  Solution:
+      (a)     As the domain of f is x ≤ 3, we only                       y
+              have the ‘left’ part of the parabola.
+                                                                             y = f (x)
+                                                                     8
+              The range is f (x) ≥ 4, f (x) ∈ ℜ.
+
+                                                                     6
+                                                                                             y=x
+      (b)     To find the inverse, swap x and y, then
+              find y.                                                4
+
+                      x = (y – 3)2 + 4
+                                                                     2                                 y = f –1(x)
+              ⇒       y – 3 = ±√𝑥 − 4 .
+                                                                                                                 x
+              From the reflection of y = f (x) in y = x,     −2                2         4         6        8
+              we can see that we want the negative
+              sign                                                  −2
+
+              ⇒       y = 3 – √𝑥 − 4.
+
+
+      (c)     The domain of f –1(x) is x ≥ 4     (the range of f (x)).
+               The range of f –1(x) is f –1(x) ≤ 3   (the domain of f (x)).
+
+
+
+
+  C3 JUNE 2016 SDB                                                                                                   9
+Modulus functions
+Modulus functions y = |f (x)|
+
+
+         |f (x)| is the ‘positive value of f (x)’,
+         so to sketch the graph of y = |f (x)| first sketch the graph of y = f (x) and then reflect the
+         part(s) below the x–axis to above the x–axis.
+
+
+
+     Example: Sketch the graph of y = |x2 – 3x|.
+
+
+         Solution:
+         First sketch the graph of y = x2 – 3x                 Then reflect the portion below
+                                                               the x-axis in the x–axis to give
+
+                  3 y                                                3 y
+
+                                      y=x²−3x                                          y=|x²−3x|
+                  2                                                  2
+
+
+                  1                                                  1
+
+                                                 x                                                x
+            −1           1      2     3      4                 −1           1     2     3     4
+
+                 −1                                                 −1
+
+
+                 −2                                                 −2
+
+
+
+
+10                                                                              C3 JUNE 2016 SDB
+Modulus functions y = f (|x|)
+         In this case f (–3) = f (3), f (–5) = f (5), f (–8.7) = f (8.7) etc. and so the graph on the
+         left of the y–axis must be the reflection of the graph on the right of the y–axis,
+
+         so to sketch the graph, first sketch the graph for positive values of x only, then reflect
+         the graph sketched in the y–axis.
+                                                                                                         3 y
+                                                                                                                                y=x²−3x
+                                                                                                         2
+  Example: Sketch the graph of y = |x|2 – 3|x|.
+                                                                                                         1
+
+                                                                                                                                                x
+                            2                                              −4       −3    −2    −1                 1    2       3           4
+  Solution:       f (x) = x – 3x
+                                                                                                     −1
+         ⇒        f (x) = x2 – 3x
+                                                                                                     −2
+         First sketch the graph of y = x2 – 3x for positive
+         values of x only.                                                                               3 y
+                                                                                                                            y=|x|²−3|x|
+                                                                                                         2
+
+         Then reflect your graph in the y–axis to                                                        1
+                                                                                                                                            x
+         complete the sketch.                                              −4       −3    −2    −1                 1    2       3       4
+
+                                                                                                     −1
+
+                                                                                                     −2
+
+
+
+Standard graphs
+
+                        3 y                                                                          y
+                                                                                                4              y=x⁴
+                                    y=x³       y=x
+                        2                                                                                              y=x²
+                                                                                                3
+
+                        1
+                                                                                                2
+                                                     x
+    −3       −2   −1            1          2
+                                                                                                1
+                       −1
+                                                                                                                                    x
+                                                                           −2            −1                    1        2
+                       −2
+                                                                                               −1
+
+                            y
+                                                                   y
+                        2                                      3
+                                y=1/x
+
+                        1                                      2
+                                                                       y=√x
+                                                     x
+                                                               1
+    −3       −2   −1            1          2         3
+
+                                                                                                                                                x
+                       −1
+                                                         −1            1        2         3          4             5        6           7
+
+                       −2                                     −1
+
+
+
+
+   C3 JUNE 2016 SDB                                                                                                                             11
+Combinations of transformations of graphs
+
+        We know the following transformations of graphs:
+        y = f (x)
+                                     a
+                 translated through   becomes y = f (x – a) + b
+                                     b
+                 stretched factor a in the y-direction becomes y = a × f (x)
+                                                                      x
+                 stretched factor a in the x-direction becomes y = f  
+                                                                      a
+                 reflected in the x-axis becomes y = – f (x)
+                 reflected in the y-axis becomes y = f (–x)
+        We can combine these transformations:
+
+
+
+     Examples:
+
+
+        1)       y = 2f (x – 3) is the image of y = f (x) under a stretch in the y-axis of factor 2
+                                             3
+                 followed by a translation   , or the translation followed by the stretch.
+                                            0
+        2)       y = 3x2 + 6 is the image of y = x2 under a stretch in the y-axis of factor 3
+                                             0
+                 followed by a translation   ,
+                                             6
+                 BUT these transformations cannot be done in the reverse order.
+                 To do a translation before a stretch we have to notice that
+                                                                                          0
+                 3x2 + 6 = 3(x2 + 2) which is the image of y = x2 under a translation of  
+                                                                                           2
+                 followed by a stretch in the y-axis of factor 3.
+        3)       y = – sin(x + π) is the image of y = sin x under a reflection in the x-axis
+                                               −π 
+                 followed by a translation of      , or the translation followed by the reflection.
+                                                0 
+
+
+
+
+12                                                                               C3 JUNE 2016 SDB
+Sketching curves
+ When sketching curves, show the coordinates of the intercepts with the axes, and the
+ equations of any asymptotes − show the asymptotes with dotted lines.
+
+                                             2
+ Example:     Sketch the curve 𝑦 = 4 − 𝑥, x > 0
+ Solution:
+                                  5 y
+                                        asymptote y=4
+                                  4
+                                  3
+                                                     y=4−2/x
+                                  2
+                       asymptote
+                             x=0
+                                1
+                                                               x
+                      −2   −1            1       2    3    4   5
+                                 −1
+                                 −2
+                                 −3
+
+
+              Note that the domain is x > 0, so no graph to the left of the y-axis.
+              x ≠ 0 ⇒ curve does not meet the x-axis
+              y=0 ⇒        x=1
+                                 −2
+              Thinking of y = 𝑥 translated up 4,
+              the horizontal asymptote is y = 4.
+              Do not forget that the y-axis, x = 0, is also an asymptote.
+
+
+
+
+  C3 JUNE 2016 SDB                                                                      13
+3        Trigonometry
+Sec, cosec and cot
+                                               1                                                  1
+     Secant is written            sec x =          ;    cosecant is written       cosec x =
+                                             cos x                                              sin x
+                                              1    cos x
+     cotangent is written cot x =                =
+                                            tan x sin x
+Graphs
+
+                     y                                                            y
+                                                                                           y=cosecx
+                         y=secx
+                 2                                                          2
+
+
+                                                                                                y=sinx
+                         y=cosx                          x                                                             x
+−π                                 π               2π            −π                              π                2π
+
+
+
+             −2                                                            −2
+
+
+
+
+                                                                                  y
+                                                                                      y=tanx    y=cotx
+                                                                              2
+     Notice that your calculator does not have sec,
+     cosec and cot buttons so to solve equations                                                                       x
+     involving sec, cosec and cot, change them                   −π                              π                2π
+     into equations involving sin, cos and tan and
+     then use your calculator as usual.
+                                                                            −2
+
+
+
+
+     Example: Find cosec 35o.
+                                          1             1
+     Solution:       cosec 35o =                =              = 1 ⋅ 743 to 4 S.F.
+                                       sin 35 o
+                                                  0 ⋅ 53576...
+
+
+     Example: Solve sec x = 3⋅2                 for 0 ≤ x ≤ 2π
+                                                    1                        1
+     Solution:       sec x = 3⋅2            ⇒           = 3 ⋅ 2 ⇒ ⇒ cos x =      = 0 ⋅ 3125
+                                                  cos x                     3⋅ 2
+         ⇒           x = 1⋅25 or 2π – 1⋅25 = 5⋅03 radians to 3 S.F.
+
+
+
+
+14                                                                                             C3 JUNE 2016 SDB
+Inverse trigonometrical functions
+
+  The inverse of sin x is written as arcsin x or sin–1 x and in order that there should only be
+  one value of the function for one value of x we restrict the domain to –π/2 ≤ x ≤ π/2 .
+  Note that the graph of y = arcsin x is the reflection of part of the graph of y = sin x in the
+  line y = x.
+  Similarly for the inverses of cos x and tan x, as shown below.
+
+
+Graphs
+              y = arcsin x                                                                       y = arccos x
+
+                          y
+                                      y=x                                                                    y
+                          y=arcsinx
+                    π/2                                                                                 π
+                                                                                       y=arccosx
+                                                                                                                             y=x
+                                            y=sinx
+                                                           x
+                                                                                                       π/2
+   −3    −2   −1               1      2      3        4
+                                                                                            y=cosx
+                                                                                                                                        x
+                   −π/2
+                                                                                  −3        −2   −1              1       2     3   4
+
+
+
+
+                                                          y = arctan x
+
+
+                                                                     y
+                                                                         y=tanx       y=x
+
+                                                                                                       y=arctanx
+                                                               π/2
+
+
+                                                                                                                     x
+              −6          −5   −4     −3         −2       −1              1       2         3      4         5   6
+
+
+                                                           −π/2
+
+
+
+
+  C3 JUNE 2016 SDB                                                                                                                 15
+Trigonometrical identities
+You should learn these
+
+
+     sin2 θ + cos2 θ = 1                                                         tan A - tan B
+                                                               tan( A - B) =
+     tan2θ + 1 = sec2θ                                                         1 + tan A tan B
+
+     1 + cot2θ = cosec2θ                                       tan 2 A =
+                                                                              2 tan A
+                                                                            1 - tan 2 A
+     sin (A + B) = sin A cos B + cos A sin B
+     sin (A – B) = sin A cos B – cos A sin B                            3 tan A − tan 3 A
+                                                               tan 3A =
+                                                                           1 − 3 tan 2 A
+     sin 2A = 2 sin A cos A
+     cos (A + B) = cos A cos B – sin A sin B                                                      P+Q     P -Q
+                                                               sin P + sin Q = 2 sin                  cos
+     cos (A – B) = cos A cos B + sin A sin B                                                       2        2
+
+     cos 2A = cos2 A – sin2 A                                                                     P+Q     P -Q
+                                                               sin P – sin Q = 2 cos                  sin
+             = 2 cos2 A – 1                                                                        2        2
+
+             = 1 – 2 sin2 A                                                                        P+Q     P -Q
+                                                               cos P + cos Q = 2 cos                   cos
+     sin2 A = ½ (1 – cos 2A)                                                                        2        2
+
+     cos2 A = ½ (1 + cos 2A)                                                                        P+Q     P -Q
+                                                               cos P – cos Q =        - 2 sin           sin
+                                                                                                     2        2
+     sin2 ½ θ = ½ (1 – cos θ)
+     cos2 ½ θ    = ½ (1 + cos θ)                                2 sin A cos B = sin(A + B) + sin(A – B)
+
+     sin 3A = 3 sin A – 4 sin3 A                                2 cos A sin B = sin(A + B) – sin(A – B)
+
+     cos 3A = 4 cos3A – 3 cos A                                 2 cos A cos B = cos(A + B) + cos(A – B)
+
+                     tan A + tan B                              –2 sin A sin B = cos(A + B) – cos(A – B)
+     tan( A + B) =
+                   1 - tan A tan B
+
+
+
+The last four formulae, 2 sin A cos B = sin(A + B) + sin(A – B) etc., are not in the formula
+booklet, and should be learnt.
+                                                                                          𝑃+𝑄           𝑃−𝑄
+You should know the proofs of the four formulae sin P + sin Q = 2 sin                         2
+                                                                                                  cos    2
+                                                                                                              , etc.
+                                         𝑷+𝑸             𝑷−𝑸
+Proof of sin P + sin Q = 2 sin            𝟐
+                                               cos        𝟐
+
+     We know that        sin(A + B) = sin A cos B + cos A sin B
+     and                 sin(A − B) = sin A cos B − cos A sin B
+     ⇒     sin(A + B) − sin(A − B) = 2 sin A cos B
+     Now put P = A + B, and Q = A − B
+                                                                    𝑃+𝑄               𝑃−𝑄
+     ⇒     P + Q = 2A, and P − Q = 2B,                   ⇒     A=    2
+                                                                          , and B =       2
+                                   𝑃+𝑄         𝑃−𝑄
+     ⇒     sin P + sin Q = 2 sin    2
+                                         cos    2
+                                                     .
+     The other formulae can be proved in a similar way.
+
+16                                                                                                C3 JUNE 2016 SDB
+Finding exact values
+
+
+  When finding exact values you may not use calculators.
+
+
+  Example: Find the exact value of cos 15o
+
+
+  Solution:    We know the exact values of sin 45o, cos 45o and sin 30o, cos 30o
+     so we consider     cos 15 = cos (45 – 30)                  = cos 45 cos30 + sin 45 sin 30
+                                             3 + 1               6 +
+               = 12 × 23 +     1
+                                2
+                                    × 12 =   2 2
+                                                      =            4
+                                                                       2
+                                                                           .
+
+
+  Example: Given that A is obtuse and that B is acute, and sin A = 3/5 and cos B = 5/13 find
+       the exact value of sin (A + B).
+
+  Solution:    We know that sin (A + B) = sin A cos B + cos A sin B so we must first find
+       cos A and sin B.
+
+       Using    sin2 θ + cos2 θ = 1
+       ⇒       cos2 A = 1 – 9/25 = 16/25           and          sin2 B = 1 – 25/169 = 144/169
+       ⇒       cos A = ± 4/5 and       sin B = ± 12/13
+       But A is obtuse so cos A is negative, and B is acute so sin B is positive
+       ⇒       cos A = – 4/5 and       sin B =       12
+                                                          /13
+       ⇒       sin (A + B) = 3/5 × 5/13 + – 4/5 × 12/13 =              –33
+                                                                               /65
+
+
+
+
+Proving identities.
+
+
+  Start with one side, usually the L.H.S., and fiddle with it until it equals the other side.
+
+  Do not fiddle with both sides at the same time.
+
+                             cos 2 A + 1
+  Example: Prove that                    = cot 2 A .
+                             1 - cos 2 A
+
+
+                        cos 2 A + 1   2 cos 2 A - 1 + 1   2 cos 2 A
+  Solution:    L.H.S. =             =              2    =      2    = cot 2 A . Q.E.D.
+                        1 - cos 2 A   1 - (1 - 2sin A)    2 sin A
+
+
+
+
+   C3 JUNE 2016 SDB                                                                              17
+Eliminating a variable between two equations
+
+
+     Example: Eliminate θ from the parametric equations x = sec θ – 1, y = tan θ.
+
+
+     Solution:    We remember that tan2θ + 1 = sec2θ
+        ⇒         sec2θ – tan2θ = 1.
+        secθ = x + 1     and tanθ = y
+        ⇒         (x + 1)2 – y2 = 1
+        ⇒         y2 = (x + 1)2 – 1 = x2 + 2x.
+
+
+
+
+Solving equations
+     Here you have to select the ‘best’ identity to help you solve the equation.
+
+
+     Example:     Solve the equation sec2A = 3 – tan A, for 0 ≤ A ≤ 360o.
+
+
+     Solution:    We know that      tan2A + 1 = sec2A
+         ⇒        tan2A + 1 = 3 – tan A
+         ⇒        tan2A + tan A – 2 = 0,                  factorising gives
+         ⇒        (tan A – 1)(tan A + 2) = 0
+         ⇒        tan A = 1    or tan A = –2
+         ⇒        A = 45, 225, or 116⋅6, 296⋅6.
+
+
+
+
+     Example: Solve sin 3x − sin 5x = 0         for 0o ≤ x ≤ 90o.
+                                                              𝑃+𝑄         𝑃−𝑄
+     Solution:    Using the formula sin P − sin Q = 2 cos      2
+                                                                    sin    2
+
+         ⇒       2 cos 4x sin(−x) = 0      ⇒    cos 4x sin x = 0
+
+         ⇒       cos 4x = 0,               or sin x = 0
+
+         ⇒       4x = 90, 270, (450), … or x = 0, (180), …
+
+         ⇒       x = 0o, 22⋅5o or 67⋅5o.
+
+
+
+
+18                                                                              C3 JUNE 2016 SDB
+R cos(x + α)
+
+  An alternative way of writing a cos x ± b sin x    using one of the formulae listed below
+      (1)     R cos (x + α) = R cos x cos α – R sin x sin α
+      (2)     R cos (x – α) = R cos x cos α + R sin x sin α
+      (3)     R sin (x + α) = R sin x cos α + R cos x sin α
+      (4)     R sin (x – α) = R sin x cos α – R cos x sin α
+
+  To keep R positive and α acute, we select the formula with corresponding + and – signs.
+  The technique is the same which ever formula we choose.
+
+
+
+  Example: Solve the equation       12 sin x – 5 cos x = 6 for 0o ≤ x ≤ 3600.
+
+
+  Solution:   First re–write in the above form:
+      notice that the sin x is positive and the cos x is negative so we need formula (4).
+
+      R sin (x – α) = R sin x cos α – R cos x sin α = 12 sin x – 5 cos x
+
+              Equating coefficients of sin x, ⇒ R cos α = 12              I
+              Equating coefficients of cos x, ⇒ R sin α = 5               II
+
+
+              Squaring and adding I and II      ⇒ R2 cos2 α + R2 sin2 α = 122 + 52
+              ⇒       R2 (cos2 α + sin2 α) = 144 + 25                but cos2 α + sin2 α = 1
+              ⇒       R2 = 169       ⇒ R = ±13
+      But choosing the correct formula means that R is positive ⇒ R = +13
+              Substitute in I   ⇒    cos α = 12/13
+              ⇒       α = 22⋅620…o or 337⋅379…o or ……
+      and choosing the correct formula means that α is acute
+              ⇒      α = 22⋅620…o.
+              ⇒       12 sin x – 5 cos x = 13 sin(x – 22⋅620…)
+
+
+      To solve        12 sin x – 5 cos x = 6
+              ⇒       12 sin x – 5 cos x = 13 sin(x – 22⋅620…) = 6
+              ⇒       sin(x – 22⋅620…) = 6/13
+              ⇒       x – 22⋅620… = 27⋅486… or 180 – 27⋅486… = 152⋅514…
+              ⇒       x = 50⋅1o or 175⋅1o .
+
+  C3 JUNE 2016 SDB                                                                            19
+     Example: Find the maximum value of 12 sin x – 5 cos x and the smallest positive value
+         of x for which it occurs.
+
+     Solution:   From the above example 12 sin x – 5 cos x = 13 sin(x – 22.6).
+         The maximum value of sin(anything) is 1 and occurs when the angle is 90, 450, 810
+         etc. i.e. 90 + 360n
+
+         ⇒       the max value of 13 sin(x – 22⋅6) is 13
+         when x – 22⋅6 = 90 + 360n ⇒ x = 112⋅6 + 360no,
+         ⇒       smallest positive value of x is 112⋅6o.
+
+
+
+
+20                                                                       C3 JUNE 2016 SDB
+4        Exponentials and logarithms
+
+Natural logarithms
+Definition and graph                                                                       y = ex       y=x
+    e ≈ 2⋅7183 and logs to base e                                          2
+
+    are called natural logarithms.
+    log e x is usually written ln x.
+                                                                                                    y = ln x
+                                                        −2                                          2
+                     x
+    Note that y = e and y = ln x
+    are inverse functions and that
+    the graph of one is the reflection                                    −2
+
+
+    of the other in the line y = x.
+
+
+
+    Graph of y = e(ax + b) + c.                                                        y
+
+
+
+
+                                                                                       y = e2x          y = ex
+                                                                               3
+
+    The graph of y = e2x is the graph of
+    y = ex stretched by a factor of 1/2 in                                     2
+
+    the direction of the x-axis.
+    y = e2x is above y = ex for x > 0,                                         1
+
+
+    and below for x < 0.
+                                                         −2
+
+
+
+
+    The graph of y = e(2x + 3) is the graph of
+                                                                                              y = e2x
+                               − 32 
+    y = e translated through   since
+         2x                                                                        6
+                                                             y = e(2x+3)+4
+                               0 
+    2x + 3 = 2(x – −23 )
+                                                                                   4
+    and the graph of y = e(2x +3) + 4 is that of
+                                      0
+    y = e(2x + 3) translated through  
+                                       4                      y = e(2x+3)
+                                                                                   2
+
+
+
+
+                                                   −4                −2                                    2
+
+
+
+
+    C3 JUNE 2016 SDB                                                                                           21
+Equations of the form eax + b = p
+
+
+     Example: Solve e2x + 3 = 5.
+
+
+     Solution:   Take the natural logarithm of each side,         remember that ln x is the inverse of ex
+
+          ⇒      ln (e2x + 3) = ln 5    ⇒         2x + 3 = ln 5
+                       ln 5 − 3
+          ⇒      x =            = –0⋅695 to 3 S.F.
+                           2
+
+
+     Example: Solve ln (3x – 5) = 4.
+
+
+     Solution:
+     (i) From the definition of logs     loga x = y ⇔ x = ay
+          ln (3x – 5) = 4
+          ⇒      3x − 5 = e4
+                       e4 + 5
+          ⇒      x =          = 19⋅9 to 3 S.F.
+                          3
+     OR
+     (ii) Raise both sides to the power of e, .
+          ⇒      eln (3x – 5) = e4 ⇒    (3x – 5) = e4             remember that ex is the inverse of ln x
+
+                       e4 + 5
+          ⇒      x =          = 19⋅9 to 3 S.F.
+                          3
+
+
+
+
+22                                                                              C3 JUNE 2016 SDB
+5       Differentiation
+Chain rule
+        If y is a composite function like y = (5x2 – 7)9
+        think of y as y = u9, where u = 5x2 – 7
+        then the chain rule gives
+                dy   dy du
+                   =     ×
+                dx   du dx
+                dy           du
+        ⇒          = 9u 8 ×
+                dx           dx
+                dy
+        ⇒          = 9(5 x 2 − 7) 8 × (10 x) = 90 x(5 x 2 − 7) 8 .
+                dx
+                                                                                                         du
+        The rule is very simple, just differentiate the function of u and multiply by                       .
+                                                                                                         dx
+                                                          dy
+        Example:        y = √(x3 – 2x). Find                 .
+                                                          dx
+                                                                 1
+        Solution:       y = √(x3 – 2x) = ( x 3 − 2 x) 2 .                 Put u = x3 – 2x
+                                      1
+                ⇒       y= u 2
+                        dy     dy du
+                ⇒          =       ×
+                        dx     du dx
+                        dy         −1   du                                      −1
+                ⇒           = 12 u 2 ×          =            1
+                                                             2
+                                                                 ( x 3 − 2 x)        2
+                                                                                         × (3 x 2 − 2)
+                        dx              dx
+                        dy        3x 2 − 2
+                ⇒          =                1
+                                                .
+                        dx     2( x − 2 x )
+                                    3         2
+
+
+
+
+Product rule
+
+    If y is the product of two functions, u and v, then
+                                dy        dv      du
+                 y = uv ⇒            = u      + v    .
+                                dx        dx      dx
+
+    Example: Differentiate y = x2 × √(x – 5).
+
+                                                             1
+    Solution:   y = x2 × √(x – 5) = x2 × ( x − 5) 2
+                                                    1
+        so put u = x2 and v = ( x − 5) 2
+               dy       dv        du
+        ⇒           = u     + v
+               dx       dx         dx
+                             −1                 1
+        = x2 × 12 ( x − 5)        2
+                                      + ( x − 5) 2 × 2x
+                x2
+        =               + 2x x − 5 .
+            2 x−5
+
+
+
+    C3 JUNE 2016 SDB                                                                                            23
+Quotient rule
+
+     If y is the quotient of two functions, u and v, then
+
+                                                              du      dv
+                                                          v       − u
+                         u                       dy           dx      dx .
+                     y =         ⇒                  =              2
+                         v                       dx              v
+
+
+                                                2x − 3
+     Example: Differentiate y =
+                                               x 2 + 5x
+                         2x − 3
+     Solution:       y =         ,        so put u = 2x – 3 and v = x2 + 5x
+                        x + 5x
+                          2
+
+                              du        dv
+                            v       − u
+                     dy       dx        dx
+         ⇒              =            2
+                     dx            v
+
+                   ( x 2 + 5 x) × 2 − (2 x − 3) × (2 x + 5)
+                 =
+                                   ( x 2 + 5 x) 2
+
+                      2 x 2 + 10 x − (4 x 2 + 4 x − 15)   − 2 x 2 + 6 x + 15
+                 =                                      =                    .
+                                  ( x 2 + 5 x) 2            ( x 2 + 5 x) 2
+
+                              3𝑥−2             𝑑𝑦
+     Example: If y =                  , find        , expressing your answer as a single algebraic fraction in
+                         √𝑥−1                  𝑑𝑥
+         its simplest form.
+
+                             3𝑥 − 2
+     𝑆𝑜𝑙𝑢𝑡𝑖𝑜𝑛:       𝑦=           1
+                           (𝑥 − 1)2
+                                  1                                      −1
+                 𝑑𝑦   (𝑥 − 1)2 × 3 − (3𝑥 − 2) × 12(𝑥 − 1) 2
+         ⇒          =
+                 𝑑𝑥                  𝑥−1
+                             1        (3𝑥 − 2)
+                      (𝑥 − 1)2 × 3 −
+                 𝑑𝑦                          1
+                                     2(𝑥 − 1) �2
+         ⇒          =
+                 𝑑𝑥              𝑥−1
+                             1        (3𝑥 − 2)
+                      (𝑥 − 1)2 × 3 −                        1
+                 𝑑𝑦                          1
+                                     2(𝑥 − 1) �2   2(𝑥 − 1) �2
+         ⇒          =                            ×          1
+                 𝑑𝑥              𝑥−1               2(𝑥 − 1) �2
+                 𝑑𝑦   6(𝑥 − 1) − (3𝑥 − 2)   6𝑥 − 6 − 3𝑥 + 2
+         ⇒          =             3�      =           3
+                 𝑑𝑥       2(𝑥 − 1) 2          2(𝑥 − 1) �2
+                 𝑑𝑦     3𝑥 − 4
+         ⇒          =         3
+                 𝑑𝑥   2(𝑥 − 1) �2
+
+
+
+
+24                                                                                      C3 JUNE 2016 SDB
+Derivatives of ex and logex ≡ ln x.
+                                  𝑑𝑦
+      y = ex              ⇒       𝑑𝑥
+                                        = ex
+                                  𝑑𝑦       1
+      y = ln x            ⇒       𝑑𝑥
+                                     = 𝑥
+                                                                        𝑑𝑦        1       1
+      y = ln kx           ⇒       y = ln k + ln x               ⇒       𝑑𝑥
+                                                                             = 0+ 𝑥 = 𝑥
+                                  𝑑𝑦       1               1
+      or y = ln kx ⇒              𝑑𝑥
+                                        = 𝑘𝑥 × 𝑘 =         𝑥
+                                                                                               using the chain rule
+
+                                                                        dy      1   k
+      y = ln xk           ⇒       y = k ln x                    ⇒          = k×   =
+                                                                        dx      x   x
+
+
+
+  Example: Find the derivative of f (x) = x3 – 5ex at the point where x = 2.
+
+
+  Solution:    f (x) = x3 – 5ex
+      ⇒        f ′(x) = 3x2 – 5ex
+      ⇒        f ′(2) = 12 – 5e2 = –24⋅9
+
+
+
+  Example: Differentiate the function                 f (x) = ln 3x – ln x5
+
+
+  Solution:    f (x) = ln 3x – ln x5 = ln 3 + ln x – 5 ln x = ln 3 – 4 ln x
+                          −4
+      ⇒        f ′(x) =
+                           x
+      or we can use the chain rule
+                          1        1          −4
+      ⇒        f ′(x) =      × 3 − 5 × 5x 4 =
+                          3x      x            x
+
+
+
+  Example: Find the derivative of                  f (x) = log 10 3x.
+                                           ln 3x
+  Solution:    f (x) = log 10 3x =                                                    using change of base formula
+                                           ln 10
+                          ln 3 + ln x    ln 3    ln x
+                     =                =       +
+                              ln 10     ln 10   ln 10
+                                    1
+                                                      1
+      ⇒        f ′(x) = 0 +         x
+                                               =           .
+                                  ln 10            x ln 10
+
+
+
+
+  C3 JUNE 2016 SDB                                                                                               25
+                             2            dy
+     Example: y = e x . Find                 .
+                                          dx
+
+     Solution:     y = eu,    where u = x2
+                    dy    dy du
+          ⇒            =    ×
+                    dx    du dx
+                    dy        du
+                       = eu ×
+                                                                     2
+          ⇒                       = eu × 2x                  = 2x e x .
+                    dx        dx
+
+                                            dy
+     Example: y = ln 7x3. Find                 .
+                                            dx
+
+     Solution:     y = ln u, where u = 7x3
+                    dy     dy du
+          ⇒             =    ×
+                    dx     du dx
+                    dy     1 du       1             3
+          ⇒             = ×      =      3
+                                          × 21x 2 =   .
+                    dx     u dx      7x             x
+
+
+𝒅𝒚         𝟏
+      =   𝒅𝒙
+𝒅𝒙
+          𝒅𝒚
+                                                    𝑑𝑦   𝑑𝑥                   𝑑𝑦     1
+     Using the chain rule we can see that           𝑑𝑥
+                                                       × 𝑑𝑦 = 1,          ⇒   𝑑𝑥
+                                                                                 =   𝑑𝑥
+                                                                                     𝑑𝑦
+
+
+
+                                          𝑑𝑦
+     Example: x = sin2 3y. Find 𝑑𝑥 .
+                                 𝑑𝑥
+     Solution:     First find 𝑑𝑦        as this is easier.
+                   𝑑𝑥
+                   𝑑𝑦
+                        = 2 sin 3y cos 3y × 3 = 6 sin 3y cos 3y
+
+                   𝑑𝑦       1                1                1       1
+          ⇒        𝑑𝑥
+                      = 𝑑𝑥 =                            =           = 3 cosec 6y
+                            𝑑𝑦        6 sin 3 y cos 3 y   3 sin 6 y
+
+
+
+Derivative of ax
+                            𝑑𝑦
+          y = ax    ⇒       𝑑𝑥
+                                 = 𝑎 𝑥 ln 𝑎
+     Proof:
+         y = ax
+     ⇒    ln y = ln ax = x ln a
+           1 𝑑𝑦
+     ⇒    𝑦 𝑑𝑥
+                   = ln 𝑎
+          𝑑𝑦
+     ⇒    𝑑𝑥
+               = y ln a = ax ln a
+
+
+     You should know this proof.
+
+26                                                                                    C3 JUNE 2016 SDB
+                                      𝑑𝑦
+  Example:    If y = 5x + 2, find 𝑑𝑥 .
+
+
+  Solution 1: y = 5x × 52 = 25 × 5x
+              𝑑𝑦
+      ⇒       𝑑𝑥
+                     = 25 × 5x ln 5
+
+
+  Solution 2: y = 5x + 2 = 5u
+              𝑑𝑦                 𝑑𝑢                                                                 𝑑𝑢
+      ⇒       𝑑𝑥
+                 = 5u ln 5 × 𝑑𝑥 = 5x + 2 ln 5                            using the chain rule and
+                                                                                                    𝑑𝑥
+                                                                                                         =1
+
+
+                        2            𝑑𝑦
+  Example:    𝑦 = 7𝑥 , find          𝑑𝑥
+
+
+                                𝑑𝑦                       𝑑𝑢   2
+  Solution:   y = 7u        ⇒   𝑑𝑥
+                                   = 7u ln 7 × 𝑑𝑥 = 7𝑥 ln 7 × 2x         using the chain rule
+
+
+
+
+Trigonometric differentiation
+
+      x must be in RADIANS when differentiating trigonometric functions.
+
+
+               f (x)                          f ′ (x)              important formulae
+               sin x                             cos x
+               cos x                          – sin x              sin2 x + cos2 x = 1
+               tan x                          sec2 x
+               sec x                        sec x tan x            tan2 x + 1 = sec2 x
+               cot x                        – cosec2 x
+              cosec x                     – cosec x cot x         1 + cot2 x = cosec2 x
+
+
+
+Chain rule – further examples
+                                                  dy
+  Example: y = sin4 x.                    Find       .
+                                                  dx
+  Solution:   y = sin4 x.                  Put u = sin x
+
+      ⇒       y = u4
+                     dy     dy du
+              ⇒          =    ×
+                     dx     du dx
+               dy          du
+      ⇒           = 4u 3 ×     = 4 sin 3 x × cos x .
+               dx          dx
+
+
+
+
+  C3 JUNE 2016 SDB                                                                                        27
+                                          dy
+     Example: y = e sin x . Find             .
+                                          dx
+     Solution:        y = eu,    where u = sin x
+                       dy    dy du
+         ⇒                =    ×
+                       dx    du dx
+                       dy       du
+         ⇒              = eu ×       = esin x × cos x    = cos x × esin x .
+                       dx       dx
+
+
+                                             dy
+     Example: y = ln (sec x). Find              .
+                                             dx
+     Solution:        y = ln u, where u = sec x
+                       dy     dy du
+         ⇒                 =    ×
+                       dx     du dx
+                       dy     1 du       1
+         ⇒                 = ×      =        × sec x tan x = tan x .
+                       dx     u dx     sec x
+
+
+
+
+Trigonometry and the product and quotient rules
+
+
+     Example: Differentiate y = x2 × cosec 3x.
+
+                      dy     dv     du
+     Solution:           = u    + v
+                      dx     dx     dx
+
+                      y = x2 × cosec 3x
+
+         Put u = x2 and v = cosec 3x
+
+                 𝑑𝑦
+                        =    x2 × (– 3cosec 3x cot 3x) + cosec 3x × 2x
+                 𝑑𝑥
+
+                        =    – 3x2 cosec 3x cot 3x + 2x cosec 3x.
+
+
+
+
+28                                                                            C3 JUNE 2016 SDB
+                                  tan 2 x
+Example: Differentiate y =
+                                   7x3
+                                                du      dv
+                                            v       − u
+                u                   dy          dx      dx
+Solution:   y =              ⇒         =             2
+                v                   dx             v
+
+                   tan 2 x
+            y =
+                    7x3
+
+    Put u = tan 2x and v = 7x3
+
+                     dy   7 x 3 × 2 sec 2 2 x − tan 2 x × 21x 2
+            ⇒           =
+                     dx                    (7 x 3 ) 2
+                     dy   14 x 3 sec 2 2 x − 21x 2 tan 2 x
+            ⇒           =
+                     dx                   49 x 6
+                     dy   2 x sec 2 2 x − 3 tan 2 x
+            ⇒           =
+                     dx                7x 4
+
+
+
+
+C3 JUNE 2016 SDB                                                  29
+6        Numerical methods
+Locating the roots of f(x) = 0
+
+     A quick sketch of the graph of y = f (x) can give a rough
+     idea of the roots of f (x) = 0.
+                                                                               y=f(x)
+     If y = f (x) changes sign between x = a and x = b and if
+     f (x) is continuous in this region then a root of f (x) = 0
+     lies between x = a and x = b.                                                                         x
+                                                                                            a          b
+
+
+
+
+The iteration xn + 1 = g(xn)
+
+     Example:
+         (a) Show that a root, α, of the equation f (x) = x3 – 8x – 7 = 0 lies between 3 and 4.
+         (b) Show that the equation         x3 – 8x – 7 = 0 can be re–arranged as x = 3 8 x + 7 .
+
+         (c) Starting with x1 = 3, use the iteration xn + 1 = 3 8 x n + 7 to find the first four
+             iterations for x.
+         (d) Show that your value of x4 is correct to 3 S.F.
+
+
+     Solution:
+         (a)     f (3) = 27 – 24 – 7 = –4,           and f (4) = 64 – 32 – 7 = +25
+         Thus    f (x) changes sign and f (x) is continuous ⇒ there is a root between 3 and 4.
+         (b)     x3 – 8x – 7 = 0       ⇒        x3 = 8x + 7   ⇒   x = 3 8x + 7 .
+         (c)     x1 = 3
+                 ⇒        x2 =   3
+                                     8× 3 + 7                 ⇒        = 3⋅14138065239
+                 ⇒        x3 = 3⋅17912997899
+                 ⇒        x4 = 3⋅18905898325
+         (d)     x4 = 3⋅19 to 3 S.F.
+                 f (3⋅185) = 3⋅1853 – 8 × 3⋅185 – 7 = – 0⋅17 …
+                 f (3⋅195) = 3⋅1953 – 8 × 3⋅195 – 7 = + 0⋅05 …
+                 f (x) changes sign and f (x) is continuous
+                 ⇒        there is a root in the interval [3⋅185, 3⋅195]
+                 ⇒        α = 3⋅19 to 3 S.F.
+
+
+
+
+30                                                                                  C3 JUNE 2016 SDB
+Conditions for convergence
+
+ If an equation is rearranged as x = g(x) and if there is a root x = α
+ then the iteration xn+1 = g(xn), starting with an approximation near x = α
+
+
+      (i)       will converge if –1 < g ′(α) < 1
+
+                   y                                           y
+                                          y=x                                        y=x
+
+                                                y=g(x)
+
+
+
+
+                                                                                             y=g(x)
+
+                                                     x                                                x
+                    X1     X2     X3 X4                        X1        X3          X4 X2
+
+
+
+
+            (a) will converge without oscillating            (b)        will oscillate and converge
+                if 0 < g ′(α) < 1,                                      if –1 < g ′(α) < 0,
+
+
+
+      (ii)      will diverge if                          y
+
+                g ′(α) < –1 or g ′(α) > 1.
+                                                                   y=g(x)
+                                                                                     y=x
+
+
+
+
+                                                                                             x
+                                                                    X1 X 2 X3   X4
+
+
+
+
+  C3 JUNE 2016 SDB                                                                                        31
+7        Appendix
+Derivatives of sin x and cos x
+           𝐬𝐢𝐧 𝒉
+𝐥𝐢𝐦𝐡→𝟎 � 𝒉 � = 𝟏                                                                                                       C
+                                                                                                              A
+OAB is a sector of a circle with centre O and radius r.
+                                        1
+The area of the triangle OAB, 2 r2 sin h,                                                 r                             r tan h
+                                                        1
+     is less than the area of the sector OAB, 2 r2h
+         1 2         1 2                                                          h
+     ⇒   2
+           r sin h < 2
+                       rh                                                O
+                                                                                                  r                    B
+         sin ℎ
+     ⇒     ℎ
+                 <1         …….I
+                                                 1
+     Also the area of the sector OAB, 2 r2h                                                                             r tan h
+                                                            1
+     is less than the area of the triangle OBC, 2 r2 tan h,
+         1 2     1                                              sin ℎ
+     ⇒   2
+           r h < 2 r2 tan h             ⇒        cos h <         ℎ
+                                                                         ……..II
+                                sin ℎ
+     I and II ⇒ cos h <          ℎ
+                                        <1
+     and as ℎ → 0,        lim cos ℎ = 1
+                          ℎ→0
+                sin ℎ                                sin ℎ
+     ⇒ 1 < lim �      �<1                    ⇒ lim �       � =1
+           ℎ→0    ℎ                              ℎ→0   ℎ
+
+
+     h must be in RADIANS, as the formula for the area of sector is only true if h is in radians.
+
+
+Alternative formula for derivative
+                                                                          y
+                                                                                                      R           y = f (x)
+     The gradient of the curve at P will be nearly                                            P
+     equal to the gradient of the line QR.                                            Q                   S
+     QM = f (x – h) and RN = f (x + h)
+     ⇒ RS = f (x + h) – f (x – h)
+     QS = MN = 2h
+                                𝑓 (𝑥 + ℎ) – 𝑓 (𝑥 – ℎ)                                 M               N                       x
+     ⇒ gradient of QR =                     2ℎ                                        x–h     x       x+h
+     and as h → 0, the gradient of QR → f ′(x) =
+     gradient of the curve at P
+                      limit 𝑓 (𝑥 + ℎ) – 𝑓 (𝑥 – ℎ)
+     ⇒ f ′(x) =       ℎ→0            2ℎ
+
+
+                                                     limit 𝑓(𝑥+ℎ)−𝑓(𝑥)
+     In C2 we used the formula f ′(x) = ℎ→0                          ℎ
+
+
+
+32                                                                                                C3 JUNE 2016 SDB
+Derivatives of sin x and cos x
+                                          limit 𝑓 (𝑥 + ℎ) – 𝑓 (𝑥 – ℎ)
+   f (x) = sin x and f ′(x) =             ℎ→0            2ℎ
+
+                       limit sin (𝑥 + ℎ) – sin (𝑥 – ℎ)
+  ⇒ f ′(x)     =       ℎ→0              2ℎ
+                       limit (sin 𝑥 cos ℎ +cos 𝑥 sin ℎ ) − (sin 𝑥 cos ℎ−cos 𝑥 sin ℎ )
+               =       ℎ→0                              2ℎ
+                       limit 2cos 𝑥 sin ℎ
+               =       ℎ→0        2ℎ
+                       limit             sin ℎ
+               =       ℎ→0
+                                 cos 𝑥     ℎ
+                         limit    sin ℎ
+               but       ℎ→0
+                                 � ℎ � = 1
+                   𝑑
+  ⇒ f ′(x) =       𝑑𝑥
+                        (sin 𝑥) = cos x
+
+
+                                           𝑑
+  Similarly, we can show that             𝑑𝑥
+                                                 (cos 𝑥) = – sin x
+
+
+  x must be in RADIANS.
+
+
+
+
+   C3 JUNE 2016 SDB                                                                     33
+Index
+algebraic fractions                            graphs
+    adding and subtracting, 3                      combining transformations, 12
+    equations, 4                                   standard functions, 11
+    multiplying and dividing, 3                inverse functions
+chain rule, 23                                     domain and range, 9
+    further examples, 27                           finding inverse, 7
+cosecant, 14                                       graphs, 7
+cotangent, 14                                  iteration
+curves                                             conditions for convergence, 31
+    sketching, 13                                  iteration equation, 30
+derivative                                         justification of accuracy, 30
+    ax, 26                                         locating the roots, 30
+    ex, 25                                     logarithm
+    ln x, 25                                       graph of ln x, 21
+differentiation                                    natural logarithm, 21
+    𝑑𝑦𝑑𝑥 = 1 𝑑𝑥𝑑𝑦, 26                          product rule, 23
+    proof of results for sin x and cos x, 32       further examples, 28
+    trigonometric functions, 27                quotient rule, 24
+equations                                          further examples, 28
+    graphical solutions, 30                    R cos(x + α), 19
+exponential                                    secant, 14
+    eax + b = p, 22                            trigonometrical identities, 16
+    graph of y = e(ax + b) + c, 21             trigonometry
+    graph of y = ex, 21                            finding exact values, 17
+functions, 5                                       graphs of sec, cosec and cot, 14
+    combining functions, 7                         harder equations, 18
+    defining functions, 6                          inverse functions, 15
+    domain, 5                                      proving identities, 17
+    modulus functions, 10
+    range, 5
+
+
+
+
+34                                                                            C3 JUNE 2016 SDB
+

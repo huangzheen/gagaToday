@@ -1,0 +1,1894 @@
+# learning_paths/from_pmt_all.yaml
+# 从 PMT 笔记自动生成
+# 源: docs/curriculum/raw_pmt/Edexcel_*_Notes.txt (Simon Baxter, May/June 2016)
+# 锁定: Edexcel IAL Mathematics 2018 改革版(等同 GCE 2017 改革)
+# 单元代码: GCE 旧(WMA01-04, WME01, WST01) → IAL 新(WMA11-14, WME01, WST01)
+# 生成时间: 2026-06-21
+
+metadata:
+  subject: mathematics
+  exam_board: edexcel_ial
+  level: a-level-all
+  source: 'Physics & Maths Tutor (PMT) Edexcel ALL Notes'
+  source_url: 'https://www.physicsandmathstutor.com/maths-revision/'
+  author: 'Simon Baxter (PMT, May/June 2016)'
+
+units:
+  - id: p1
+    code: WMA11/01
+    name: 'Auto-generated from PMT P1'
+    difficulty: medium
+    source_pmt: 'Edexcel P1 Notes (PMT)'
+    past_papers:
+      - "raw_pmt/past_papers/p1/January_2019_MA.pdf"
+      - "raw_pmt/past_papers/p1/January_2019_QP.pdf"
+      - "raw_pmt/past_papers/p1/January_2020_QP.pdf"
+      - "raw_pmt/past_papers/p1/January_2021_QP.pdf"
+      - "raw_pmt/past_papers/p1/January_2022_QP.pdf"
+      - "raw_pmt/past_papers/p1/January_2023_QP.pdf"
+      - "raw_pmt/past_papers/p1/January_2024_QP.pdf"
+      - "raw_pmt/past_papers/p1/June_2019_QP.pdf"
+      - "raw_pmt/past_papers/p1/June_2022_QP.pdf"
+      - "raw_pmt/past_papers/p1/June_2023_QP.pdf"
+    topics:
+      - id: algebra
+        name: "Algebra"
+        lessons:
+          - id: c1-algebra-indices
+            name: "Laws of indices 指数律"
+            source_pmt: "Edexcel_C1_Notes.txt"
+            kp_id_range: "kp_alevels_mathematics_p1_001-003"
+            exercises:
+              - "raw_pmt/P1_questions/Edexcel_C1_Algebra_-_Surds_and_indices.pdf"
+            content: |
+              Indices
+                  Rules of indices
+
+
+                  am × an = am + n                              (am )n = amn                       1
+                                                                                                 a n = n a
+                  am ÷ an = am – n                              a0 = 1
+                                                                                                                     ( a)
+                                                                                                  m                          m
+                                                                    –n     1                     a n =    n
+                                                                                                              am =       n
+                                                                a        = n
+                                                                          a
+
+                  Examples:
+                       (i)    5 –3 × 54 = 5 –3 + 4 = 51 = 5.
+                                                                                 1
+                              7 –4 × 7 –2 = 7 –4 + –2 = 7 –4 – 2 = 7–6 =            .
+                                                                                 76
+                      (ii)    35 ÷ 3 –2 = 35 – –2 = 35 + 2 = 37.
+                                                                           1
+                              9 –4 ÷ 96 = 9 –4 – 6 = 9–10 =
+                                                                          9 10
+                              11 –3 ÷ 11 –5 = 11 –3 – –5 = 11 –3 + 5 = 112 = 121
+                                                                          1
+                      (iii)   (6 –3)4 = 6 –3 × 4 = 6 –12 =                   .
+                                                                         612
+                                                        2
+                              64 3 =  64 3  = ( 4) 2 = 16
+                                2          1
+                      (iv)
+
+                                     −2            1
+                      (v)     125         3
+                                              =         2
+                                                                     since minus means turn upside down
+                                                            3
+                                                  125
+                                     1
+                              =        ,                    since 3 on bottom of fraction is cube root, 3 125 = 5
+                                    52
+                                    1
+                              =
+                                    25
+
+
+                  Example: Express (16a) ÷ (8b) as power of 2.
+
+
+                  Solution:   (16a) ÷ (8b) = (24)a ÷ (23)b = 24a ÷ 23b = 24a – 3b.
+
+
+
+
+                  Example: Find x if 92x = 27x + 1.
+                  C1 MAY 2016 SDB                                                                                    3
+
+               Solution:   First notice that 9 = 32 and 27 = 33 and so
+                           92x = 27x + 1             ⇒ (32)2x = (33)x + 1
+                   ⇒       34x = 33x + 3
+                   ⇒       4x = 3x + 3               ⇒            x = 3.
+
+
+
+          - id: c1-algebra-surds
+            name: "Surds 根式化简与运算"
+            source_pmt: "Edexcel_C1_Notes.txt"
+            kp_id_range: "kp_alevels_mathematics_p1_004-006"
+            exercises:
+              - "raw_pmt/P1_questions/Edexcel_C1_Algebra_-_Surds_and_indices.pdf"
+            content: |
+              Surds
+               A surd is a ‘nasty’ root – i.e. a root which is not rational.
+                                             3   1        1         5
+                   Thus    √64 = 8, �27 = 3 ,                       √−243 = −3 are rational and not surds
+                                   5             3
+                   and      √5, √45, √−72                               are irrational and are surds.
+
+
+               Simplifying surds
+
+
+               Example: To simplify                   50 we notice that 50 = 25 × 2 = 52 × 2
+                   ⇒            50 =    25 × 2 =              25 × 2 = 5 2 .
+
+
+
+               Example: To simplify                  3
+                                                         40       we notice that 40 = 8 × 5 = 23 × 5
+                   ⇒        3
+                                40 =    3
+                                            8×5 =             3
+                                                                  8 ×3 5 = 2×3 5.
+
+
+
+               Rationalising the denominator
+
+
+               Rationalising means getting rid of surds.
+                   We remember that multiplying (a + b) by (a – b) gives a2 – b2 which has the
+                   effect of squaring both a and b at the same time!!
+
+
+                                                                               2+3√5
+               Example: Rationalise the denominator of                                 .
+                                                                               3−√5
+                           2+3√5            2+3√5                 3+√5
+               Solution:               =                  ×
+                            3−√5                3−√5              3+√5
+                                 6+3√5√5+ 9√5+2√5
+                           =                         2
+                                       32 −�√5�
+
+                                21+11√5
+                           =                .
+                                   4
+
+
+
+
+               4                                                                                        C1 MAY 2016 SDB
+
+
+          - id: c1-quadratics
+            name: "Quadratic functions and equations 二次函数与方程"
+            source_pmt: "Edexcel_C1_Notes.txt"
+            kp_id_range: "kp_alevels_mathematics_p1_007-012"
+            exercises:
+              - "raw_pmt/P1_questions/Edexcel_C1_Algebra_-_Quadratics.pdf"
+            content: |
+              2 Quadratic functions...............................................................................................5
+                      Completing the square. .............................................................................................................................5
+                      Factorising quadratics ...............................................................................................................................6
+                 Solving quadratic equations. ........................................................................................................... 6
+                      By factorising. ...........................................................................................................................................6
+                      By completing the square ..........................................................................................................................6
+                      By using the formula .................................................................................................................................7
+                      The discriminant, b2 – 4ac ......................................................................................................................7
+                      Miscellaneous quadratic equations ...........................................................................................................8
+                 Quadratic graphs.............................................................................................................................. 8
+                 Simultaneous equations ................................................................................................................... 9
+                      Two linear equations .................................................................................................................................9
+                      One linear equation and one quadratic. ...................................................................................................10
+                 Inequalities .................................................................................................................................... 11
+                      Linear inequalities ...................................................................................................................................11
+                      Quadratic inequalities, x2 > k or < k ....................................................................................................11
+                      Quadratic inequalities, ax2 + bx + c > k or < k ....................................................................................11
+
+
+          - id: c1-simultaneous-inequalities
+            name: "Simultaneous equations and inequalities 联立与不等式"
+            source_pmt: "Edexcel_C1_Notes.txt"
+            kp_id_range: "kp_alevels_mathematics_p1_013-016"
+            exercises:
+              - "raw_pmt/P1_questions/Edexcel_C1_Algebra_-_Inequalities.pdf"
+              - "raw_pmt/P1_questions/Edexcel_C1_Algebra_-_Simultaneous_equations.pdf"
+            content: |
+                 Simultaneous equations ................................................................................................................... 9
+                      Two linear equations .................................................................................................................................9
+                      One linear equation and one quadratic. ...................................................................................................10
+                 Inequalities .................................................................................................................................... 11
+                      Linear inequalities ...................................................................................................................................11
+                      Quadratic inequalities, x2 > k or < k ....................................................................................................11
+                      Quadratic inequalities, ax2 + bx + c > k or < k ....................................................................................11
+
+
+      - id: coordinate-geometry
+        name: "Coordinate geometry"
+        lessons:
+          - id: c1-coordinate-geometry
+            name: "Coordinate geometry 坐标几何基础"
+            source_pmt: "Edexcel_C1_Notes.txt"
+            kp_id_range: "kp_alevels_mathematics_p1_026-033"
+            exercises:
+              - "raw_pmt/P1_questions/Edexcel_C1_Coordinate_geometry_-_Straight_lines.pdf"
+            content: |
+              3 Coordinate geometry ..........................................................................................12
+                 Distance between two points ......................................................................................................... 12
+                 Gradient ......................................................................................................................................... 12
+                 Equation of a line........................................................................................................................... 12
+                 Parallel and perpendicular lines..................................................................................................... 12
+
+
+      - id: sequences
+        name: "Sequences and series"
+        lessons:
+          - id: c1-sequences
+            name: "Sequences and series 数列与级数"
+            source_pmt: "Edexcel_C1_Notes.txt"
+            kp_id_range: "kp_alevels_mathematics_p1_034-038"
+            exercises:
+              - "raw_pmt/P1_questions/Edexcel_C1_Sequences_and_series_-_arithmetic_series.pdf"
+              - "raw_pmt/P1_questions/Edexcel_C1_Sequences_and_series_-_general.pdf"
+            content: |
+              4 Sequences and series ........................................................................................13
+                 Definition by a formula xn = f(n) ................................................................................................... 13
+                 Definitions of the form xn+1 = f(xn) ................................................................................................ 13
+                 Series and Σ notation ..................................................................................................................... 13
+                 Arithmetic series............................................................................................................................ 14
+                      Proof of the formula for the sum of an arithmetic series .........................................................................14
+
+
+      - id: graphs
+        name: "Curve sketching 图像"
+        lessons:
+          - id: c1-curve-sketching
+            name: "Cubic, quartic, transformations 三次四次图像与变换"
+            source_pmt: "Edexcel_C1_Notes.txt"
+            kp_id_range: "kp_alevels_mathematics_p1_020-022"
+            exercises:
+              - "raw_pmt/P1_questions/Edexcel_C1_Functions_-_Transformation_and_graphs.pdf"
+            content: |
+              5 Curve sketching ..................................................................................................15
+                 Standard graphs ............................................................................................................................. 15
+                      Cubic graphs ...........................................................................................................................................16
+                 Transformations of graphs............................................................................................................. 17
+                      Translations .............................................................................................................................................17
+                      Stretches ..................................................................................................................................................18
+                      Reflections in the x-axis ..........................................................................................................................19
+                      Reflections in the y–axis .........................................................................................................................19
+                      Summary of transformations ...................................................................................................................20
+
+
+      - id: differentiation
+        name: "Differentiation"
+        lessons:
+          - id: c1-differentiation
+            name: "Differentiation 微分基础 + Tangents/Normals"
+            source_pmt: "Edexcel_C1_Notes.txt"
+            kp_id_range: "kp_alevels_mathematics_p1_039-047"
+            exercises:
+              - "raw_pmt/P1_questions/Edexcel_C1_Differentiation_-_basic_differentiation.pdf"
+              - "raw_pmt/P1_questions/Edexcel_C1_Differentiation_-_Tangents_and_normals.pdf"
+              - "raw_pmt/P1_questions/Edexcel_C1_Differentiation_-_Stationary_points.pdf"
+            content: |
+              6 Differentiation ..................................................................................................... 21
+                  General result................................................................................................................................. 21
+                  Tangents and Normals ................................................................................................................... 21
+                      Tangents ................................................................................................................................................. 21
+                      Normals .................................................................................................................................................. 22
+
+
+      - id: integration
+        name: "Integration"
+        lessons:
+          - id: c1-integration
+            name: "Indefinite integration 不定积分 + 反推"
+            source_pmt: "Edexcel_C1_Notes.txt"
+            kp_id_range: "kp_alevels_mathematics_p1_048-054"
+            exercises:
+              - "raw_pmt/P1_questions/Edexcel_C1_Integration_-_Basic_integration.pdf"
+              - "raw_pmt/P1_questions/Edexcel_C1_Integration_-_Areas.pdf"
+            content: |
+              7 Integration .......................................................................................................... 23
+                  Indefinite integrals ......................................................................................................................... 23
+                      Finding the arbitrary constant................................................................................................................. 23
+
+
+  - id: p2
+    code: WMA12/01
+    name: 'Auto-generated from PMT P2'
+    difficulty: medium
+    source_pmt: 'Edexcel P2 Notes (PMT)'
+    past_papers:
+      - "raw_pmt/past_papers/p2/January_2020_QP.pdf"
+      - "raw_pmt/past_papers/p2/January_2021_QP.pdf"
+      - "raw_pmt/past_papers/p2/January_2022_QP.pdf"
+      - "raw_pmt/past_papers/p2/January_2023_QP.pdf"
+      - "raw_pmt/past_papers/p2/January_2024_QP.pdf"
+      - "raw_pmt/past_papers/p2/June_2022_QP.pdf"
+      - "raw_pmt/past_papers/p2/June_2023_QP.pdf"
+    topics:
+      - id: algebra-functions
+        name: "Algebra and functions"
+        lessons:
+          - id: c2-algebra-polynomials
+            name: "Polynomials, factor theorem 多项式 + 因子定理"
+            source_pmt: "Edexcel_C2_Notes.txt"
+            kp_id_range: "kp_alevels_mathematics_p2_005-007"
+            exercises:
+              - "raw_pmt/P2_questions/Edexcel_C2__Algebra_-_Remainder_and_Factor_Theorem.pdf"
+            content: |
+              1       Algebra
+              Polynomials
+                  A polynomial is an expression of the form
+                              anxn + an –1 xn –1 + . . . a2x2 + a1x + a0
+                  where all the powers of x are positive integers or 0.
+                  Addition, subtraction and multiplication of polynomials are easy, division must be done by
+                  long division.
+
+                  Factorising
+                  General examples of factorising:
+                              2ab + 6ac2 = 2a(b + 3c2)
+                              x2 – 5x + 6 = (x – 2)(x – 3)
+                              x2 – 6x = x(x – 6)
+                              6x2 – 11x – 10 = (3x + 2)(2x – 5)
+                               2ax – 3by – 6ay + bx = 2ax – 6ay + bx – 3by
+                                     = 2a(x – 3y) + b(x – 3y)
+                                     = (2a + b)(x – 3y)
+
+
+                  Standard results
+                     x2 – y2 = (x – y)(x + y),           difference of two squares
+                              (x + y)2 = x2 + 2xy + y2,
+                              (x – y)2 = x2 – 2xy + y2
+
+                  Long division
+                  Example:
+                                                                  3x2 – 5x     + 9
+                         2                       4          3
+                      2x + 3x – 1            6x      –     x           +   x   – 3
+                                                 4          3      2
+                                             6x + 9x            – 3x
+                                                     –10x + 3x2 +
+                                                            3
+                                                                           x   – 3
+                                                            3      2
+                                                     –10x – 15x        + 5x
+                                                                   2
+                                                                 18x   – 4x    – 3
+                                                                   2
+                                                                 18x   + 27x   – 9
+                                                                       – 31x   + 6
+
+
+                  ⇒ when 6x4 – x3 + x – 3 is divided by 2x2 + 3x – 1,
+                      the quotient is 3x2 – 5x + 9, and the remainder is –31x + 6.
+
+
+                  C2 JUNE 2016 SDB                                                                 3
+
+              Remainder theorem
+
+               If 627 is divided by 6 the quotient is 104 and the remainder is 3.
+               This can be written as 627 = 6 × 104 + 3.
+               In the same way, if a polynomial
+               P(x) = a0 + a1x + a2x2 + ... anxn is divided by (cx + d) to give a quotient, Q(x) with a
+               remainder r, then r will be a constant (since the divisor is of degree one) and we can write
+                   P(x) = (cx + d) × Q(x) + r
+                   If we now choose the value of x which makes (cx + d) = 0 ⇒ x = –d/c
+                   then we have P (−d c ) = 0 × Q(x) + r
+
+                   ⇒       P (−d c ) = r.
+
+
+               Theorem: If we put x = –d/c in the polynomial we obtain r, the remainder that we would
+                   have after dividing the polynomial by (cx + d).
+
+
+               Example: The remainder when P(x) = 2x3 + ax2 + bx + 9 is divided by (2x – 3) is –6, and
+                  when P(x) is divided by (x + 2) the remainder is 1.
+                   Find the values of a and b.
+
+               Solution:   (2x – 3) = 0 when x = 3/2,
+                           ⇒        dividing P(x) by (2x – 3) gives a remainder
+                           P ( 3 2 ) = 2 × ( 3 2 ) 3 + a × ( 3 2 ) 2 + b × ( 3 2 ) + 9 = –6
+
+                           ⇒        3a + 2b = –29                       I
+
+                   and (x + 2) = 0 when x = –2,
+                           ⇒        dividing P(x) by (x + 2) gives a remainder
+                           P(–2) = 2 × (–2)3 + a × (–2)2 + b × (–2) + 9 = 1
+                           ⇒        4a – 2b = 8                         II
+
+
+                   I + II ⇒ 7a = –21
+                           ⇒        a = –3
+                           using I we get b = –10
+
+
+
+
+               4                                                                              C2 JUNE 2016 SDB
+
+              Factor theorem
+
+               Theorem: If, in the remainder theorem, r = 0 then (cx + d) is a factor of P(x)
+               ⇒ P (−d c ) = 0    ⇔      (cx + d) is a factor of P(x).
+
+
+               Example: A quadratic equation has solutions (roots) x = –1/2 and x = 3. Find the quadratic
+                  equation in the form ax2 + bx + c = 0
+
+
+               Solution: The equation has roots x = – ½ and x = 3
+                   ⇒       it must have factors (2x + 1) and (x – 3)                   by the factor theorem
+
+                   ⇒       an equation is (2x + 1)(x – 3) = 0
+                   ⇒       2x2 – 5x – 3 = 0.                                           or any multiple
+
+
+               Example: Show that (x – 2) is a factor of P(x) = 6x3 – 19x2 + 11x + 6 and hence factorise
+                  the expression completely.
+
+
+               Solution: Choose the value of x which makes          (x – 2) = 0, i.e. x = 2
+                   ⇒       remainder = P(2) = 6 × 8 – 19 × 4 + 11 × 2 + 6 = 48 – 76 + 22 + 6 = 0
+                   ⇒       (x – 2) is a factor by the factor theorem.
+                   We have started with a cubic and so we the other factor must be a quadratic, which can
+                   be found by long division or by ‘common sense’.
+                   ⇒       6x3 – 19x2 + 11x + 6 = (x – 2)(6x2 – 7x – 3)
+                   =       (x – 2)(2x – 3)(3x + 1)
+                   which is now factorised completely.
+
+
+
+
+               C2 JUNE 2016 SDB                                                                          5
+
+              Choosing a suitable factor
+              To choose a suitable factor we look at the coefficient of the highest power of x and the
+              constant (the term without an x).
+
+
+              Example: Factorise 2x3 + x2 – 13x + 6.
+
+
+              Solution: 2 is the coefficient of x3 and 2 has factors of 2 and 1.
+                  6 is the constant term and 6 has factors of 1, 2, 3 and 6
+                  ⇒        the possible linear factors of 2x3 + x2 – 13x + 6 are
+                           (x ± 1),      (x ± 2),      (x ± 3),       (x ± 6)
+                           (2x ± 1),     (2x ± 2),     (2x ± 3),      (2x ± 6)
+
+
+                  But     (2x ± 2) = 2(x ± 1)   and    (2x ± 6) = 2(x ± 3), so they are not new factors.
+
+
+                  We now test the possible factors using the factor theorem until we find one that works.
+                        Test   (x – 1), put x = 1     giving 2 × 13 + 12 – 13 × 1 + 6 ≠ 0
+                        Test   (x + 1), put x = –1    giving 2 × (–1)3 + (–1)2 – 13 × (–1) + 6 ≠ 0
+                        Test   (x – 2), put x = 2     giving 2 × 23 + 22 – 13 × 2 + 6 = 16 + 4 – 26 + 6 = 0
+                        and since the result is zero (x – 2) is a factor.
+
+
+                  We now divide to give
+                  2x3 + x2 – 13x + 6     = (x – 2)(2x2 + 5x – 3)
+                                         = (x – 2)(2x – 1)(x + 3).
+
+
+
+
+              6                                                                      C2 JUNE 2016 SDB
+
+              Cubic equations
+
+               Factorise using the factor theorem then solve.
+                   N.B. The quadratic factor might not factorise in which case you will need to use the
+               formula for this part.
+
+
+               Example: Solve the equation           2x3 + x2 – 3x + 1 = 0.
+
+
+               Solution: Possible factors are (x ± 1) and (2x ± 1).
+                   Put x = 1 we have 2 × 13 + 12 – 3×1 + 1 = 1 ≠ 0
+                   ⇒ (x – 1) is not a factor
+                   Put x = –1 we have 2 × (–1)3 + (–1)2 – 3×(–1) + 1 = 3 ≠ 0
+                   ⇒ (x + 1) is not a factor
+                                      1                  1 3    1 2      1
+                   Putting x = 2          we have    2 × �2� + �2� – 3× 2 + 1 = 0
+                   ⇒       (2x – 1) is a factor
+                   ⇒       2x3 + x2 – 3x + 1 = (2x – 1)(x2 + x – 1) = 0
+                                  1
+                   ⇒       x = 2 or x2 + x – 1 = 0          –   this will not factorise so we use the formula
+
+                                  1           −1 ±    ( −1) 2 − 4 ×1× ( −1)
+                   ⇒       x = 2 or x =                                     = 0⋅618 or –1⋅618 to 3 D.P.
+                                                          2 ×1
+
+
+
+
+               C2 JUNE 2016 SDB                                                                        7
+
+
+      - id: coord-geometry-circles
+        name: "Coordinate geometry: circles"
+        lessons:
+          - id: c2-coordinate-geometry-circles
+            name: "Circles, tangents 圆与切线"
+            source_pmt: "Edexcel_C2_Notes.txt"
+            kp_id_range: "kp_alevels_mathematics_p2_010-013"
+            exercises:
+              - "raw_pmt/P2_questions/Edexcel_C2__Coordinate_geometry_-_Circles.pdf"
+            content: |
+              3 Coordinate Geometry .........................................................................................15
+                 Mid point ....................................................................................................................................... 15
+                 Distance between two points ......................................................................................................... 15
+                 Perpendicular lines ........................................................................................................................ 15
+                 Circle ............................................................................................................................................. 15
+                      Centre at the origin.................................................................................................................................. 15
+                      General equation ..................................................................................................................................... 16
+                      Equation of tangent ................................................................................................................................. 17
+                      Intersection of line and circle .................................................................................................................. 17
+
+
+      - id: sequences-series
+        name: "Sequences and series"
+        lessons:
+          - id: c2-sequences-binomial
+            name: "Geometric series, binomial series 等比与二项式"
+            source_pmt: "Edexcel_C2_Notes.txt"
+            kp_id_range: "kp_alevels_mathematics_p2_020-024"
+            exercises:
+              - "raw_pmt/P2_questions/Edexcel_C2__Sequences_and_series_-_Binomial_expansion.pdf"
+              - "raw_pmt/P2_questions/Edexcel_C2__Sequences_and_series_-_Geometric_series.pdf"
+            content: |
+              4 Sequences and series ........................................................................................19
+                 Geometric series ............................................................................................................................ 19
+                      Finite geometric series ............................................................................................................................ 19
+                      Infinite geometric series .......................................................................................................................... 20
+                      Proof of the formula for the sum of a geometric series ........................................................................... 19
+                 Binomial series for positive integral index .................................................................................... 21
+                      Pascal’s triangle ...................................................................................................................................... 21
+                      Factorials ................................................................................................................................................. 22
+                      Binomial coefficients or nCr or 𝒏𝒓 ...................................................................................................... 22
+
+
+      - id: exponentials-logs
+        name: "Exponentials and logarithms"
+        lessons:
+          - id: c2-exponentials-logs
+            name: "Exponentials and logarithms 指数与对数"
+            source_pmt: "Edexcel_C2_Notes.txt"
+            kp_id_range: "kp_alevels_mathematics_p2_040-045"
+            exercises:
+              - "raw_pmt/P2_questions/Edexcel_C2__Exponentials_and_logs_-_Exponential_equations.pdf"
+              - "raw_pmt/P2_questions/Edexcel_C2__Exponentials_&_Logs_-_Laws_of_logs.pdf"
+            content: |
+              5 Exponentials and logarithms .............................................................................. 23
+                  Graphs of exponentials and logarithms ......................................................................................... 23
+                  Rules of logarithms........................................................................................................................ 23
+                  Changing the base of a logarithm .................................................................................................. 24
+                      A particular case ..................................................................................................................................... 24
+                  Equations of the form ax = b ........................................................................................................ 24
+
+
+      - id: differentiation
+        name: "Differentiation"
+        lessons:
+          - id: c2-differentiation-advanced
+            name: "Stationary points, max/min 驻点 + 极值"
+            source_pmt: "Edexcel_C2_Notes.txt"
+            kp_id_range: "kp_alevels_mathematics_p2_050-055"
+            exercises:
+              - "raw_pmt/P2_questions/Edexcel_C2__Differentiation_-_basic_differentiation.pdf"
+              - "raw_pmt/P2_questions/Edexcel_C2__Differentiation_-_Tangents_and_normals.pdf"
+              - "raw_pmt/P2_questions/Edexcel_C2__Differentiation_-_Stationary_points.pdf"
+            content: |
+              6 Differentiation ..................................................................................................... 25
+                  Increasing and decreasing functions .............................................................................................. 25
+                  Stationary points and local maxima and minima (turning points). ................................................ 25
+                      Using second derivative ......................................................................................................................... 26
+                      Using gradients before and after ............................................................................................................ 27
+                  Maximum and minimum problems ............................................................................................... 28
+
+
+      - id: integration
+        name: "Integration"
+        lessons:
+          - id: c2-integration-advanced
+            name: "Definite integrals, area, trapezium rule 定积分 + 面积 + 梯形法"
+            source_pmt: "Edexcel_C2_Notes.txt"
+            kp_id_range: "kp_alevels_mathematics_p2_060-065"
+            exercises:
+              - "raw_pmt/P2_questions/Edexcel_C2__Integration_-_basic_integration.pdf"
+              - "raw_pmt/P2_questions/Edexcel_C2__Integration_-_areas.pdf"
+            content: |
+              7 Integration .......................................................................................................... 29
+                  Definite integrals ........................................................................................................................... 29
+                  Area under curve ........................................................................................................................... 29
+                  Numerical integration: the trapezium rule ..................................................................................... 30
+
+
+  - id: p1-p2
+    code: WMA11/01 + WMA12/01 (跨单元)
+    name: 'Auto-generated from PMT P1-P2'
+    difficulty: medium
+    source_pmt: 'Edexcel P1-P2 Notes (PMT)'
+    past_papers:
+      - "raw_pmt/past_papers/p1/January_2019_MA.pdf"
+      - "raw_pmt/past_papers/p1/January_2019_QP.pdf"
+      - "raw_pmt/past_papers/p1/January_2020_QP.pdf"
+      - "raw_pmt/past_papers/p1/January_2021_QP.pdf"
+      - "raw_pmt/past_papers/p1/January_2022_QP.pdf"
+      - "raw_pmt/past_papers/p1/January_2023_QP.pdf"
+      - "raw_pmt/past_papers/p1/January_2024_QP.pdf"
+      - "raw_pmt/past_papers/p1/June_2019_QP.pdf"
+      - "raw_pmt/past_papers/p1/June_2022_QP.pdf"
+      - "raw_pmt/past_papers/p1/June_2023_QP.pdf"
+      - "raw_pmt/past_papers/p2/January_2020_QP.pdf"
+      - "raw_pmt/past_papers/p2/January_2021_QP.pdf"
+      - "raw_pmt/past_papers/p2/January_2022_QP.pdf"
+      - "raw_pmt/past_papers/p2/January_2023_QP.pdf"
+      - "raw_pmt/past_papers/p2/January_2024_QP.pdf"
+      - "raw_pmt/past_papers/p2/June_2022_QP.pdf"
+      - "raw_pmt/past_papers/p2/June_2023_QP.pdf"
+    topics:
+      - id: trigonometry
+        name: "Trigonometry"
+        lessons:
+          - id: c2-trigonometry
+            name: "Trigonometry 三角学(基础 + 进阶)"
+            source_pmt: "Edexcel_C2_Notes.txt"
+            kp_id_range: "kp_alevels_mathematics_p1_055-061 + p2_030-032"
+            exercises:
+              - "raw_pmt/P2_questions/Edexcel_C2__Trigonometry_-_Sine_and_cosine_rule.pdf"
+              - "raw_pmt/P2_questions/Edexcel_C2__Trigonometry_-_Arc_length_and_sector_area.pdf"
+              - "raw_pmt/P2_questions/Edexcel_C2__Trigonometry_-_Trigonometric_identities.pdf"
+              - "raw_pmt/P2_questions/Edexcel_C2__Trigonometry_-_Trigonometric_equations.pdf"
+              - "raw_pmt/P2_questions/Edexcel_C2__Trigonometry_-_Trigonometric_graphs.pdf"
+            content: |
+              2 Trigonometry ........................................................................................................8
+                 Radians ............................................................................................................................................ 8
+                      Connection between radians and degrees..................................................................................................8
+                      Arc length , area of a sector and area of a segment ...................................................................................8
+                 Trigonometric functions .................................................................................................................. 9
+                      Basic results ..............................................................................................................................................9
+                      Exact values for 30o, 45o and 60o ..............................................................................................................9
+                 Sine and cosine rules and area of triangle ....................................................................................... 9
+                      Sine rule ....................................................................................................................................................9
+                      Ambiguous case ...................................................................................................................................... 10
+                      Cosine rule .............................................................................................................................................. 10
+                      Area of triangle ....................................................................................................................................... 10
+                 Graphs of trigonometric functions................................................................................................. 10
+                      Graphs of y = sin nx, y = sin(–x), y = sin(x + n) etc. ............................................................................ 11
+                 Solving trigonometrical equations................................................................................................. 12
+                 Using identities .............................................................................................................................. 13
+
+
+  - id: p3
+    code: WMA13/01
+    name: 'Auto-generated from PMT P3'
+    difficulty: medium
+    source_pmt: 'Edexcel P3 Notes (PMT)'
+    past_papers:
+      - "raw_pmt/past_papers/p3/January_2020_QP.pdf"
+      - "raw_pmt/past_papers/p3/January_2021_QP.pdf"
+      - "raw_pmt/past_papers/p3/January_2022_QP.pdf"
+      - "raw_pmt/past_papers/p3/January_2023_QP.pdf"
+      - "raw_pmt/past_papers/p3/January_2024_QP.pdf"
+      - "raw_pmt/past_papers/p3/June_2022_QP.pdf"
+      - "raw_pmt/past_papers/p3/June_2023_QP.pdf"
+    topics:
+      - id: algebra-functions
+        name: "Algebra and functions"
+        lessons:
+          - id: c3-algebra-functions
+            name: "Functions, composite, inverse, modulus 函数 + 复合 + 反 + 绝对值"
+            source_pmt: "Edexcel_C3_Notes.txt"
+            kp_id_range: "kp_alevels_mathematics_p3_001-010"
+            exercises:
+              - "raw_pmt/P3_questions/Edexcel_C3_Algebra_-_Quadratics.pdf"
+              - "raw_pmt/P3_questions/Edexcel_C3_Algebra_-_Rational_Functions.pdf"
+            content: |
+              1       Algebraic fractions .................................................................................................3
+                  Cancelling common factors .................................................................................................................. 3
+                  Multiplying and dividing fractions ....................................................................................................... 3
+                  Adding and subtracting fractions .......................................................................................................... 3
+                  Equations .............................................................................................................................................. 4
+
+
+
+      - id: trigonometry-advanced
+        name: "Trigonometry (advanced)"
+        lessons:
+          - id: c3-trig-advanced
+            name: "Trigonometry 三角学进阶(addition formulas)"
+            source_pmt: "Edexcel_C3_Notes.txt"
+            kp_id_range: "kp_alevels_mathematics_p3_011-020"
+            exercises:
+              - "raw_pmt/P3_questions/Edexcel_C3_Trigonometry_-_Trigonometric_identities.pdf"
+              - "raw_pmt/P3_questions/Edexcel_C3_Trigonometry_-_Trigonometric_formulae.pdf"
+              - "raw_pmt/P3_questions/Edexcel_C3_Trigonometry_-_Trigonometric_equations.pdf"
+              - "raw_pmt/P3_questions/Edexcel_C3_Trigonometry_-_Trigonometric_graphs.pdf"
+            content: |
+              Trigonometry and the product and quotient rules
+
+
+                   Example: Differentiate y = x2 × cosec 3x.
+
+                                    dy     dv     du
+                   Solution:           = u    + v
+                                    dx     dx     dx
+
+                                    y = x2 × cosec 3x
+
+                       Put u = x2 and v = cosec 3x
+
+                               𝑑𝑦
+                                      =    x2 × (– 3cosec 3x cot 3x) + cosec 3x × 2x
+                               𝑑𝑥
+
+                                      =    – 3x2 cosec 3x cot 3x + 2x cosec 3x.
+
+
+
+
+              28                                                                            C3 JUNE 2016 SDB
+
+                                                tan 2 x
+              Example: Differentiate y =
+                                                 7x3
+                                                              du      dv
+                                                          v       − u
+                              u                   dy          dx      dx
+              Solution:   y =              ⇒         =             2
+                              v                   dx             v
+
+                                 tan 2 x
+                          y =
+                                  7x3
+
+                  Put u = tan 2x and v = 7x3
+
+                                   dy   7 x 3 × 2 sec 2 2 x − tan 2 x × 21x 2
+                          ⇒           =
+                                   dx                    (7 x 3 ) 2
+                                   dy   14 x 3 sec 2 2 x − 21x 2 tan 2 x
+                          ⇒           =
+                                   dx                   49 x 6
+                                   dy   2 x sec 2 2 x − 3 tan 2 x
+                          ⇒           =
+                                   dx                7x 4
+
+
+
+
+              C3 JUNE 2016 SDB                                                  29
+
+              6        Numerical methods
+              Locating the roots of f(x) = 0
+
+                   A quick sketch of the graph of y = f (x) can give a rough
+                   idea of the roots of f (x) = 0.
+                                                                                             y=f(x)
+                   If y = f (x) changes sign between x = a and x = b and if
+                   f (x) is continuous in this region then a root of f (x) = 0
+                   lies between x = a and x = b.                                                                         x
+                                                                                                          a          b
+
+
+
+
+              The iteration xn + 1 = g(xn)
+
+                   Example:
+                       (a) Show that a root, α, of the equation f (x) = x3 – 8x – 7 = 0 lies between 3 and 4.
+                       (b) Show that the equation         x3 – 8x – 7 = 0 can be re–arranged as x = 3 8 x + 7 .
+
+                       (c) Starting with x1 = 3, use the iteration xn + 1 = 3 8 x n + 7 to find the first four
+                           iterations for x.
+                       (d) Show that your value of x4 is correct to 3 S.F.
+
+
+                   Solution:
+                       (a)     f (3) = 27 – 24 – 7 = –4,           and f (4) = 64 – 32 – 7 = +25
+                       Thus    f (x) changes sign and f (x) is continuous ⇒ there is a root between 3 and 4.
+                       (b)     x3 – 8x – 7 = 0       ⇒        x3 = 8x + 7   ⇒   x = 3 8x + 7 .
+                       (c)     x1 = 3
+                               ⇒        x2 =   3
+                                                   8× 3 + 7                 ⇒        = 3⋅14138065239
+                               ⇒        x3 = 3⋅17912997899
+                               ⇒        x4 = 3⋅18905898325
+                       (d)     x4 = 3⋅19 to 3 S.F.
+                               f (3⋅185) = 3⋅1853 – 8 × 3⋅185 – 7 = – 0⋅17 …
+                               f (3⋅195) = 3⋅1953 – 8 × 3⋅195 – 7 = + 0⋅05 …
+                               f (x) changes sign and f (x) is continuous
+                               ⇒        there is a root in the interval [3⋅185, 3⋅195]
+                               ⇒        α = 3⋅19 to 3 S.F.
+
+
+
+
+              30                                                                                  C3 JUNE 2016 SDB
+
+              Conditions for convergence
+
+               If an equation is rearranged as x = g(x) and if there is a root x = α
+               then the iteration xn+1 = g(xn), starting with an approximation near x = α
+
+
+                    (i)       will converge if –1 < g ′(α) < 1
+
+                                 y                                           y
+                                                        y=x                                        y=x
+
+                                                              y=g(x)
+
+
+
+
+                                                                                                           y=g(x)
+
+                                                                   x                                                x
+                                  X1     X2     X3 X4                        X1        X3          X4 X2
+
+
+
+
+                          (a) will converge without oscillating            (b)        will oscillate and converge
+                              if 0 < g ′(α) < 1,                                      if –1 < g ′(α) < 0,
+
+
+
+                    (ii)      will diverge if                          y
+
+                              g ′(α) < –1 or g ′(α) > 1.
+                                                                                 y=g(x)
+                                                                                                   y=x
+
+
+
+
+                                                                                                           x
+                                                                                  X1 X 2 X3   X4
+
+
+
+
+                C3 JUNE 2016 SDB                                                                                        31
+
+              7        Appendix
+              Derivatives of sin x and cos x
+                         𝐬𝐢𝐧 𝒉
+              𝐥𝐢𝐦𝐡→𝟎 � 𝒉 � = 𝟏                                                                                                       C
+                                                                                                                            A
+              OAB is a sector of a circle with centre O and radius r.
+                                                      1
+              The area of the triangle OAB, 2 r2 sin h,                                                 r                             r tan h
+                                                                      1
+                   is less than the area of the sector OAB, 2 r2h
+                       1 2         1 2                                                          h
+                   ⇒   2
+                         r sin h < 2
+                                     rh                                                O
+                                                                                                                r                    B
+                       sin ℎ
+                   ⇒     ℎ
+                               <1         …….I
+                                                               1
+                   Also the area of the sector OAB, 2 r2h                                                                             r tan h
+                                                                          1
+                   is less than the area of the triangle OBC, 2 r2 tan h,
+                       1 2     1                                              sin ℎ
+                   ⇒   2
+                         r h < 2 r2 tan h             ⇒        cos h <         ℎ
+                                                                                       ……..II
+                                              sin ℎ
+                   I and II ⇒ cos h <          ℎ
+                                                      <1
+                   and as ℎ → 0,        lim cos ℎ = 1
+                                        ℎ→0
+                              sin ℎ                                sin ℎ
+                   ⇒ 1 < lim �      �<1                    ⇒ lim �       � =1
+                         ℎ→0    ℎ                              ℎ→0   ℎ
+
+
+                   h must be in RADIANS, as the formula for the area of sector is only true if h is in radians.
+
+
+              Alternative formula for derivative
+                                                                                        y
+                                                                                                                    R           y = f (x)
+                   The gradient of the curve at P will be nearly                                            P
+                   equal to the gradient of the line QR.                                            Q                   S
+                   QM = f (x – h) and RN = f (x + h)
+                   ⇒ RS = f (x + h) – f (x – h)
+                   QS = MN = 2h
+                                              𝑓 (𝑥 + ℎ) – 𝑓 (𝑥 – ℎ)                                 M               N                       x
+                   ⇒ gradient of QR =                     2ℎ                                        x–h     x       x+h
+                   and as h → 0, the gradient of QR → f ′(x) =
+                   gradient of the curve at P
+                                    limit 𝑓 (𝑥 + ℎ) – 𝑓 (𝑥 – ℎ)
+                   ⇒ f ′(x) =       ℎ→0            2ℎ
+
+
+                                                            
+
+              ... (truncated, see full PMT notes)
+
+  - id: p4
+    code: WMA14/01
+    name: 'Auto-generated from PMT P4'
+    difficulty: medium
+    source_pmt: 'Edexcel P4 Notes (PMT)'
+    past_papers:
+      - "raw_pmt/past_papers/p4/January_2021_QP.pdf"
+      - "raw_pmt/past_papers/p4/January_2022_QP.pdf"
+      - "raw_pmt/past_papers/p4/January_2023_QP.pdf"
+      - "raw_pmt/past_papers/p4/January_2024_QP.pdf"
+      - "raw_pmt/past_papers/p4/June_2022_QP.pdf"
+      - "raw_pmt/past_papers/p4/June_2023_QP.pdf"
+    topics:
+      - id: algebra
+        name: "Algebra and series"
+        lessons:
+          - id: c4-algebra
+            name: "Partial fractions, binomial expansion, sums of series"
+            source_pmt: "Edexcel_C4_Notes.txt"
+            kp_id_range: "kp_alevels_mathematics_p4_001-020"
+            exercises:
+              - "raw_pmt/P4_questions/Edexcel_C4_Algebra_-_Partial_fractions.pdf"
+              - "raw_pmt/P4_questions/Edexcel_C4_Sequences_and_series_-_Binomial_series.pdf"
+              - "raw_pmt/P4_questions/Edexcel_C4_Sequences_and_series_-_Maclaurin_series.pdf"
+              - "raw_pmt/P4_questions/Edexcel_C4_Sequences_and_series_-_general.pdf"
+            content: |
+              1         Algebra .................................................................................................................3
+                  Partial fractions ..................................................................................................................................................... 3
+
+
+      - id: coordinate-geometry
+        name: "Coordinate geometry (parametric)"
+        lessons:
+          - id: c4-coordinate-geometry
+            name: "Parametric equations 参数方程"
+            source_pmt: "Edexcel_C4_Notes.txt"
+            kp_id_range: "kp_alevels_mathematics_p4_021-030"
+            exercises:
+              - "raw_pmt/P4_questions/Edexcel_C4_Coordinate_geometry_-_Parametric_curves.pdf"
+            content: |
+              2         Coordinate Geometry ...........................................................................................5
+                  Parametric equations ............................................................................................................................................. 5
+                      Conversion from parametric to Cartesian form .................................................................................................................. 6
+                      Area under curve given parametrically .............................................................................................................................. 7
+
+
+      - id: sequences-series
+        name: "Sequences and series"
+        lessons:
+          - id: c4-sequences-series
+            name: "Binomial series 二项式级数(n 不是正整数)"
+            source_pmt: "Edexcel_C4_Notes.txt"
+            kp_id_range: "kp_alevels_mathematics_p4_031-040"
+            exercises:
+              - "raw_pmt/P4_questions/Edexcel_C4_Sequences_and_series_-_Binomial_series.pdf"
+              - "raw_pmt/P4_questions/Edexcel_C4_Sequences_and_series_-_Maclaurin_series.pdf"
+              - "raw_pmt/P4_questions/Edexcel_C4_Sequences_and_series_-_general.pdf"
+            content: |
+              3         Sequences and series ..........................................................................................8
+                  Binomial series (1 + x)n for any n ....................................................................................................................... 8
+
+
+      - id: differentiation
+        name: "Differentiation (advanced)"
+        lessons:
+          - id: c4-differentiation
+            name: "Differentiation 进阶: exp/log/trig/parametric/implicit"
+            source_pmt: "Edexcel_C4_Notes.txt"
+            kp_id_range: "kp_alevels_mathematics_p4_041-060"
+            exercises:
+              - "raw_pmt/P4_questions/Edexcel_C4_Differentiation_-_Implicit_differentiation.pdf"
+              - "raw_pmt/P4_questions/Edexcel_C4_Differentiation_-_Parametric_differentiation.pdf"
+              - "raw_pmt/P4_questions/Edexcel_C4_Differentiation_-_Products_and_quotients.pdf"
+              - "raw_pmt/P4_questions/Edexcel_C4_Differentiation_-_Rates_of_change.pdf"
+              - "raw_pmt/P4_questions/Edexcel_C4_Differentiation_-_Stationary_points.pdf"
+              - "raw_pmt/P4_questions/Edexcel_C4_Differentiation_-_Tangents_and_normals.pdf"
+              - "raw_pmt/P4_questions/Edexcel_C4_Differential_equations_-_first_order.pdf"
+            content: |
+              4         Differentiation ..................................................................................................... 10
+                                                      𝑑𝑦            𝑑𝑥
+                  Relationship between                      and          ...................................................................................................................... 10
+                                                      𝑑𝑥            𝑑𝑦
+                  Implicit differentiation ........................................................................................................................................ 10
+                  Parametric differentiation ................................................................................................................................... 11
+                  Exponential functions, a x ................................................................................................................................... 11
+                  Related rates of change ....................................................................................................................................... 12
+                  Forming differential equations ............................................................................................................................ 13
+
+
+      - id: integration
+        name: "Integration (advanced)"
+        lessons:
+          - id: c4-integration
+            name: "Integration 进阶: by parts / partial fractions / volumes"
+            source_pmt: "Edexcel_C4_Notes.txt"
+            kp_id_range: "kp_alevels_mathematics_p4_061-080"
+            exercises:
+              - "raw_pmt/P4_questions/Edexcel_C4_Integration_-_Areas.pdf"
+              - "raw_pmt/P4_questions/Edexcel_C4_Integration_-_Basic_integration.pdf"
+              - "raw_pmt/P4_questions/Edexcel_C4_Integration_-_By_parts.pdf"
+              - "raw_pmt/P4_questions/Edexcel_C4_Integration_-_By_substitution.pdf"
+              - "raw_pmt/P4_questions/Edexcel_C4_Integration_-_Using_partial_fractions.pdf"
+              - "raw_pmt/P4_questions/Edexcel_C4_Integration_-_Volumes.pdf"
+              - "raw_pmt/P4_questions/Edexcel_C4_Numerical_Methods_-_Trapezium_rule.pdf"
+            content: |
+              5         Integration........................................................................................................... 14
+                                                  1
+                  Integrals of ex and ......................................................................................................................................... 14
+                                        𝑥
+                  Standard integrals ............................................................................................................................................... 14
+                  Integration using trigonometric identities ........................................................................................................... 14
+                  Integration by ‘reverse chain rule’ ...................................................................................................................... 15
+                      Integrals of tan x and cot x ............................................................................................................................................... 16
+                      Integrals of sec x and cosec x ........................................................................................................................................... 17
+                  Integration using partial fractions ....................................................................................................................... 17
+                  Integration by substitution, indefinite ................................................................................................................. 17
+                  Integration by substitution, definite .................................................................................................................... 19
+                      Choosing the substitution ................................................................................................................................................. 20
+                  Integration by parts ............................................................................................................................................. 21
+                  Area under curve ................................................................................................................................................. 22
+                  Volume of revolution .......................................................................................................................................... 23
+                      Volume of revolution about the x–axis............................................................................................................................. 23
+                      Volume of revolution about the y–axis............................................................................................................................. 23
+                  Parametric integration ......................................................................................................................................... 24
+                  Differential equations.......................................................................................................................................... 25
+                      Separating the variables ................................................................................................................................................... 25
+                  Exponential growth and decay ............................................................................................................................ 26
+
+
+
+
+                    C4 JUNE 2016 SDB                                                                                                                                                                    1
+
+
+      - id: vectors
+        name: "Vectors"
+        lessons:
+          - id: c4-vectors
+            name: "Vectors 3D, scalar product, lines, planes"
+            source_pmt: "Edexcel_C4_Notes.txt"
+            kp_id_range: "kp_alevels_mathematics_p4_081-110"
+            exercises:
+              - "raw_pmt/P4_questions/Edexcel_C4_Vectors_-_Scalar_products.pdf"
+              - "raw_pmt/P4_questions/Edexcel_C4_Vectors_-_Vector_lines.pdf"
+              - "raw_pmt/P4_questions/Edexcel_C4_Trigonomnetry_-_Trigonometrical_formulae_and_equations.pdf"
+              - "raw_pmt/P4_questions/Edexcel_C4_Trigonomnetry_-_Trigonometrical_identities.pdf"
+            content: |
+              6         Vectors ............................................................................................................... 27
+                  Notation ...............................................................................................................................................................27
+                  Definitions, adding and subtracting, etcetera ......................................................................................................27
+                      Parallel and non - parallel vectors ..................................................................................................................................... 28
+                      Modulus of a vector and unit vectors ................................................................................................................................ 29
+                      Position vectors................................................................................................................................................................. 30
+                      Ratios ................................................................................................................................................................................ 30
+                      Proving geometrical theorems .......................................................................................................................................... 31
+                  Three dimensional vectors...................................................................................................................................32
+                      Length, modulus or magnitude of a vector ....................................................................................................................... 32
+                      Distance between two points............................................................................................................................................. 32
+                  Scalar product......................................................................................................................................................32
+                      Perpendicular vectors ........................................................................................................................................................ 33
+                      Angle between vectors ...................................................................................................................................................... 34
+                      Angle in a triangle............................................................................................................................................................. 33
+                  Vector equation of a straight line ........................................................................................................................35
+                  Geometrical problems .........................................................................................................................................35
+                  Intersection of two lines ......................................................................................................................................37
+                      2 Dimensions .................................................................................................................................................................... 37
+                      3 Dimensions .................................................................................................................................................................... 37
+
+              7         Appendix ............................................................................................................ 38
+                  Binomial series (1 + x)n for any n – proof .........................................................................................................38
+                  Derivative of xq for q rational ..........................................................................................................................38
+                    1
+                  ∫ 𝑥 𝑑𝑥 for negative limits ...................................................................................................................................39
+                  Integration by substitution – why it works ..........................................................................................................40
+                  Parametric integration .........................................................................................................................................40
+                  Separating the variables – why it works ..............................................................................................................41
+
+              Index ........................................................................................................................... 42
+
+
+
+
+                                                                                                                                                                                  C4 JUNE 2016 SDB
+              2
+
+              1       Algebra
+              Partial fractions
+
+                  1) You must start with a proper fraction: i.e. the degree of the numerator must be less than
+                     the degree of the denominator.
+                      If this is not the case you must first do long division to find quotient and remainder.
+
+
+                  2) (a)      Linear factors (not repeated)
+                                   ......                 A
+                                                     ≡          + ........
+                              (ax − b)(. . . . . . )   (ax − b)
+                      (b)     Linear repeated factors (squared)
+                                    ......                  A           B
+                                                      ≡            +          + ........
+                              (ax − b) (. . . . . . )
+                                       2
+                                                        (ax − b) 2
+                                                                     (ax − b)
+                      (c)     Quadratic factors)
+                                  ......                Ax + B
+                                                     ≡            + ........
+                              (ax + b)(. . . . . . )
+                                     2
+                                                       (ax 2 + b)
+                                     ......                    Ax + B
+                        or                                ≡               + ........
+                              (ax + bx + c)(. . . . . . )
+                                     2
+                                                            (ax + bx + c)
+                                                               2
+
+
+
+
+                                             5 − x + 2x 2
+                  Example:    Express                           in partial fractions.
+                                           (1 − x)(1 + x 2 )
+                  Solution:   The degree of the numerator, 2, is less than the degree of the denominator, 3, so
+                      we do not need long division and can write
+
+                               5 − x + 2x 2                A     Bx + C
+                                                  ≡            +                        multiply both sides by (1–x)(1+x2)
+                              (1 − x)(1 + x 2 )           1− x   1+ x2
+                      ⇒       5 – x + 2x2 ≡ A(1 + x2) + (Bx + C)(1 – x)
+                      ⇒       5 – 1 + 2 = 2A          ⇒        A=3                                clever value!, put x = 1
+
+                      ⇒       5=A+C                ⇒           C=2                                   easy value, put x = 0
+
+                      ⇒       2=A–B                ⇒           B=1                               equate coefficients of x2
+
+                               5 − x + 2x 2                 3      x+2
+                      ⇒                               ≡         +       .
+                              (1 − x)(1 + x 2 )            1− x   1+ x2
+
+
+                  Note: You can put in any value for x, so you can always find as many equations as you
+                      need to solve for A, B, C, D . . . .
+
+
+                  C4 JUNE 2016 SDB                                                                                       3
+
+                                                     x 2 − 7 x + 22
+                  Example:        Express                                    in partial fractions.
+                                                   (2 x − 1)( x − 3) 2
+
+
+                  Solution:     The degree of the numerator, 2, is less than the degree of the denominator,
+                         3, so we do
+
+              ... (truncated, see full PMT notes)
+
+  - id: m1
+    code: WME01/01
+    name: 'Auto-generated from PMT M1'
+    difficulty: medium
+    source_pmt: 'Edexcel M1 Notes (PMT)'
+    past_papers:
+      - "raw_pmt/past_papers/m1/January_2019_MA.pdf"
+      - "raw_pmt/past_papers/m1/January_2019_QP.pdf"
+      - "raw_pmt/past_papers/m1/January_2020_QP.pdf"
+      - "raw_pmt/past_papers/m1/January_2021_QP.pdf"
+      - "raw_pmt/past_papers/m1/January_2022_QP.pdf"
+      - "raw_pmt/past_papers/m1/January_2023_QP.pdf"
+      - "raw_pmt/past_papers/m1/January_2024_QP.pdf"
+      - "raw_pmt/past_papers/m1/June_2019_MA.pdf"
+      - "raw_pmt/past_papers/m1/June_2022_QP.pdf"
+      - "raw_pmt/past_papers/m1/June_2023_QP.pdf"
+    topics:
+      - id: mechanics-models
+        name: "Mathematical models in mechanics"
+        lessons:
+          - id: m1-models-vectors
+            name: "Mathematical models in mechanics + Vectors in mechanics"
+            source_pmt: "Edexcel_M1_Notes.txt"
+            kp_id_range: "kp_alevels_mathematics_m1_001-015"
+            exercises:
+              - "raw_pmt/M1_questions/Edexcel_M1_Modelling.pdf"
+              - "raw_pmt/M1_questions/Edexcel_M1_Kinematics_-_Problems_with_vectors.pdf"
+              - "raw_pmt/M1_questions/Edexcel_M1_Collisions.pdf"
+              - "raw_pmt/M1_questions/Edexcel_M1_Collisions_-_Direct_impact.pdf"
+            content: |
+              1. Mathematical Models in Mechanics ............................................................... 3
+                 Assumptions and approximations often used to simplify the mathematics involved: .......................................... 3
+              2. Vectors in Mechanics. .................................................................................... 4
+                 Magnitude and direction ,  components ..................................................................................................... 4
+                 Parallel vectors ................................................................................................................................................ 5
+                 Adding vectors ................................................................................................................................................ 5
+                 Resolving vectors in two perpendicular components ........................................................................................ 6
+                 Vector algebra ................................................................................................................................................. 6
+                 Vectors in mechanics....................................................................................................................................... 6
+                 Velocity and displacement. .............................................................................................................................. 7
+                 Relative displacement vectors .......................................................................................................................... 7
+                 Collision of moving particles ........................................................................................................................... 8
+                 Closest distance between moving particles ....................................................................................................... 8
+                 Relative velocity.............................................................................................................................................. 9
+
+      - id: kinematics
+        name: "Kinematics of a particle moving in a straight line"
+        lessons:
+          - id: m1-kinematics
+            name: "Kinematics 直线运动(匀加速 + 速度-时间图)"
+            source_pmt: "Edexcel_M1_Notes.txt"
+            kp_id_range: "kp_alevels_mathematics_m1_016-025"
+            exercises:
+              - "raw_pmt/M1_questions/Edexcel_M1_Kinematics.pdf"
+              - "raw_pmt/M1_questions/Edexcel_M1_Kinematics_-_Uniform_acceleration_formulae.pdf"
+              - "raw_pmt/M1_questions/Edexcel_M1_Kinematics_-_by_graphical_methods.pdf"
+              - "raw_pmt/M1_questions/Edexcel_M1_Kinematics_-_Projectiles.pdf"
+              - "raw_pmt/M1_questions/Edexcel_M1_Kinematics_-_Problems_with_vectors.pdf"
+            content: |
+              3. Kinematics of a particle moving in a straight line ........................................ 10
+                 Constant acceleration formulae. ..................................................................................................................... 10
+                 Vertical motion under gravity ........................................................................................................................ 10
+                 Speed-time graphs ......................................................................................................................................... 12
+
+      - id: statics
+        name: "Statics of a particle"
+        lessons:
+          - id: m1-statics
+            name: "Statics 静力学(合力 + 摩擦)"
+            source_pmt: "Edexcel_M1_Notes.txt"
+            kp_id_range: "kp_alevels_mathematics_m1_026-035"
+            exercises:
+              - "raw_pmt/M1_questions/Edexcel_M1_Statics.pdf"
+              - "raw_pmt/M1_questions/Edexcel_M1_Statics_-_Equilibrium_problems.pdf"
+              - "raw_pmt/M1_questions/Edexcel_M1_Moments.pdf"
+              - "raw_pmt/M1_questions/Edexcel_M1_Moments_-_Moments_about_a_point.pdf"
+            content: |
+              4. Statics of a particle. ...................................................................................... 13
+                 Resultant forces ............................................................................................................................................. 13
+                 Resultant of three or more forces ................................................................................................................... 14
+                 Equilibrium of a particle under coplanar forces. ............................................................................................. 15
+                 Types of force ............................................................................................................................................... 16
+                 Friction ......................................................................................................................................................... 17
+                 Coefficient of friction. ................................................................................................................................... 18
+                 Limiting equilibrium ..................................................................................................................................... 19
+
+      - id: dynamics
+        name: "Dynamics of a particle"
+        lessons:
+          - id: m1-dynamics
+            name: "Dynamics 动力学(牛顿定律 + 连接体 + 滑轮)"
+            source_pmt: "Edexcel_M1_Notes.txt"
+            kp_id_range: "kp_alevels_mathematics_m1_036-050"
+            exercises:
+              - "raw_pmt/M1_questions/Edexcel_M1_Dynamics.pdf"
+              - "raw_pmt/M1_questions/Edexcel_M1_Dynamics_-_F_=_ma_horizontally.pdf"
+              - "raw_pmt/M1_questions/Edexcel_M1_Dynamics_-_F_=_ma_on_a_slope.pdf"
+              - "raw_pmt/M1_questions/Edexcel_M1_Dynamics_-_Connected_particles.pdf"
+              - "raw_pmt/M1_questions/Edexcel_M1_Dynamics_-_Momentum_and_impulse.pdf"
+              - "raw_pmt/M1_questions/Edexcel_M1_Dynamics_-_Analysis_of_force_systems.pdf"
+            content: |
+              5. Dynamics of a particle moving in a straight line. ......................................... 20
+                 Newton’s laws of motion. .............................................................................................................................. 20
+                 Connected particles ....................................................................................................................................... 22
+                 Particles connected by pulleys: ...................................................................................................................... 24
+                 Force on pulley.............................................................................................................................................. 26
+                 Impulse and Momentum. ............................................................................................................................... 27
+                 Internal and External Forces and Impulses. .................................................................................................... 28
+                 Conservation of linear momentum, CLM. ...................................................................................................... 29
+                 Impulse in string between two particles .......................................................................................................... 31
+              6. Moments ...................................................................................................... 32
+                 Moment of a Force ........................................................................................................................................ 32
+                 Sum of moments ........................................................................................................................................... 32
+                 Moments and Equilibrium ............................................................................................................................. 33
+                 Non-uniform rods .......................................................................................................................................... 33
+                 Nearly tilting rods.......................................................................................................................................... 34
+              Appendix ............................................................................................................ 35
+              Conservation of linear momentum, C.L.M. ........................................................ 35
+              Index .................................................................................................................. 36
+
+              2   M1 OCTOBER 2016 SDB
+
+              1.        Mathematical Models in Mechanics
+              Assumptions and approximations often used to simplify the mathematics
+              involved:
+                   a) a rigid body is a particle,
+                   b) no air resistance,
+                   c)   no wind,
+                   d) force due to gravity remains constant,
+                   e)   light pulleys and light strings etc. have no mass,
+                   f)   the tension in a light string which remains taut will be constant throughout its length.
+                   g) if a pulley is light or smooth the tensions in the a string going round the pulley will be
+                      equal on both sides; the same is true for a smooth peg,
+                   h) if a string is inextensible and remains taut, the accelerations of two particles, one fixed at
+                      each end, will be equal,
+                   i)   if a rod is uniform  constant mass per unit length  the centre of mass will be in the
+                        middle,
+                   j)   a lamina is a uniform flat object of negligible thickness,
+                   k)   the earth’s surface, although spherical, is usually modelled by a plane,
+                   l)   surface is smooth - no friction,
+                   m) forces behave like vectors.
+
+
+
+
+              M1 OCTOBER 2016 SDB                                                                                      3
+
+              2.       Vectors in Mechanics.
+                   A vector is a quantity which has both magnitude and direction.
+                   A scalar is just a number - it has no direction - e.g. mass, time, etc.
+
+                   Vectors should be underlined, a letter without the underlining means the length of the vector.
+                    r is the length of the vector r
+
+
+
+              Magnitude and direction ,  components
+                   From component form, draw a sketch and use Pythagoras and trigonometry to find the
+                   hypotenuse and angle.
+
+
+                   Example:
+                                                                    5         r = (32 + 52)
+                        r = 3i + 5j =          m
+                                                                                      180 - 
+                                                                              
+                       r=                                                                           x
+                                                                          3
+                       tan  = 5/3            = 59.0o
+                        r is a vector of magnitude          m, making an angle of 121.0o with the x-axis.
+                                                       ~~~~~~~~~~~~~~~~~~~~
+                   From magnitude and direction form, draw a sketch and use trigonometry to find x and y
+                   components.
+
+
+                   Example:
+                       r is a vector of length 7 cm making an angle of 50o with the x-axis.
+                                 a
+                            50                 a = 7 cos 50o = 450 cm,
+                                               b = 7 sin 50o = 536 cm
+                                      b
+                            7
+                                                r=                 cm.
+
+
+
+
+                   Example: Find a vector p of length 15 in the direction of q =                .
+
+                   Solution:     Any vector in the direction of q must be a multiple of q.
+                       First find the length of q = q =
+
+                       and as 15 = 15  10, p = 15 q  p = 15                 =
+
+
+
+
+              4                                                                                     M1 OCTOBER 2016 SDB
+
+              Parallel vectors
+
+
+                Two vectors are parallel  one is a multiple of another:
+
+                e.g. 6i – 8j = 2(3i – 4j)          6i – 8j and 3i – 4j are parallel
+
+                Or                                                                           .
+
+
+
+
+              Adding vectors
+                Geometrically, use a vector triangle              or        a vector parallelogram:
+
+                                                                                 p
+                              p
+                                                   q
+                                                       or                              p+q
+
+
+                                  p+q
+                                                                                  q
+
+
+
+
+                1) In component form:
+
+                2) To add two vectors which are given in magnitude and direction form:
+                Either   a) convert to component form, add and convert back,
+                Or       b) sketch a vector triangle and use sine or cosine rule.
+
+
+                Example:
+                     Add together,      3 miles on a bearing of 60 o and 4 miles on a bearing of 140o..
+                Solution:
+                                                              north
+
+
+                                     north                            140
+
+                                                   3        100
+                                         60                                 4
+                                              
+
+                                                        x
+
+
+
+
+              M1 OCTOBER 2016 SDB                                                                         5
+
+                      Using the cosine rule
+                              x2 = 32 + 42  2  3  4  cos 100 = 2916756
+                               x = 54006996 = 540
+                      then, using the sine rule,
+                                                    sin  = 0729393
+
+                                = 4683551           bearing = 468 + 60 = 1068o
+                      Answer Resultant vector is 540 miles on a bearing of 1068o.
+
+
+
+
+              Resolving vectors in two perpendicular components
+
+                                                                                  y
+
+
+                  F has components F cos  and F sin 
+                  as shown.                                            F sin              F
+
+
+                                                                                                                    x
+
+                                                                                          F cos 
+
+
+              Vector algebra
+
+                  Notation,     = a,     = b, etc., but    = r, 
+
+              ... (truncated, see full PMT notes)
+
+  - id: s1
+    code: WST01/01
+    name: 'Auto-generated from PMT S1'
+    difficulty: medium
+    source_pmt: 'Edexcel S1 Notes (PMT)'
+    past_papers:
+      - "raw_pmt/past_papers/s1/January_2019_MA.pdf"
+      - "raw_pmt/past_papers/s1/January_2019_QP.pdf"
+      - "raw_pmt/past_papers/s1/January_2021_QP.pdf"
+      - "raw_pmt/past_papers/s1/January_2022_QP.pdf"
+      - "raw_pmt/past_papers/s1/January_2023_QP.pdf"
+      - "raw_pmt/past_papers/s1/January_2024_QP.pdf"
+      - "raw_pmt/past_papers/s1/June_2019_MA.pdf"
+      - "raw_pmt/past_papers/s1/June_2019_QP.pdf"
+      - "raw_pmt/past_papers/s1/June_2022_QP.pdf"
+      - "raw_pmt/past_papers/s1/June_2023_QP.pdf"
+    topics:
+      - id: statistical-representation
+        name: "Statistical representation"
+        lessons:
+          - id: s1-representation
+            name: "数据收集 / 表示 / 频数分布"
+            source_pmt: "Edexcel_S1_Notes.txt"
+            kp_id_range: "kp_alevels_mathematics_s1_001-008"
+            exercises:
+              - "raw_pmt/S1_questions/Edexcel_S1_Representation_and_summary_data.pdf"
+              - "raw_pmt/S1_questions/Edexcel_S1_Sampling_methods.pdf"
+            content: |
+              1       Statistical modelling
+
+              Statistical modelling
+                                                                                                          1
+                  Example: When a die is rolled, we say that the probability of each number is 6 . This is a
+                     statistical model, but the assumption that each face is equally likely might not be true.
+                      Suppose the die is weighted to increase the chance of a six. We might then find, after
+                                                                      1                                 1
+                      experimenting, that the probability of a six is 4 and the probability of a one is 12, with the
+                                                               1
+                      probability of other faces remaining at 6 , all adding up to 1. In this case we have refined,
+                      or improved, the model to give a truer picture.
+
+
+                  Example: The heights of a large group of adults are measured. The mean is 172⋅3 cm and the
+                     standard deviation is 12⋅4 cm.
+                      It could be thought that the general shape of the histogram can be modelled by the curve
+                                                                      y
+                                                               0.03
+
+                                            1 𝑥−172∙3 2
+                                  1        − �          �
+                      f (x) =             𝑒 2    12∙4
+                                                               0.02
+
+                                12∙4√2𝜋                        0.01
+
+                                                                                                      x
+                                                                   0
+                                                                   130    150   170     190     210
+                                                                                172.3
+
+
+
+
+                      This might not give a true picture, in which case we would have to change the equation, or
+                      refine the model.
+
+              Definition
+                  A statistical model is a simplification of a real world situation, usually describing a real world
+                  situation using equations. It can be used to make predictions about a real world problem. By
+                  analysing and refining the model an improved understanding may be obtained.
+
+              Advantages
+                     •   the model is quick and easy to produce
+                     •   the model helps our understanding of the real world problem
+                     •   the model helps us to make predictions
+                     •   the model helps us to control a situation – e.g. railway timetables, air traffic control etc.
+
+              Disadvantages
+                     •   the model simplifies the situation and only describes a part of the real world problem.
+                     •   the model may only work in certain situations, or for a particular range of values.
+
+
+
+
+                  S1 NOVEMBER 2016 SDB                                                                             5
+
+
+      - id: measures-location
+        name: "Measures of location"
+        lessons:
+          - id: s1-measures-location
+            name: "Measures of location 均值 / 中位数 / 众数"
+            source_pmt: "Edexcel_S1_Notes.txt"
+            kp_id_range: "kp_alevels_mathematics_s1_009-016"
+            exercises:
+              - "raw_pmt/S1_questions/Edexcel_S1_Representation_and_summary_data.pdf"
+            content: |
+              2   17/11/2016 Statistics 1 SDB
+
+              Statistics 1
+
+                1   Statistical modelling                                                                                                                                            5
+                     Statistical modelling ........................................................................................................... 5
+                       Definition ....................................................................................................................................................5
+                       Advantages ..................................................................................................................................................5
+                       Disadvantages..............................................................................................................................................5
+
+                2   Representation of sample data                                                                                                                                    6
+                     Variables ............................................................................................................................. 6
+                       Qualitative variables ....................................................................................................................................6
+                       Quantitative variables ..................................................................................................................................6
+                       Continuous variables ...................................................................................................................................6
+                       Discrete variables ........................................................................................................................................6
+                     Frequency distributions ...................................................................................................... 6
+                       Frequency distribution .................................................................................................................................6
+                       Cumulative frequency .................................................................................................................................6
+                     Stem and leaf & back-to-back stem and leaf diagrams ...................................................... 7
+                       Comparing two distributions from a back to back stem and leaf diagram. .................................................7
+                     Grouped frequency distributions ........................................................................................ 7
+                       Class boundaries and widths .......................................................................................................................7
+                     Cumulative frequency curves for grouped data .................................................................. 8
+                     Histograms .......................................................................................................................... 9
+                       Width and height of a bar in centimetres ...................................................................................................11
+
+                3   Mode, mean (and median)                                                                                                                                       13
+                     Mode ................................................................................................................................. 13
+                     Mean ................................................................................................................................. 13
+                     Coding............................................................................................................................... 14
+                       Coding and calculating the mean ..............................................................................................................14
+                     Median .............................................................................................................................. 15
+                     When to use mode, median and mean .............................................................................. 15
+                       Mode .........................................................................................................................................................15
+                       Median.......................................................................................................................................................15
+                       Mean ..........................................................................................................................................................15
+
+              4   Median (Q2), quartiles (Q1, Q3) and percentiles                                                                                                               16
+                   Discrete lists and discrete frequency tables ...................................................................... 16
+                     Interquartile range ..................................................................................................................................... 16
+                     Range ........................................................................................................................................................ 16
+                     Discrete lists .............................................................................................................................................. 16
+                     Discrete frequency tables .......................................................................................................................... 16
+                   Grouped frequency tables, continuous and discrete data .................................................. 17
+                     Grouped frequency tables, continuous data .............................................................................................. 17
+                     Grouped frequency tables, discrete data ................................................................................................... 18
+                     Percentiles ................................................................................................................................................. 19
+                   Box Plots ........................................................................................................................... 19
+                   Outliers .............................................................................................................................. 19
+                   Skewness ........................................................................................................................... 20
+                     Positive skew ............................................................................................................................................ 20
+                     Negative skew ........................................................................................................................................... 21
+
+              5   Measures of spread                                                                                                                                            22
+                   Range & interquartile range .............................................................................................. 22
+                     Range ........................................................................................................................................................ 22
+                     Interquartile range ..................................................................................................................................... 22
+                   Variance and standard deviation ....................................................................................... 22
+                     Proof of the alternative formula for variance ............................................................................................ 22
+                     Rough checks, m ± s, m ± 
+
+              ... (truncated, see full PMT notes)
+
+      - id: measures-spread
+        name: "Measures of spread"
+        lessons:
+          - id: s1-measures-spread
+            name: "Measures of spread 极差 / 方差 / 标准差"
+            source_pmt: "Edexcel_S1_Notes.txt"
+            kp_id_range: "kp_alevels_mathematics_s1_017-024"
+            exercises:
+              - "raw_pmt/S1_questions/Edexcel_S1_Representation_and_summary_data.pdf"
+            content: |
+              3       Mode, mean (and median)
+
+              Mode
+                  The mode is the value, or class interval, which occurs most often.
+
+
+
+
+              Mean
+                  The mean of the values x1, x2, … , xn with frequencies f1, f2, … , fn the mean is
+                                            𝑛                             𝑛
+                                      1
+                              𝑚 = 𝑥̅ = � 𝑥𝑖 𝑓𝑖 ,              where 𝑁 = � 𝑓𝑖
+                                      𝑁
+                                           𝑖=1                            𝑖=1
+
+
+
+                  Example: Find the mean for the following table showing the number of children per family.
+                  Solution:   Number of children    Frequency
+                                       x                  f          xf
+                                       0                  5           0
+                                       1                  8           8
+                                       2                 12          24
+                                       3                 18          54
+                                       4                  9          36
+                                       5                  4          20
+                                                         56        142
+                      Σ xi fi = 142, and N = Σ fi = 56
+                               142
+                      ⇒ 𝑥̅ = 56 = 2⋅54 to 3 S.F.
+
+                                                                              𝑛
+                                                                  1
+                      Note that the mean 𝑚 is often written as 𝑚 = � 𝑥𝑖 , and the 𝑓𝑖 is implied.
+                                                                  𝑁
+                                                                              1
+
+
+
+
+                  S1 NOVEMBER 2016 SDB                                                                   13
+
+                In a grouped frequency table you must use the mid-interval value.
+
+                Example: The table shows the numbers of children in prep school classes in a town.
+
+                Solution:        Number               Mid-interval         Frequency
+                               of children               value
+                                                          x                       f         xf
+                                 1 - 10                 5⋅5                   5             27⋅5
+                                11 - 15                13                     8            104
+                                16 – 20                18                    12            216
+                                21 - 30                25⋅5                  18            459
+                                31 - 40                35⋅5                  11            390⋅5
+                                                                             54           1197
+
+                     Σ xi fi = 1197, and N = Σ fi = 54
+                                1197
+                     ⇒ 𝑥̅ = 54 = 22⋅2 to 3 S.F.
+
+
+
+
+              Coding
+                The weights of a group of people are given as x1, x2, … xn in kilograms. These weights are
+                now changed to grammes and given as t1, t2, … tn .
+                In this case ti = 1000 × xi             – this is an example of coding.
+                                                                            𝑥𝑖 −20
+                Another example of coding could be ti =                               .
+                                                                              5
+
+
+              Coding and calculating the mean
+                                              𝑥𝑖 −20
+                With the coding, ti =                  , we are subtracting 20 from each x-value and then dividing the
+                                                5
+                result by 5.
+                We first find the mean for ti, and then we reverse the process to find the mean for xi
+                ⇒ we find the mean for ti, multiply by 5 and add 20, giving 𝑥̅ = 5𝑡̅ + 20
+
+                                       𝑥𝑖 −20
+                Proof:         ti =                   ⇒           xi = 5ti + 20
+                                         5
+                                         𝑛                    𝑛
+                                   1          1
+                               𝑥̅ = � 𝑥𝑖 𝑓𝑖 =   �(5𝑡𝑖 + 20)𝑓𝑖
+                                   𝑁          𝑁
+                                        𝑖=1                𝑖=1
+                                                𝑛                     𝑛
+                                           5          20
+                               ⇒       𝑥̅ = � 𝑡𝑖 𝑓𝑖 +    � 𝑓𝑖
+                                           𝑁          𝑁
+                                                𝑖=1                  𝑖=1
+                                                                                                             𝑛              𝑛
+                                                                                                           1
+                               ⇒       𝑥̅ = 5𝑡̅ + 20                                             since 𝑡̅ = � 𝑡𝑖 𝑓𝑖 and 𝑁 = � 𝑓𝑖
+                                                                                                           𝑁
+                                                                                                            𝑖=1            𝑖=1
+
+
+
+                14                                                                                       S1 NOVEMBER 2016 SDB
+
+                                                       𝑥𝑖 −165
+                Example: Use the coding ti =                     to find the mean weight for the following
+                                                         10
+                   distribution.
+
+                            Weight, kg       Mid-interval        Coded value   Frequency
+                                                                     𝑥 −165
+                                                 xi              ti = 𝑖           fi             ti fi
+                                                                        10
+                           140 - 150             145               –2             9             –18
+                           150 - 160             155               –1            21             –21
+                           160 - 170             165                0            37               0
+                           170 - 180             175                1            28              28
+                           180 - 190             185                2            11              22
+                                                                                106              11
+
+                                   11
+                     ⇒      𝑡̅ =
+                                   106
+                                   𝑥𝑖 −165                                        11
+                     and    ti =             ⇒         𝑥̅ = 10 𝑡̅ + 165 = 10 ×          + 165 = 166⋅0377358
+                                     10                                           106
+                     ⇒      mean weight is 166⋅04 kg to 2 D.P.
+
+                     Here the coding simplified the arithmetic                  for those who like to work without a calculator!
+
+
+
+
+              Median
+                The median is the middle number in an ordered list. Finding the median is explained in the
+                next section.
+
+
+
+
+              When to use mode, median and mean
+
+              Mode
+                You should use the mode if the data is qualitative (colour etc.) or if quantitative (numbers)
+                with a clearly defined mode (or bi-modal). It is not much use if the distribution is fairly even.
+
+              Median
+                You should use this for quantitative data (numbers), when the data is skewed, i.e. when the
+                median, mean and mode are probably not equal, and when there might be extreme values
+                (outliers).
+
+              Mean
+                This is for quantitative data (numbers), and uses all pieces of data. It gives a true measure, and
+                should only be used if the data is fairly symmetrical (not skewed), i.e. the mean could not be
+                affected by extreme values (outliers).
+
+
+                S1 NOVEMBER 2016 SDB                                                                                        15
+
+
+      - id: probability
+        name: "Probability"
+        lessons:
+          - id: s1-probability
+            name: "Probability 概率基础"
+            source_pmt: "Edexcel_S1_Notes.txt"
+            kp_id_range: "kp_alevels_mathematics_s1_025-032"
+            exercises:
+              - "raw_pmt/S1_questions/Edexcel_S1_Probability.pdf"
+              - "raw_pmt/S1_questions/Edexcel_S1_Modelling.pdf"
+            content: |
+              4   Median (Q2), quartiles (Q1, Q3) and percentiles                                                                                                               16
+                   Discrete lists and discrete frequency tables ...................................................................... 16
+                     Interquartile range ..................................................................................................................................... 16
+                     Range ........................................................................................................................................................ 16
+                     Discrete lists .............................................................................................................................................. 16
+                     Discrete frequency tables .......................................................................................................................... 16
+                   Grouped frequency tables, continuous and discrete data .................................................. 17
+                     Grouped frequency tables, continuous data .............................................................................................. 17
+                     Grouped frequency tables, discrete data ................................................................................................... 18
+                     Percentiles ................................................................................................................................................. 19
+                   Box Plots ........................................................................................................................... 19
+                   Outliers .............................................................................................................................. 19
+                   Skewness ........................................................................................................................... 20
+                     Positive skew ............................................................................................................................................ 20
+                     Negative skew ........................................................................................................................................... 21
+
+
+      - id: correlation-regression
+        name: "Correlation and regression"
+        lessons:
+          - id: s1-correlation-regression
+            name: "Correlation and regression 相关与回归"
+            source_pmt: "Edexcel_S1_Notes.txt"
+            kp_id_range: "kp_alevels_mathematics_s1_033-040"
+            exercises:
+              - "raw_pmt/S1_questions/Edexcel_S1_Correlation_and_regression.pdf"
+              - "raw_pmt/S1_questions/Edexcel_S1_Correlation_and_regression_-_PMCC.pdf"
+              - "raw_pmt/S1_questions/Edexcel_S1_Correlation_and_regression_-_Regression.pdf"
+            content: |
+              5   Measures of spread                                                                                                                                            22
+                   Range & interquartile range .............................................................................................. 22
+                     Range ........................................................................................................................................................ 22
+                     Interquartile range ..................................................................................................................................... 22
+                   Variance and standard deviation ....................................................................................... 22
+                     Proof of the alternative formula for variance ............................................................................................ 22
+                     Rough checks, m ± s, m ± 2s .................................................................................................................. 22
+                     Coding and variance ................................................................................................................................. 23
+                   Mean and variance of a combined group .......................................................................... 24
+
+
+      - id: discrete-random-variables
+        name: "Discrete random variables"
+        lessons:
+          - id: s1-discrete-random
+            name: "Discrete random variables 离散随机变量"
+            source_pmt: "Edexcel_S1_Notes.txt"
+            kp_id_range: "kp_alevels_mathematics_s1_041-050"
+            exercises:
+              - "raw_pmt/S1_questions/Edexcel_S1_Discrete_distributions.pdf"
+              - "raw_pmt/S1_questions/Edexcel_S1_Discrete_random_variables.pdf"
+            content: |
+              6   Probability                                                                                                                                                   25
+                   Relative frequency ............................................................................................................ 25
+                   Sample spaces, events and equally likely outcomes ......................................................... 25
+                   Probability rules and Venn diagrams ................................................................................ 25
+                   Diagrams for two dice etc. ................................................................................................ 26
+                   Tree diagrams.................................................................................................................... 27
+                   Independent events............................................................................................................ 28
+                     To prove that A and B are independent .................................................................................................. 28
+                   Exclusive events................................................................................................................ 29
+                   Number of arrangements of n objects ............................................................................... 29
+
+
+
+
+              2                                                                                                                        S1 NOVEMBER 2016 SDB
+
+
+      - id: normal-distribution
+        name: "The Normal distribution"
+        lessons:
+          - id: s1-normal-distribution
+            name: "Normal distribution N(μ, σ²) 正态分布"
+            source_pmt: "Edexcel_S1_Notes.txt"
+            kp_id_range: "kp_alevels_mathematics_s1_051-060"
+            exercises:
+              - "raw_pmt/S1_questions/Edexcel_S1_Normal_distribution.pdf"
+            content: |
+              7   Correlation                                                                                                                                                30
+                   Scatter diagrams................................................................................................................ 30
+                     Positive, negative, no correlation & line of best fit. ..................................................................................30
+                   Product moment correlation coefficient, PMCC ............................................................. 30
+                     Formulae....................................................................................................................................................30
+                     Coding and the PMCC ..............................................................................................................................31
+                     Interpretation of the PMCC .......................................................................................................................31
+

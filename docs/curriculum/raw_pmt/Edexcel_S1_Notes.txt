@@ -1,0 +1,2769 @@
+ Statistics 1
+
+
+Revision Notes
+
+
+
+
+                November 2016
+2   17/11/2016 Statistics 1 SDB
+Statistics 1
+
+  1   Statistical modelling                                                                                                                                            5
+       Statistical modelling ........................................................................................................... 5
+         Definition ....................................................................................................................................................5
+         Advantages ..................................................................................................................................................5
+         Disadvantages..............................................................................................................................................5
+
+  2   Representation of sample data                                                                                                                                    6
+       Variables ............................................................................................................................. 6
+         Qualitative variables ....................................................................................................................................6
+         Quantitative variables ..................................................................................................................................6
+         Continuous variables ...................................................................................................................................6
+         Discrete variables ........................................................................................................................................6
+       Frequency distributions ...................................................................................................... 6
+         Frequency distribution .................................................................................................................................6
+         Cumulative frequency .................................................................................................................................6
+       Stem and leaf & back-to-back stem and leaf diagrams ...................................................... 7
+         Comparing two distributions from a back to back stem and leaf diagram. .................................................7
+       Grouped frequency distributions ........................................................................................ 7
+         Class boundaries and widths .......................................................................................................................7
+       Cumulative frequency curves for grouped data .................................................................. 8
+       Histograms .......................................................................................................................... 9
+         Width and height of a bar in centimetres ...................................................................................................11
+
+  3   Mode, mean (and median)                                                                                                                                       13
+       Mode ................................................................................................................................. 13
+       Mean ................................................................................................................................. 13
+       Coding............................................................................................................................... 14
+         Coding and calculating the mean ..............................................................................................................14
+       Median .............................................................................................................................. 15
+       When to use mode, median and mean .............................................................................. 15
+         Mode .........................................................................................................................................................15
+         Median.......................................................................................................................................................15
+         Mean ..........................................................................................................................................................15
+4   Median (Q2), quartiles (Q1, Q3) and percentiles                                                                                                               16
+     Discrete lists and discrete frequency tables ...................................................................... 16
+       Interquartile range ..................................................................................................................................... 16
+       Range ........................................................................................................................................................ 16
+       Discrete lists .............................................................................................................................................. 16
+       Discrete frequency tables .......................................................................................................................... 16
+     Grouped frequency tables, continuous and discrete data .................................................. 17
+       Grouped frequency tables, continuous data .............................................................................................. 17
+       Grouped frequency tables, discrete data ................................................................................................... 18
+       Percentiles ................................................................................................................................................. 19
+     Box Plots ........................................................................................................................... 19
+     Outliers .............................................................................................................................. 19
+     Skewness ........................................................................................................................... 20
+       Positive skew ............................................................................................................................................ 20
+       Negative skew ........................................................................................................................................... 21
+
+5   Measures of spread                                                                                                                                            22
+     Range & interquartile range .............................................................................................. 22
+       Range ........................................................................................................................................................ 22
+       Interquartile range ..................................................................................................................................... 22
+     Variance and standard deviation ....................................................................................... 22
+       Proof of the alternative formula for variance ............................................................................................ 22
+       Rough checks, m ± s, m ± 2s .................................................................................................................. 22
+       Coding and variance ................................................................................................................................. 23
+     Mean and variance of a combined group .......................................................................... 24
+
+6   Probability                                                                                                                                                   25
+     Relative frequency ............................................................................................................ 25
+     Sample spaces, events and equally likely outcomes ......................................................... 25
+     Probability rules and Venn diagrams ................................................................................ 25
+     Diagrams for two dice etc. ................................................................................................ 26
+     Tree diagrams.................................................................................................................... 27
+     Independent events............................................................................................................ 28
+       To prove that A and B are independent .................................................................................................. 28
+     Exclusive events................................................................................................................ 29
+     Number of arrangements of n objects ............................................................................... 29
+
+
+
+
+2                                                                                                                        S1 NOVEMBER 2016 SDB
+7   Correlation                                                                                                                                                30
+     Scatter diagrams................................................................................................................ 30
+       Positive, negative, no correlation & line of best fit. ..................................................................................30
+     Product moment correlation coefficient, PMCC ............................................................. 30
+       Formulae....................................................................................................................................................30
+       Coding and the PMCC ..............................................................................................................................31
+       Interpretation of the PMCC .......................................................................................................................31
+
+8   Regression                                                                                                                                                 33
+     Explanatory and response variables.................................................................................. 33
+     Regression line.................................................................................................................. 33
+       Least squares regression line .....................................................................................................................33
+       Interpretation .............................................................................................................................................34
+     Coding and Regression Lines ........................................................................................... 35
+     Which formula for Sxy, Sxx, etc. ......................................................................................... 36
+
+9   Discrete Random Variables                                                                                                                                  39
+     Random Variables ............................................................................................................ 39
+     Continuous and discrete random variables ....................................................................... 39
+       Continuous random variables ....................................................................................................................39
+       Discrete random variables .........................................................................................................................39
+     Probability distributions.................................................................................................... 39
+     Cumulative probability distribution.................................................................................. 40
+     Expectation or expected values ........................................................................................ 40
+       Expected mean or expected value of X. .....................................................................................................40
+       Expected value of a function .....................................................................................................................40
+       Expected variance......................................................................................................................................40
+       Expectation algebra ...................................................................................................................................40
+       Interpretation of expected value ................................................................................................................41
+     The discrete uniform distribution ..................................................................................... 42
+       Conditions for a discrete uniform distribution...........................................................................................42
+       Expected mean and variance .....................................................................................................................43
+       Non-standard uniform distribution ............................................................................................................43
+
+10 The Normal Distribution N(µ, σ2)                                                                                                                            44
+     The standard normal distribution N(0, 12) ...................................................................... 44
+     The general normal distribution N(µ, σ2) ....................................................................... 44
+       Use of tables ..............................................................................................................................................44
+
+
+
+
+S1 NOVEMBER 2016 SDB                                                                                                                                            3
+11 Context questions and answers                                                                                                                                  48
+    Accuracy ........................................................................................................................... 48
+    Statistical models .............................................................................................................. 48
+    Histograms ........................................................................................................................ 49
+    Averages ........................................................................................................................... 49
+    Skewness ........................................................................................................................... 50
+    Correlation ........................................................................................................................ 51
+    Discrete uniform distribution ............................................................................................ 53
+    Normal distribution ........................................................................................................... 53
+
+12 Appendix                                                                                                                                                       55
+    –1 ≤ P.M.C.C. ≤ 1 ........................................................................................................... 55
+      Cauchy-Schwartz inequality ..................................................................................................................... 55
+      P.M.C.C. between –1 and +1 .................................................................................................................... 55
+    Regression line and coding ............................................................................................... 56
+      Proof ......................................................................................................................................................... 56
+                                                   𝑋−𝜇
+    Normal Distribution, Z =                         𝝈
+                                                           .......................................................................................... 57
+
+
+
+
+4                                                                                                                        S1 NOVEMBER 2016 SDB
+1       Statistical modelling
+
+Statistical modelling
+                                                                                            1
+    Example: When a die is rolled, we say that the probability of each number is 6 . This is a
+       statistical model, but the assumption that each face is equally likely might not be true.
+        Suppose the die is weighted to increase the chance of a six. We might then find, after
+                                                        1                                 1
+        experimenting, that the probability of a six is 4 and the probability of a one is 12, with the
+                                                 1
+        probability of other faces remaining at 6 , all adding up to 1. In this case we have refined,
+        or improved, the model to give a truer picture.
+
+
+    Example: The heights of a large group of adults are measured. The mean is 172⋅3 cm and the
+       standard deviation is 12⋅4 cm.
+        It could be thought that the general shape of the histogram can be modelled by the curve
+                                                        y
+                                                 0.03
+
+                              1 𝑥−172∙3 2
+                    1        − �          �
+        f (x) =             𝑒 2    12∙4
+                                                 0.02
+
+                  12∙4√2𝜋                        0.01
+
+                                                                                        x
+                                                     0
+                                                     130    150   170     190     210
+                                                                  172.3
+
+
+
+
+        This might not give a true picture, in which case we would have to change the equation, or
+        refine the model.
+
+Definition
+    A statistical model is a simplification of a real world situation, usually describing a real world
+    situation using equations. It can be used to make predictions about a real world problem. By
+    analysing and refining the model an improved understanding may be obtained.
+
+Advantages
+       •   the model is quick and easy to produce
+       •   the model helps our understanding of the real world problem
+       •   the model helps us to make predictions
+       •   the model helps us to control a situation – e.g. railway timetables, air traffic control etc.
+
+Disadvantages
+       •   the model simplifies the situation and only describes a part of the real world problem.
+       •   the model may only work in certain situations, or for a particular range of values.
+
+
+
+
+    S1 NOVEMBER 2016 SDB                                                                             5
+2        Representation of sample data
+
+Variables
+
+Qualitative variables
+         Non-numerical - e.g. red, blue or long, short etc.
+
+Quantitative variables
+         Numerical - e.g. length, age, time, number of coins in pocket, etc
+
+Continuous variables
+         Can take any value within a given range - e.g. height, time, age, etc.
+
+Discrete variables
+    Can only take certain values - e.g. shoe size, cost in £ and p, number of coins.
+
+
+
+
+Frequency distributions
+
+Frequency distribution
+         A distribution is best thought of as a table. Thus a frequency distribution can be thought
+         of as a frequency table, i.e. a list of discrete values and their frequencies.
+
+    Example: The number of M&Ms is counted in several bags,
+       and recorded in the frequency distribution/table below:
+         number of M&Ms          37       38       39       40       41       42       43
+           frequency             3        8        11       19       13       7        2
+
+
+
+
+Cumulative frequency
+         Add up the frequencies as you go down/along the list
+        number of M&Ms           37       38       39       40       41       42       43
+         frequency               3        8        11       19       13       7        2
+        cumulative frequency     3        11       22       41       54       61       63
+
+
+
+
+    6                                                                      S1 NOVEMBER 2016 SDB
+Stem and leaf & back-to-back stem and leaf diagrams
+      Line up the digits as leaves on the branches so that it looks like a bar chart.
+      The leaves on each branch must be in numerical order, starting from the stem.
+      Add a key; e.g. 5|2 means 52, or 4|3 means 4⋅3 etc.
+
+Comparing two distributions from a back to back stem and leaf diagram.
+
+
+                     A                                          B         key 8/1 = 81
+                                        8   1    2   2   4      5    6    7   8
+                          3   1     0   7   2    3   5   6      7    7    8   8 9 9 9
+               3      2   2   1     1   6   1    3   4   5      5    6    6   7 8 8 8 9 9
+             7 6      5   5   3     3   5   0    0   1   2      3    4    5   6 8
+           9 8 7      4   3   0     0   4
+             8 7      5   3   1     1   3
+               9      9   7   4     2   2
+               5      4   3   2     1   1
+                              8     7   0
+
+      Comparison:
+        1. The values in A are on average smaller than those in B
+        2. The values in A are more spread out than those in B.
+        By looking at the diagram you should always be able to make at least two
+        comparisons, usually one concerning the median and another concerning the spread,
+        often the inter-quartile range.
+
+Grouped frequency distributions
+
+Class boundaries and widths
+      When deciding class boundaries you must not leave a gap between one class and
+      another, whether dealing with continuous or discrete distributions.
+
+      For discrete distributions avoid leaving gaps between classes by using class boundaries as
+      shown below: X = 0, 1, 2, 3, 4, 5, 6, 7, … discrete.
+
+                            Class                  Class            Class boundaries
+                     interval – as given         contains             without gaps
+                            0–4                 0, 1, 2, 3, 4            0 – 4⋅5
+
+                              5–9               5, 6, 7, 8, 9             4⋅5– 9⋅5
+
+                          10 – 12               10, 11, 12               9⋅5 – 12⋅5
+                              etc
+      For continuous distributions the class boundaries can be anywhere.
+
+
+
+  S1 NOVEMBER 2016 SDB                                                                        7
+      Example:        0 ≤ x < 5,    5 ≤ x < 9,     9 ≤ x < 16, etc.
+
+              Note that each interval starts at the point where the previous interval ended, but 5,
+              for example, goes in the second interval 5 ≤ x < 9.
+
+
+
+Cumulative frequency curves for grouped data
+      For a discrete frequency distribution/table.
+
+
+                   class           class                                 cumulative
+                                                 frequency      class
+                 interval       boundaries                                frequency
+                   0-4           0 to 4⋅5            27         ≤ 4⋅5         27
+                  5–9           4⋅5 to 9⋅5           36         ≤ 9⋅5         63
+                 10 – 19       9⋅5 to 19⋅5           54        ≤ 19⋅5        117
+                 20 – 29      19⋅5 to 29⋅5           49        ≤ 29⋅5        166
+                 30 – 59       29⋅5 to 59⋅5          24        ≤ 59⋅5        190
+                 60 –99        59⋅5 to 99⋅5          10        ≤ 99⋅5        200
+
+      Plot points at ends of intervals, (4⋅5, 27), (9⋅5, 63), (19⋅5, 117) etc. and join points with a
+      smooth curve.
+
+
+
+
+  8                                                                         S1 NOVEMBER 2016 SDB
+Histograms
+  Histograms deal with continuous data. NO SPACES BEWTEEN THE BARS.
+  Therefore when we have class intervals of
+
+            3 − 4,             5 − 7,                8,            9 − 12              they must be thought of as
+          2⋅5 − 4⋅5,         4⋅5 − 7⋅5,          7⋅5 − 8⋅5,      8⋅5 − 12⋅5
+          class width 2       class width 3      class width 1   class width 4
+
+
+
+  To draw a histogram, first draw up a table showing the class intervals, class boundaries, class
+                                                                   𝑓𝑟𝑒𝑞𝑢𝑒𝑛𝑐𝑦
+  widths, frequencies and then height of each bar is calculated as 𝑐𝑙𝑎𝑠𝑠 𝑤𝑖𝑑𝑡ℎ – as shown below
+  (the height is called the frequency density):
+
+                            class                class                class                     frequency
+                          interval            boundaries              width      frequency        density
+
+                           0-4                 0 to 4⋅5                4⋅5             27            6
+
+                           5–9                 4⋅5 to 9⋅5              5               36            7⋅2
+
+                          10 – 19             9⋅5 to 19⋅5              10              54            5⋅4
+
+                          20 – 29             19⋅5 to 29⋅5             10              49            4⋅9
+
+                          30 – 44             29⋅5 to 44⋅5             15              24            1⋅6
+
+                          45 –59              44⋅5 to 59⋅5             15              12            0⋅8
+
+
+frequency
+density
+
+     10
+
+
+
+       5
+
+
+
+
+                              10                 20              30               40            50          60      x
+
+
+  In the above diagram and table we see that the tallest bar is not necessarily the one with the
+  greatest frequency, but the one with greatest frequency density. The class interval with tallest
+  bar is 4⋅5 – 9⋅5, whereas the class interval with the greatest frequency is 9⋅5 – 19⋅5 (it is in fact
+  the third tallest bar).
+  In this example we have taken frequency density × class width = area. This is not always the
+  case, but frequency density × class width is always proportional to area.
+
+
+  S1 NOVEMBER 2016 SDB                                                                                                  9
+Example:      100 people were asked how many DVDs they owned. The results are shown
+              below.
+
+                                        10   frequency density
+           Number of     frequency       9
+            DVDs
+                                         8
+           12 to 14          15
+                                         7
+
+           15 to 16                      6
+
+
+              17                         5
+
+                                         4
+           18 to 21
+                                         3
+
+           22 to 30                      2
+
+                                         1                                                    number of
+                                                                                              DVDs
+                                         0
+                                             12           15     18   21   24       27   30     33
+
+
+
+     (a)      What are the class
+              boundaries for the interval 12 to 14?
+     (b)      What is the area of the bar for the class 12 to 14?
+              Compare this with the frequency for this class.
+     (c)      Fill in the blanks in the frequency table. Check that your frequencies add up to 100.
+     (d)      Find the number of people who own between 15 and 24 DVDs, inclusive.
+
+Solution:
+    (a)       Class boundaries for the interval 12 to 14 are 11⋅5 to 14⋅5
+    (b)       Class width of bar for 12 to 14 is 14⋅5 – 11⋅5 = 3,
+              height of bar = 2⋅5, ⇒ area = 3 × 2⋅5 = 7⋅5 which is half the frequency, 15.
+              Thus the frequency is always twice the area.
+     (c)      15 to 16 is 14⋅5 to 16⋅5 width 2, height 4⋅5 ⇒ area 9 ⇒ frequency = 2× 9 = 18
+                 17 is 16⋅5 to 17⋅5 width 1, height 8⋅5 ⇒ area 8⋅5 ⇒ frequency = 2× 8⋅5 = 17
+              18 to 21 is 17⋅5 to 21⋅5 width 4, height 4 ⇒ area 16 ⇒ frequency = 2 × 16 = 32
+              22 to 30 is 21⋅5 to 30⋅5 width 9, height 1 ⇒ area 9 ⇒ frequency = 2× 9 = 18
+
+              Check 15 + 18 + 17 + 32 + 18 = 100, which is correct
+
+(d) 15 to 24 is 14⋅5 to 24⋅5
+           14⋅5 to 16⋅5 and 16⋅5 to 17⋅5 and 17⋅5 to 21⋅5 gives f = 18 + 17 + 32
+           21⋅5 to 24⋅5 has width 3 and height 1 so area = 3 ⇒ f = 2 × 3 = 6
+           ⇒       number between 15 and 24 inclusive is 18 + 17 + 32 + 6 = 73.
+
+
+
+
+10                                                                              S1 NOVEMBER 2016 SDB
+Width and height in centimetres
+
+  When the width and height are measured in cm, and the area in cm2
+  The class width is proportional to the width in cm,
+  the frequency density is proportional to the height in cm,
+  and the frequency is proportional to the area in cm2 of the bar.
+            The frequency might be equal to the area of the bar, or
+            the frequency might be double the area of the bar, or
+            the frequency might be one third of the area of the bar, etc.
+
+  Example:      A histogram is to be drawn from the following data:
+
+                                                x                         f
+                                               2−4                       15
+                                               5−6                        9
+                                              7 − 12                     18
+                                           13 − 16                       10
+
+
+      The width of the 2 − 4 interval is 6 cm, and its height is 8 cm.
+      Find the widths and heights, in cm, for the 5 − 6, the 7 − 12, and the 13 − 16 bars.
+  Solution:
+      (a)       The 2 − 4 interval has width 6 cm, height 8 cm ⇒ area = 6 × 8 = 48 cm 2.
+                The 2 − 4 interval is 1⋅5 to 4⋅5, so has width 3 ∝ 6 cm
+                and frequency 15 ∝ 48 cm2.
+      (b)       The 5 − 6 interval is 4⋅5 − 6⋅5, so has width 2,
+                                                                                         2
+                which is 23 of the width of the 2 to 4 interval, so its width (in cm) is 3 × 6 = 4 cm.
+                                                                          6
+                The 5 − 6 bar has a frequency of 6, which is 15 of the frequency of the 2 − 4 bar,
+                                                           6
+                so the area of the 5 − 6 bar is          15
+                                                               × 48 = 19⋅2 cm2,
+
+                ⇒ height is area ÷ width = 19⋅2 cm2 ÷ 4 cm = 4⋅8 cm.
+      (c)       We can now fill in the table below, working from left to right.
+
+
+        x        boundaries    width   frequency           width, cm                area, cm2            height, cm
+       2−4        1⋅5 – 4⋅5     3         15                   6 cm      6 cm × 8 cm = 48 cm2              8 cm
+                                                       2                  9
+       5−6        4⋅5 – 6⋅5     2         9            3
+                                                           × 6 = 4 cm
+                                                                          15
+                                                                               × 48 = 28⋅8 cm2       28⋅8 ÷ 4 = 7⋅2 cm
+                                                     6                    18
+      7 − 12     6⋅5 – 12⋅5     6         18         3
+                                                           × 6 = 12 cm
+                                                                          15
+                                                                                   × 48 = 57⋅6 cm2   57⋅6 ÷ 12 = 4⋅8 cm
+                                                       4                      10
+      13 − 16    12⋅5 – 16⋅5    4         10           3
+                                                           × 6 = 8 cm              × 48 = 32 cm2       32 ÷ 8 = 4 cm
+                                                                              15
+
+
+
+
+  S1 NOVEMBER 2016 SDB                                                                                                11
+Example: A grouped frequency table for the weights of adults has the following entries:
+
+            weight kg      …      …     50 – 60      60 – 70    70 – 85    …
+            frequency      …      …        60          35         20       …
+
+     In a histogram, the bar for the class 50 – 60 kg is 2 cm wide and 9 cm high.
+     Find the width and height of the bar for the 70 – 85 kg class.
+
+
+Solution:   50 – 60 is usually taken to mean 50 ≤ weight < 60
+
+
+            The width of the 50 – 60 class is 10 kg ≡ 2 cm
+                                                     15
+     ⇒      width of the 70 – 85 class is 15 kg ≡         × 2 = 3 cm
+                                                     10
+
+
+            The area of the 50 – 60 bar is 2 cm × 9 cm = 18 cm2 ⇔ frequency is 60
+     ⇒      the frequency of the 70 – 85 bar is 20
+                                             20
+     ⇒      the area of the 70 – 85 bar is 60 × 18 = 6 cm2
+
+     ⇒      the height of the 70 – 85 bar is area ÷ width = 6 cm2 ÷ 3 cm = 2 cm.
+
+
+     Answer the width of 70 – 85 kg bar is 3 cm, and the height is 2 cm.
+
+
+
+
+12                                                                        S1 NOVEMBER 2016 SDB
+3       Mode, mean (and median)
+
+Mode
+    The mode is the value, or class interval, which occurs most often.
+
+
+
+
+Mean
+    The mean of the values x1, x2, … , xn with frequencies f1, f2, … , fn the mean is
+                              𝑛                             𝑛
+                        1
+                𝑚 = 𝑥̅ = � 𝑥𝑖 𝑓𝑖 ,              where 𝑁 = � 𝑓𝑖
+                        𝑁
+                             𝑖=1                            𝑖=1
+
+
+
+    Example: Find the mean for the following table showing the number of children per family.
+    Solution:   Number of children    Frequency
+                         x                  f          xf
+                         0                  5           0
+                         1                  8           8
+                         2                 12          24
+                         3                 18          54
+                         4                  9          36
+                         5                  4          20
+                                           56        142
+        Σ xi fi = 142, and N = Σ fi = 56
+                 142
+        ⇒ 𝑥̅ = 56 = 2⋅54 to 3 S.F.
+
+                                                                𝑛
+                                                    1
+        Note that the mean 𝑚 is often written as 𝑚 = � 𝑥𝑖 , and the 𝑓𝑖 is implied.
+                                                    𝑁
+                                                                1
+
+
+
+
+    S1 NOVEMBER 2016 SDB                                                                   13
+  In a grouped frequency table you must use the mid-interval value.
+
+  Example: The table shows the numbers of children in prep school classes in a town.
+
+  Solution:        Number               Mid-interval         Frequency
+                 of children               value
+                                            x                       f         xf
+                   1 - 10                 5⋅5                   5             27⋅5
+                  11 - 15                13                     8            104
+                  16 – 20                18                    12            216
+                  21 - 30                25⋅5                  18            459
+                  31 - 40                35⋅5                  11            390⋅5
+                                                               54           1197
+
+       Σ xi fi = 1197, and N = Σ fi = 54
+                  1197
+       ⇒ 𝑥̅ = 54 = 22⋅2 to 3 S.F.
+
+
+
+
+Coding
+  The weights of a group of people are given as x1, x2, … xn in kilograms. These weights are
+  now changed to grammes and given as t1, t2, … tn .
+  In this case ti = 1000 × xi             – this is an example of coding.
+                                                              𝑥𝑖 −20
+  Another example of coding could be ti =                               .
+                                                                5
+
+
+Coding and calculating the mean
+                                𝑥𝑖 −20
+  With the coding, ti =                  , we are subtracting 20 from each x-value and then dividing the
+                                  5
+  result by 5.
+  We first find the mean for ti, and then we reverse the process to find the mean for xi
+  ⇒ we find the mean for ti, multiply by 5 and add 20, giving 𝑥̅ = 5𝑡̅ + 20
+
+                         𝑥𝑖 −20
+  Proof:         ti =                   ⇒           xi = 5ti + 20
+                           5
+                           𝑛                    𝑛
+                     1          1
+                 𝑥̅ = � 𝑥𝑖 𝑓𝑖 =   �(5𝑡𝑖 + 20)𝑓𝑖
+                     𝑁          𝑁
+                          𝑖=1                𝑖=1
+                                  𝑛                     𝑛
+                             5          20
+                 ⇒       𝑥̅ = � 𝑡𝑖 𝑓𝑖 +    � 𝑓𝑖
+                             𝑁          𝑁
+                                  𝑖=1                  𝑖=1
+                                                                                               𝑛              𝑛
+                                                                                             1
+                 ⇒       𝑥̅ = 5𝑡̅ + 20                                             since 𝑡̅ = � 𝑡𝑖 𝑓𝑖 and 𝑁 = � 𝑓𝑖
+                                                                                             𝑁
+                                                                                              𝑖=1            𝑖=1
+
+
+
+  14                                                                                       S1 NOVEMBER 2016 SDB
+                                         𝑥𝑖 −165
+  Example: Use the coding ti =                     to find the mean weight for the following
+                                           10
+     distribution.
+
+              Weight, kg       Mid-interval        Coded value   Frequency
+                                                       𝑥 −165
+                                   xi              ti = 𝑖           fi             ti fi
+                                                          10
+             140 - 150             145               –2             9             –18
+             150 - 160             155               –1            21             –21
+             160 - 170             165                0            37               0
+             170 - 180             175                1            28              28
+             180 - 190             185                2            11              22
+                                                                  106              11
+
+                     11
+       ⇒      𝑡̅ =
+                     106
+                     𝑥𝑖 −165                                        11
+       and    ti =             ⇒         𝑥̅ = 10 𝑡̅ + 165 = 10 ×          + 165 = 166⋅0377358
+                       10                                           106
+       ⇒      mean weight is 166⋅04 kg to 2 D.P.
+
+       Here the coding simplified the arithmetic                  for those who like to work without a calculator!
+
+
+
+
+Median
+  The median is the middle number in an ordered list. Finding the median is explained in the
+  next section.
+
+
+
+
+When to use mode, median and mean
+
+Mode
+  You should use the mode if the data is qualitative (colour etc.) or if quantitative (numbers)
+  with a clearly defined mode (or bi-modal). It is not much use if the distribution is fairly even.
+
+Median
+  You should use this for quantitative data (numbers), when the data is skewed, i.e. when the
+  median, mean and mode are probably not equal, and when there might be extreme values
+  (outliers).
+
+Mean
+  This is for quantitative data (numbers), and uses all pieces of data. It gives a true measure, and
+  should only be used if the data is fairly symmetrical (not skewed), i.e. the mean could not be
+  affected by extreme values (outliers).
+
+
+  S1 NOVEMBER 2016 SDB                                                                                        15
+4        Median (Q2), quartiles (Q1, Q3) and percentiles
+
+Discrete lists and discrete frequency tables
+    To find medians and quartiles
+                       𝑛                  𝑛                 3𝑛
+         1. Find k =       (for Q2),            (for Q1),        (for Q3).
+                       2                  4                 4
+         2. If k is an integer, use the mean of the kth and (k + 1)th numbers in the list.
+         3. If k is not an integer, use the next integer up, and find the number with that position in
+            the list.
+
+Interquartile range
+    The interquartile range, I.Q.R., is Q3 – Q1.
+
+Range
+    The range is the largest number minus the smallest (including outliers).
+
+Discrete lists
+    A discrete list of 10 numbers is shown below:
+        x        11      13    17      25     33                     34      42   49    51       52
+
+                                     𝑛
+         n = 10          for Q1,          = 2⋅5 so use 3rd number, ⇒              Q1 = 17
+                                     4
+                                     𝑛                                                               𝟏
+                         for Q2,          = 5 so use mean of 5th and 6th, ⇒             Q2 = 33 𝟐         median
+                                     2
+                                     3𝑛
+                         for Q3 ,              = 7⋅5 so use 8th number,           ⇒     Q3 = 49
+                                       4
+
+    The interquartile range, I.Q.R., is Q3 – Q1 = 49 – 17 = 32, and the range is 52 − 11 = 41.
+
+Discrete frequency tables
+      x      5             6          7             8            9        10      11        12
+      f      3             6          8            10            9         8       6         4
+    cum freq 3             9         17            27           36        44      50        54
+
+                               𝑛           1
+         n = 54     for Q1,        = 13 2 so use 14th number,                     ⇒     Q1 = 7
+                               4
+                               𝑛                                                                 𝟏
+                    for Q2,        = 27 so use mean of 27th and 28th,             ⇒     Q2 = 8 𝟐         median
+                               2
+                               3𝑛              1
+                    for Q3 ,        = 40 2 so use 41st number,                    ⇒     Q3 = 10
+                               4
+
+
+    The interquartile range, I.Q.R., is Q3 – Q1 = 10 – 7 = 3, and the range is 12 − 5 = 7
+
+
+    16                                                                                 S1 NOVEMBER 2016 SDB
+Grouped frequency tables, continuous and discrete data
+  To find medians and quartiles
+                       𝑛                𝑛               3𝑛
+     1. Find k =            (for Q2),       (for Q1),        (for Q3).
+                       2                4               4
+     2. Do not round k up or change it in any way.
+     3. Use linear interpolation to find median and quartiles – note that you must use the
+        correct intervals for discrete data (start at the halves).
+
+
+Grouped frequency tables, continuous data
+
+
+                              class boundaries       frequency       cumulative frequency
+                                0≤x<5                   27                    27
+                                5 to 10                 36                    63
+                                10 to 20                54                   117
+                                20 to 30                49                   166
+                                30 to 60                24                   190
+                               60 to 100                12                   202
+
+  With continuous data, the end of one interval is the same as the start of the next – no gaps.
+
+
+                                             𝑛          1
+  To find Q1, n = 202               ⇒            = 50            do not change it
+                                             4          2
+
+
+
+
+                                            Q1 – 5
+                                                             5
+           class
+         boundaries    5                                               Q1                   10
+
+         cumulative
+         frequencies
+                       27                                             50⋅5                  63
+
+                                                             36
+                                             23⋅5
+
+  In the diagram we think of the 27th value as the end of the (0 − 5) interval, and the start of the
+  (5 − 10) interval.
+  Also the 63rd value is taken as the end of (5 − 10) and the start of (10 − 20)
+                            𝑄1 −5        23⋅5
+  From the diagram                  =
+                              5             36
+                       23⋅5
+  ⇒ Q1 = 5 + 5 ×              = 8⋅263888889 = 8⋅26 to 3 S.F.
+                       36
+
+
+
+
+  S1 NOVEMBER 2016 SDB                                                                            17
+                                                  𝑛
+  To find Q2, n = 202                 ⇒               = 101      do not change it
+                                                  2
+             class
+           boundaries    10                                                  Q2                   20
+
+           cumulative
+           frequencies
+                         63                                                  101                  117
+
+                               𝑄2 −10            101−63                             38
+  From the diagram                       =                 ⇒     Q2 = 10 + 10 ×          = 17⋅037…= 17⋅0 to 3 S.F.
+                               20−10             117−63                             54
+
+                           3𝑛
+  Similarly for Q3,             = 151⋅5, so Q3 lies in the interval (20, 30)
+                           4
+                𝑄3 −20              151.5−117                                34.5
+       ⇒                   =                          ⇒    Q3 = 20 + 10 ×           = 27⋅0408… = 27⋅0 to 3 S.F.
+                30−20               166−117                                   49
+
+
+Grouped frequency tables, discrete data
+  The discrete data in grouped frequency tables is treated as continuous.
+       1. Change the class boundaries to the 4⋅5 , 9⋅5 etc.
+       2. Proceed as for grouped frequency tables for continuous data.
+
+
+                             class                  class                           cumulative
+                                                                     frequency
+                           interval              boundaries                          frequency
+                             0–4                  0 to 4⋅5              25               25
+                              5–9                 4⋅5 to 9⋅5            32               57
+                           10 – 19               9⋅5 to 19⋅5            51               108
+                           20 – 29               19⋅5 to 29⋅5           47               155
+                           30 – 59               29⋅5 to 59⋅5           20               175
+                           60 –99                59⋅5 to 99⋅5           8                183
+
+
+                                             𝑛
+  To find Q1,      n = 183            ⇒          = 45⋅75
+                                             4
+
+                class
+              boundaries      4⋅5                               Q1                                  9⋅5
+
+              cumulative
+              frequencies
+                          25                                    45⋅75                               57
+
+
+                               𝑄1 −4⋅5            45∙75−25
+  From the diagram                         =
+                               9⋅5−4⋅5             57−25
+                                   20⋅75
+       ⇒       Q1 = 4⋅5 + 5 ×                  = 7⋅7421875…= 7⋅74 to 3 S.F.
+                                      32
+
+  Q2 and Q3 can be found in a similar way.
+
+  18                                                                                          S1 NOVEMBER 2016 SDB
+Percentiles
+  Percentiles are calculated in exactly the same way as quartiles.
+
+                                            90𝑛
+  Example: For the 90th percentile, find          and proceed as above.
+                                            100
+
+
+
+
+Box Plots
+      In a group of people the youngest is 21 and the oldest is 52. The quartiles are 32 and 45,
+      and the median age is 41.
+
+      We can illustrate this information with a box plot as below – remember to include a scale
+      and label the axis.
+
+                   lowest                                               highest
+                    value              Q1            Q2       Q3         value
+
+
+
+
+                                                                                  age
+                   20             30                40                  50
+
+
+
+
+Outliers
+  An outlier is an extreme value. You are not required to remember how to find an outlier – you
+  will always be given a rule.
+
+
+  Example: The ages of 11 children are given below.
+
+      age     3       6      12        12    13          14        14    15        17   21   26
+
+      Q1 = 12, Q2 = 14 and Q3 = 17.
+      Outliers are values outside the range Q1 – 1⋅5 × (Q3 – Q1) to Q3 + 1⋅5 × (Q3 – Q1).
+      Find any outliers, and draw a box plot.
+
+
+
+
+  S1 NOVEMBER 2016 SDB                                                                            19
+  Solution:       Lower boundary for outliers is 12 – 1⋅5 × (17 – 12) = 4⋅5
+                  Upper boundary for outliers is 17 + 1⋅5 × (17 – 12) = 24⋅5
+       ⇒          3 and 26 are the only outliers.
+       To draw a box plot, put crosses at 3 and 26 (outlilers), and draw the lines to 6 (the lowest
+       value which is not an outlier), and to 21 (the highest value which is not an outlier).
+
+                     lowest                                        highest
+                      value             Q1     Q2         Q3        value
+                   not outlier                                    not outlier
+
+              ×                                                                      ×
+
+
+
+                                                                                         age
+                   5               10                15           20            25
+
+
+
+  Note that there are other ways of drawing box plots with outliers, but this is the safest and will
+  never be wrong – so why not use it.
+
+
+
+Skewness
+  A distribution which is symmetrical is not skewed
+
+Positive skew
+  If a symmetrical box plot is stretched in the direction of the positive x-axis, then the resulting
+  distribution has positive skew.
+
+                  Q1         Q2   Q3
+
+                                                                                     PULL
+
+
+                        Q1        Q2                Q3
+
+
+
+
+  For positive skew the diagram shows that           Q3 – Q2 > Q2 – Q1
+
+
+
+
+  20                                                                            S1 NOVEMBER 2016 SDB
+  The same ideas apply for a continuous distribution, and a little bit of thought should show that
+  for positive skew mean > median > mode.
+
+
+
+                                                                       PULL
+
+
+
+
+                 mode       mean
+                        median
+
+
+
+
+Negative skew
+  If a symmetrical box plot is stretched in the direction of the negative x-axis, then the resulting
+  distribution has negative skew.
+                                                                  Q1        Q2      Q3
+
+                                   PULL
+
+
+                                                       Q1              Q2           Q3
+
+
+
+
+  For negative skew the diagram shows that      Q3 – Q2 < Q2 – Q1
+
+
+  The same ideas apply for a continuous distribution, and a little bit of thought should show that
+  for negative skew mean < median < mode.
+
+
+
+                                              PULL
+
+
+
+
+                                                                mean         mode
+                                                                       median
+
+
+
+  S1 NOVEMBER 2016 SDB                                                                           21
+5        Measures of spread
+Range & interquartile range
+
+Range
+         The range is found by subtracting the smallest value from the largest value.
+
+Interquartile range
+         The interquartile range is found by subtracting the lower quartile from the upper quartile,
+         so I.Q.R. = Q3 – Q1.
+
+
+
+Variance and standard deviation
+         Variance is the square of the standard deviation.
+                            1
+                (sd)𝑥 2 =     �(𝑥𝑖 − 𝑥̅ )2 𝑓𝑖 , or
+                            𝑁
+                             1
+                 (sd)𝑥 2 =     � 𝑥𝑖 2 𝑓𝑖 − 𝑥̅ 2 .
+                             𝑁
+
+         When calculating the variance from a table, it is nearly always easier to use the second
+         formula. To answer more general questions you should use the first formula.
+
+         Variance and standard deviation measure the spread of the distribution.
+
+Proof of the alternative formula for variance
+                     1                       1
+         (sd)𝑥 2 =     �(𝑥𝑖 − 𝑥̅ )2 𝑓𝑖   =     �(𝑥𝑖 2 − 2𝑥𝑖 𝑥̅ + 𝑥̅ 2 )𝑓𝑖
+                     𝑁                       𝑁
+
+             1            1             1
+         =     � 𝑥𝑖 2 𝑓𝑖 − � 2𝑥𝑖 𝑥̅ 𝑓𝑖 + � 𝑥̅ 2 𝑓𝑖
+             𝑁            𝑁             𝑁
+
+          1    2
+                     2𝑥̅           𝑥̅ 2
+         = � 𝑥𝑖 𝑓𝑖 −     � 𝑥𝑖 𝑓𝑖 +      � 𝑓𝑖
+          𝑁          𝑁             𝑁
+                                                                             1
+                                                                since 𝑥̅ =     ∑ 𝑥𝑓   and N = ∑ 𝑓
+                                                                             𝑁
+          1                          1
+         = � 𝑥𝑖 2 𝑓𝑖 − 2𝑥̅ 2 + 𝑥̅ 2 = � 𝑥𝑖 2 𝑓𝑖 − 𝑥̅ 2
+          𝑁                          𝑁
+
+Rough checks, m ± s, m ± 2s
+         When calculating a standard deviation, you should check that there is approximately
+         65 − 70% of the population within 1 s.d. of the mean and
+         approximately 95% within 2 s.d. of the mean.
+         These approximations are best for a fairly symmetrical distribution.
+
+
+    22                                                                          S1 NOVEMBER 2016 SDB
+Coding and variance
+                               𝑥𝑖 −𝑘
+  Using the coding ti =                 we see that
+                                𝑎
+       xi = ati + k      ⇒          𝑥̅ = a𝑡̅ + k                                 as shown in the section on coding and the mean
+
+                      1                                   1                         2
+  ⇒ (sd)𝑥 2 =           �(𝑥𝑖 − 𝑥̅ )2 𝑓𝑖          =          ��(𝑎𝑡𝑖 + 𝑘) − (𝑎𝑡̅ + 𝑘)� 𝑓𝑖
+                      𝑁                                   𝑁
+
+            1                                  𝑎2
+           = �(𝑎𝑡𝑖 − 𝑎𝑡̅)2 𝑓𝑖                =    �(𝑡𝑖 − 𝑡̅)2 𝑓𝑖
+            𝑁                                  𝑁
+
+       ⇒ (sd)𝑥 2 = 𝑎2 (sd)𝑡 2                ⇒        (sd)𝑥 = 𝑎(sd)𝑡
+
+  Notice that subtracting k has no effect, since this is equivalent to translating the graph, and
+  therefore does not change the spread, and if all the x-values are divided by a, then we need to
+  multiply (sd)t by a to find (sd)x.
+
+
+Example: Find the mean and standard deviation for the following distribution.
+
+                                                                                                   𝑥𝑖 −210
+       Here the x-values are nasty, but if we change them to form ti =                                        then the
+                                                                                                      5
+       arithmetic in the last two columns becomes much easier.
+
+                                                 𝑥𝑖 −210
+                          x              ti =                               f          ti fi        ti 2 fi
+                                                      5
+                         200                     –2                         12      –24              48
+                         205                     –1                         23      –23              23
+                         210                      0                         42        0               0
+                         215                      1                         30       30              30
+                         220                      2                         10       20              40
+                                                                           117        3             141
+
+                                    1                     3           1
+       the mean of t is 𝑡̅ = 𝑁 ∑ 𝑡𝑖 𝑓𝑖 =                          =
+                                                      117             39
+                                                              1                         141        1 2
+       and the variance of t is (sd)𝑡 2 =                         ∑ 𝑡𝑖 2 𝑓𝑖 − 𝑡̅ 2 =        − � � = 1⋅204470743
+                                                              𝑁                         117    39
+       (sd)𝑡 = √1 ∙ 204470743 = 1 ∙ 097483824 = 1.10 to 3 S.F.
+
+                                       𝑥𝑖 −210                                            1
+       To find 𝑥̅ , using 𝑡𝑖 =                   , ⇒ 𝑥̅ = 5𝑡̅ + 210 = 5 ×                      + 210 = 210.13 to 2 D.P.
+                                         5                                               39
+       To find the standard deviation of x
+
+       (sd)x = 5(sd)t = 5 × 1⋅0974838… = 5⋅49 to 3 S.F.
+
+       We would need to multiply the variance by 52 = 25
+
+       ⇒       (sd)x2 = 25(sd)t2 = 25 × 1⋅204470743 = 30⋅1 to 3 S.F.
+
+
+
+
+  S1 NOVEMBER 2016 SDB                                                                                                       23
+Mean and variance of a combined group
+ Example: One class of 20 boys has a mean mass of 62 kg with a standard deviation of 3 kg.
+      A second class of 30 boys has a mean mass of 60 kg with a standard deviation of 4 kg.
+      Find the mean and standard deviation of the combined class of 50 boys.
+
+                           1                               1            2
+ Solution:    Mean 𝑥 = 𝑛 ∑ 𝑥𝑖 , and variance = (sd)2 = 𝑛 ∑ 𝑥𝑖 2 − 𝑥
+                                   1
+      1st class:     mean = 62 = 20 ∑ 𝑥𝑖 ⇒        ∑ 𝑥𝑖 = 20 × 62 = 1240
+                                   1
+      2nd class:     mean = 60 = 30 ∑ 𝑥𝑖 ⇒        ∑ 𝑥𝑖 = 30 × 60 = 1800
+                                   1         1
+      Combined:      mean = 𝑥 = 𝑛 ∑ 𝑥𝑖 =     50
+                                                  (1240 + 1800) = 60 ∙ 8 kg
+
+
+                                       1
+      1st class:     variance = 32 = 20 ∑ 𝑥𝑖 2 − 622 ⇒         ∑ 𝑥𝑖 2 = (622 + 32) × 20 = 77060
+
+
+                                       1
+      2nd class:     variance = 42 = 30 ∑ 𝑥𝑖 2 − 602 ⇒         ∑ 𝑥𝑖 2 = (602 + 42) × 300 = 108480
+
+      Combined:      ∑ 𝑥𝑖 2 = 77060 + 108480 = 185540, and the mean is 60⋅8, from above
+                                   1
+              ⇒      variance = 50 ∑ 𝑥𝑖 2 − 𝑚𝑒𝑎𝑛2
+                     1
+              =      50
+                          × 185540 − 60⋅82 = 14⋅16
+
+              ⇒      standard deviation = √14 ∙ 16 = 3⋅76            to 3 S.F.
+
+
+      Answer :       mean = 60⋅8 kg and standard deviation = 3⋅76 kg, for combined group.
+
+
+
+
+ 24                                                                         S1 NOVEMBER 2016 SDB
+6       Probability
+Relative frequency
+    After tossing a drawing pin a large number of times
+                                                       𝑛𝑢𝑚𝑏𝑒𝑟 𝑜𝑓 𝑡𝑖𝑚𝑒𝑠 𝑤𝑖𝑡ℎ 𝑝𝑜𝑖𝑛𝑡 𝑢𝑝
+    the relative frequency of it landing point up is                                 ;
+                                                            𝑡𝑜𝑡𝑎𝑙 𝑛𝑢𝑚𝑏𝑒𝑟 𝑜𝑓 𝑡𝑜𝑠𝑠𝑒𝑠
+    this can be thought of as the experimental probability.
+
+Sample spaces, events and equally likely outcomes
+    A sample space is the set of all possible outcomes, all equally likely.
+    An event is a set of possible outcomes.
+             number of ways 𝐴 can happen      𝑛(𝐴)
+    P(A) = total number in the sample space = 𝑁 , where N is number in sample space.
+
+
+
+Probability rules and Venn diagrams
+    All outcomes must be equally likely to happen.
+            n( A)
+    P(A) =
+             N
+    P(A′ ) = P(not A) = 1 – P(A)
+    A′ is the complement of A.      A ∪ B means A or B or both.            A ∩ B means both A and B,
+
+                                                        B                                      B
+                                         A                                     A
+             A        A′
+
+
+
+
+    P(A ∪ B) = P(A) + P(B) – P(A ∩ B)
+
+    P(A | B) means the probability that A has occurred given that we know that B has already
+    occurred, and should always be re-written as
+
+                              𝑃(𝐴∩𝐵)
+                 P(A | B) =
+                                 𝑃(𝐵)
+
+        If we know that B has already happened, we can think of B as the new sample space with
+        n(B) elements.
+        Then the number of ways that A can now occur is n(A∩B)
+
+                                             𝑛(𝐴∩𝐵)
+                              𝑛(𝐴∩𝐵)           𝑁        𝑃(𝐴∩𝐵)
+        ⇒        P(A | B) =             =     𝑛(𝐵) =
+                                 𝑛(𝐵)                       𝑃(𝐵)
+                                               𝑁
+
+
+
+
+    S1 NOVEMBER 2016 SDB                                                                           25
+Diagrams for two dice etc.
+  When considering two dice, two spinners or a coin and a die, the following types of diagram
+  are often useful – they ensure that all outcomes are equally likely to happen.
+
+
+           Two dice                  Coin and die                      Two coins     Three coins
+       green
+
+       6   × × × × × ×                  6    ×    ×                     H    H       H   H   H
+       5   × × × × × ×                  5    ×    ×                     H    T       H   H   T
+       4   × × × × × ×                  4    ×    ×                     T    H       H   T   H
+       3   × × × × × ×                  3    ×    ×                     T    T       T   H   H
+       2   × × × × × ×                  2    ×    ×                                  H   T   T
+       1   × × × × × ×                  1    ×    ×                                  T   H   T
+           1 2 3 4 5 6 red                   H    T                                  T   T   H
+                                                                                     T   T   T
+
+
+
+  From these diagrams, in which all outcomes are equally likely, it should be easy to see that
+                                    3
+  For two dice:       P(total 10) = 36,
+                        15
+       P(red > green) = 36,
+                                                                       1
+                                  𝑃(total 10 𝐚𝐧𝐝 4 on green)           36    1
+       P(total 104 on green) =                            =           6    = .
+                                          𝑃(4 on green)                      6
+                                                                       36
+                                                               3
+  For coin and die: P(Head and an even number) =                   .
+                                                           12
+                                                  3
+  For three dice:     P(exactly two Heads) = .
+                                                  8
+
+
+
+
+  26                                                                               S1 NOVEMBER 2016 SDB
+Tree diagrams
+ The rules for tree diagrams are
+     Select which branches you need
+     Multiply along each branch
+     Add the results of each branch needed.
+     Make sure that you include enough working to show which branches you are using (method).
+     Be careful to allow for selection with and without replacement.
+
+
+ Example: In the launch of a rocket, the probability of an electrical fault is 0⋅2. If there is an
+    electrical fault the probability that the rocket crashes is 0⋅4, and if there is no electrical
+    fault the probability that the rocket crashes is 0⋅3.
+            Draw a tree diagram. The rocket takes off, and is seen to crash. What is the
+     probability that there was an electrical fault?
+
+
+
+ Solution:
+     Let E be an electrical fault, and C be a crash.                                        C
+                                                                                  0⋅4
+     We want to find P(EC).
+                                                                          E
+                𝑃(𝐸∩𝐶)
+     P(EC) =                                                     0⋅2             0⋅6
+                  𝑃(𝐶)                                                                      C′
+     P(E∩C) = 0⋅2 × 0⋅4 = 0⋅08
+     and P(C) = 0⋅2 × 0⋅4 + 0⋅8 × 0⋅3 = 0⋅32                                                 C
+                                                                                   0⋅3
+                         0⋅08                                     0⋅8
+     ⇒       P(EC) =           = 0⋅25
+                         0⋅32                                              E′
+                                                                                   0⋅7
+                                                                                             C′
+
+
+
+
+ S1 NOVEMBER 2016 SDB                                                                             27
+Independent events
+  Definition.              A and B are independent ⇔ P(A ∩ B) = P(A) × P(B)
+                          It is also true that P(A | B) = P(A | B′ ) = P(A).
+                          A and B are not linked, they have no effect on each other.
+
+To prove that A and B are independent
+  first              find P(A), P(B) and P(A ∩ B) without assuming that P(A ∩ B) = P(A) × P(B),
+
+  second             show that P(A ∩ B) = P(A) × P(B).
+
+  Note: If A and B are not independent then P(A ∩ B) ≠ P(A) × P(B), and must be found in
+  another way, usually considering sample spaces and/or Venn diagrams.
+
+  Example: A red die and a green die are rolled and the total score recorded.
+           A is the event ‘total score is 7’, B is the event ‘green score is 6’ and C is the event ‘total
+           score is 10’.
+           Show that A and B are independent, but B and C are not independent.
+
+  Solution:          The events A, B and C are shown on the diagram.
+       green
+                                                                            6      1                 6        1
+       6         ×    ×     ×    ×     ×      ×   B               P(A) = 36 = 6, P(B) = 36 = 6
+                                                                                            1
+       5         ×    ×     ×    ×     ×      ×                   and P(A ∩ B) = 36                                from diagram
+
+                                                                                        1       1    1
+       4         ×    ×     ×    ×     ×      × C                 P(A) × P(B) = 6 × 6 = 36 = P(A ∩ B)
+
+       3         ×    ×     ×    ×     ×      ×                   ⇒      A and B are independent.
+       2         ×    ×     ×    ×     ×      ×
+                                                                            6      1                 3         1
+       1         ×    ×     ×    ×     ×      ×   A
+                                                                  P(B) = 36 = 6, P(C) = 36 = 12
+                                                                                            1
+                                                                  and P(B ∩ C) = 36                                from diagram
+                                                                                        1       1        1
+                 1    2     3    4     5      6   red             P(B) × P(C) = 6 × 12 = 72 ≠ P(B ∩ C)
+
+                                                                  ⇒      B and C are not independent
+
+
+  Example: A and B are independent events. P(A) = 0⋅5 and P(A ∩ B′) = 0⋅3. Find P(B).
+
+  Solution:          P(A) = 0⋅5 and P(A ∩ B′) = 0⋅3                                                                        B
+      ⇒              P(A ∩ B) = P(A) − P(A ∩ B′) = 0⋅5 – 0⋅3                                             A
+
+      ⇒              P(A ∩ B) = 0⋅2                                                                          0⋅3
+           But       P(A ∩ B) = P(A) × P(B)             since A and B are independent
+           ⇒         P(A ∩ B) = 0⋅5 × P(B)
+           ⇒         0⋅5 × P(B) = 0⋅2
+                                0∙2
+           ⇒         P(B) =           = 0⋅4
+                                0∙5
+
+  28                                                                                                S1 NOVEMBER 2016 SDB
+Exclusive events
+  Definition.         A and B are mutually exclusive                                              B
+                                                                                    A
+                     ⇔ P(A ∩ B) = 0
+                     i.e. they cannot both occur at the same time
+                     ⇒       P(A ∪ B) = P(A) + P(B)
+
+  Note: If A and B are not exclusive then P(A ∪ B) ≠ P(A) + P(B), and must be found in
+  another way, usually considering sample spaces and/or Venn diagrams.
+
+
+  Example: P(A) = 0⋅3, P(B) = 0⋅6 and P(A′∩ B′) = 0⋅1.
+      Prove that A and B are mutually exclusive.
+
+
+  Solution:     A′∩ B′ is shaded in the diagram
+      ⇒         P(A′∩ B′) = 1 – P(A ∪ B)                                        A             B
+
+      ⇒         P(A ∪ B) = 1 – 0⋅1 = 0⋅9
+      P(A ∪ B) = P(A) + P(B) – P(A ∩ B)                                       0⋅1
+
+      ⇒         0.9 = 0⋅3 + 0⋅6 – P(A ∩ B)
+      ⇒         P(A ∩ B) = 0
+      ⇒         A and B are mutually exclusive.
+
+
+
+Number of arrangements
+  Example: A bag contains 5 Red beads, 7 Yellow beads, and 6 White beads. Three beads are
+     drawn without replacement from the bag. Find the probability that there are 2 Red beads
+     and 1 Yellow bead.
+
+  Solution:     These beads can be drawn in any order, RRY, RYR, YRR
+
+      ⇒         P(RRY or RYR or YRR)
+      =         P(RRY) + P(RYR) + P(YRR)
+      =          5
+                18   × 174 × 167 + 185 × 177 × 164 + 187 × 175 × 164 =408
+                                                                      35
+                                                                          .
+  You must always remember the possibility of more than one order. In rolling four DICE,
+  exactly TWO SIXES can occur in six ways:
+      SSNN, SNSN, SNNS, NSSN, NSNS, NNSS, each of which would have the same
+                         1 2       5 2        25
+      probability �6� × �6� = 1296
+                                                                                    25   25
+      and so the probability of exactly two sixes with four dice is 6 × 1296 = 216.
+
+
+  S1 NOVEMBER 2016 SDB                                                                                29
+7         Correlation
+Scatter diagrams
+
+Positive, negative, no correlation & line of best fit.
+
+
+
+
+         no correlation                positive correlation                   negative correlation
+
+
+    The pattern of a scatter diagram shows linear correlation in a general manner.
+    A line of best fit can be draw by eye, but only when the points nearly lie on a straight line.
+
+
+Product moment correlation coefficient, PMCC
+
+Formulae
+          The 𝑆∗∗ are all similar to each other and make other formulae simpler to learn and use:
+
+                                                                            1
+                          Sxy = �(𝑥𝑖 − 𝑥̅ )(𝑦 − 𝑦�) =           � 𝑥𝑖 𝑦𝑖 −     �� 𝑥𝑖 � �� 𝑦𝑖 �
+                                                                            𝑁
+
+                                                                            1        2
+                          Sxx = �(𝑥𝑖 − 𝑥̅ )2              =     � 𝑥𝑖 2 −      �� 𝑥𝑖 �
+                                                                            𝑁
+
+                                                                            1        2
+                          Syy = �(𝑦𝑖 − 𝑦�)2               =     � 𝑦𝑖 2 −      �� 𝑦𝑖 �
+                                                                            𝑁
+
+
+
+                                   S xy
+          The PMCC        r   =               ,   –1 ≤ r ≤ +1                              for proof, see appendix
+                                  S xx S yy
+
+          To calculate the PMCC first calculate Sxx, Syy and Sxy using the second formula on each
+          line.
+          N.B. These formulae are all in the formula booklet.
+
+
+
+
+    30                                                                               S1 NOVEMBER 2016 SDB
+Coding and the PMCC
+      To see the effect of coding on the PMCC, it is better to use the first formula on each line.
+                                                              𝑥−𝑘
+ Example:     Investigate the effect of the coding t =              on the PMCC.
+                                                               𝑎
+
+
+
+ Solution:    rxy =             ∑(𝑥𝑖 − 𝑥̅ )(𝑦 − 𝑦�)
+                       �∑(𝑥𝑖 − 𝑥̅ )2 ∑(𝑦𝑖 − 𝑦�)2
+                     𝑥𝑖 −𝑘
+              ti =               ⇒ xi = ati + k and 𝑥̅ = a 𝑡̅ + k
+                      𝑎
+
+
+                                   ∑�𝑎𝑡𝑖 + 𝑘 − (𝑎𝑡̅ + 𝑘 )�(𝑦 − 𝑦�)
+      ⇒       rxy =
+                                                          2
+                                �∑�𝑎𝑡𝑖 + 𝑘 − (𝑎𝑡̅ + 𝑘 )� ∑(𝑦𝑖 − 𝑦�)2
+
+                                  ∑ 𝑎(𝑡𝑖 − 𝑡̅)(𝑦 − 𝑦�)
+              =
+                           �∑ 𝑎2 (𝑡𝑖 − 𝑡̅)2 ∑(𝑦𝑖 − 𝑦�)2
+
+
+                                  𝑎 ∑(𝑡𝑖 − 𝑡̅)(𝑦 − 𝑦�)
+              =
+                           √𝑎2 �∑(𝑡𝑖 − 𝑡̅)2 ∑(𝑦𝑖 − 𝑦�)2
+
+
+                                 ∑(𝑡𝑖 − 𝑡̅)(𝑦 − 𝑦�)
+              =
+                           �∑(𝑡𝑖 − 𝑡̅)2 ∑(𝑦𝑖 − 𝑦�)2
+
+              =           rty
+      In other words, the coding on x has had no effect on the PMCC. Similarly, coding on y has
+      no effect on the PMCC.
+  ⇒ Coding has no effect on the PMCC.
+
+
+
+Interpretation of the PMCC
+  It can be shown that          –1 ≤ r ≤ +1                                                see appendix
+
+              if r = +1 there is perfect positive linear correlation,
+              if r = –1 there is perfect negative linear correlation,
+              if r = 0 (or close to zero) there is no linear correlation .
+
+  PMCC tests to see if there is a linear connection between the variables.
+  For strong correlation, the points on a scatter graph will lie very close to a straight line, and r
+  will be close to 1 or –1.
+
+
+  S1 NOVEMBER 2016 SDB                                                                              31
+Example: Bleep tests are used to measure people’s fitness. A higher score means a higher
+   level of fitness. The heart rate, p beats per minute, and bleep score, s, for 12 people were
+   recorded and coded, using x = p – 60 and y = 10s – 50.
+
+       x          0        –6      9      –1        5     8       30        19      28    20      36    23
+       y          55       62      38     –7     50       44      8          8      3     20      –14   3
+
+
+            Σ x = 171, Σ y = 270, Σ x2 = 4477, Σ y2 = 13540, Σ xy = 1020.
+
+     (a)    Find the PMCC between x and y.
+     (b)    Write down the PMCC between p and s.
+     (c)    Explain why your answer to (b) might suggest that there is a linear relationship
+            between p and s.
+     (d)    Interpret the significance of the PMCC.
+
+
+                                               1                                         171×270
+Solution:   (a)        Sxy = � 𝑥𝑖 𝑦𝑖 −           �� 𝑥𝑖 � �� 𝑦𝑖 �            = 1020 –               = –2827⋅5
+                                               𝑁                                             12
+
+
+                                    1        2                        1712
+            Sxx = � 𝑥𝑖 2 −            �� 𝑥𝑖 �           = 4477 –                 = 2040⋅25
+                                    𝑁                                  12
+
+
+                     2
+                                    1           2
+                                                                       2702
+            Syy = � 𝑦 − 𝑁 �� 𝑦𝑖 �                       = 13540 –                = 7465
+                                                                        12
+                        S xy               −2827∙5
+     ⇒      r =                    =                           = – 0⋅7245127195 = – 0⋅725 to 3 S.F.
+                       S xx S yy        √2040∙25×7465
+
+
+
+     (b)    As coding has no effect on the PMCC, the product moment correlation coefficient
+            for p and s is also – 0⋅725, to 3 S.F.
+
+
+     (c)    r = – 0⋅725 is ‘quite close’ to –1, and therefore the points on a scatter diagram
+            would lie close to a straight line
+            ⇒          there is evidence of a linear relation between p and s.
+
+
+     (d)    Always give both answers − the technical describing the correlation, and the
+            wordy one which copies out the question. Then, whatever the examiner wants, you
+            should get the mark(s).
+            There is negative correlation between p and s, which means that
+            as heart rate increases, the bleep score decreases, or
+            people with higher heart rate tend to have lower bleep scores.
+
+
+
+
+32                                                                                        S1 NOVEMBER 2016 SDB
+8       Regression
+Explanatory and response variables
+
+
+
+                    h
+
+
+                                                           d
+
+    In an experiment a toy car is released from rest on a ramp from a height of h. The horizontal
+    distance, d, is then measured. The experimenter can control the height, h, and the distance, d,
+    depends on the height chosen.
+    h is called the explanatory (or independent) variable and is plotted on the horizontal axis. d is
+    called the response (or dependent) variable and is plotted on the vertical axis.
+
+
+    In some cases it may not be possible to control the explanatory variable. For example the
+    temperature at a given time may affect the sales of ice cream; the researcher cannot control the
+    temperature, but it is the temperature which affects the ice cream sales.
+    Therefore the temperature is the explanatory variable, and the ice cream sales is the response
+    variable.
+
+
+
+
+Regression line
+
+Least squares regression line
+                    y
+
+
+
+
+                6
+
+
+
+
+                4
+
+                                           (𝑥̅ , 𝑦�)
+
+
+                2
+
+
+
+
+                                 2                     4         6        x
+
+
+
+
+    S1 NOVEMBER 2016 SDB                                                                          33
+  The scatter diagram shows the regression line of y on x. The regression line is drawn to
+  minimise the sum of the squares of the vertical distances between the line and the points.
+                                                                                               S xy
+  It can be shown that the regression line has equation y = a + bx, where b =                         ,
+                                                                                               S xx
+  also that the regression line passes through the ‘mean point’, (𝑥̅ , 𝑦�),
+  and so we can find a from the equation 𝑦� = a + b𝑥̅ ⇒ a = 𝑦� – b𝑥̅
+
+Interpretation
+  In the equation     y = a + bx
+
+       a is the value of y when x is zero (or when x is not present)
+       b is the amount by which y increases for an increase of 1 in x.
+
+  You must write your interpretation in context − copy out the question word for word.
+
+
+  Example: A local authority is investigating the cost of reconditioning its incinerators. Data
+     from 10 randomly chosen incinerators were collected. The variables monitored were the
+     operating time x (in thousands of hours) since last reconditioning and the reconditioning
+     cost y (in £1000). None of the incinerators had been used for more than 3000 hours since
+     last reconditioning.
+       The data are summarised below,
+              Σx = 25⋅0, Σx2 = 65⋅68, Σy = 50⋅0, Σy2 = 260⋅48, Σxy = 130⋅64.
+       (a)    Find the equation of the regression line of y on x.
+       (b)    Give interpretations of a and b.
+
+  Solution:
+                     25∙0                           50∙0
+       (a)    𝑥̅ =          = 2⋅50,          𝑦� =          = 5⋅00,
+                     10                             10
+                                  25∙0×50∙0                                          (25∙0)2
+              Sxy = 130⋅64 –                        = 5⋅64,          Sxx = 65.68 –             = 3⋅18
+                                        10                                              10
+                      𝑆𝑥𝑦       5.64
+       ⇒      b =           =          = 1⋅773584906
+                      𝑆𝑥𝑥       3.18
+
+       ⇒      a = 𝑦� – b𝑥̅ = 5⋅00 – 1⋅773584906 × 2⋅50 = 0⋅5660377358
+       ⇒      regression line equation is             y = 0⋅566 + 1⋅77x     to 3 S.F.
+
+
+       (b)    a is the cost in £1000 of reconditioning an incinerator which has not been used, so
+              the cost of reconditioning an incinerator which has not been used is £566.
+              (a is the value of y when x is zero)
+              b is the increase in cost (in £1000) of reconditioning for every extra 1000 hours of
+              use, so it costs an extra £1774 to recondition an incinerator for every 1000 hours of
+              use. (b is the gradient of the line)
+
+
+  34                                                                              S1 NOVEMBER 2016 SDB
+Coding and Regression Lines
+ If we have the regression line of y on x:   y = a + bx,
+ and the coding p = 2y, q = x − 5
+ then the regression line of p on q can be found by re-arranging the coding to make x and y the
+ subjects (if necessary), and substituting in the regression line of y on x.
+             p = 2y, q = x − 5
+                     𝑝
+     ⇒       y = 2 and x = q + 5
+     Substitute in y = a + bx
+             𝑝
+     ⇒       2
+                 = a + b(q + 5)
+
+     ⇒       regression line of p on q is p = (2a + 10b) + 2bq
+
+
+ Example: A drilling machine can run at various speeds, but in general the higher the speed
+    the sooner the drill needs to be replaced.
+
+     Over several months, 15 pairs of observations of speed, s revolutions per minute, and the
+     life of the drill, h hours, are collected.
+     For convenience the data are coded so that s = x + 20 and h = 5y + 100
+
+     The regression line of y on x is calculated as y = 57⋅14 − 3⋅090x.
+
+     Find the regression line of h on s.
+
+
+ Solution:   First find x and y in terms of s and h.
+
+             s = x + 20 and h = 5y + 100
+
+                                   ℎ−100
+     ⇒       x = s − 20 and 𝑦 =      5
+                                         .
+
+     Then substitute into the equation of the regression line, y = 57⋅14 − 3⋅090x .
+
+             ℎ−100
+     ⇒           5
+                   = 57⋅14 − 3⋅090(s − 20)
+     ⇒       h − 100 = 285⋅7 − 15⋅45s + 309⋅0
+
+     ⇒       h = 694⋅7 − 15⋅45s is the regression line of h on s.
+
+
+
+
+ S1 NOVEMBER 2016 SDB                                                                        35
+Which formula for Sxy, Sxx, etc.
+
+
+                                                               1
+              Mean                                               � 𝑥𝑖
+                                                               𝑁
+                                     1             2                          1
+       Variance = (sd)x2               � 𝑥𝑖 2 − 𝑥                               �(𝑥𝑖 − 𝑥)2
+                                     𝑁                                        𝑁
+                                              ∑ 𝑥𝑖 ∑ 𝑦𝑖
+               Sxy                  � 𝑥𝑖 𝑦𝑖 −                              �(𝑥𝑖 − 𝑥)(𝑦𝑖 − 𝑦)
+                                                 𝑁
+                                              (∑ 𝑥𝑖 )2
+               Sxx                  � 𝑥𝑖 −2                                    �(𝑥𝑖 − 𝑥)2
+                                                 𝑁
+                                              (∑ 𝑦𝑖 )2
+               Syy                  � 𝑦𝑖 −2                                    �(𝑦𝑖 − 𝑦)2
+                                                 𝑁
+
+
+
+  Or we could use the equivalent formulae
+  with 𝑥𝑖 𝑓𝑖 , 𝑥𝑖 2 𝑓𝑖 , (𝑥𝑖 − 𝑥)2 𝑓𝑖 , and (𝑥𝑖 − 𝑥)(𝑦𝑖 − 𝑦)𝑓𝑖 .
+  In general, we use the formulae in the first column when we want to calculate, and the
+  formulae in the second column for general problems about standard deviation, r, b, etc.
+
+
+
+
+  Example: The weights, w, and heights, h of four people are shown in the table below. (In
+     practice there would be more people, but it is easier to show the method with a small
+     number of pairs.)
+
+        (a)    Find the mean weight, mean height and the PMCC.
+        (b)    A fifth person joins the group with weight 77 kg and height 171 cm. Find the new
+               value of Shh.
+        (c)    Given that the addition of the fifth person increases the value of Swh, what is the
+               effect of the fifth person on the gradient of the regression line of w on h?
+
+
+
+
+  36                                                                         S1 NOVEMBER 2016 SDB
+Solution:
+(a)
+              w                            h          wh                   w2                  h2
+              75                          173        12975                5625             29929
+              69                          167        11523                4761             27889
+              80                          174        13920                6400             30276
+              72                          170        12240                5184             28900
+             296                          684        50658               21970            116994
+
+            296                           684
+      𝑤 = 4 = 74 and ℎ = 4 = 171
+                        296×684                             2962                          6842
+  𝑆𝑤ℎ = 50658 −              4
+                                      = 42, 𝑆𝑤𝑤 = 21970 −          = 66, 𝑆ℎℎ = 116994 −          = 30
+                                                             4                             4
+                   42
+      ⇒ r=                  = 0⋅943879807 = 0⋅ 944 to 3 S.F.
+              √66×√30
+
+
+
+(b) To answer part (b) we use the formulae in the second column.
+                        4
+
+          𝑆ℎℎ = �(ℎ𝑖 − ℎ)2
+                        1
+
+          = (173−171)2 + (167−171)2 + (174−171)2 + (170−171)2
+      The height, h5 = 171 cm, of the fifth person does not change the mean height, ℎ = 171 cm.
+      To find the new Shh after the fifth person joins the group, we have to add the term
+      (ℎ5 − ℎ)2 = (171 − 171)2 = 0.
+      and so zero is added to Shh, and the new Shh = the old Shh .
+
+
+
+(c) The regression line of w on h is w = a + bh.
+                                 𝑆
+      The gradient is b = 𝑆𝑤ℎ .
+                                     ℎℎ
+
+      We are told that the addition of the fifth person increases the value of Swh, and we have
+      shown that Shh is not changed
+                                      bigger
+      ⇒ the new gradient = same , and is therefore bigger than the original gradient for four
+      people.
+
+
+
+
+S1 NOVEMBER 2016 SDB                                                                                37
+     Example:     A class of 25 students takes a physics exam and a mathematics exam. The
+        equation of the regression line of physics marks, p, against mathematics marks, m, is
+        found using
+
+         Spp = 1241, Spm = 649 and Smm = 847, 𝑝 = 57 and 𝑚 = 65.
+              𝑆𝑝𝑚      649
+         𝑏=        =        = 0 ∙ 766
+              𝑆𝑚𝑚      847
+         (a) Which is the explanatory variable?
+         (b) A pupil who takes the exams at a later date scores 62 in physics and 65 marks in
+             mathematics.
+             (i) Find the new value of Smm.
+             (ii) What can you say, without detailed calculation, about the new values of Spm
+             and Spp?
+
+
+     Solution:
+         (a) m is the explanatory variable (and p is the response variable).
+         (b) (i) The addition of an extra mark, 65, which is equal to the mean, 𝑚 = 65, of
+             the original group, will leave the mean unchanged.
+                 Smm = ∑(𝑚𝑖 − 𝑚)2
+                 The result, 65 in mathematics, will give an extra term in Smm.
+                 The extra term = (65 − 𝑚)2 = (65 − 65)2 = 0
+                 Adding 0 to Smm = ∑(𝑚𝑖 − 𝑚)2 has no effect
+                 ⇒      Smm is unchanged,    ⇒       new Smm = 847
+
+                                                                                       2
+                 (ii)   new Spm = ∑�𝑝𝑖 − 𝑝𝑛𝑒𝑤 �(𝑚𝑖 − 𝑚); and new Spp = ∑�𝑝𝑖 − 𝑝𝑛𝑒𝑤 �
+                 As we do not know the new value 𝑝𝑛𝑒𝑤 , we cannot, without detailed calculation,
+                 say anything about Spm or Spp.
+
+
+
+
+38                                                                        S1 NOVEMBER 2016 SDB
+9       Discrete Random Variables
+Random Variables
+    A random variable must take a numerical value:
+
+    Examples: the number on a single throw of a die
+              the height of a person
+              the number of cars travelling past a fixed point in a certain time
+
+        But not the colour of hair as this is not a number
+
+
+Continuous and discrete random variables
+
+Continuous random variables
+    A continuous random variable is one which can take any value in a certain interval;
+    Examples: height, time, weight.
+
+Discrete random variables
+
+    A discrete random variable can only take certain values in an interval
+    Examples: Score on die (1, 2, 3, 4, 5, 6)
+                Number of coins in pocket (0, 1, 2, ...)
+
+
+
+Probability distributions
+    A probability distribution (or table) is the set of possible outcomes together with their
+    probabilities, similar to a frequency distribution (or table).
+
+    Example:
+       score on two dice, X       2     3      4     5     6         7    8    9    10   11     12
+                                  1     2      3     4     5         6    5    4    3     2     1
+         probability, f (x)
+                                  36    36    36    36     36        36   36   36   36   36     36
+
+
+    is the probability distribution (table) for the random variable, X, the total score on two dice.
+                                                                12
+    Note that the sum of the probabilities must be 1, i.e.     ∑ P( X = x) = 1 .
+                                                               x=2
+
+
+
+
+    S1 NOVEMBER 2016 SDB                                                                               39
+Cumulative probability distribution
+  Just like cumulative frequencies, the cumulative probability, F, that the total score on two dice
+                                                                       1       2        3        6     1
+  is less than or equal to 4 is F(4) = P(X ≤ 4) = P(X = 2, 3, 4) =         +        +        =        = .
+                                                                      36       36       36       36    6
+  Note that F(4.3) means P(X ≤ 4.3) and seeing as there are no scores between 4 and 4.3 this is
+  the same as P(X ≤ 4) = F(4).
+  You are expected to recognise that capital F (X) means the cumulative probability.
+
+
+Expectation or expected values
+
+Expected mean or expected value of X.
+  For a discrete probability distribution the expected mean of X , or the expected value of X is
+      µ = E[X] = � 𝑥𝑖 𝑝𝑖
+
+Expected value of a function
+  The expected value of any function, h(X), is defined as
+
+       E[X] = � ℎ(𝑥𝑖 )𝑝𝑖
+       Note that for any constant, k, E[k] = k,                   since ∑ 𝑘𝑝𝑖 = k ∑ 𝑝𝑖 = k × 1 = k
+
+
+Expected variance
+  The expected variance of X is
+
+
+       𝜎 2 = Var[𝑋] = �(𝑥𝑖 − 𝜇)2 𝑝𝑖 = � 𝑥𝑖 2 𝑝𝑖 − 𝜇 2 ,         or
+
+
+       σ 2 = Var[X] = E[(X – µ)2] = E[X 2] – µ 2 = E[X 2] – (E[X])2
+
+Expectation algebra
+
+  E[aX + b] = �(𝑎𝑥𝑖 + 𝑏)𝑝𝑖 = � 𝑎𝑥𝑖 𝑝𝑖 + 𝑏𝑝𝑖 = 𝑎 � 𝑥𝑖 𝑝𝑖 + 𝑏
+
+              = aE[X] + b                                            since ∑ 𝑥𝑖 𝑝𝑖 = µ, and ∑ 𝑝𝑖 = 1
+
+
+  Var[aX + b] = E[(aX + b)2] – (E[(aX + b)])2
+              = E[(a2X 2 + 2abX + b2)]) – (aE[X] + b)2
+              =   {a2 E[X 2] + 2ab E[X] + E[b2]} – {a2 (E[X])2 + 2ab E[X] + b2}
+            =     a2 E[X 2] – a2 (E[X])2 = a2{E[X 2] – (E[X])2} = a2 Var[X]
+  Thus we have two important results:
+     E[aX + b] = aE[X] + b
+       Var[aX + b] = a2 Var[X] which are equivalent to the results for coding done earlier.
+
+
+  40                                                                       S1 NOVEMBER 2016 SDB
+  Example: A fair die is rolled and the score recorded.
+       (a)    Find the expected mean and variance for the score, X.
+       (b)    A ‘prize’ is awarded which depends on the score on the die. The value of the prize
+              is $Z = 3X – 6. Find the expected mean and variance of Z.
+
+
+ Solution:    (a)    score probability        xi pi       xi2pi
+                                  1            1             1
+                       1          6            6             6
+                                  1            2             4
+                       2          6            6             6
+                                  1            3             9
+                       3          6            6              6
+                                  1            4             16
+                       4          6            6             6
+                                  1            5             25
+                       5          6            6             6
+                                  1            6             36
+                       6          6            6             6
+
+
+                                               21            91
+                                               6             6
+
+
+                                         21     1
+              ⇒     µ = E[X] = ∑ 𝑥𝑖 𝑝𝑖 = 6 = 3 2
+                                               91     21 2           35        11
+              and σ 2 = E[X 2] – (E[X])2 = 6 – � 6 � = 12 = 2 12
+                                                                                    1              11
+       ⇒      The expected mean and variance for the score, X, are µ = 32 and               σ 2 = 2 12
+
+
+
+       (b)    Z = 3X – 6
+                                                                 1             1
+              ⇒      E[Z] = E[3X – 6] = 3E[X] – 6 = 10 2 – 6 = 4 2
+                                                                          35            1
+              and    Var[Z] = Var[3X – 6] = 32 Var[X] = 9 × 12 = 26 4
+                                                                                    1                1
+       ⇒      The expected mean and variance for the prize, $Z, are µ = 42 and σ 2 = 26 4
+
+
+Interpretation of expected value
+  In the example above, assume that the die was rolled N times, where N is large, and the score
+  recorded each time.
+                                 1
+  If the frequencies were exactly 6 N, then the mean of the recorded scores would equal E[X] =
+                                                                               11
+  3⋅5, and the variance of the recorded scores would equal Var[X] = 2 12.
+  Also, if the value of the prize, Z, was calculated each time, then the mean of the values would
+                                                                               1
+  equal E[Z] = 4⋅5, and the variance of the values would equal Var[X] = 26 4.
+
+
+  S1 NOVEMBER 2016 SDB                                                                                   41
+       Example:     A die is rolled until a 6 is thrown, or until the die has been rolled 4 times.
+            Find the expected mean and standard deviation of the number of times the die is
+            rolled.
+
+
+       Solution:              Expected mean                   = µ       = E[X] = ∑ 𝑥𝑖 𝑝𝑖
+               and            expected variance               = σ 2 = E[X 2] − (E[𝑋])2 = ∑ 𝑥𝑖 2 𝑝𝑖 − µ2
+
+
+                number                                                     probability
+               of rolls, xi
+                                            outcome                            pi
+                                                                                                 xipi       xi2 pi
+                                                                                 1                1           1
+                    1                           (six)
+                                                                                 6                6           6
+                                                                              5 1                10          20
+                    2                      (not six)(six)                      ×
+                                                                              6 6                36          36
+                                                                             5 2     1           75         225
+                    3                  (not six)(not six)(six)              � � ×
+                                                                             6       6           216        216
+                                     (not six)(not six)(not six)                     3           500        2000
+                    4                4th roll could be anything               �56�               216        216
+                                                                                                 671        2381
+                                                                                                 216        216
+
+
+                                        671
+       ⇒        µ = ∑ 𝑥𝑖 𝑝𝑖 = 216 = 3⋅11 to 3 S.F.
+                                                    2381           671 2
+       and      σ 2 = ∑ 𝑥𝑖 2 𝑝𝑖 − µ2 =                  216
+                                                              − �216� = 1⋅372920953
+
+       ⇒        σ = √1 ∙ 372920953 = 1⋅17 to 3 S.F.
+
+
+       Answer :               Expected mean number of rolls is 3⋅11, with standard deviation 1⋅17
+
+
+
+
+The discrete uniform distribution
+
+  Conditions for a discrete uniform distribution
+       •    The discrete random variable X is defined over a set of n distinct values
+       •    Each value is equally likely, with probability 1/n .
+
+
+  Example: The random variable X is defined as the score on a single die. X is a discrete
+     uniform distribution on the set {1, 2, 3, 4, 5, 6}
+
+       The probability distribution is
+
+           Score                 1                 2                3                    4   5          6
+                                 1                 1                1                    1   1          1
+       Probability               6                 6                6                    6   6          6
+
+
+
+  42                                                                                         S1 NOVEMBER 2016 SDB
+Expected mean and variance
+  For a discrete uniform random variable, X defined on the set {1, 2, 3, 4, ..., n},
+
+          X             1            2           3            4               ...           ...        n
+                        1            1           1            1                                        1
+      Probability       𝑛            𝑛           𝑛            𝑛                                        𝑛
+
+                                                                                                               1
+      By symmetry we can see that the Expected mean = µ = E[X] = 2 (n + 1),
+                                                     1                1                 1                  1
+      or µ = E[X] = ∑ 𝑥𝑖 𝑝𝑖 = 1 × 𝑛 + 2 × 𝑛 + 3 × 𝑛 + … + n × 𝑛
+                                                     1            1                         1     1
+              = (1 + 2 + 3 + … + n) × 𝑛                       =   2
+                                                                      n(n + 1) × 𝑛 = 2 (n + 1)                             long winded method
+
+
+
+      Var[X] = σ 2 = E[X 2] – (E[X])2 = ∑ 𝑥𝑖 2 𝑝𝑖 − 𝜇 2
+                                                                                                           2
+                            1            1               1                          1       1
+               = (12 × 𝑛 + 22 × 𝑛 + 32 × 𝑛 + … + n2 × 𝑛) − �2 (𝑛 + 1)�
+                                                                                            2
+                                                              1           1
+               = (12 + 22 + 32 + … + n2) × 𝑛 − �2 (𝑛 + 1)�
+                    1                                1        1
+               = 6 n(n + 1)(2n + 1) × 𝑛 − 4 (n + 1) 2                                                          since Σ i2 = n(n + 1)(2n + 1)
+                                                                                                                           1
+                                                                                                                           6
+                    1
+               = 24 (n + 1)[4(2n + 1) − 6(n + 1)]
+                    1                                    1
+               = 24 (n + 1) (2n − 2) = 12 (n + 1) (n − 1)
+                                             1
+      ⇒        Var[X] = σ 2 = 12 (n2 − 1)
+
+  These formulae can be quoted in an exam (if you learn them!).
+
+Non-standard uniform distribution
+  The formulae can sometimes be used for non-standard uniform distributions.
+
+  Example: X is the score on a fair 10 sided spinner. Define Y = 5X + 3.
+      Find the mean and variance of Y.
+                                                                                                                     1
+      Y is the distribution {8, 13, 18, … 53}, all with the same probability 10 .
+  Solution:   X is a (standard) discrete uniform distribution on the set {1, 2, 3, …, 10}
+                        1                        1
+      ⇒       E[X] = 2 (n + 1) = 5 2
+                                1                        99       1
+      and     Var[X] =          12
+                                     (n2 − 1) = 12 = 8 4
+                                                                                            1
+      ⇒       E[Y]          = E[5X + 3] = 5E[X] + 3 = 30 2
+                                                                                                  99            1
+      and     Var[Y] = Var[5X + 3] = 52 Var[X] = 25 × 12 = 206 4
+                                                                  1                         1
+      ⇒       mean and variance of Y are 27 2 and 206 4 .
+
+
+
+  S1 NOVEMBER 2016 SDB                                                                                                                   43
+10     The Normal Distribution N(µ, σ2)
+
+The standard normal distribution N(0, 12)
+
+
+  The diagram shows the standard normal distribution
+                                                                                  0.5 φ(z)
+  Mean, µ, = 0
+  Standard deviation, σ, = 1
+                                                                                                               z
+                                                             −3      −2     −1               1        2    3
+  The tables give the area, Φ(z), from –∞ up to z;                                               z
+  this is the probability P(Z < z)
+
+
+  To find other probabilities, sketch the curve and use your head.
+
+
+  Example: P(Z < –1⋅23)
+                                                                                  0.5 φ(z)
+       = area up to –1⋅23 = Φ(–1⋅23)
+
+                                                                                                               z
+       = area beyond +1⋅23 = 1 – Φ(+1⋅23)
+                                                             −3      −2     −1           1           2     3
+                                                                      z= −1.23           z=1.23
+       = 1 – 0⋅8907 = 0⋅1093 to 4 D.P.        from tables
+
+
+
+
+The general normal distribution N(µ, σ2)
+
+Use of tables
+  To use the tables for a Normal distribution with
+                                                                                                 z
+  mean µ and standard deviation σ
+
+
+                 X −µ                                                                                          z
+  We use Z =             (see appendix) and look in the
+                   σ                                        μ−3σ     μ−2σ   μ−σ      μ   μ+σ         μ+2σ μ+3σ
+
+  tables under this value of Z
+
+
+
+
+  44                                                                         S1 NOVEMBER 2016 SDB
+Example: The length of life (in months) of Blowdri’s hair driers is approximately Normally
+   distributed with mean 90 months and standard deviation 15 months, N(90, 152).
+    (a) Each drier is sold with a 5 year guarantee. What proportion of driers fail before the
+        guarantee expires?
+    (b) The manufacturer decides to change the length of the guarantee so that no more than
+        1% of driers fail during the guarantee period. How long should he make the
+        guarantee?
+
+
+Solution:
+    (a) X is the length of life of drier ⇒ X ~ N(90, 152)
+        5 years = 60 months
+    ⇒ we want P(X < 60) = area up to 60                                                                           z
+
+                                                                            60              90
+
+
+
+               X −µ           60 − 90
+    ⇒ Z =                 =           = − 2.0                                         0.5
+                                                                                             φ(z)
+                  σ             15
+    so we want area to left of Z = –2                             z= −2                                 z=2
+
+    = Φ(–2) = 1 – Φ(2)                                                                                            z
+                                                            −3          −2       −1                 1   2     3
+    = 1 – 0⋅9772 = 0⋅0228 to 4 D.P. from tables.
+
+⇒   the proportion of hair driers failing during the guarantee period is 0.0288 to 4 D.P.
+
+
+(b) Let the length of the guarantee be t years
+    ⇒ we need P(X < t) = 0⋅01.
+    We need the value of Z such that Φ(Z) = 0⋅01
+                                                              area
+                                                              0.01                                                z
+    From the tables Z = –2⋅3263 to 4 D.P. from tables
+                                                                        t                   90
+    (remember to look in the small table after the
+    Normal tables)
+    Standardising the variable                                                        0.5 φ(z)
+                  X −µ            t − 90
+    ⇒       Z =               =
+                      σ             15
+                                                                 area
+                                                                 0.01                                             z
+            t − 90
+    ⇒              = − 2 ⋅ 3263 to 4 D.P. from tables                 z
+                                                                  −2.3263                   0
+              15
+    ⇒       t = 55⋅1 to 3 S.F.
+
+    so the manufacturer should give a guarantee period of 55 months (4 years 7 months)
+
+
+S1 NOVEMBER 2016 SDB                                                                                          45
+Example: The results of an examination were Normally distributed. 10% of the candidates
+     had more than 70 marks and 20% had fewer than 35 marks.
+
+     Find the mean and standard deviation of the marks.
+
+
+Solution:
+
+
+First we need the values from the tables                                      0.5 φ(z)
+     ⇒      Φ(–0⋅8416) = 0⋅2,
+                                                                area                              area
+     and 1 – Φ(1⋅2816) = 0⋅1                                    0.2                               0.1
+                                                                                                         z
+                                                                           z                z
+                                                                       −0.8416
+                                                                                 0       1.2816
+
+
+
+
+            X −µ
+Using Z =        we have
+             σ
+                  35 − µ
+     – 0⋅8416 =
+                    σ
+⇒ µ = 35 + 0⋅8416σ
+                                                               area                               area
+                                  I                            0.2                                0.1
+                                                                                                         z
+                  70 − µ
+and 1⋅2816 =                                                             35      μ        70
+                    σ
+⇒ µ = 70 – 1⋅2816σ                II
+I − II ⇒ 0 = −35 + 2⋅1232σ
+⇒ σ = 16⋅5 and µ = 48⋅9 to 3 S.F.                              simultaneous equations
+
+
+
+
+46                                                                     S1 NOVEMBER 2016 SDB
+Example: The weights of chocolate bars are normally distributed with mean 205 g and
+    standard deviation 2⋅6 g. The stated weight of each bar is 200 g.
+
+    (a) Find the probability that a single bar is underweight.
+    (b) Four bars are chosen at random. Find the probability that fewer than two bars are
+        underweight.
+
+
+Solution:
+    (a) Let W be the weight of a chocolate bar, W ~ N(205, 2⋅62).
+              𝑊−𝜇       200−205
+        Z =         =             = – 1⋅9230769…
+               𝜎          2∙6
+        P(W < 200) = P(Z < – 1⋅92) = 1 – Φ(1⋅92) = 1 – 0⋅9726
+        ⇒ probability of an underweight bar is 0⋅0274.
+
+
+
+    (b) We want the probability that 0 or 1 bars chosen from 4 are underweight.
+        Let U be underweight and C be correct weight.
+        P(1 underweight) = P(CCCU) + P(CCUC) + P(CUCC) + P(UCCC)
+            = 4 × 0⋅0274 × 0⋅97263 = 0⋅1008354753
+        P(0 underweight) = 0⋅92764 = 0⋅7403600224
+        ⇒ the probability that fewer than two bars are underweight = 0⋅841 to 3 S.F.
+
+
+
+
+S1 NOVEMBER 2016 SDB                                                                        47
+11     Context questions and answers
+
+Accuracy
+  You are required to give your answers to an appropriate degree of accuracy.
+  There is no hard and fast rule for this, but the following guidelines should never let you down.
+       1. If stated in the question give the required degree of accuracy.
+       2. When using a calculator, give 3 S.F.
+          unless finding Sxx,, Sxy etc. in which case you can give more figures – you should use
+          all figures when finding the PMCC or the regression line coefficients.
+       3. Sometimes it is appropriate to give a mean to 1 or 2 D.P. rather than 3 S.F.
+       4. When using the tables and doing simple calculations (which do not need a calculator),
+          you should give 4 D.P.
+
+Statistical models
+  Question 1
+       (a)     Explain briefly what you understand by
+               (i)    a statistical experiment,
+               (ii)   an event.
+       (b)     State one advantage and one disadvantage of a statistical model.
+
+
+  Answer
+       (a)     (i) a test/investigation/process for collecting data to provide evidence to test a
+               hypothesis.
+               (ii) A subset of possible outcomes of an experiment, e.g. a total of 6 on two dice.
+       (b)     Quick, cheap can vary the parameters and predict
+               Does not replicate real world situation in every detail.
+
+
+  Question 2
+       Statistical models can be used to describe real world problems. Explain the process
+       involved in the formulation of a statistical model.
+  Answer
+       Observe real world problem
+       Devise a statistical model and collect data
+       Compare observed against expected outcomes and test the model
+       Refine model if necessary
+
+
+
+  48                                                                       S1 NOVEMBER 2016 SDB
+ Question 3
+     (a)      Write down two reasons for using statistical models.
+     (b)      Give an example of a random variable that could be modelled by
+              (i)     a normal distribution,
+              (ii)    a discrete uniform distribution.
+ Answer
+     (a)      To simplify a real world problem
+              To improve understanding / describe / analyse a real world problem
+              Quicker and cheaper than using real thing
+              To predict possible future outcomes
+              Refine model / change parameters possible                                 Any 2
+
+
+     (b)      (i) height, weight, etc.         (ii) score on a face after rolling a fair die
+
+
+Histograms
+ Question 1
+     Give a reason to justify the use of a histogram to represent these data.
+ Answer
+     The variable (minutes delayed) is continuous.
+
+
+Averages
+ Question 1
+     Write down which of these averages, mean or median, you would recommend the
+     company to use. Give a reason for your answer.
+ Answer
+     The median, because the data is skewed.
+
+
+ Question 2
+   State whether the newsagent should use the median and the inter-quartile range or the mean
+   and the standard deviation to compare daily sales. Give a reason for your answer.
+ Answer
+   Median & IQR as the data is likely to be skewed
+
+
+
+
+ S1 NOVEMBER 2016 SDB                                                                           49
+ Question 3
+       Compare and contrast the attendance of these 2 groups of students.
+ Answer
+       Median 2nd group < Median 1st group;
+       Mode 1st group > Mode 2nd group;
+       2nd group had larger spread/IQR than 1st group
+       Only 1 student attends all classes in 2nd group
+
+
+ Question 4
+      Compare and contrast these two box plots.
+ Answer
+        Median of Northcliffe is greater than median of Seaview.
+        Upper quartiles are the same
+        IQR of Northcliffe is less than IQR of Seaview
+        Northcliffe positive skew, Seaview negative skew − using mean and median
+        or Northcliffe symmetrical, Seaview positive skew – using quartiles
+        Notice that it is possible to have different skewness depending on the way of measuring.
+        Range of Seaview greater than range of Northcliffe
+        any 3 acceptable comments
+
+
+
+
+Skewness
+ Question 1
+      Comment on the skewness of the distribution of bags of crisps sold per day.
+      Justify your answer.
+ Answer
+      Q2 − Q1 = 7; Q3 − Q2 = 11; Q3 − Q2 > Q2 − Q1 so positive skew.
+
+
+  Question 2
+       Give two other reasons why these data are negatively skewed.
+ Answer
+       For negative skew;   Mean < median < mode: 49⋅4 < 52 < 56
+        Q3 – Q2 < Q2 – Q1: 8 < 17
+
+
+
+ 50                                                                     S1 NOVEMBER 2016 SDB
+ Question 3
+      Describe the skewness of the distribution. Give a reason for your answer.
+
+
+  Answer
+      No skew or slight negative skew.
+      0.22 = Q3 − Q2 ≈ Q2 − Q1 = 0.23 or 0.22 = Q3 − Q2 < Q2 − Q1 = 0.23
+      or mean (3.23) ≈ median (3.25), or mean (3.23) < median (3.25)
+      When the skew is very slight, you can say “no skew” or “slight skew”.
+
+
+
+
+Correlation
+  Question 1
+      Give an interpretation of your PMCC (–0⋅976)
+  Answer
+      Negative skew ⇔ as height increases, temperature decreases (must be in context).
+
+
+  Question 2
+   Give an interpretation of this value, PMCC = –0⋅862.
+  Answer
+   Negative skew ⇔ as sales at one petrol station increase, sales at the other decrease (must be
+   in context).
+
+
+   Question 3
+      Give an interpretation of your correlation coefficient, 0⋅874.
+  Answer
+      Positive skew ⇔ taller people tend to be more confident (must be in context).
+
+
+  Question 4
+      Comment on the assumption that height and weight are independent.
+  Answer
+      Evidence (in question) suggests height and weight are positively correlated/linked,
+      therefore the assumption of independence is not sensible (must be in context).
+
+
+
+
+  S1 NOVEMBER 2016 SDB                                                                       51
+Regression
+Question 1
+     Suggest why the authority might be cautious about making a prediction of the
+     reconditioning cost of an incinerator which had been operating for 4500 hours since its last
+     reconditioning.
+Answer    4500 is well outside the range of observed values, and there is no evidence that
+   the model will apply.
+
+
+Question 2
+     Give an interpretation of the slope, 0⋅9368, and the intercept, 19, of your regression line.
+Answer
+     The slope, b – for every extra hour of practice 0⋅9368 fewer errors will be made
+     The intercept, a – without practice 19 errors will be made.
+
+
+Question 3
+     Interpret the value of b (coefficient of x in regression line).
+Answer
+     3 extra ice-creams are sold for every 1°C increase in temperature
+
+
+Question 4
+     At 1 p.m. on a particular day, the highest temperature for 50 years was recorded. Why you
+     should not use the regression equation to predict ice cream sales on that day.
+Answer
+     Temperature is likely to be outside range of observed values, so model not reliable.
+
+
+Question 5
+     Interpret the value of a, (regression line)
+Answer
+     a = 562 is the number of chocolate bars sold per day if no money spent on advertising
+
+
+Question 6
+     Give a reason to support fitting a regression model of the form y = a + bx to these data.
+Answer
+     Points on the scatter graph lie close to a straight line.
+
+
+Question 7 Give an interpretation of the value of b.Answer             A flight costs £2.03 (or about
+£2) for every extra 100km or about 2p per extra km.
+
+
+52                                                                          S1 NOVEMBER 2016 SDB
+Discrete uniform distribution
+  Question 1
+      A discrete random variable is such that each of its values is assumed to be equally likely.
+      (a)      Write down the name of the distribution that could be used to model this random
+               variable.
+      (b)      Give an example of such a distribution.
+      (c)      Comment on the assumption that each value is equally likely.
+      (d)      Suggest how you might refine the model in part (a).
+  Answer
+      (a)      Discrete uniform
+      (b)      Tossing a fair die /coin and recording the score, drawing a card from a pack, and
+               recording its value.
+      (c)      Useful in theory – allows problems to be modelled, but the assumption might not
+               be true in practice
+      (d)      Carry out an experiment to find the probabilities – which might not fit the model.
+
+
+Normal distribution
+  Question 1
+      The random variable X is normally distributed with mean 177⋅0, standard deviation 6⋅4.
+      It is suggested that X might be a suitable random variable to model the height, in cm, of
+      adult males.
+  (a) Give two reasons why this is a sensible suggestion.
+  (b) Explain briefly why mathematical models can help to improve our understanding of real-
+      world problems.
+  Answer
+  (a) Male heights cluster round a central height of approx 177/178 cm
+      Height is a continuous random variable.
+      Most male heights lie within 177 ± 3× 6.4 (within 3 standard deviations of the mean).
+  (b) Simplifies real world problems
+      Enable us to gain some understanding of real world problems more quickly/cheaply.
+
+
+  Question 2
+      Explain why the normal distribution may not be suitable to model the number of minutes
+      that motorists are delayed by these roadworks.
+
+
+
+  S1 NOVEMBER 2016 SDB                                                                         53
+Answer For this data skewness is 3.9 (given in the question), whereas a normal distribution is
+   symmetrical and has no skew.
+Question 3
+     Describe two features of the Normal distribution
+Answer
+     Bell shaped curve; symmetrical about the mean; 95% of data lies within 2 s.d. of mean;
+     etc. (any 2).
+
+
+Question 4
+     Give a reason to support the use of a normal distribution in this case.
+Answer
+     Since mean and median are similar (or equal or very close), the distribution is (nearly)
+     symmetrical and a normal distribution may be suitable.
+     Allow mean or median close to mode/modal class ⇒ ), the distribution is (nearly)
+     symmetrical and a normal distribution may be suitable.
+
+
+
+
+54                                                                      S1 NOVEMBER 2016 SDB
+12    Appendix
+
+–1 ≤ P.M.C.C. ≤ 1
+
+Cauchy-Schwartz inequality
+  Consider    (a12 + a22)(b12 + b22) – (a1b1 + a2b2)2
+      =       a12 b12 + a12 b22 + a22 b12 + a22 b22 – a12 b12 – 2a1b1a2b2 – a22 b22
+      =       a12 b22 – 2a1b1a2b2+ a22 b12
+      =       (a1b2 – a2b1)2 ≥ 0
+  ⇒ (a12 + a22)(b12 + b22) – (a1b1 + a2b2)2 ≥ 0
+  ⇒ (a1b1 + a2b2)2 ≤ (a12 + a22)(b12 + b22)
+
+
+  This proof can be generalised to show that
+              (a1b1 + a2b2 + … + anbn)2 ≤ (a12 + a22 + … + an2)(b12 + b22 + … + bn2)
+                 𝑛          2             𝑛          𝑛
+
+      or      �� 𝑎𝑖 𝑏𝑖 �          ≤ �� 𝑎𝑖 2 � �� 𝑏𝑖 2 �
+                𝑖=1                     𝑖=1          𝑖=1
+
+
+
+
+P.M.C.C. between –1 and +1
+  In the above proof, take ai = (xi – 𝑥̅ ), and bi = (yi – 𝑦�)
+  ⇒ Sxy = Σ (xi – 𝑥̅ )(yi – 𝑦�) = Σ aibi
+      Sxx = Σ (xi – 𝑥̅ )2 = Σ ai2              and     Syy = Σ (yi – 𝑦�)2 = Σ bi2
+
+
+                           𝑆𝑥𝑦
+  P.M.C.C. = r =
+                       �𝑆𝑥𝑥 𝑆𝑦𝑦
+               𝑆𝑥𝑦 2             (∑ 𝑎𝑖 𝑏𝑖 )2
+  ⇒ r2 =               =
+                           (∑ 𝑎𝑖 2 )�∑ 𝑏𝑖 2 �
+                                                 ≤ 1                       using the Cauchy-Schwartz inequality
+             𝑆𝑥𝑥 𝑆𝑦𝑦
+
+  ⇒ –1 ≤ r ≤ +1
+
+
+
+
+  S1 NOVEMBER 2016 SDB                                                                                      55
+Regression line and coding
+                                                                                                𝑆𝑥𝑦
+  The regression line of y on x has equation y = a + bx, where b =                                    , and a = 𝑦� – b𝑥̅ .
+                                                                                                𝑆𝑥𝑥
+  Using the coding x = hX + m, y = gY + n, the regression line for Y on X is found by writing
+  gY + n instead of y, and hX + m instead of x in the equation of the regression line of y on x,
+  ⇒ gY + n = a + b(hX + m)
+              𝑎+𝑏𝑚−𝑛                ℎ𝑏
+  ⇔ Y =                         +           X … … … … …                     equation I.
+                    𝑔                   𝑔
+
+
+Proof
+  𝑥̅ = h𝑋� + m, and 𝑦� = g𝑌� + n                                        this is the effect of coding on the mean
+
+  ⇒ (x – 𝑥̅ ) = (hX + m) – (h𝑋� + m) = (hX – h𝑋�),                          and similarly (y – 𝑦�) = (gY – g𝑌�).
+
+
+  Let the regression line of y on x be y = a + bx, and
+  let the regression line of Y on X be Y = α + β X.
+
+
+               𝑆𝑥𝑦
+  Then b =              and a = 𝑦� – b𝑥̅
+               𝑆𝑥𝑥
+              𝑆𝑋𝑌
+  also β =              and α = 𝑌� – β 𝑋�.
+              𝑆𝑋𝑋
+              𝑆𝑥𝑦       ∑(𝑥−𝑥̅ )(𝑦−𝑦�)                ∑(ℎ𝑋−ℎ𝑋�)(𝑔𝑌−𝑔𝑌�)            ℎ𝑔 ∑(𝑋−𝑋�)(𝑌−𝑌�)   𝑔 ∑(𝑋−𝑋�)(𝑌−𝑌�)
+        b =         =                             =      ∑(ℎ𝑋−ℎ𝑋�)2
+                                                                               =                    =
+              𝑆𝑥𝑥            ∑(𝑥−𝑥̅ )2                                               ℎ2 ∑(𝑋−𝑋� )2       ℎ ∑(𝑋−𝑋�)2
+                        𝑔
+        ⇒        b=         β
+                        ℎ
+                         ℎ𝑏
+        ⇒        β =
+                         𝑔
+
+
+                                𝑦�−𝑛            ℎ𝑏 𝑥̅ −𝑚       𝑦�−𝑏𝑥̅ +𝑏𝑚−𝑛            𝑎+𝑏𝑚−𝑛
+        α = 𝑌� – β 𝑋� =                     −     � ℎ � =                          =                         since a = 𝑦� – b𝑥̅
+                                    𝑔           𝑔                       𝑔                  𝑔
+        and so
+                                                𝑎+𝑏𝑚−𝑛         ℎ𝑏
+        Y = α +βX ⇔ Y =                                    +        X
+                                                    𝑔          𝑔
+        which is the same as equation I.
+
+
+
+
+  56                                                                                             S1 NOVEMBER 2016 SDB
+                                                𝑿−𝝁
+Normal Distribution, Z =
+                                                 𝝈
+  The standard normal distribution with mean 0 and
+  standard deviation 1 has equation
+                                                                                       φ(z)
+                                   1
+                        1         − 𝑧2
+      𝜙(𝑧) =                  𝑒    2
+                    √2𝜋
+  The normal distribution tables allow us to find the area
+                                                                                                   z
+  between Z1 and Z2.
+        𝑍2
+              1         1 2                                                   Z1   0          Z2
+  = �               𝑒 −2𝑧 𝑑𝑧
+       𝑍1    √2𝜋
+
+
+
+
+  The normal distribution with mean µ and standard deviation σ has equation
+                                     1 𝑥−𝜇 2
+                        1          − �    �
+      𝑓(𝑥) =                   𝑒     2 𝜎
+                    𝜎 √2𝜋
+
+
+                                     𝑋2                 1 𝑥−𝜇 2
+                                            1
+                                                      𝑒 2 𝜎 � 𝑑𝑥
+                                                       − �
+  𝑃(𝑋1 ≤ 𝑋 ≤ 𝑋2 ) = �                                                                              x
+                                     𝑋1   𝜎√2𝜋
+                                                                              X1   μ          X2
+
+
+
+                                           𝑥−𝜇
+  Using the substitution             z=
+                                           𝜎
+                                   𝑋1 −𝜇                         𝑋2 −𝜇
+      dx = σ dz,            Z1 =            and           Z2 =
+                                     𝜎                            𝜎
+                                                 𝑍2
+                                                           1          1 2
+      ⇒ 𝑃(𝑋1 ≤ 𝑋 ≤ 𝑋2 ) = �                                       𝑒 −2𝑧 𝜎𝑑𝑧
+                                                 𝑍1       𝜎√2𝜋
+              𝑍2
+                    1          1 2
+      = �                   𝑒 −2𝑧 𝑑𝑧
+             𝑍1    √2𝜋
+      = the area under the standard normal curve, which we can find from the tables using
+             𝑋1 −𝜇                         𝑋2 −𝜇
+      Z1 =                  and     Z2 =              .
+            𝜎               𝜎
+      Thus 𝑃(𝑋1 ≤ 𝑋 ≤ 𝑋2 ) = 𝑃(𝑍1 ≤ 𝑍 ≤ 𝑍2 ) = Φ(𝑍2 ) − Φ(𝑍1 )
+
+
+
+
+  S1 NOVEMBER 2016 SDB                                                                             57
+   Index
+accuracy, 48                              probability distributions, 39
+box plots, 19                             product moment correlation coefficient, 30
+class boundaries, 7                         between -1 and +1, 55
+                                            coding, 31
+correlation, 30                             interpretation, 31
+  context questions, 51
+                                          quartiles
+cumulative frequency, 6                     discrete lists and tables, 16
+  cumulative frequency curves, 8            grouped frequency tables, 17
+cumulative probability distribution, 40   random variables, 39
+discrete uniform distribution, 42           continuous, 39
+  context questions, 53                     discrete, 39
+  expected mean, 43                       range, 22
+  expected variance, 43
+                                          regression, 33
+exclusive events, 29                        context questions, 52
+expectation. See expected values            explanatory variable, 33
+                                            response variable, 33
+expectation algebra, 40
+                                          regression line, 33
+expected values, 40                         interpretation, 34
+  expected mean, 40
+  expected variance, 40                   regression line and coding
+  interpretation, 41                        proof, 56
+frequency distributions, 6                relative frequency, 25
+  grouped frequency distributions, 7      sample spaces, 25
+histograms, 9                             scatter diagrams, 30
+  context questions, 49                     line of best fit, 30
+independent events, 28                    skewness, 20
+interquartile range, 16, 22                 context questions, 50
+mean, 13                                  standard deviation, 22
+  coding, 14                              statistical modelling, 5
+  when to use, 15
+                                          statistical models
+median                                      context questions, 48
+  discrete lists and tables, 16
+  grouped frequency tables, 17            stem and leaf diagrams, 7
+  when to use, 15                         tree diagrams, 27
+mode, 13                                  variables
+  when to use, 15                           continuous variables, 6
+normal distribution, 44                     discrete variables, 6
+  context questions, 53                     qualitative variables, 6
+  general normal distribution, 44           quantitative variables, 6
+  standard normal distribution, 44        variance, 22
+  standardising the variable, proof, 57     coding, 23
+outliers, 19
+percentiles, 19
+probability
+  diagrams for two dice etc, 26
+  number of arrangements, 29
+  rules, 25
+  Venn diagrams, 25
+
+
+
+
+   58                                                               S1 NOVEMBER 2016 SDB
+

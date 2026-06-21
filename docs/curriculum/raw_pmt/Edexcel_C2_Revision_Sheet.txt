@@ -1,0 +1,171 @@
+                                 EXAMINATION HINTS
+
+Before the examination
+    Obtain a copy of the formulae book – and use it!
+    Write a list of and LEARN any formulae not in the formulae book
+    Learn basic definitions
+    Make sure you know how to use your calculator!
+    Practise all the past papers - TO TIME!
+
+
+At the start of the examination
+  Read the instructions on the front of the question paper and/or answer booklet
+  Open your formulae book at the relevant page
+
+
+During the examination
+  Read the WHOLE question before you start your answer
+  Start each question on a new page (traditionally marked papers) or
+  Make sure you write your answer within the space given for the question (on-line marked papers)
+  Draw clear well-labelled diagrams
+  Look for clues or key words given in the question
+  Show ALL your working - including intermediate stages
+  Write down formulae before substituting numbers
+  Make sure you finish a ‘prove’ or a ‘show’ question – quote the end result
+  Don’t fudge your answers (particularly if the answer is given)!
+  Don’t round your answers prematurely
+  Make sure you give your final answers to the required/appropriate degree of accuracy
+  Check details at the end of every question (e.g. particular form, exact answer)
+  Take note of the part marks given in the question
+  If your solution is becoming very lengthy, check the original details given in the question
+  If the question says “hence” make sure you use the previous parts in your answer
+  Don’t write in pencil (except for diagrams) or red ink
+  Write legibly!
+  Keep going through the paper – go back over questions at the end if time
+
+
+At the end of the examination
+  If you have used supplementary paper, fill in all the boxes at the top of every page
+                                                    C2 KEY POINTS
+
+C2 Algebra and functions
+Algebraic division by (x ± a)
+Remainder theorem: When f(x) is divided by (x – a),          f(x) = (x – a)Q(x) + R                     where Q(x) is
+the quotient and R is the remainder
+Factor theorem: If f(a) = 0 then (x – a) is a factor of f(x)
+
+C2 Coordinate geometry
+Circle, centre (0, 0) radius r: x2 + y2 = r2
+Circle centre (a, b) radius r: (x – a)2 + (y – b)2 = r2
+Useful circle facts:
+The angle between the tangent and the radius is 90°
+Tangents drawn from a common point to a circle are equal in length
+The centre of a circle is on the perpendicular bisector of any chord
+The angle subtended by a diameter at the circumference is 90°
+
+C2 Sequences and Series
+A geometric series is a series in which each term is obtained from the previous term by multiplying
+by a constant called the common ratio, r
+                           a(1 − r n )             a
+nth term = arn–1, Sn =                 ,  S∞ =         where |r| < 1.
+                             1− r                1− r
+
+The following expansions are valid for all n ∈ N:
+
+(a + b)n = a n + n C1 a n −1b + n C 2 a n −1b 2 + ... + n C r a n − r b r + ... + b n
+                                                                              n(n − 1) 2 n(n − 1)(n − 2)
+(1 + x)n = 1 + nx + n C 2 x 2 + ... + n C r x r + ... + x n = 1 + nx +                x +                + ... + x n
+                                                                                  2!            3!
+                    n!
+where nCr =
+                r!(n − r )!
+
+C2 Trigonometry
+            a     b     c
+Sine rule      =     =                         and ambiguous case
+          sin A sin B sin C
+                                                             b2 + c2 − a2
+Cosine rule a2 = b2 + c2 – 2bccosA or cosA =
+                                                                 2bc
+Area of ∆ABC = ½absinC
+                                                                   1
+sinx° = cos(90 – x)°, cosx° = sin(90 – x)°, tanx° =
+                                                              tan(90° − x)
+Graphs of trigonometric functions
+sin(–x) = –sinx, cos(–x) = cosx, tan(–x) = tanx
+sin30° = cos60° = ½, cos30° = sin60° = 23 , tan30° = 13 , tan 60° =                   3
+                        1
+cos45° = sin45° =        2
+                             , tan45° = 1
+
+Degrees        360° 180° 90° 45° 60° 30° 270° 120° 135°                              etc
+Radians         2π      π        π
+                                 2
+                                        π
+                                        4
+                                                π
+                                                3
+                                                      π
+                                                      6
+                                                            3π
+                                                             2
+                                                                    2π
+                                                                     3
+                                                                            3π
+                                                                             4
+
+
+
+Arc length = rθ , Area of sector = ½r2θ (θ in radians)
+                              (180 – θ)°                 θ°
+
+                                  S                      A
+
+                                 T                       C
+                              (180 + θ)°           (360 – θ)°
+
+                                                      sin θ
+                    cos2θ + sin2θ = 1, tanθ =
+                                                      cos θ
+
+C2 Exponentials and Logarithms
+If y = ax  then     logay = x
+                                                                  p
+Laws of logarithms: logapq = logap + logaq, loga                    = logap – logaq, logaxn = n.logax
+                                                                  q
+                                      log b x
+Other useful results: logax =                 ,   loga1 = 0, logaa = 1
+                                      log b a
+
+f: x → ax x ∈ R a > 0 (a is constant)                                               y
+
+is an exponential function, e.g. 72x+4                                                      y = ax, a > 0
+                                                                                    1
+
+
+Solve equations of the form ax = b                                                  O            x
+
+
+C2 Differentiation
+   dy         d2 y
+If    = 0 and 2 > 0 the stationary point is a minimum turning point
+   dx         dx
+   dy         d2 y
+If    = 0 and 2 < 0 the stationary point is a maximum turning point
+   dx         dx
+                            dy                                 dy
+For an increasing function,    > 0, for a decreasing function,    <0
+                            dx                                 dx
+Maxima and minima problems: (a) Find the point at which f´(x) = 0. (b) Find the nature of the
+turning point to confirm that the value is a maximum or minimum as required. (c) Make sure that all
+parts of the question have been answered (e.g. finding the maximum/minimum as well as the value
+of x at which it occurs).
+
+C2 Integration
+                                        b
+If   ∫ f(x) dx = F(x) + c then ∫ f ( x) dx = [F( x)] ba = F(b) – F(a)
+                                        a
+                                                              b
+If y > 0 for a ≤ x ≤ b, then area is given by A = ∫ y dx
+                                                              a
+
+Trapezium rule
+                                                                                         b−a
+b
+
+∫ f ( x) dx ≈
+a
+                1
+                2   h[y0 + yn + 2(y1 + ... + yn–1)]      where yi = f(a + ih) and h =
+                                                                                          n
+

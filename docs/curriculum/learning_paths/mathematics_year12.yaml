@@ -1,0 +1,842 @@
+# Mathematics A-level — Year 12 学习路径
+#
+# 锁定的考试局: Edexcel IAL(International A Level, 2018 改革后)
+# Year 12 = AS 阶段 = IAL IAS = P1 + P2 两个 paper
+# 锁定的 spec 版本: 2018+ IAL Mathematics 改革版(WMA11/01, WMA12/01)
+# 教材配套: Pearson Edexcel IAL Pure Mathematics Year 1 (AS)
+# 用户项目: 雨中国高 / 中德班类型学生,目标 A-level A*-A
+#
+# 注意: 之前我们写 KP 库时 KP ID 是 p1-algebra 形式 (kp_alevels_mathematics_p1_001)。
+# 本文件中 lessons 引用的 kp_refs 字段就是这些 KP ID。
+# 部分 KP 待详尽展开 (P1 §2-6 已有骨架, P2 整张待拆), 标记 [pending_kp]。
+
+metadata:
+  subject: mathematics
+  subject_zh: 数学
+  exam_board: edexcel_ial
+  level: a-level-year12
+  qualification: IAL IAS
+  specification_version: "2018+ reformed"
+  specification_pdf: "需查证: Pearson 官网 WMA11/01 + WMA12/01 spec PDF"
+  duration_weeks: 32
+  total_lessons: 50
+  target_grade: "A*-A"
+  start_date: "Year 12 September"
+  end_date: "Year 12 June (P1 + P2 考试)"
+
+target_user:
+  starting_level: "IGCSE Mathematics A*/A, 或国内初三中考 95+"
+  prior_kp_count: 0
+  end_level_kp_count: 280  # P1 (~150 KP) + P2 (~130 KP) 估算
+
+# ===========================================================================
+# UNIT 1: Pure Mathematics 1 (P1)  —— WMA11/01
+# ===========================================================================
+units:
+  - id: p1
+    name: "Pure Mathematics 1"
+    code: WMA11/01
+    difficulty: easy-medium
+    weight: "1/2 of IAS"
+    duration_weeks: 16
+    exam_window: "January / May-June / October"
+    paper_length_minutes: 90
+    total_marks: 75
+    past_papers:
+      - 2019-Jan-WMA11-01
+      - 2020-Jan-WMA11-01
+      - 2021-Jan-WMA11-01
+      - 2022-Jan-WMA11-01
+      - 2023-Jan-WMA11-01
+      - 2024-Jan-WMA11-01
+      - 2019-May-WMA11-01
+      - 2020-May-WMA11-01
+      - 2021-May-WMA11-01
+      - 2022-May-WMA11-01
+      - 2023-May-WMA11-01
+      - 2024-May-WMA11-01
+      - 2024-May-WMA11-01R  # resit
+    source_pmT: "https://www.physicsandmathstutor.com/maths-revision/a-level-maths/pure/"
+
+    # --------------------- TOPICS in P1 ---------------------
+    topics:
+      # ---- §1 Algebra ----
+      - id: p1-algebra
+        name: "Algebra"
+        difficulty: easy
+        weight_in_paper: "~20-25%"
+        kp_count: 25
+        lessons:
+          - id: p1-algebra-l01-indices
+            name: "Laws of indices 指数律"
+            kp_refs: [kp_alevels_mathematics_p1_001, kp_alevels_mathematics_p1_002, kp_alevels_mathematics_p1_003]
+            duration_minutes: 90
+            prerequisites: [igcse-algebra-basics]
+            objectives:
+              - "掌握 aᵐ × aⁿ = aᵐ⁺ⁿ, aᵐ ÷ aⁿ = aᵐ⁻ⁿ, (aᵐ)ⁿ = aᵐⁿ"
+              - "处理零指数 a⁰ = 1 与负指数 a⁻ⁿ = 1/aⁿ"
+              - "分数指数 a^(m/n) = ⁿ√(aᵐ)"
+
+          - id: p1-algebra-l02-surds
+            name: "Surds 根式化简与运算"
+            kp_refs: [kp_alevels_mathematics_p1_004, kp_alevels_mathematics_p1_005, kp_alevels_mathematics_p1_006]
+            duration_minutes: 90
+            prerequisites: [p1-algebra-l01-indices]
+            objectives:
+              - "简化 √n, 保留精确值"
+              - "Surd 加减(同类合并)与乘除"
+              - "Rationalising the denominator 有理化分母"
+
+          - id: p1-algebra-l03-quadratics-factorise
+            name: "Quadratic equations: factorisation 因式分解解二次方程"
+            kp_refs: [kp_alevels_mathematics_p1_007]
+            duration_minutes: 60
+            prerequisites: [p1-algebra-l02-surds]
+            objectives:
+              - "用因式分解法解一元二次方程"
+              - "识别 2 个数乘积 = c, 和 = b"
+              - "处理 a ≠ 1 的情况(先提取公因式)"
+
+          - id: p1-algebra-l04-quadratics-completing
+            name: "Completing the square 配方法"
+            kp_refs: [kp_alevels_mathematics_p1_008]
+            duration_minutes: 90
+            prerequisites: [p1-algebra-l03-quadratics-factorise]
+            objectives:
+              - "将 ax² + bx + c 改写为 a(x + p)² + q"
+              - "识别顶点坐标 (-p, q) 与对称轴"
+              - "用配方法解二次方程"
+
+          - id: p1-algebra-l05-quadratics-formula
+            name: "Quadratic formula 二次公式"
+            kp_refs: [kp_alevels_mathematics_p1_009]
+            duration_minutes: 60
+            prerequisites: [p1-algebra-l03-quadratics-factorise]
+            objectives:
+              - "背诵 x = (-b ± √(b² - 4ac)) / (2a)"
+              - "应用公式解不能因式分解的二次方程"
+
+          - id: p1-algebra-l06-discriminant
+            name: "Discriminant 判别式"
+            kp_refs: [kp_alevels_mathematics_p1_010]
+            duration_minutes: 60
+            prerequisites: [p1-algebra-l05-quadratics-formula]
+            objectives:
+              - "理解 Δ = b² - 4ac 与根的关系"
+              - "Δ > 0 两不同实根, = 0 一重根, < 0 无实根"
+              - "反推:已知根的情况,求系数范围"
+
+          - id: p1-algebra-l07-quadratics-graphs
+            name: "Quadratic graphs 二次函数图像"
+            kp_refs: [kp_alevels_mathematics_p1_011]
+            duration_minutes: 60
+            prerequisites: [p1-algebra-l04-quadratics-completing]
+            objectives:
+              - "画 y = ax² + bx + c 抛物线"
+              - "识别顶点 / 对称轴 / 截距"
+              - "用判别式判与 x 轴交点个数"
+
+          - id: p1-algebra-l08-quadratics-inequalities
+            name: "Quadratic inequalities 二次不等式"
+            kp_refs: [kp_alevels_mathematics_p1_012]
+            duration_minutes: 60
+            prerequisites: [p1-algebra-l07-quadratics-graphs]
+            objectives:
+              - "用图像法 / 符号表法解二次不等式"
+              - "a > 0 / a < 0 区间规则"
+
+          - id: p1-algebra-l09-simultaneous-linear
+            name: "Simultaneous equations: 2 linear 两线性联立"
+            kp_refs: [kp_alevels_mathematics_p1_013]
+            duration_minutes: 60
+            prerequisites: [igcse-algebra-basics]
+            objectives:
+              - "代入法 vs 消元法"
+              - "求唯一解"
+
+          - id: p1-algebra-l10-simultaneous-quadratic
+            name: "Simultaneous: linear + quadratic 一次二次联立"
+            kp_refs: [kp_alevels_mathematics_p1_014]
+            duration_minutes: 90
+            prerequisites: [p1-algebra-l09-simultaneous-linear, p1-algebra-l05-quadratics-formula]
+            objectives:
+              - "用一次方程代入二次,解一元二次"
+              - "几何意义:直线与抛物线交点"
+              - "判别式判交点个数"
+
+          - id: p1-algebra-l11-inequalities-linear
+            name: "Linear inequalities 线性不等式与不等式组"
+            kp_refs: [kp_alevels_mathematics_p1_015, kp_alevels_mathematics_p1_016]
+            duration_minutes: 60
+            prerequisites: [igcse-algebra-basics]
+            objectives:
+              - "解线性不等式,数轴表示"
+              - "不等式组:同时成立"
+
+          - id: p1-algebra-l12-polynomial-division
+            name: "Polynomial long division 多项式长除法"
+            kp_refs: [kp_alevels_mathematics_p1_017, kp_alevels_mathematics_p1_019]
+            duration_minutes: 90
+            prerequisites: [p1-algebra-l03-quadratics-factorise]
+            objectives:
+              - "长除:商 + 余式"
+              - "综合除法(更快速)"
+
+          - id: p1-algebra-l13-factor-theorem
+            name: "Factor theorem 因子定理"
+            kp_refs: [kp_alevels_mathematics_p1_018]
+            duration_minutes: 90
+            prerequisites: [p1-algebra-l12-polynomial-division]
+            objectives:
+              - "P(a) = 0 ⟺ (x - a) 是 P(x) 的因子"
+              - "Remainder theorem: P(x) ÷ (x - a) 余式 = P(a)"
+              - "用因子定理找高次多项式因子"
+
+          - id: p1-algebra-l14-cubic-quartic-graphs
+            name: "Cubic and quartic graphs 三次四次函数图像"
+            kp_refs: [kp_alevels_mathematics_p1_020, kp_alevels_mathematics_p1_021]
+            duration_minutes: 90
+            prerequisites: [p1-algebra-l13-factor-theorem]
+            objectives:
+              - "画 y = (x-r1)(x-r2)(x-r3) 三次函数"
+              - "画四次函数(W 形 / M 形)"
+              - "Critical points(导数为 0)判断极值"
+
+          - id: p1-algebra-l15-graph-transformations
+            name: "Graph transformations 图像变换"
+            kp_refs: [kp_alevels_mathematics_p1_022]
+            duration_minutes: 90
+            prerequisites: [p1-algebra-l07-quadratics-graphs, p1-algebra-l14-cubic-quartic-graphs]
+            objectives:
+              - "4 种变换:y=f(x+a) / y=f(x)+a / y=af(x) / y=f(ax)"
+              - "水平 vs 垂直,拉伸 vs 翻转"
+              - "应用:画 y = 2(x-3)² + 1"
+
+          - id: p1-algebra-l16-partial-fractions
+            name: "Partial fractions 部分分式"
+            kp_refs: [kp_alevels_mathematics_p1_024, kp_alevels_mathematics_p1_025]
+            duration_minutes: 90
+            prerequisites: [p1-algebra-l13-factor-theorem]
+            objectives:
+              - "P(x)/((x-a)(x-b)) = A/(x-a) + B/(x-b)"
+              - "重复因子情况:(x-a)²(x-b) → 含 A/(x-a)² 项"
+              - "为 C4 积分准备"
+
+          - id: p1-algebra-l17-algebraic-proof
+            name: "Algebraic proof 代数证明"
+            kp_refs: [kp_alevels_mathematics_p1_023]
+            duration_minutes: 60
+            prerequisites: [p1-algebra-l01-indices]
+            objectives:
+              - "证明 'n² - n 永远是偶数' 之类命题"
+              - "拆分 / 奇偶性 / 反证法"
+
+      # ---- §2 Coordinate geometry ----
+      - id: p1-coordinate-geometry
+        name: "Coordinate geometry 坐标几何"
+        difficulty: easy-medium
+        weight_in_paper: "~15-20%"
+        kp_count: 8  # [pending_kp: KP #26-33 骨架已列, 详尽待 Phase A2]
+        lessons:
+          - id: p1-coord-l01-straight-line-equation
+            name: "Straight line equations 直线方程"
+            kp_refs: [pending_kp_p1_026, pending_kp_p1_027]
+            duration_minutes: 90
+            prerequisites: [igcse-coord-basics]
+            objectives:
+              - "y = mx + c 形式,识别 m (梯度) + c (y 截距)"
+              - "点斜式: y - y₁ = m(x - x₁)"
+
+          - id: p1-coord-l02-parallel-perpendicular
+            name: "Parallel and perpendicular lines 平行与垂直"
+            kp_refs: [pending_kp_p1_028]
+            duration_minutes: 60
+            prerequisites: [p1-coord-l01-straight-line-equation]
+            objectives:
+              - "平行: m₁ = m₂"
+              - "垂直: m₁ × m₂ = -1"
+
+          - id: p1-coord-l03-line-intersections
+            name: "Line and curve intersections 直线与曲线交点"
+            kp_refs: [pending_kp_p1_029, pending_kp_p1_030]
+            duration_minutes: 90
+            prerequisites: [p1-algebra-l10-simultaneous-quadratic, p1-coord-l01-straight-line-equation]
+            objectives:
+              - "解联立求交点坐标"
+              - "判别式判交点个数 (0/1/2)"
+
+          - id: p1-coord-l04-circle-equations
+            name: "Circle equations 圆方程"
+            kp_refs: [pending_kp_p1_031]
+            duration_minutes: 60
+            prerequisites: [p1-coord-l01-straight-line-equation]
+            objectives:
+              - "(x-a)² + (y-b)² = r² 形式"
+              - "找圆心 (a, b) 和半径 r"
+
+          - id: p1-coord-l05-tangent-to-curve
+            name: "Tangent to curve 曲线的切线"
+            kp_refs: [pending_kp_p1_032, pending_kp_p1_045]
+            duration_minutes: 90
+            prerequisites: [p1-coord-l01-straight-line-equation, p1-diff-l01-polynomial-derivatives]
+            objectives:
+              - "求某点切线方程"
+              - "用 §4 Differentiation 的导数作为切线斜率"
+              - "2023 Jan WMA11/01 Q1 真题类型"
+
+          - id: p1-coord-l06-graph-transformations
+            name: "Graph transformations 图像变换"
+            kp_refs: [kp_alevels_mathematics_p1_022]
+            duration_minutes: 60
+            prerequisites: [p1-algebra-l15-graph-transformations]
+            objectives:
+              - "4 种基础变换 (与 §1 Algebra 图像变换重叠)"
+
+      # ---- §3 Sequences and series ----
+      - id: p1-sequences
+        name: "Sequences and series 数列与级数"
+        difficulty: easy
+        weight_in_paper: "~10%"
+        kp_count: 5  # [pending_kp]
+        lessons:
+          - id: p1-seq-l01-arithmetic
+            name: "Arithmetic sequences 等差数列"
+            kp_refs: [pending_kp_p1_034]
+            duration_minutes: 60
+            prerequisites: [igcse-algebra-basics]
+            objectives:
+              - "第 n 项: aₙ = a₁ + (n-1)d"
+              - "前 n 项和: Sₙ = n/2 (2a₁ + (n-1)d)"
+
+          - id: p1-seq-l02-geometric
+            name: "Geometric sequences 等比数列"
+            kp_refs: [pending_kp_p1_035]
+            duration_minutes: 60
+            prerequisites: [p1-seq-l01-arithmetic]
+            objectives:
+              - "第 n 项: aₙ = a₁ × r^(n-1)"
+              - "前 n 项和: Sₙ = a₁(1-rⁿ)/(1-r)"
+
+          - id: p1-seq-l03-sigma
+            name: "Sigma notation Σ 求和符号"
+            kp_refs: [pending_kp_p1_036]
+            duration_minutes: 60
+            prerequisites: [p1-seq-l01-arithmetic]
+            objectives:
+              - "Σr = n(n+1)/2, Σr² = n(n+1)(2n+1)/6"
+              - "用 Σ 表达级数"
+
+          - id: p1-seq-l04-infinite-geometric
+            name: "Sum to infinity of geometric series 无限等比级数"
+            kp_refs: [pending_kp_p1_037]
+            duration_minutes: 60
+            prerequisites: [p1-seq-l02-geometric]
+            objectives:
+              - "|r| < 1 时, S_∞ = a/(1-r)"
+              - "应用:复利、衰变"
+
+          - id: p1-seq-l05-recurrence
+            name: "Recurrence relations 递推关系"
+            kp_refs: [pending_kp_p1_038]
+            duration_minutes: 60
+            prerequisites: [p1-seq-l01-arithmetic, p1-seq-l02-geometric]
+            objectives:
+              - "u_{n+1} = f(uₙ) 模式识别"
+              - "迭代求前几项"
+
+      # ---- §4 Differentiation ----
+      - id: p1-differentiation
+        name: "Differentiation 微分基础"
+        difficulty: medium
+        weight_in_paper: "~15%"
+        kp_count: 9  # [pending_kp]
+        lessons:
+          - id: p1-diff-l01-polynomial-derivatives
+            name: "Polynomial derivatives 多项式求导"
+            kp_refs: [pending_kp_p1_039, pending_kp_p1_040, pending_kp_p1_041]
+            duration_minutes: 90
+            prerequisites: [p1-algebra-l01-indices]
+            objectives:
+              - "dy/dx = nax^(n-1) 多项式求导"
+              - "和 / 差 / 倍数求导法则"
+
+          - id: p1-diff-l02-product-quotient
+            name: "Product and quotient rules 乘积与商求导"
+            kp_refs: [pending_kp_p1_042, pending_kp_p1_043]
+            duration_minutes: 90
+            prerequisites: [p1-diff-l01-polynomial-derivatives]
+            objectives:
+              - "Product rule: (fg)' = f'g + fg'"
+              - "Quotient rule: (f/g)' = (f'g - fg')/g²"
+
+          - id: p1-diff-l03-chain-rule
+            name: "Chain rule 复合函数求导"
+            kp_refs: [pending_kp_p1_044]
+            duration_minutes: 60
+            prerequisites: [p1-diff-l02-product-quotient]
+            objectives:
+              - "(f(g(x)))' = f'(g(x)) × g'(x)"
+
+          - id: p1-diff-l04-tangents-normals
+            name: "Tangents and normals 切线与法线"
+            kp_refs: [pending_kp_p1_045]
+            duration_minutes: 90
+            prerequisites: [p1-diff-l01-polynomial-derivatives, p1-coord-l01-straight-line-equation]
+            objectives:
+              - "已知点 (x₀, y₀) 写切线 y - y₀ = m(x - x₀)"
+              - "法线斜率 = -1/切线斜率"
+              - "2023 Jan WMA11/01 Q1 真题类型"
+
+          - id: p1-diff-l05-stationary-points
+            name: "Stationary points 驻点"
+            kp_refs: [pending_kp_p1_046]
+            duration_minutes: 90
+            prerequisites: [p1-diff-l01-polynomial-derivatives]
+            objectives:
+              - "驻点定义: dy/dx = 0"
+              - "二阶导数判极大 / 极小"
+              - "画图标注驻点"
+
+          - id: p1-diff-l06-optimisation
+            name: "Optimisation 优化问题"
+            kp_refs: [pending_kp_p1_047]
+            duration_minutes: 90
+            prerequisites: [p1-diff-l05-stationary-points]
+            objectives:
+              - "建模型(用变量表示量)"
+              - "求导 + 求驻点 + 验证最优"
+              - "应用:最小成本、最大利润"
+
+      # ---- §5 Integration ----
+      - id: p1-integration
+        name: "Integration 积分基础"
+        difficulty: medium
+        weight_in_paper: "~15%"
+        kp_count: 7  # [pending_kp]
+        lessons:
+          - id: p1-int-l01-indefinite
+            name: "Indefinite integration 不定积分"
+            kp_refs: [pending_kp_p1_048, pending_kp_p1_049]
+            duration_minutes: 90
+            prerequisites: [p1-diff-l01-polynomial-derivatives]
+            objectives:
+              - "∫ ax^n dx = (a/(n+1))x^(n+1) + c (n ≠ -1)"
+              - "加常数 c"
+              - "验证:F'(x) = f(x)"
+
+          - id: p1-int-l02-definite
+            name: "Definite integration 定积分"
+            kp_refs: [pending_kp_p1_050, pending_kp_p1_054]
+            duration_minutes: 90
+            prerequisites: [p1-int-l01-indefinite]
+            objectives:
+              - "∫[a,b] f(x) dx = F(b) - F(a)"
+              - "几何意义:曲线下面积"
+              - "FTC 定理"
+
+          - id: p1-int-l03-area-under-curve
+            name: "Area under a curve 曲线下面积"
+            kp_refs: [pending_kp_p1_051]
+            duration_minutes: 60
+            prerequisites: [p1-int-l02-definite]
+            objectives:
+              - "处理曲线在 x 轴下方时的负面积"
+              - "|f(x)| 与 f(x) 的区别"
+
+          - id: p1-int-l04-area-between-curves
+            name: "Area between two curves 两曲线间面积"
+            kp_refs: [pending_kp_p1_052]
+            duration_minutes: 90
+            prerequisites: [p1-int-l03-area-under-curve]
+            objectives:
+              - "A = ∫[a,b] (上曲线 - 下曲线) dx"
+              - "找交点确定积分上下限"
+
+          - id: p1-int-l05-kinematics
+            name: "Kinematics applications 运动学应用"
+            kp_refs: [pending_kp_p1_053]
+            duration_minutes: 90
+            prerequisites: [p1-int-l02-definite, p1-diff-l01-polynomial-derivatives]
+            objectives:
+              - "v = dx/dt, a = dv/dt"
+              - "积分求位移,微分求速度 / 加速度"
+              - "2023 Jan WMA11/01 Q11 真题类型"
+
+      # ---- §6 Trigonometry ----
+      - id: p1-trigonometry
+        name: "Trigonometry 三角学基础"
+        difficulty: easy-medium
+        weight_in_paper: "~15-20%"
+        kp_count: 7  # [pending_kp]
+        lessons:
+          - id: p1-trig-l01-radians
+            name: "Radians 弧度制"
+            kp_refs: [pending_kp_p1_055]
+            duration_minutes: 60
+            prerequisites: [igcse-trig-basics]
+            objectives:
+              - "π rad = 180° 转换"
+              - "P1 全部用弧度"
+
+          - id: p1-trig-l02-arc-sector
+            name: "Arc length and sector area 弧长与扇形面积"
+            kp_refs: [pending_kp_p1_056]
+            duration_minutes: 60
+            prerequisites: [p1-trig-l01-radians]
+            objectives:
+              - "s = rθ, A = ½r²θ"
+              - "2023 Jan WMA11/01 Q6 真题类型"
+
+          - id: p1-trig-l03-exact-values
+            name: "Exact trig values 三角函数精确值"
+            kp_refs: [pending_kp_p1_057, pending_kp_p1_061]
+            duration_minutes: 90
+            prerequisites: [p1-trig-l01-radians]
+            objectives:
+              - "0°, 30°, 45°, 60°, 90° 精确值"
+              - "sin² + cos² = 1"
+
+          - id: p1-trig-l04-identities
+            name: "Trigonometric identities 三角恒等式"
+            kp_refs: [pending_kp_p1_058]
+            duration_minutes: 60
+            prerequisites: [p1-trig-l03-exact-values]
+            objectives:
+              - "tan θ = sin θ / cos θ"
+              - "1 + tan²θ = sec²θ"
+
+          - id: p1-trig-l05-simple-equations
+            name: "Simple trig equations 简单三角方程"
+            kp_refs: [pending_kp_p1_059]
+            duration_minutes: 90
+            prerequisites: [p1-trig-l04-identities]
+            objectives:
+              - "解 sin θ = k / cos θ = k 在指定区间"
+              - "找出所有解(用周期性)"
+
+          - id: p1-trig-l06-trig-graphs
+            name: "Trig function graphs 三角函数图像"
+            kp_refs: [pending_kp_p1_060]
+            duration_minutes: 90
+            prerequisites: [p1-trig-l03-exact-values]
+            objectives:
+              - "y = sin x / cos x / tan x 图像"
+              - "周期 2π (sin/cos) / π (tan)"
+
+  # ===========================================================================
+  # UNIT 2: Pure Mathematics 2 (P2)  —— WMA12/01
+  # ===========================================================================
+  - id: p2
+    name: "Pure Mathematics 2"
+    code: WMA12/01
+    difficulty: medium
+    weight: "1/2 of IAS"
+    duration_weeks: 16
+    exam_window: "January / May-June / October"
+    paper_length_minutes: 90
+    total_marks: 75
+    past_papers:
+      - 2019-Jan-WMA12-01
+      - 2020-Jan-WMA12-01
+      - 2021-Jan-WMA12-01
+      - 2022-Jan-WMA12-01
+      - 2023-Jan-WMA12-01
+      - 2024-Jan-WMA12-01
+      - 2019-May-WMA12-01
+      - 2020-May-WMA12-01
+      - 2021-May-WMA12-01
+      - 2022-May-WMA12-01
+      - 2023-May-WMA12-01
+      - 2024-May-WMA12-01
+      - 2024-May-WMA12-01R
+    source_pmT: "https://www.physicsandmathstutor.com/maths-revision/a-level-maths/pure/"
+
+    topics:
+      # [pending_kp: P2 整张拆解未启动, 以下 topics 是基于 IAL 2018+ 真实 spec 推测]
+      - id: p2-algebra-functions
+        name: "Algebra and functions 代数与函数"
+        difficulty: medium
+        weight_in_paper: "~15-20%"
+        kp_count: ~25  # [pending_kp]
+        lessons:  # [pending_kp: P2 lessons 骨架, Phase A2 详尽]
+          - id: p2-algebra-l01-functions-notation
+            name: "Function notation 函数符号"
+            kp_refs: [pending_kp_p2_001]
+            duration_minutes: 60
+            prerequisites: [p1-algebra-l01-indices]
+            objectives:
+              - "f(x), f(g(x)), f⁻¹(x) 概念"
+              - "Domain / range 定义"
+
+          - id: p2-algebra-l02-composite-inverse
+            name: "Composite and inverse functions 复合与反函数"
+            kp_refs: [pending_kp_p2_002]
+            duration_minutes: 90
+            prerequisites: [p2-algebra-l01-functions-notation]
+            objectives:
+              - "fg(x) = f(g(x))"
+              - "求反函数(f(x) = y → x = f⁻¹(y))"
+
+          - id: p2-algebra-l03-modulus
+            name: "Modulus function 绝对值函数"
+            kp_refs: [pending_kp_p2_003]
+            duration_minutes: 60
+            prerequisites: [p2-algebra-l01-functions-notation]
+            objectives:
+              - "|x| = x 当 x ≥ 0, -x 当 x < 0"
+              - "画 y = |f(x)| 图像"
+
+      - id: p2-coord-geometry-circles
+        name: "Coordinate geometry: circles 圆与几何"
+        difficulty: medium
+        weight_in_paper: "~10-15%"
+        kp_count: ~20  # [pending_kp]
+        lessons:  # [pending_kp]
+          - id: p2-coord-l01-circle-equation-form
+            name: "Circle equation: general form 圆方程一般式"
+            kp_refs: [pending_kp_p2_010]
+            duration_minutes: 60
+            prerequisites: [p1-coord-l04-circle-equations]
+            objectives:
+              - "x² + y² + 2fx + 2gy + c = 0"
+              - "找圆心 (-f, -g) 和半径"
+
+          - id: p2-coord-l02-line-circle-intersection
+            name: "Line and circle intersection 直线与圆交点"
+            kp_refs: [pending_kp_p2_011]
+            duration_minutes: 90
+            prerequisites: [p2-coord-l01-circle-equation-form, p1-algebra-l10-simultaneous-quadratic]
+            objectives:
+              - "代换消元,解一元二次"
+              - "判别式判交点个数"
+
+      - id: p2-sequences-series
+        name: "Sequences and series 数列与级数(扩展)"
+        difficulty: medium
+        weight_in_paper: "~10%"
+        kp_count: ~15  # [pending_kp]
+        lessons:  # [pending_kp]
+          - id: p2-seq-l01-arithmetic-series-formula
+            name: "Arithmetic series: Sₙ formula 等差级数求和公式"
+            kp_refs: [pending_kp_p2_020]
+            duration_minutes: 60
+            prerequisites: [p1-seq-l01-arithmetic]
+            objectives:
+              - "Sₙ = n/2 (2a + (n-1)d) 推导"
+              - "求和应用"
+
+      - id: p2-trigonometry
+        name: "Trigonometry 三角学(扩展)"
+        difficulty: medium-hard
+        weight_in_paper: "~15-20%"
+        kp_count: ~25  # [pending_kp]
+        lessons:  # [pending_kp]
+          - id: p2-trig-l01-trig-identities-advanced
+            name: "Advanced trig identities 高级三角恒等式"
+            kp_refs: [pending_kp_p2_030]
+            duration_minutes: 90
+            prerequisites: [p1-trig-l04-identities]
+            objectives:
+              - "sin(A ± B) / cos(A ± B) 加法定理"
+              - "2A 公式"
+
+          - id: p2-trig-l02-radians-arc-sector-3d
+            name: "Radians + 3D trigonometry 弧度 + 3D 三角"
+            kp_refs: [pending_kp_p2_031]
+            duration_minutes: 90
+            prerequisites: [p1-trig-l01-radians]
+            objectives:
+              - "3D 几何中三角函数应用"
+
+      - id: p2-exponentials-logs
+        name: "Exponentials and logarithms 指数与对数"
+        difficulty: medium
+        weight_in_paper: "~15%"
+        kp_count: ~20  # [pending_kp]
+        lessons:  # [pending_kp]
+          - id: p2-exp-l01-exponential-functions
+            name: "Exponential functions 指数函数"
+            kp_refs: [pending_kp_p2_040]
+            duration_minutes: 90
+            prerequisites: [p1-algebra-l01-indices]
+            objectives:
+              - "y = eˣ, y = aˣ 图像与性质"
+              - "2023 Jan WMA11/01 Q5 真题类型(代换 + 对数)"
+
+          - id: p2-exp-l02-logarithm-basics
+            name: "Logarithm basics 对数基础"
+            kp_refs: [pending_kp_p2_041]
+            duration_minutes: 90
+            prerequisites: [p2-exp-l01-exponential-functions]
+            objectives:
+              - "logₐ x = y ⟺ aʸ = x"
+              - "对数律: log(ab) = log a + log b"
+
+          - id: p2-exp-l03-exponential-models
+            name: "Exponential models 指数模型"
+            kp_refs: [pending_kp_p2_042]
+            duration_minutes: 90
+            prerequisites: [p2-exp-l02-logarithm-basics]
+            objectives:
+              - "y = a × bᵗ 建模(增长 / 衰变)"
+              - "取对数线性化"
+
+      - id: p2-differentiation
+        name: "Differentiation 进阶微分"
+        difficulty: medium-hard
+        weight_in_paper: "~15%"
+        kp_count: ~20  # [pending_kp]
+        lessons:  # [pending_kp]
+          - id: p2-diff-l01-exp-log-derivatives
+            name: "Derivatives of eˣ and ln x eˣ 与 ln x 求导"
+            kp_refs: [pending_kp_p2_050]
+            duration_minutes: 90
+            prerequisites: [p1-diff-l01-polynomial-derivatives, p2-exp-l01-exponential-functions]
+            objectives:
+              - "d/dx (eˣ) = eˣ"
+              - "d/dx (ln x) = 1/x"
+
+          - id: p2-diff-l02-product-chain-applied
+            name: "Product and chain rules: applied 乘积 / 链式 应用"
+            kp_refs: [pending_kp_p2_051]
+            duration_minutes: 90
+            prerequisites: [p2-diff-l01-exp-log-derivatives, p1-diff-l02-product-quotient, p1-diff-l03-chain-rule]
+            objectives:
+              - "复杂函数求导:含 eˣ, ln x, sin x"
+
+      - id: p2-integration
+        name: "Integration 进阶积分"
+        difficulty: medium-hard
+        weight_in_paper: "~15%"
+        kp_count: ~20  # [pending_kp]
+        lessons:  # [pending_kp]
+          - id: p2-int-l01-exp-log-integration
+            name: "Integration of eˣ and 1/x eˣ 与 1/x 积分"
+            kp_refs: [pending_kp_p2_060]
+            duration_minutes: 90
+            prerequisites: [p2-diff-l01-exp-log-derivatives]
+            objectives:
+              - "∫ eˣ dx = eˣ + c"
+              - "∫ 1/x dx = ln|x| + c"
+
+          - id: p2-int-l02-integration-by-substitution
+            name: "Integration by substitution 换元积分法"
+            kp_refs: [pending_kp_p2_061]
+            duration_minutes: 90
+            prerequisites: [p2-int-l01-exp-log-integration]
+            objectives:
+              - "识别 u = f(x), 转换 du"
+              - "应用:∫ 2x(x²+1)³ dx 之类"
+
+# ===========================================================================
+# MOCK EXAMS
+# ===========================================================================
+mock_exams:
+  - month: 11  # 11 月 (Year 12 第一次诊断)
+    name: "Year 12 中期诊断"
+    format: paper1-p1
+    duration_minutes: 90
+    source: "P1 真题(2022 Jan 或 2023 Jan)"
+    paper_refs:
+      qp: "raw_pmt/past_papers/p1/January_2023_QP.pdf"
+      ms: "raw_pmt/past_papers/p1/January_2023_MA.pdf"
+    goal: "评估 P1 §1-2 学习效果,定位薄弱点"
+    pass_threshold: "60/75 (80%)"
+
+  - month: 1  # 1 月 (P1 真实考试窗口,可选)
+    name: "January WMA11/01 真考"
+    format: paper1-p1
+    duration_minutes: 90
+    exam_window: "January"
+    source: "Edexcel 官方 WMA11/01 真考"
+    paper_refs:
+      qp_options:  # 选一份做模考
+        - "raw_pmt/past_papers/p1/January_2024_QP.pdf"
+        - "raw_pmt/past_papers/p1/January_2022_QP.pdf"
+        - "raw_pmt/past_papers/p1/January_2020_QP.pdf"
+        - "raw_pmt/past_papers/p1/January_2019_QP.pdf"
+      ms_options:
+        - "raw_pmt/past_papers/p1/January_2024_MA.pdf"
+        - "raw_pmt/past_papers/p1/January_2022_MA.pdf"
+        - "raw_pmt/past_papers/p1/January_2020_MA.pdf"
+        - "raw_pmt/past_papers/p1/January_2019_MA.pdf"
+    goal: "可选项:学生若已准备充分,可在 1 月首次考 P1"
+    pass_threshold: "60/75 (80%)"
+
+  - month: 3  # 3 月 (P2 学完后)
+    name: "Year 12 末 P2 诊断"
+    format: paper2-p2
+    duration_minutes: 90
+    source: "P2 真题(2023 Jan 或 2024 Jan)"
+    paper_refs:
+      qp: "raw_pmt/past_papers/p2/January_2023_QP.pdf"
+      ms: "raw_pmt/past_papers/p2/January_2023_MA.pdf"
+    goal: "评估 P2 学习效果"
+    pass_threshold: "60/75 (80%)"
+
+  - month: 5  # 5-6 月 (P1 + P2 真实考试)
+    name: "May/June WMA11/01 + WMA12/01 真考"
+    format: paper1-p1-and-paper2-p2
+    duration_minutes: 180
+    exam_window: "May-June"
+    source: "Edexcel 官方 WMA11/01 + WMA12/01 真考"
+    paper_refs:
+      # 5-6 月是 IAL 第二考期(1 月没有 5-6 月试卷,5-6 月是 IAL 主要考试)
+      p1_qp: "raw_pmt/past_papers/p1/June_2019_QP.pdf"
+      p1_ms: "raw_pmt/past_papers/p1/June_2022_MA.pdf"  # 仅作参考,实际 5-6 月用 Pearson 官方的
+      p2_qp: "raw_pmt/past_papers/p2/June_2022_QP.pdf"
+      p2_ms: "raw_pmt/past_papers/p2/June_2022_MA.pdf"
+    goal: "Year 12 最终真考,2 个 paper 都要 A*-A"
+    pass_threshold: "A*-A(总分 ≥ 80%)"
+
+  - month: 10  # 10 月 (IAL 第三考期,可重考)
+    name: "October IAL 真考(可重考)"
+    format: paper1-p1
+    duration_minutes: 90
+    exam_window: "October"
+    source: "Edexcel 官方 WMA11/01 + WMA12/01 真考"
+    paper_refs:
+      note: "10 月 IAL 真考窗口;PMT 暂未公开 10 月 IAL P1/P2 试卷(可能 Pearson 限制),需 Pearson 账号下载"
+    goal: "学生若 1 月或 5-6 月未达 A*,可重考"
+    pass_threshold: "A*-A(总分 ≥ 80%)"
+
+# ===========================================================================
+# 学习节奏(每周)
+# ===========================================================================
+weekly_schedule:
+  total_lessons_per_week: 4
+  lesson_duration_minutes: 90
+  total_hours_per_week: 6  # 4 × 1.5
+  breakdown:
+    new_content_lessons: 2  # 每周 2 节新课
+    practice_lessons: 1     # 每周 1 节练习
+    review_lessons: 1       # 每周 1 节复习
+  resources:
+    - "Edexcel IAL Pure Mathematics Year 1 (AS) 教材(Pearson)"
+    - "Physics & Maths Tutor Pure Year 1 notes(免费)"
+    - "Savemyexams IAL 题目分类(免费)"
+    - "Znotes IAL P1 + P2(免费)"
+
+# ===========================================================================
+# 进度追踪
+# ===========================================================================
+progress_tracking:
+  total_kp_target: 280  # P1 + P2 详尽展开后约 280 KP
+  current_kp_count: 25  # 当前已完成 P1 §1 Algebra 25 KP
+  completion_percent: 9  # 25/280 ≈ 9%
+  quality_notes:
+    - "P1 §1 Algebra 25 KP 已详尽展开 (review_status: draft, 待用户 review)"
+    - "P1 §2-6 共 36 KP 已列骨架 (待详尽展开)"
+    - "P2 全部 7 topics 已列骨架 (待详尽展开)"
+    - "每 lesson 的 kp_refs 字段引用了真实 KP ID 或 [pending_kp_*] 占位"
+
+# ===========================================================================
+# 备注
+# ===========================================================================
+notes:
+  - "P1 §1 Algebra 的 25 KP 详尽内容见: docs/curriculum/tracks/alevels/knowledge-points/mathematics/p1-algebra.md"
+  - "P1 §2-6 骨架在 p1-algebra.md 末尾追加 (新)"
+  - "P2 骨架在本文件 (待 Phase A2 详尽)"
+  - "Past paper 出处: 需查 Edexcel 官网 https://qualifications.pearson.com(2019-2024 完整)"
+  - "PMT 笔记: https://www.physicsandmathstutor.com/maths-revision/a-level-maths/pure/"
+  - "本文件 2026-06-21 v1.0: 第一版,基于已知 P1 真实内容 + P2 推测内容"

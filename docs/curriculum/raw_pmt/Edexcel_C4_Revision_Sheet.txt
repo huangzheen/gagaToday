@@ -1,0 +1,135 @@
+                                 EXAMINATION HINTS
+
+Before the examination
+    Obtain a copy of the formulae book – and use it!
+    Write a list of and LEARN any formulae not in the formulae book
+    Learn basic definitions
+    Make sure you know how to use your calculator!
+    Practise all the past papers - TO TIME!
+
+
+At the start of the examination
+  Read the instructions on the front of the question paper and/or answer booklet
+  Open your formulae book at the relevant page
+
+
+During the examination
+  Read the WHOLE question before you start your answer
+  Start each question on a new page (traditionally marked papers) or
+  Make sure you write your answer within the space given for the question (on-line marked papers)
+  Draw clear well-labelled diagrams
+  Look for clues or key words given in the question
+  Show ALL your working - including intermediate stages
+  Write down formulae before substituting numbers
+  Make sure you finish a ‘prove’ or a ‘show’ question – quote the end result
+  Don’t fudge your answers (particularly if the answer is given)!
+  Don’t round your answers prematurely
+  Make sure you give your final answers to the required/appropriate degree of accuracy
+  Check details at the end of every question (e.g. particular form, exact answer)
+  Take note of the part marks given in the question
+  If your solution is becoming very lengthy, check the original details given in the question
+  If the question says “hence” make sure you use the previous parts in your answer
+  Don’t write in pencil (except for diagrams) or red ink
+  Write legibly!
+  Keep going through the paper – go back over questions at the end if time
+
+
+At the end of the examination
+  If you have used supplementary paper, fill in all the boxes at the top of every page
+                                                 C4 KEY POINTS
+
+C4 Algebra and functions
+Partial fractions: Methods for dealing with degree of numerator ≥ degree of denominator, partial
+fractions of the form
+      2x + 3        A    B       C              5− x             A     B       C
+                   ≡ +       +       and                     ≡      +     +
+ x( x − 1)(2 x + 1) x x − 1 2 x + 1       ( x + 2)( x − 3) 2
+                                                               x + 2 x − 3 ( x − 3) 2
+
+
+C4 Coordinate geometry
+Changing equations of curves between Cartesian and parametric form
+           dx
+Use of ∫ y    dt to find area under a curve
+           dt
+
+
+C4 Sequences are series
+Expansion of (ax + b)n for any rational n and for |x| < ba , using
+                                                                       n(n − 1) 2 n(n − 1)(n − 2)
+(1 + x)n = 1 + nx + n C 2 x 2 + ... + n C r x r + ... + x n = 1 + nx +         x +                + ... + x n
+                                                                          2!             3!
+                    n!
+where nCr =
+                r!(n − r )!
+
+
+C4 Differentiation
+Implicit and parametric differentiation including applications to tangents and normals
+Exponential growth and decay
+d(a x )
+        = ax ln a
+ dx
+Formation of differential equations
+
+
+C4 Integration
+                                       1 kx
+∫ ex dx = ex + c          ∫ ekx dx =     e +c
+                                       k
+  1                          1           1 1         1                         1           1
+∫ x dx = ln | x | +c       ∫ ax dx = ∫ a . x dx = a ln | x | +c  1   or      ∫ ax dx = a ln | ax | +c    2
+
+
+
+                1                                    1                                         1
+∫ cos kx dx =     sin kx + c       ∫ sin kx dx = – cos kx + c             ∫ sec2kx dx =          tan kx + c
+                k                                    k                                         k
+
+           f ′( x)                                                       [f ( x)]n +1
+Use of ∫           dx = ln | f ( x) | + c and   ∫ f ′( x)[f ( x)] dx =
+                                                                 n
+                                                                                      +c
+           f ( x)                                                           n +1
+
+Integration of other trig. functions: see formulae book
+
+Volume: use of ∫ π y2 dx when rotating about x-axis
+
+Integration by substitution
+Integration by parts
+Use of partial fractions in integration
+Differential equations: first order separable variables
+                  dy                    g( y )        h ( x)
+e.g. f( x)g ( y )    = h ( x)k( y ) ⇒ ∫        dy = ∫        dx
+                  dx                    k( y)         f ( x)
+Trapezium rule applied to C3 and C4 functions
+                                                                                       b−a
+b
+
+∫ f ( x ) dx ≈
+a
+                 1
+                 2   h[y0 + yn + 2(y1 + ... + yn–1)]   where yi = f(a + ih) and h =
+                                                                                        n
+
+
+
+C4 Vectors
+If a = xi + yj + zk, |a| = √(x2 + y2 + z2)
+
+If a = xi + yj + zk, the unit vector in the direction of a is [(xi + yj + zk) ÷ √(x2 + y2 + z2)]
+
+Scalar product:
+If OP = p = xi + yj + zk and OQ = q = ai + bj + ck and ∠POQ = θ, then
+
+p.q = |p||q| cosθ           and p.q = (xi + yj + zk) . (ai + bj + ck) = xa + by + cz
+
+If OP and OQ are perpendicular, p.q = 0
+
+Vector equation of line where a is the position vector of a point on the line and m is a vector
+parallel to the line:
+r = a + λm
+Vector equation of line where a and b are the position vectors of points on the line:
+ r = a + λ ( b – a)
+

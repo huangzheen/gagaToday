@@ -1,0 +1,163 @@
+                                 EXAMINATION HINTS
+
+Before the examination
+    Obtain a copy of the formulae book – and use it!
+    Write a list of and LEARN any formulae not in the formulae book
+    Learn basic definitions
+    Make sure you know how to use your calculator!
+    Practise all the past papers - TO TIME!
+
+
+At the start of the examination
+  Read the instructions on the front of the question paper and/or answer booklet
+  Open your formulae book at the relevant page
+
+
+During the examination
+  Read the WHOLE question before you start your answer
+  Start each question on a new page (traditionally marked papers) or
+  Make sure you write your answer within the space given for the question (on-line marked papers)
+  Draw clear well-labelled diagrams
+  Look for clues or key words given in the question
+  Show ALL your working - including intermediate stages
+  Write down formulae before substituting numbers
+  Make sure you finish a ‘prove’ or a ‘show’ question – quote the end result
+  Don’t fudge your answers (particularly if the answer is given)!
+  Don’t round your answers prematurely
+  Make sure you give your final answers to the required/appropriate degree of accuracy
+  Check details at the end of every question (e.g. particular form, exact answer)
+  Take note of the part marks given in the question
+  If your solution is becoming very lengthy, check the original details given in the question
+  If the question says “hence” make sure you use the previous parts in your answer
+  Don’t write in pencil (except for diagrams) or red ink
+  Write legibly!
+  Keep going through the paper – go back over questions at the end if time
+
+
+At the end of the examination
+  If you have used supplementary paper, fill in all the boxes at the top of every page
+                                               C1 KEY POINTS
+
+C1 Algebra and functions
+                                                 x         x
+Surds (i)        xy =    x× y          (ii)        =                   (iii) a x ± b x = (a ± b) x
+                                                 y         y
+N.B. In general         x± y ≠     x± y
+
+                           1                       a                       1                    am b
+Rationalising Given            , multiply by           .       Given            , multiply by
+                           a                       a                     a± b                   am b
+
+                                               am
+Indices 1. am × an = am + n               2.      = am – n              3. (am)n = amn          4. a0 = 1
+                                               an
+5. a–n =
+            1
+            an
+                               1
+                        6. a n = n a
+                                                           m
+                                                  7. a n = n a m = n a    ( )  m
+
+
+
+
+Quadratic functions If f(x) = ax2 + bx + c, the discriminant is b2 – 4ac
+For f(x) = 0, b2 – 4ac > 0 ⇒ two real, distinct roots, b2 – 4ac = 0 ⇒ two real, equal roots,
+b2 – 4ac < 0 ⇒ two unreal roots
+Factorising, completing the square, using the formula
+                        − b ± b 2 − 4ac
+If f(x) = 0, then x =
+                               2a
+Sketching quadratic functions
+(a) To find the point of intersection with the y-axis: put x = 0 in y = f(x)
+(b) To find the points of intersection with the x-axis: solve f(x) = 0
+(c) To find the maximum/minimum point: use completing the square, symmetry or
+    solve f ´(x) = 0 [This latter method uses C2 techniques]
+
+                         ⎛     1⎞
+Other curves: reciprocal ⎜ y = ⎟ , cubics
+                         ⎝     x⎠
+Expanding brackets, collecting like tems, factorising
+Simultaneous equations (including one linear and one quadratic)
+Linear and quadratic inequalities
+
+
+       Transformation                                        Description
+                                                                    ⎛0⎞
+ y = f(x) + a           a>0        Translation of y = f(x) through ⎜⎜ ⎟⎟
+                                                                    ⎝a⎠
+                                                                    ⎛ – a⎞
+ y = f(x + a)           a>0        Translation of y = f(x) through ⎜⎜ ⎟⎟
+                                                                    ⎝ 0 ⎠
+
+y = af(x)               a>0        Stretch of y = f(x) parallel to y-axis with scale factor a
+
+
+                                                                                                 1
+ y = f(ax)              a>0        Stretch of y = f(x) parallel to x-axis with scale factor
+                                                                                                 a
+C1 Coordinate geometry                   P (x1, y1) and Q (x2, y2)
+                         y 2 − y1
+Gradient of PQ =                         Distance PQ =     ( x 2 − x1 ) 2 + ( y 2 − y1 ) 2
+                         x 2 − x1
+Equation of a straight line
+(i) Given the gradient, m and the vertical intercept (0, c):                             y = mx + c
+(ii) Given a point P (x1, y1) on the line and the gradient, m:                           y – y1 = m(x – x1)
+                                                                                              y − y1     x − x1
+(iii) Given two points P(x1, y1) and Q(x2, y2) on the line:                                           =
+                                                                                             y 2 − y1   x 2 − x1
+                                   ⎛ x + x 2 y1 + y 2 ⎞
+Mid-point of PQ             M ⎜ 1           ,         ⎟
+                                   ⎝ 2          2 ⎠
+Gradient of line l1 is m1, gradient of line l2 is m2
+If line l1 is parallel to line l2, then m1 = m2
+If line l1 is perpendicular to line l2, then m1× m2 = –1
+
+C1 Sequences and Series
+                             4
+Sigma notation, e.g. ∑ (2r + 5) = 7 + 9 + 11 + 13
+                            r =1
+
+
+
+un+1 = 3un + 5, n ≥ 1, u1 = –2 The first 5 terms of this sequence are –2, –1, 2, 11 and 38
+
+An arithmetic series is a series in which each term is obtained from the previous term by adding a
+constant called the common difference, d
+nth term = a + (n – 1)d
+       n                          n
+Sn =     [2a + (n – 1)d]           or Sn =
+                                     [a + l] where last term l = a + (n – 1)d
+       2                          2
+                                                                       n
+Sum of the first n natural numbers: 1 + 2 + 3 + 4 + … + n:       Sn = (n + 1)
+                                                                       2
+
+C1 Differentiation
+                                                  dy              d2 y
+Notation:     If       y = f(x) then                 = f ´(x) and      = f´´(x)
+                                                  dx              dx 2
+
+                                                  dy
+                   y
+                                                  dx
+
+                   axn                           anxn–1     (a is constant)
+
+                   f(x) ± g(x)                   f ´(x) ± g´(x)
+
+
+Equation of tangents and normals: Use the following facts:
+                                                  dy
+(a) Gradient of a tangent to a curve =
+                                                  dx
+(b) The normal to a curve at a particular point is perpendicular to the tangent at that point
+(c) If two perpendicular lines have gradients m1 and m2 then m1×m2 = –1
+(d) The equation of a line through (x1, y1) with gradient m is y – y1 = m(x – x1)
+
+C1 Integration
+               n +1
+∫axn dx = ax           +c     provided n ≠ –1                 ∫ ( f ´(x) + g ´(x) ) dx = f(x) + g(x) + c
+             n +1
+

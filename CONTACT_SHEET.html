@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>GermanLearning MVP — Art Contact Sheet</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', monospace;
+    background: #1a1410;
+    color: #e8d5b0;
+    padding: 24px;
+    line-height: 1.5;
+  }
+  h1 {
+    font-size: 28px;
+    color: #f4d35e;
+    margin-bottom: 8px;
+    border-bottom: 2px solid #c9956b;
+    padding-bottom: 12px;
+  }
+  .meta { color: #8a7a60; font-size: 13px; margin-bottom: 32px; }
+  .group {
+    margin-bottom: 40px;
+    background: #25201a;
+    border: 2px solid #4a3a2a;
+    border-radius: 8px;
+    padding: 20px;
+  }
+  .group-title {
+    font-size: 18px;
+    color: #f4d35e;
+    margin-bottom: 4px;
+  }
+  .group-desc {
+    color: #8a7a60;
+    font-size: 13px;
+    margin-bottom: 16px;
+  }
+  .row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+  }
+  .card {
+    background: #2d261d;
+    border: 2px solid #4a3a2a;
+    border-radius: 6px;
+    padding: 12px;
+    text-align: center;
+  }
+  .card img {
+    width: 100%;
+    height: auto;
+    image-rendering: pixelated;
+    background: #1a1410;
+    border-radius: 4px;
+    display: block;
+    margin-bottom: 8px;
+  }
+  .card-label {
+    font-size: 13px;
+    color: #c9956b;
+    font-family: monospace;
+  }
+  .card-aspect {
+    font-size: 11px;
+    color: #6a5a40;
+    margin-top: 2px;
+  }
+  .card.scene img { image-rendering: auto; }
+  .stat {
+    display: inline-block;
+    background: #4a3a2a;
+    color: #f4d35e;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    margin-right: 8px;
+  }
+</style>
+</head>
+<body>
+
+<h1>GermanLearning MVP — Art Contact Sheet</h1>
+<div class="meta">
+  <span class="stat">15 张图</span>
+  <span class="stat">9.8 MB</span>
+  <span class="stat">风格: 16-bit 像素艺术 (AI 生成,占位稿)</span>
+  <span class="stat">2026-06-21</span>
+</div>
+
+<div class="group">
+  <div class="group-title">Anna — Café Einstein 服务员</div>
+  <div class="group-desc">柏林咖啡馆 40 岁女店员 · 4 个表情 · 同参考图锁定形象</div>
+  <div class="row">
+    <div class="card">
+      <img src="assets/characters/anna/anna_neutral.png" alt="anna neutral">
+      <div class="card-label">anna_neutral.png</div>
+      <div class="card-aspect">896 × 1200 (3:4)</div>
+    </div>
+    <div class="card">
+      <img src="assets/characters/anna/anna_smile.png" alt="anna smile">
+      <div class="card-label">anna_smile.png</div>
+      <div class="card-aspect">896 × 1200 (3:4)</div>
+    </div>
+    <div class="card">
+      <img src="assets/characters/anna/anna_surprise.png" alt="anna surprise">
+      <div class="card-label">anna_surprise.png</div>
+      <div class="card-aspect">896 × 1200 (3:4)</div>
+    </div>
+    <div class="card">
+      <img src="assets/characters/anna/anna_thinking.png" alt="anna thinking">
+      <div class="card-label">anna_thinking.png</div>
+      <div class="card-aspect">896 × 1200 (3:4)</div>
+    </div>
+  </div>
+</div>
+
+<div class="group">
+  <div class="group-title">Peter — Berlin Hauptbahnhof 问询处</div>
+  <div class="group-desc">柏林中央车站 50 岁男职员 · 4 个表情 · 同参考图锁定形象</div>
+  <div class="row">
+    <div class="card">
+      <img src="assets/characters/peter/peter_neutral.png" alt="peter neutral">
+      <div class="card-label">peter_neutral.png</div>
+      <div class="card-aspect">896 × 1200 (3:4)</div>
+    </div>
+    <div class="card">
+      <img src="assets/characters/peter/peter_smile.png" alt="peter smile">
+      <div class="card-label">peter_smile.png</div>
+      <div class="card-aspect">896 × 1200 (3:4)</div>
+    </div>
+    <div class="card">
+      <img src="assets/characters/peter/peter_surprise.png" alt="peter surprise">
+      <div class="card-label">peter_surprise.png</div>
+      <div class="card-aspect">896 × 1200 (3:4)</div>
+    </div>
+    <div class="card">
+      <img src="assets/characters/peter/peter_thinking.png" alt="peter thinking">
+      <div class="card-label">peter_thinking.png</div>
+      <div class="card-aspect">896 × 1200 (3:4)</div>
+    </div>
+  </div>
+</div>
+
+<div class="group">
+  <div class="group-title">柏林三大场景</div>
+  <div class="group-desc">第 1-3 关使用的地点背景 · 16:9 横屏</div>
+  <div class="row">
+    <div class="card scene">
+      <img src="assets/scenes/berlin/hauptbahnhof_interior.png" alt="hauptbahnhof">
+      <div class="card-label">hauptbahnhof_interior.png</div>
+      <div class="card-aspect">1376 × 768 (16:9)</div>
+    </div>
+    <div class="card scene">
+      <img src="assets/scenes/berlin/cafe_einstein.png" alt="cafe">
+      <div class="card-label">cafe_einstein.png</div>
+      <div class="card-aspect">1376 × 768 (16:9)</div>
+    </div>
+    <div class="card scene">
+      <img src="assets/scenes/berlin/street_kreuzberg.png" alt="kreuzberg">
+      <div class="card-label">street_kreuzberg.png</div>
+      <div class="card-aspect">1376 × 768 (16:9)</div>
+    </div>
+  </div>
+</div>
+
+<div class="group">
+  <div class="group-title">UI 元素</div>
+  <div class="group-desc">对话框 + 按钮 + 柏林徽章 + 麦克风</div>
+  <div class="row">
+    <div class="card ui">
+      <img src="assets/ui/dialogue_box.png" alt="dialogue box">
+      <div class="card-label">dialogue_box.png</div>
+      <div class="card-aspect">1024 × 1024 (1:1)</div>
+    </div>
+    <div class="card ui">
+      <img src="assets/ui/button_normal.png" alt="button">
+      <div class="card-label">button_normal.png</div>
+      <div class="card-aspect">1024 × 1024 (1:1)</div>
+    </div>
+    <div class="card ui">
+      <img src="assets/ui/city_badge_berlin.png" alt="berlin badge">
+      <div class="card-label">city_badge_berlin.png</div>
+      <div class="card-aspect">1024 × 1024 (1:1)</div>
+    </div>
+    <div class="card ui">
+      <img src="assets/ui/mic_button.png" alt="mic">
+      <div class="card-label">mic_button.png</div>
+      <div class="card-aspect">1024 × 1024 (1:1)</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

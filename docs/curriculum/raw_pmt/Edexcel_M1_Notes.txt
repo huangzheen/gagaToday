@@ -1,0 +1,1503 @@
+Mechanics 1
+
+
+Revision Notes
+
+
+
+
+          October 2016
+1. Mathematical Models in Mechanics ............................................................... 3
+   Assumptions and approximations often used to simplify the mathematics involved: .......................................... 3
+2. Vectors in Mechanics. .................................................................................... 4
+   Magnitude and direction ,  components ..................................................................................................... 4
+   Parallel vectors ................................................................................................................................................ 5
+   Adding vectors ................................................................................................................................................ 5
+   Resolving vectors in two perpendicular components ........................................................................................ 6
+   Vector algebra ................................................................................................................................................. 6
+   Vectors in mechanics....................................................................................................................................... 6
+   Velocity and displacement. .............................................................................................................................. 7
+   Relative displacement vectors .......................................................................................................................... 7
+   Collision of moving particles ........................................................................................................................... 8
+   Closest distance between moving particles ....................................................................................................... 8
+   Relative velocity.............................................................................................................................................. 9
+3. Kinematics of a particle moving in a straight line ........................................ 10
+   Constant acceleration formulae. ..................................................................................................................... 10
+   Vertical motion under gravity ........................................................................................................................ 10
+   Speed-time graphs ......................................................................................................................................... 12
+4. Statics of a particle. ...................................................................................... 13
+   Resultant forces ............................................................................................................................................. 13
+   Resultant of three or more forces ................................................................................................................... 14
+   Equilibrium of a particle under coplanar forces. ............................................................................................. 15
+   Types of force ............................................................................................................................................... 16
+   Friction ......................................................................................................................................................... 17
+   Coefficient of friction. ................................................................................................................................... 18
+   Limiting equilibrium ..................................................................................................................................... 19
+5. Dynamics of a particle moving in a straight line. ......................................... 20
+   Newton’s laws of motion. .............................................................................................................................. 20
+   Connected particles ....................................................................................................................................... 22
+   Particles connected by pulleys: ...................................................................................................................... 24
+   Force on pulley.............................................................................................................................................. 26
+   Impulse and Momentum. ............................................................................................................................... 27
+   Internal and External Forces and Impulses. .................................................................................................... 28
+   Conservation of linear momentum, CLM. ...................................................................................................... 29
+   Impulse in string between two particles .......................................................................................................... 31
+6. Moments ...................................................................................................... 32
+   Moment of a Force ........................................................................................................................................ 32
+   Sum of moments ........................................................................................................................................... 32
+   Moments and Equilibrium ............................................................................................................................. 33
+   Non-uniform rods .......................................................................................................................................... 33
+   Nearly tilting rods.......................................................................................................................................... 34
+Appendix ............................................................................................................ 35
+Conservation of linear momentum, C.L.M. ........................................................ 35
+Index .................................................................................................................. 36
+2   M1 OCTOBER 2016 SDB
+1.        Mathematical Models in Mechanics
+Assumptions and approximations often used to simplify the mathematics
+involved:
+     a) a rigid body is a particle,
+     b) no air resistance,
+     c)   no wind,
+     d) force due to gravity remains constant,
+     e)   light pulleys and light strings etc. have no mass,
+     f)   the tension in a light string which remains taut will be constant throughout its length.
+     g) if a pulley is light or smooth the tensions in the a string going round the pulley will be
+        equal on both sides; the same is true for a smooth peg,
+     h) if a string is inextensible and remains taut, the accelerations of two particles, one fixed at
+        each end, will be equal,
+     i)   if a rod is uniform  constant mass per unit length  the centre of mass will be in the
+          middle,
+     j)   a lamina is a uniform flat object of negligible thickness,
+     k)   the earth’s surface, although spherical, is usually modelled by a plane,
+     l)   surface is smooth - no friction,
+     m) forces behave like vectors.
+
+
+
+
+M1 OCTOBER 2016 SDB                                                                                      3
+2.       Vectors in Mechanics.
+     A vector is a quantity which has both magnitude and direction.
+     A scalar is just a number - it has no direction - e.g. mass, time, etc.
+
+     Vectors should be underlined, a letter without the underlining means the length of the vector.
+      r is the length of the vector r
+
+
+
+Magnitude and direction ,  components
+     From component form, draw a sketch and use Pythagoras and trigonometry to find the
+     hypotenuse and angle.
+
+
+     Example:
+                                                      5         r = (32 + 52)
+          r = 3i + 5j =          m
+                                                                        180 - 
+                                                                
+         r=                                                                           x
+                                                            3
+         tan  = 5/3            = 59.0o
+          r is a vector of magnitude          m, making an angle of 121.0o with the x-axis.
+                                         ~~~~~~~~~~~~~~~~~~~~
+     From magnitude and direction form, draw a sketch and use trigonometry to find x and y
+     components.
+
+
+     Example:
+         r is a vector of length 7 cm making an angle of 50o with the x-axis.
+                   a
+              50                 a = 7 cos 50o = 450 cm,
+                                 b = 7 sin 50o = 536 cm
+                        b
+              7
+                                  r=                 cm.
+
+
+
+
+     Example: Find a vector p of length 15 in the direction of q =                .
+
+     Solution:     Any vector in the direction of q must be a multiple of q.
+         First find the length of q = q =
+
+         and as 15 = 15  10, p = 15 q  p = 15                 =
+
+
+
+
+4                                                                                     M1 OCTOBER 2016 SDB
+Parallel vectors
+
+
+  Two vectors are parallel  one is a multiple of another:
+
+  e.g. 6i – 8j = 2(3i – 4j)          6i – 8j and 3i – 4j are parallel
+
+  Or                                                                           .
+
+
+
+
+Adding vectors
+  Geometrically, use a vector triangle              or        a vector parallelogram:
+
+                                                                   p
+                p
+                                     q
+                                         or                              p+q
+
+
+                    p+q
+                                                                    q
+
+
+
+
+  1) In component form:
+
+  2) To add two vectors which are given in magnitude and direction form:
+  Either   a) convert to component form, add and convert back,
+  Or       b) sketch a vector triangle and use sine or cosine rule.
+
+
+  Example:
+       Add together,      3 miles on a bearing of 60 o and 4 miles on a bearing of 140o..
+  Solution:
+                                                north
+
+
+                       north                            140
+
+                                     3        100
+                           60                                 4
+                                
+
+                                          x
+
+
+
+
+M1 OCTOBER 2016 SDB                                                                         5
+        Using the cosine rule
+                x2 = 32 + 42  2  3  4  cos 100 = 2916756
+                 x = 54006996 = 540
+        then, using the sine rule,
+                                      sin  = 0729393
+
+                  = 4683551           bearing = 468 + 60 = 1068o
+        Answer Resultant vector is 540 miles on a bearing of 1068o.
+
+
+
+
+Resolving vectors in two perpendicular components
+
+                                                                    y
+
+
+    F has components F cos  and F sin 
+    as shown.                                            F sin              F
+
+
+                                                                                                      x
+
+                                                                            F cos 
+
+
+Vector algebra
+
+    Notation,     = a,     = b, etc., but    = r, usually!
+                                                                                 A
+        To get from A to B
+        first go A to O using –a
+                                                                a
+        then go O to B using b
+                  = –a + b = b – a.
+                                                  O                                    B
+                                                                        b
+
+
+
+
+Vectors in mechanics
+    Forces behave as vectors (the physicists tell us so) - modelling.
+    Velocity is a vector so must be given either in component form or as magnitude and direction.
+    Speed is the magnitude of the velocity so is a scalar and has no direction.
+    Acceleration is a vector so must be given either in component form or as magnitude and
+    direction.
+
+
+6                                                                                     M1 OCTOBER 2016 SDB
+Velocity and displacement.
+  If a particle moves from the point (2, 4) with a constant velocity v = 3i – 4j for 5 seconds
+  then its displacement vector will be velocity  time = (3i – 4j)  5 = 15i – 20j
+  and so its new position will be given by r = (2i + 4j) + (15i – 20j) = 17i – 16j.
+
+
+  Example: A particle is initially at the point (4, 11) and moves with velocity             m s-1. Find
+     its position vector after t seconds.
+
+  Solution: The displacement during t seconds will be t 
+
+     and so the new position vector will be r =                  + t           =           .
+
+
+
+
+Relative displacement vectors
+                                                                                     C
+  If you are standing at a point C and X is
+  standing at a point D then the position vector
+                                                                           rC            rD – rC
+  of X relative to you is the vector
+
+
+  and         = rD rel C = d – c = rD – rC                   O
+                                                                                            D
+                                                                                rD
+
+  Thus if a particle A is at rA = 3i – 4j and B is at rB = 7i + 2j
+  then the position of A relative to B is
+        = rA rel B = a – b = rA – rB = (3i – 4j) – (7i + 2j) = –4i – 6j.
+
+
+
+
+M1 OCTOBER 2016 SDB                                                                                   7
+Collision of moving particles
+    Example: Particle A is intially at the point (3, 4) and travels with velocity 9i – 2j m s-1.
+                Particle B is intially at the point (6, 7) and travels with velocity 6i – 5j m s-1.
+        (a)     Find the position vectors of A and B at time t.
+        (b)     Show that the particles collide and find the time and position of collision.
+
+
+Solution:
+
+        (a)     rA =                                                      (Initial position + displacement)
+
+
+                rB =                                                        (Initial position + displacement)
+
+        (b)     If the particles collide then their x-coordinates will be equal
+                       x-coords = 3 + 9t = 6 + 6t      t=1
+
+
+                BUT we must also show that the y-coordinates are equal at the same value of t =1.
+                        y-coords = 4 – 2t = 7 – 5t  t = 1.
+                 particles collide when t = 1 at (12, 2).
+
+
+Closest distance between moving particles
+    Example: Two particles, A and B, are moving so that their position vectors at time t are
+
+        rA =              and rB =                 .
+
+        (a)     Find the vector       at time t.
+        (b)     Find the distance between A and B at time t in terms of t.
+        (c)     Find the minimum distance between the particles and the time at which this occurs.
+
+
+    Solution:
+        (a)         = rB  rA =
+
+
+        (b)     The distance, d, between the particles is the length of
+                    =
+
+                       d 2 = (–1 +2t)2 + (1 + t)2 = 1 – 4t + 4t2 + 1 + 2t + t2
+                           = 5t2 – 2t + 2
+
+                       d =       5t 2  2t  2
+
+
+
+
+8                                                                                    M1 OCTOBER 2016 SDB
+      (c)     The minimum value of d will occur when the minimum value of d2 occurs so we
+              differentiate d2 with respect to t.
+              d 2 = 5t2 – 2t + 2
+               d (d 2 )
+                        10t  2  0   for max and min  t = 02
+                  dt
+                                     d 2 (d 2 )
+      and the second derivative                  10 which is positive for t = 02
+                                       dt 2
+             d 2 is a minimum at t = 02
+
+             minimum value of d =            5  0  22  2  0  2  2  1 8 = 134 to 3 S.F.
+
+
+
+
+Relative velocity
+  This is similar to relative position in that if C and D are at positions rC and rD
+  then the position of D relative to C is           = rD rel C = rD – rC
+  which leads on, by differentiating with respect to time, to: -
+  if C and D are moving with velocities vC and vD then the velocity of D relative to C is
+              vD rel C = vD – vC .
+
+
+  Example: Particles A and B have velocities vA = (12t – 3) i + 4 j and
+      vB = (3t2 – 1) i + 2t j.
+      Find the velocity of A relative to B and show that this velocity is parallel to the x- axis
+      for a particular value of t which is to be determined.
+
+
+  Solution:   vA =                      and       vB =
+
+             vA rel B = vA – vB =
+
+
+      When the relative velocity is parallel to the x-axis, the y-coordinate = 0
+       4 – 2t = 0 which happens when t = 2
+             the relative velocity is parallel to the x-axis when t = 2.
+
+
+
+
+M1 OCTOBER 2016 SDB                                                                                 9
+3.       Kinematics of a particle moving in a straight line
+Constant acceleration formulae.
+
+     v = u + at;            s = ut + at2;          s = (u + v) t;        v2 = u2 + 2as.
+
+     N.B. Units must be consistent - e.g. change km h1 to m s1 before using the formulae.
+
+
+     Example: A particle moves through a point O with speed 13 m s1 with acceleration 6 m s2.
+       Find the time(s) at which the particle is 12 m from O.
+
+
+     Solution:
+        u = 13, a = 6, s = 12, t = ?
+        Use      s = ut + at2        12 = 13t +  (6)  t2
+
+                  3t2  13t + 12 = 0           (3t  4)(t  3) = 0
+                  t=1      or 3.
+
+         Answer Particle is 12 m from O after 1 and 3 seconds.
+
+
+
+Vertical motion under gravity
+     1) The acceleration always acts downwards whatever direction the particle is moving.
+     2) We assume that there is no air resistance, that the object is not spinning or turning and that
+        the object can be treated as a particle.
+     3) We assume that the gravitational acceleration remains constant and is 98 m s2.
+     4) Always state which direction (up or down) you are taking as positive.
+
+
+     Example: A ball is thrown vertically upwards from O with a speed of 14 m s1.
+         (a)        Find the greatest height reached.
+         (b)        Find the total time before the ball returns to O.
+         (c)        Find the velocity after 2 seconds.
+
+
+     Solution:      Take upwards as the positive direction. +
+         (a)        At the greatest height, h, the velocity will be 0 and so we have
+                    +      u = 14, v = 0, a = –98 and s = h (the greatest height).
+                    Using    v2 = u2 + 2as    we have    02 = 142 + 2  (–98)  h
+                           h = 196  196 = 10.
+                            Answer: Greatest height is 10 m.
+
+
+
+10                                                                                   M1 OCTOBER 2016 SDB
+      (b)    When the particle returns to O the displacement, s, from O is 0 so we have
+             +       s = 0, a = –98, u = 14 and t = ?
+             Using s = ut + at2          we have     0 = 14t –  98t2
+
+                     t(14 – 49t) = 0
+                     t = 0 (at start) or t = 2    seconds.
+
+             Answer: The ball takes 2        seconds to return to O.
+
+
+      (c)    After 2 seconds, u = 14, a = –98, t = 2 and v = ?
+             Using v = u + at we have
+             +       v = 14 – 98  2
+                     v = –56.
+             Answer: After 2 seconds the ball is travelling at 5.6 m s1 downwards.
+
+
+
+
+M1 OCTOBER 2016 SDB                                                                       11
+Speed-time graphs
+
+
+     1) The area under a speed-time graph represents the distance travelled.
+     2) The gradient of a speed-time graph is the acceleration or deceleration.
+
+
+     Example: A particle is initially travelling at a speed of 2 m s1 and immediately accelerates at
+        3 m s2 for 10 seconds; it then travels at a constant speed before decelerating at a 2 m s2
+        until it stops.
+     (a) Find the maximum speed and the time spent decelerating.
+     (b) Sketch a speed-time graph.
+     (c) If the total distance travelled is 1130 metres, find the time spent travelling at a constant
+         speed.
+     Solution:
+     (a) For maximum speed: u = 2, a = 3, t = 10, v = u + at  v = 32 m s1 is maximum speed.
+            For deceleration from 32 m s1 at 2 m s2 the time taken is 32  2 = 16 seconds.
+     (b) In the graph, T is the total time taken.
+
+               v
+
+      32
+
+
+
+
+        2
+
+
+                         10                              T 16                    T        t
+
+
+
+
+            Distance travelled in first 10 secs is area of trapezium =    (2 + 32)  10 = 170 metres,
+
+            distance travelled in last 16 secs is area of triangle =    16  32 = 256 metres,
+            Total distance travelled is 1130 metres
+             distance travelled at constant speed = 1130  (170 + 256) = 704 metres
+             time travelling at speed of 32 m s-1 is 704  32 = 22 s.
+
+
+
+
+12                                                                                    M1 OCTOBER 2016 SDB
+4.       Statics of a particle.
+Resultant forces
+     As forces behave like vectors you can add two forces geometrically using a triangle or a
+     parallelogram.
+
+
+     R = F1 + F2
+
+                        R
+                                       F2                 F2         R
+                                                   or
+
+                   F1                                              F1
+
+
+
+     To find R from a diagram either draw accurately or, preferably, use sine and/or cosine rules.
+
+
+     Example: F1 and F2 are two forces of magnitudes 9 N and 5 N and the angle between their
+        directions is 100o. Find the resultant force.
+     Solution:
+                                                          Using the cosine rule
+                                                          R2 = 52 + 92  2  5  9  cos 80
+                   R                5                      R = 950640…
+                                            100o          and, using the sine rule,
+           xo                    80o
+                                                            5     9  50640...
+                        9                                                           x  31 196...0
+                                                          sin x       sin80
+
+
+         Answer: The resultant force is 951 N at an angle of 312o with the 9 N force.
+
+
+
+
+     Example:
+         Find the resultant of P = 5i  7j and Q = 2i + 13j.
+     Solution:
+         R = P + Q = (5i  7j) + (2i + 13j) = 3i + 6j.
+         Answer         Resultant is 3i + 6j N.
+
+
+
+
+M1 OCTOBER 2016 SDB                                                                                     13
+Resultant of three or more forces
+     Reminder:
+                                                                       y
+     We can resolve vectors in two
+     perpendicular components as shown:
+                                                             F sin             F
+
+     F has components F cos  and F sin  .                                                                x
+                                                                               F cos 
+
+     To find the resultant of three forces
+         1)      convert into component form (i and j) , add and convert back
+     or 2)       sketch a vector polygon and use sine/cosine rule to find the resultant of two,
+                 then combine this resultant with the third force to find final resultant.
+     For more than three forces continue with either of the above methods.
+
+                                                                                            4N
+     Example: Find the resultant of the four
+              forces shown in the diagram.                                                  60o
+                                                                               25o                     9N
+                                                                           7N
+                                                                                          8N
+
+
+
+
+     Solution:   First resolve the 7 N and 4 N                                       4 sin 60 N
+                 forces horizontally and vertically
+         The resultant force 
+                                                                 7 cos 25 N                       4 cos 60 + 9 N
+         is 4cos 60 + 9 – 7cos 25 = 465585… N
+         and the resultant force 
+                                                                                 7 sin 25 + 8 N
+         is (7sin 25 + 8) – 4sin 60 = 749423… N
+
+
+                 giving this diagram                                                                     4.65585
+                                                                                            
+                R=     4  655852  7  494232  8  82 N
+                           7  49423
+         and     tan  =               = 581o
+                           4  65585                                            7.49423                 R
+
+
+                Answer: resultant is 882 N at an angle of 581o below the 9 N force.
+
+
+
+
+14                                                                                        M1 OCTOBER 2016 SDB
+  Example: Use a vector polygon to find the resultant of the three forces shown in the diagram.
+  Solution: To sketch the vector polygon, draw the forces end to end.
+      I have started with the 3 N, then the 4 N and finally the 2 N force.
+
+                                                                          3N
+                 3N
+
+                                      2N
+                                48o                                           R1 N
+                                                                  4N
+                                                                         o              R2 N
+                          4N
+
+
+                                                                              2N
+                                                                        48o
+
+
+      Combine the 3 N and 4 N forces to find the resultant R1 = 5 N with  = 36.9o,
+      and now combine R1 with the 2 N force to find the final resultant R2 using the cosine and
+      or sine rule.
+      It would probably be easier to resolve each force in two perpendicular directions as in the
+      previous example.
+
+
+
+
+Equilibrium of a particle under coplanar forces.
+  If the sum of all the forces acting on a particle is zero (or if the resultant force is 0 N) then the
+  particle is said to be in equilibrium.
+
+
+  Example: Three forces P =                 N, Q =         N and R =            N are acting on a
+      particle which is in equilibrium.
+      Find the values of a and b.
+
+
+  Solution:    As the particle is in equilibrium the sum of the forces will be 0 N.
+              P+Q+R =0
+
+      
+
+              Answer:     a = –4 and b = –2
+
+
+
+
+M1 OCTOBER 2016 SDB                                                                                   15
+Example:     A particle is in equilibrium at O                          Q
+      under the forces shown in the diagram.
+         Find the magnitudes of P and Q.
+                                                                             60o              P
+
+Solution:
+       Method (i)                                                                   12
+
+         First resolve Q in horizontal and vertical directions
+
+
+         Resolve   Q sin 60 = 12  Q = 13856.                                     Q sin 60
+
+
+                                                                  Q cos 60                    P
+         Resolve   P = Q cos 60 = 6928.
+
+
+         Answer P = 693 N and Q = 139 N                                            12
+
+
+
+         Method (ii)                                                                              P
+         Sketch a triangle of forces, showing the three forces adding up to 0.
+
+
+         P = 12 tan 30o = 693 N                                                                            12
+                                                                                          Q
+         and Q = 12  cos 30o = 139 N                                                                30o
+
+
+
+
+Types of force
+     1) Contact forces: tension, thrust, friction, normal (i.e. perpendicular to the surface) reaction.
+     2) Non-contact forces: weight / gravity, magnetism, force of electric charges.
+     N.B. ALWAYS DRAW A DIAGRAM SHOWING ALL FORCES, but never mark a
+     force on a diagram without knowing what is providing it.
+
+
+
+
+16                                                                                 M1 OCTOBER 2016 SDB
+Friction
+  If we try to pull a box across the floor there is
+  a friction force between the box and the                                    R
+  floor.
+  If the box does not move the friction force
+  will be equal to the force P                                                                     P
+  and as P increases from 0 N the friction               F
+  force will also increase from 0 N until it
+  reaches its maximum value Fmax, after
+                                                                              mg
+  which the box will no longer be in
+  equilibrium.
+  When friction force is at its maximum and
+  the box is on the point of moving the box is
+  said to be in limiting equilibrium.
+  N.B. The direction of the friction force is always opposite to the direction of motion (or the
+  direction in which the particle would move if there was no friction).
+
+
+  Example: A particle of mass 2 kg rests in equilibrium on a plane which makes an angle of
+    25o with the horizontal.
+              Find the magnitude of the friction force and the magnitude of the normal reaction.
+
+
+  Solution: DRAW A DIAGRAM SHOWING ALL FORCES  the weight 2g N, the
+      friction F N and the normal reaction R N. Remember that the particle would move down
+      the slope without friction so friction must act up the slope.
+      Then draw a second diagram showing forces resolved along and perpendicular to the
+      slope.
+                                                                          R
+                        R
+                                          F
+                                                                                               F
+
+
+                                                             2g sin 25
+                                      o
+              25o                25
+
+                            2g                                                     2g cos 25
+
+
+
+      The particle is in equilibrium so
+      resolving perpendicular to the slope R = 2g cos 25 = 177636…,
+      and resolving parallel to the slope      F = 2g sin 25 = 82833….
+
+
+      Answer:       Friction force is 83 N and normal reaction is 18 N, to 2 S.F.
+
+
+
+
+M1 OCTOBER 2016 SDB                                                                                17
+Coefficient of friction.
+     There is a maximum value, or limiting value, of the friction force between two surfaces. The
+     ratio of this maximum friction force to the normal reaction between the surfaces is constant for
+     the two surfaces and is called the coefficient of friction.
+         Fmax = R, where  is the coefficient of friction and R is the normal reaction.
+
+
+     Example: A particle of mass 3 kg lies in equilibrium on a slope of angle 25o. If the coefficient
+        of friction is 06, show that the particle is in equilibrium and find the value of the friction
+        force.
+
+
+     Solution:                                             R      F
+                       R
+                              F
+
+                                               3g sin 25
+                                                                 3g cos 25
+                             3g
+                 25o
+
+
+
+
+         Res            R = 3g cos 25 = 26645…
+         If we assume that the particle is in equilibrium
+         Res             F = 3g sin 25 = 12424…
+         But the maximum friction force is Fmax = R = 06  26645… = 15987… N
+         Thus the friction needed to prevent sliding is 12.424… N and since the maximum possible
+         value of the friction force is 15987… N the particle will be in equilibrium and the actual
+         friction force will be just 12.424… N.
+
+
+                            Answer   Friction force is 12 N to 2 S.F.
+
+
+
+
+18                                                                              M1 OCTOBER 2016 SDB
+Limiting equilibrium
+       When a particle is in equilibrium but the friction force has reached its maximum or
+       limiting value and the particle is on the point of moving, the particle is said to be in
+       limiting equilibrium.
+Example:      A particle of mass 6 kg on a slope of angle 30 o is being pushed by a horizontal
+      force of P N. If the particle is in limiting equilibrium and is on the point of moving up the
+      slope find the value of P, given that  = 03.
+Solution:         DRAW A DIAGRAM SHOWING ALL FORCES
+       As the particle is on the point of moving up the slope the friction force will be acting down
+       the slope, and as the particle is in limiting equilibrium the friction force will be at its
+       maximum or limiting value, F = R.
+
+                   R
+                                                                  R
+                                                                              P cos 30
+
+                               P
+              F
+                        6g
+             30o                                  F + 6g sin 30
+                                                                      6g cos 30 + P sin 30
+
+
+
+
+       Res              R = 6g cos 30 + P sin 30
+                       Limiting equilibrium  F = R
+                        F = 03R = 152766… + 015P                  I
+
+
+       Res              F + 6g sin 30 = P cos 30                     II
+
+       I and II       152766… + 015P + 6g sin 30 = P cos 30
+                        P = 62395…
+
+
+                              Answer P = 62 N. to 2 S.F.
+
+
+
+
+M1 OCTOBER 2016 SDB                                                                               19
+5.       Dynamics of a particle moving in a straight line.
+Newton’s laws of motion.
+     1) A particle will remain at rest or will continue to move with constant velocity in a straight
+        line unless acted on by a resultant force.
+     2) For a particle with constant mass, m kg, the resultant force F N acting on the particle and
+        its acceleration a m s2 satisfy the equation F = m a.
+     3) If a body A exerts a force on a body B then body B exerts an equal force on body A but in
+        the opposite direction.
+
+
+
+     Example: A box of mass 30 kg is being pulled along the ground by a horizontal force of
+        95 N. If the acceleration of the trolley is 15 m s2 find the coefficient of friction.
+
+
+     Solution:   DRAW A DIAGRAM SHOWING ALL FORCES
+         No need to resolve as the forces
+         are already at 90o to each other.                                                  R
+                                                                          15
+         Resolve , F = ma
+                95 – F = 30  15                                                                     95
+                                                                     F
+                F = 95 – 45 = 50
+         Resolve              R = 30g
+                                                                                            30g
+         The box is moving, therefore friction is at its maximum
+                 =             = 0170068027…
+
+                 = 017 to 2 S.F.
+
+
+
+
+     Example: A ball of mass 2 kg tied to the end of a string. The tension in the string is 30 N.
+         Find the acceleration of the ball and state in which direction it is acting.
+
+
+     Solution:   DRAW A DIAGRAM SHOWING ALL FORCES
+         Resolve upwards  30 – 2g = 2a                                                           30
+                a = 52
+                                                                                        a
+
+
+         Answer Acceleration is 52 m s2 upwards.
+                                                                                                  2g
+         Note that it does not matter in which direction a is marked; if a is
+         marked in the ‘wrong’ direction, then the answer will be negative.
+
+
+20                                                                                M1 OCTOBER 2016 SDB
+Example:      A particle of mass 25 kg is being pulled up a slope at angle of 25o above the
+      horizontal by a rope which makes an angle of 15o with the slope. If the tension in the rope
+      is 300 N and if the coefficient of friction between the particle and the slope is find the
+      acceleration of the particle.
+
+
+Solution:
+                      R          300
+                                                                        R + 300 sin 15
+                                    15o
+            a                                                                                 300 cos 15
+                                                                    a
+
+                F             25o
+                                                                   F + 25g sin 25
+                25o
+                                                                                         25g cos 25
+                           25g
+
+
+
+
+       Res                 R + 300 sin 15 = 25g cos 25           R = 14439969…
+       and, since moving, friction is maximum  F = R =             14439969 = 360999…
+
+
+       Res      ,         F = ma
+                           300 cos 15  (F + 25g sin 25) = 25a
+                                a = 600545…
+
+
+                          Answer the acceleration is 6.0 m s-2    to 2 S.F.
+
+
+                                                   
+
+
+
+
+M1 OCTOBER 2016 SDB                                                                                    21
+Connected particles
+In problems with two or more connected particles, draw a large diagram in which the particles are
+clearly separate. Then put in all forces on each particle: don’t forget Newton’s third law there
+will be some ‘equal and opposite’ pairs of forces.
+
+
+Example:      A lift of mass 600 kg is accelerating upwards carrying a man of mass 70 kg. If the
+      tension in the lift cables is 7000 N find the acceleration of the lift and the force between
+      the floor and the man’s feet.
+Solution:
+         Draw a clear diagram with all forces on lift AND all forces on man.
+         Draw a second diagram showing the combined system, that is, the man and the lift as
+         ‘one particle’.
+         N.B.   If the normal reaction on the man is R newtons then this means that the lift floor is
+                pushing up on the man with a force of R newtons,
+                therefore the man must be pushing down on the lift floor with an equal sized force
+                of R newtons.
+         Hint: Draw a LARGE lift and put the man in the middle (not touching the floor).
+
+                 Lift and man separate                Lift and man combined
+                          7000
+
+
+
+                                                                7000
+
+                          R
+
+
+                                                                           a
+                                             a
+
+                        70g
+
+                                                                670g
+
+
+
+
+                        600g + R
+
+
+     For the lift and man combined
+     Res , F = ma           7000  670g = 670a  a = 064776… = 065 m s2 to 2 S.F.
+
+
+     For the man only
+     Res , F = ma           R  70g = 70a          R = 73134328… = 730 N          to 2 S.F.
+
+
+22                                                                             M1 OCTOBER 2016 SDB
+  Example: A truck of mass 1300 kg is pulling a trailer of mass 700 kg. The driving force
+      exerted by the truck is 1500 N and there is no resistance to motion.
+       Find the acceleration of the truck and trailer, and the force in the tow bar between the
+       truck and the trailer.
+
+
+  Solution: Draw a clear diagram, separating the truck and the trailer to show the forces on
+        each one.
+       Draw a second diagram showing the combined system, that is, the truck and the trailer
+       as ‘one particle’.
+       If the force in the tow bar is T N then this force will be pulling the trailer and pulling
+       back on the truck, since the truck is accelerating.
+
+
+  Trailer and truck separate
+                                  R1      a                            R2      a
+
+                                                   T        T
+                                                                                       1500
+
+
+                                   700g                                1300g
+
+
+  Trailer and truck combined                            a
+                                               R
+
+
+                                                                1500
+
+
+                                              2000g
+
+       Note that the truck and trailer both have the same acceleration, assuming a rigid tow bar.
+  For the truck and trailer combined
+  Res , F = ma          1500 = 2000a  a = 075 m s2
+
+
+  For the trailer only
+  Res , F = ma           T = 700a  T = 700 × 075 = 525 = 530 N                 to 2 S.F.
+
+
+
+
+M1 OCTOBER 2016 SDB                                                                                 23
+Particles connected by pulleys:
+     The string will always be inextensible and light and the pulley (or peg) will always be smooth
+     or light.
+     1) As the string is inextensible the accelerations of the two particles at its ends will have the
+        same magnitude.
+     2) As the string is light, the tension in the string will be constant along its length.
+     3) As the pulley (or peg) is smooth or light, the tensions in the string on either side of the
+        pulley (or peg) will be equal.
+
+
+     Example: Particles of mass 3 kg and 5 kg are attached to the ends of a light inextensible
+       string which passes over a fixed smooth pulley. The 5 kg particle is initially 2 m above the
+       floor.
+        The system is released from rest; find the greatest height of the lighter mass above its initial
+        position in the subsequent motion. Assume that the lighter mass does not reach the pulley.
+
+
+     Solution:
+        The two particles will move together until the heavier one hits
+        the floor. Then the string will become slack, and the lighter
+        particle will move freely under gravity.                                  T
+        Thus, our problem has two distinct parts.                             a             T
+
+        1) What happens before the heavy particle hits the floor?                               a
+                                                                                      3g
+        2) What happens after the heavy particle hits the floor?
+                                                                                           5g         2m
+
+        Since the string is inextensible the accelerations of both
+        particles will be equal in magnitude.
+        Since the string is light and the pulley is smooth the tensions on both sides will be equal in
+        magnitude.
+        1) For 3 kg particle
+            R , F = ma                 T  3g = 3a                     I
+            For 5 kg particle
+            R , F = ma                 5g  T = 5a                     II
+            ALWAYS ADD I + II              2g = 8a  a = 025g
+
+
+            Knowing that the acceleration of both particles is 025g m s2 we can now find the
+        speed of both particles (equal speeds) when the heavier one hits the floor.
+            Both particles will have travelled 2 m and so, considering the 3 kg particle,
+
+            + u = 0, a = 025g, s = 2, v = ? so using        v2 = u2 + 2as
+             v2 = 2  025g  2 = g              v =
+
+
+24                                                                                M1 OCTOBER 2016 SDB
+     2) The remaining motion takes place freely under gravity as the string will have become
+        slack when the heavier mass hit the floor!
+         For the 3 kg mass
+         + u =        , a = g, v = 0, s = ?     so using v2 = u2 + 2as
+          0 = g + 2  g  s                s = 05
+
+  The 3 kg mass travelled 2 m before the 5 kg mass hit the floor and then moved up a further
+  05 m after the string became slack.
+
+
+         Answer:      the lighter particle reached a height of 2.5 m above its initial position.
+
+
+
+
+M1 OCTOBER 2016 SDB                                                                                25
+Force on pulley
+     Example: A block of mass 4 kg is on a slope which makes an angle of 40o with the
+        horizontal. The block is attached to an inextensible, light string which passes over a light,
+        smooth pulley. The other end of the string is attached to a ball of mass 5 kg. The
+        coefficient of friction between the block and the slope is . The block is accelerating up
+        the slope.
+         (a) What can you assume because the string is light and inextensible?
+         (b) What can you assume because the pulley is light and smooth?
+         (c) Find the magnitude of the force exerted on the pulley by the string.
+
+
+     Solution:
+         (a) Because the string is light the tension is the same anywhere on the string, and because
+             the string is inextensible the accelerations of the block and ball are equal.
+         (b) Because the pulley is light and smooth, the tensions in the string on either side of the
+             pulley will be equal.
+         (c) The force of the string on the pulley will be the resultant of the two tensions, T, on
+             either side of the pulley. So we first find the tensions.
+
+
+                          a            R                                                          T
+                                                 T           T
+                                                                                                      T
+                                                                 a                            25o o
+                                   F                                                             25
+                                           4g               5g                     40o
+                               o
+                          40
+
+
+
+         For the block:   Res               R = 4g cos 40o,
+              and since the block is moving, F = R =  4g cos 40o = g cos 40o
+
+                          Res                    N2L  T  (F + 4g sin 40o) = 4a              I
+         For the ball:    Res                   N2L        5g  T = 5a                      II
+         ALWAYS ADD                    I + II           5g  (g cos 40o + 4g sin 40o) = 9a
+                                  a =          (5g  (g cos 40o + 4g sin 40o)) = 181061001…
+
+              Substitute in II  T = 5g  5 181061001… = 399469499…
+              By symmetry, the resultant force of the string on the pulley will act along the angle
+              bisector, and the tension on each side will contribute to this resultant force,
+                  resultant force of the string on the pulley = 2T cos 25o = 724084635……
+              Resultant force of string on pulley is 72 N to 2 S.F.
+
+
+
+
+26                                                                                       M1 OCTOBER 2016 SDB
+  Impulse and Momentum.
+  (a) We know that the velocity v m s1 of a body of mass m kg moving with a constant
+      acceleration a m s2 for time t seconds is given by
+              v = u + at, where u is the initial velocity.
+       mv = mu + mat
+       mat = mv  mu.
+      Newton's Second Law states that F = ma
+             Ft = mat
+             Ft = mv  mu.
+      Note that F must be constant since a is constant.
+  (b) We define the impulse, I, of a constant force F N acting for a time t seconds to be
+      I = Ft Newton-seconds (Ns).
+  (c) We define the momentum of a body of mass m kg moving with velocity v m s1 to be
+      mv kg m s1.
+  (d) The equation I = Ft = mv  mu of paragraph (a) can now be thought of as
+              Impulse = Change in Momentum.
+
+
+      N.B. Impulse and Momentum are vectors.
+
+
+  Example: A ball of mass 2 kg travelling in a straight line at 4 m s1 is acted on by a constant
+      force of 3 N acting in the direction of motion. Find the speed after 5 seconds.
+
+  Solution:                4 m s1                           v m s1
+       +             3N
+
+
+                           t=0                               t=5
+
+      The impulse of the force is 3  5 = 15 Ns in the direction of motion.
+      Taking the direction of motion as positive we have I = 15, u = 4, m = 2 and v = ?.
+      Using I = mv – mu we have 15 = 2v – 2  4
+             v = 115
+      Answer: speed after 5 seconds is 115 m s1.
+
+
+
+
+M1 OCTOBER 2016 SDB                                                                             27
+Example:      A ball of mass 15 kg is struck by a bat in the opposite direction to the motion of
+      the ball. Before the impulse the ball is travelling at 16 m s1 and the impulse of the bat on
+      the ball is 50 Ns. Find the velocity of the ball immediately after impact.
+
+
+Solution:    Take the direction of motion of the ball as positive and let the speed after impact
+       be x m s1.
+
+                 Before                           During                          After
+
+
+
+                                          50 Ns
+                       16 m s1                                             x m s1
+         +
+                         I = –50, u = 16 and v = –x
+                 Using I = mv – mu
+                         –50 = 15  (–x) – 15  16
+                         x = 17 .
+
+                 Answer:     velocity after impact is 17   m s1 away from the bat.
+
+
+
+
+Internal and External Forces and Impulses.
+     (a) If a hockey ball is hit by a hockey stick then the impulse on the ball is an external impulse
+         on the ball.
+     (b) If two cricket balls collide then the impulses between the balls at the moment of collision
+         are internal when considering the two balls together.
+         If we were considering just one ball then the impulse of collision would be external to that
+         ball.
+     (c) If an explosion separates a satellite from a rocket then the impulse of the explosion is
+         internal when considering the rocket and the satellite together.
+         If we were considering the satellite alone then the impulse of the explosion would be
+         external to the satellite.
+
+
+
+
+28                                                                              M1 OCTOBER 2016 SDB
+Conservation of linear momentum, CLM.
+  If there are no external impulses acting on a system then the total momentum of that system is
+  conserved (i.e. remains the same at different times).
+  or total momentum before impact equals total momentum after impact.
+  Note that if there is an external impulse acting on the system then the momentum
+  perpendicular to that impulse is conserved.
+                before                    during                               after
+           u1            u2                         I                     v1           v2
+                                          I
+
+           m1        m2              m1                 m2                m1           m2
+
+
+   + Note that the total impulse on the system is I + I = 0, as the impulses when
+    considering both balls together are internal.
+                CLM  m1u1 + m2 u2 = m1v1 + m2v2
+
+
+  Example: A railway truck of mass 1500 kg is travelling in a straight line at 3 m s1. A second
+    truck of mass 1000 kg is travelling in the opposite direction at 5 m s1. They collide (without
+    breaking up) and couple together. With what speed and in what direction are they moving
+    after the impact?
+  Solution: There is no external impulse (the impulse of gravity is ignored as the time interval
+     is very short) and so momentum is conserved.
+
+     ALWAYS DRAW A DIAGRAM  before and after (and sometimes during)
+  You must always choose which direction is positive, then take note of the directions of the
+  arrows in your diagram.
+  Let the common speed after impact be v ms-1 in the direction of the initial velocity of the
+  1500 kg truck (if this direction is wrong then v will be negative):
+   +              before                                             after
+            3                  5                                          v
+
+
+           1500               1000                                 1500        1000
+
+
+
+
+  Taking motion to the right as the positive direction,
+  CLM
+     Momentum before = m1u1 + m2u2 = 1500  3 + 1000  (5) = –500
+     Momentum after = m1v1 + m2v2 = 1500 v + 1000 v = 2500 v
+     But momentum is conserved               –500 = 2500 v
+           v = –02 m s1.
+     Answer Speed is 02 m s1 in the direction of the 1000 kg truck's initial velocity.
+
+
+M1 OCTOBER 2016 SDB                                                                             29
+Example:     Two balls A and B are travelling towards each other with speeds uA = 5 m s1 and
+      uB = 6 m s1.
+        After impact A is now travelling in the opposite direction at 3 m s1, and B continues to
+        travel in its original direction but with speed 2 m s1.
+        The mass of A is 2 kg. Find the mass of B.
+
+
+Solution:        Let the mass of B be m kg.
+
+
+       ALWAYS DRAW A DIAGRAM  before and after (and sometimes during)
+
+
+                            before                           after
+                     5               6                   3           2
+
+                 A      2            m   B           A   2           m   B
+
+     + 
+       Taking left as positive
+     No external impulse  momentum conserved
+     CLM  total momentum before = total momentum after
+        2  (5) + m  6 = 2  3 + m  2
+             4m = 16         m=4
+     Answer    Mass of ball B is 4 kg.
+
+
+
+
+30                                                                             M1 OCTOBER 2016 SDB
+Impulse in string between two particles
+  If a string links two particles which are moving apart then the string will become taut and, at
+  that time, there will be an impulse in the string.
+  In this case the impulses on the two particles will be equal in magnitude but opposite in
+  direction.
+  Thus when considering the two particles as one system there is no external impulse and the
+  problem can be treated in a similar way to collisions.
+  The assumptions involved are that the string is light (mass can be ignored) and inextensible
+  (does not stretch).
+
+
+  Example: Two particles P and Q of masses 2 kg and 5 kg are connected by a light
+    inextensible string. They are moving away from each other with speeds uP = 3 m s1 and
+    uQ = 4 m s1.
+     After the string becomes taut the particles move on with the same velocity.
+  (a) Find this common velocity.
+  (b) Find the impulse in the string.
+
+
+  Solution:   ALWAYS DRAW A DIAGRAM  before and after and this time during
+     Let common speed after the string has become taut be v
+
+
+                  before                             during                      after
+              3            4                                                                  v
+                                                                           v
+                                                 I        I
+          P   2            5   Q        P   2                 5   Q    P   2                  5   Q
+
+
+
+     Taking direction to the right as positive
+   +
+  (a) No external impulse              CLM  total momentum conserved
+             2  (3) + 5  4 = 2  v + 5  v
+             v=2
+
+
+  (b) To find impulse consider only one particle, P.
+      Note that I is now an external impulse acting on P.
+      For particle P using I = mv – mu
+             I = 2  v  2  (3)              but v = 2
+             I = 10
+  Answer:     Common speed is 2 m s1 and Impulse = 10 Ns
+
+
+M1 OCTOBER 2016 SDB                                                                                 31
+6.     Moments
+Moment of a Force
+Definition: The moment of a force F about a point P is the product of the magnitude of F and the
+        perpendicular distance from P to the line of action of the force.
+       Moments are measured in newton-metres, Nm and the sense - clockwise or anti-clockwise
+       should always be given.
+
+                                                                                         F
+So:                                    F
+                                                                      M     
+                                               or                               d
+                       d
+                                                                            P
+                           P
+
+            moment = F  d clockwise                   moment = F  PM = F  d sin
+                                                       clockwise
+
+
+
+
+Sum of moments
+Example:          The force 7i + 4j N acts at the point (5, 3); find its moment about the point (2, 1)
+
+
+Solution:
+       First draw a sketch showing the components of the force and the point (2, 1).
+
+              y                                4N
+
+
+                                           3
+              3                                             7N
+
+                                   2
+
+                               P
+
+                                                                      x
+                                               5
+
+
+       Taking moments about P clockwise
+                  moment = 7  2  4  3 = 2 Nm clockwise.
+
+
+
+
+32                                                                                  M1 OCTOBER 2016 SDB
+Moments and Equilibrium
+       If several forces are in equilibrium then
+  (i) The resultant force must be zero  the resultant force in any direction must be zero.
+  (ii) The sum of the moments of all the forces about any point must be zero.
+
+
+  Example: If the forces in the diagram are in equilibrium find the force F and the distance x m.
+
+                                  4N                              FN
+
+                                                   B               C          D
+                                  A      3m               2m           xm
+
+
+                                                   13 N                       7N
+  Solution:
+     (i)       Resolve      4 + F = 13 + 7                 F = 16
+     (ii)      The sum of moments about any point must be zero.
+       Taking moments clockwise about C  as F acts through C its moment will be zero
+             4  5  13  2 + F  0 + 7  x = 0                x = 6  7 = 0857
+               Answer F = 16 N and x = 0857 m.
+
+
+Non-uniform rods
+  A uniform rod has its centre of mass at its mid-point. A non-uniform rod (e.g. a tree trunk)
+  would not necessarily have its centre of mass at its mid-point
+  Example: A non-uniform rod AB of mass 25 kg is of length 8 metres. Its centre of mass is
+    3 metres from A. The rod is pivoted about M, its mid point.
+     A mass of 20 kg is placed at P so that the system is in equilibrium. How far should this
+     mass be from the end A?
+     What is now the reaction at the pivot?
+
+
+  Solution:    DRAW A DIAGRAM SHOWING ALL FORCES
+     Let 20 kg mass be x m from M.                                                R
+     Moments about the pivot
+                                                          A             G         M        P         B
+      1  25g = x  20g                                          3m        1m        xm
+              x = 125               AP = 525 m.
+                                                                        25g                    20g
+
+     Resolving  for equilibrium          R = 25g + 20g = 45g
+
+
+     Answer: 20 kg mass should be placed 525 m from A, and the reaction at the pivot is 45g N.
+
+
+M1 OCTOBER 2016 SDB                                                                                      33
+Nearly tilting rods
+     If a rod is supported at two points A and B then when the rod is about to tilt about B the normal
+     reaction at A will be 0.
+
+
+     Example: A uniform plank PQ of mass 8 kg rests on two supports at A and B.
+         PQ = 2 m, PA = 06 m and AB =07 m. A mass M kg is placed at X on the rod between B
+         and Q at a distance of 05 m from B.
+         The rod is on the point of tilting about B: find the value of M.
+
+
+     Solution:    DRAW A DIAGRAM SHOWING ALL FORCES
+         The centre of mass, G, will be at mid point,  PG = 1 m.
+
+                                       RA                        RB
+                                                                              X
+                    P              A                G             B                       Q
+
+                         06 m              04 m        03 m        05 m       02 m
+
+                                                    8g                        Mg
+
+
+        If the rod is on the point of tilting about B then the reaction at A will be 0
+              RA = 0.
+        The system is in equilibrium so moments about any point will be 0.
+        We could find the value of RB, but if we take moments about B the moment of RB is 0,
+        whatever the value of RB.
+        Moments about B, taking clockwise as positive
+                 07  RA – 03  8g + 0  RB + 05  Mg                     (remember RA = 0)
+                 M = 48
+            Answer Mass required to tilt rod is greater than 4.8 kg.
+
+
+
+
+34                                                                                        M1 OCTOBER 2016 SDB
+Appendix
+Conservation of linear momentum, C.L.M.
+  Two balls, masses m1 and m2, are moving with speeds u1 and u2. They collide and after impact
+  are moving with speeds v1 and v2, as shown in the diagram.
+  There are no external impulses acting on the system
+  Let the internal impulse between the balls be I, acting in opposite directions on each ball.
+
+
+                before                    during                               after
+           u1            u2                                               v1           v2
+
+                                          I      I
+           m1        m2             m1               m2                  m1            m2
+
+
+
+
+   +           using I = mv  mu
+  For m1        I = m1v1  m1u1
+  For m2         I = m2v2  m2u2
+  Adding         0 = m1v1 + m2v2  m1u1  m2u2
+               m1u1 + m2u2 = m1v1 + m2v2
+  or            total momentum before collision = total momentum after collision
+  Thus linear momentum is conserved, giving the Conservation of Linear Momentum, C.L.M.
+
+
+  Note that if there is an external impulse acting on the system then the momentum
+  perpendicular to that impulse is conserved.
+
+
+
+
+M1 OCTOBER 2016 SDB                                                                              35
+Index
+Assumptions, 3                   Newton’s laws of motion, 20
+Connected particles, 22          Relative displacement, 7
+  lifts, 22                        closest distance, 8
+  pulleys, 24                      collision, 8
+  trailers, 23                   Relative velocity, 9
+Constant acceleration, 10        Resultant forces, 13
+  greatest height, 10              parallelogram, 13
+  vertical motion, 10              triangle, 13
+Displacement, 7                    vector polygon, 14
+Equilibrium, 15                  Rods
+  limiting equilibrium, 17, 19     non-uniform, 33
+Forces                             tilting, 34
+  contact forces, 16               uniform, 33
+  external, 28                   Scalar, 4
+  internal, 28                   Speed-time graphs, 12
+  non-contact forces, 16           acceleration, 12
+Friction, 17                       distance travelled, 12
+  coefficient of friction, 18    Vectors, 4
+Impulse, 27                        adding vectors, 5
+  string between particles, 31     magnitude and direction, 4
+Mathematical Models, 3             parallel vectors, 5
+
+Moments, 32                        resolving vectors, 6, 14
+                                   resultant vector, 5
+Moments and Equilibrium, 33
+                                 Velocity, 7
+Momentum, 27
+  conservation of, 29
+  conservation, proof, 35
+
+
+
+
+36                                                            M1 OCTOBER 2016 SDB
+

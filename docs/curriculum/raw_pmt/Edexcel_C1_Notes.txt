@@ -1,0 +1,1309 @@
+ Pure Core 1
+
+
+Revision Notes
+
+
+
+
+                 May 2016
+Pure Core 1
+1 Algebra .................................................................................................................3
+   Indices ............................................................................................................................................. 3
+        Rules of indices .........................................................................................................................................3
+   Surds ................................................................................................................................................ 4
+        Simplifying surds ......................................................................................................................................4
+        Rationalising the denominator ..................................................................................................................4
+
+2 Quadratic functions...............................................................................................5
+        Completing the square. .............................................................................................................................5
+        Factorising quadratics ...............................................................................................................................6
+   Solving quadratic equations. ........................................................................................................... 6
+        By factorising. ...........................................................................................................................................6
+        By completing the square ..........................................................................................................................6
+        By using the formula .................................................................................................................................7
+        The discriminant, b2 – 4ac ......................................................................................................................7
+        Miscellaneous quadratic equations ...........................................................................................................8
+   Quadratic graphs.............................................................................................................................. 8
+   Simultaneous equations ................................................................................................................... 9
+        Two linear equations .................................................................................................................................9
+        One linear equation and one quadratic. ...................................................................................................10
+   Inequalities .................................................................................................................................... 11
+        Linear inequalities ...................................................................................................................................11
+        Quadratic inequalities, x2 > k or < k ....................................................................................................11
+        Quadratic inequalities, ax2 + bx + c > k or < k ....................................................................................11
+
+3 Coordinate geometry ..........................................................................................12
+   Distance between two points ......................................................................................................... 12
+   Gradient ......................................................................................................................................... 12
+   Equation of a line........................................................................................................................... 12
+   Parallel and perpendicular lines..................................................................................................... 12
+
+4 Sequences and series ........................................................................................13
+   Definition by a formula xn = f(n) ................................................................................................... 13
+   Definitions of the form xn+1 = f(xn) ................................................................................................ 13
+   Series and Σ notation ..................................................................................................................... 13
+   Arithmetic series............................................................................................................................ 14
+        Proof of the formula for the sum of an arithmetic series .........................................................................14
+
+5 Curve sketching ..................................................................................................15
+   Standard graphs ............................................................................................................................. 15
+        Cubic graphs ...........................................................................................................................................16
+   Transformations of graphs............................................................................................................. 17
+        Translations .............................................................................................................................................17
+        Stretches ..................................................................................................................................................18
+        Reflections in the x-axis ..........................................................................................................................19
+        Reflections in the y–axis .........................................................................................................................19
+        Summary of transformations ...................................................................................................................20
+6 Differentiation ..................................................................................................... 21
+    General result................................................................................................................................. 21
+    Tangents and Normals ................................................................................................................... 21
+        Tangents ................................................................................................................................................. 21
+        Normals .................................................................................................................................................. 22
+
+7 Integration .......................................................................................................... 23
+    Indefinite integrals ......................................................................................................................... 23
+        Finding the arbitrary constant................................................................................................................. 23
+
+Appendix ................................................................................................................ 24
+    Quadratic equation formula proof ................................................................................................. 24
+    Differentiation from first principles .............................................................................................. 24
+        General formulae .................................................................................................................................... 25
+
+Index....................................................................................................................... 26
+
+
+
+
+2                                                                                                                      C1 MAY 2016 SDB
+1       Algebra
+Indices
+    Rules of indices
+
+
+    am × an = am + n                              (am )n = amn                       1
+                                                                                   a n = n a
+    am ÷ an = am – n                              a0 = 1
+                                                                                                       ( a)
+                                                                                    m                          m
+                                                      –n     1                     a n =    n
+                                                                                                am =       n
+                                                  a        = n
+                                                            a
+
+    Examples:
+         (i)    5 –3 × 54 = 5 –3 + 4 = 51 = 5.
+                                                                   1
+                7 –4 × 7 –2 = 7 –4 + –2 = 7 –4 – 2 = 7–6 =            .
+                                                                   76
+        (ii)    35 ÷ 3 –2 = 35 – –2 = 35 + 2 = 37.
+                                                             1
+                9 –4 ÷ 96 = 9 –4 – 6 = 9–10 =
+                                                            9 10
+                11 –3 ÷ 11 –5 = 11 –3 – –5 = 11 –3 + 5 = 112 = 121
+                                                            1
+        (iii)   (6 –3)4 = 6 –3 × 4 = 6 –12 =                   .
+                                                           612
+                                          2
+                64 3 =  64 3  = ( 4) 2 = 16
+                  2          1
+        (iv)
+
+                       −2            1
+        (v)     125         3
+                                =         2
+                                                       since minus means turn upside down
+                                              3
+                                    125
+                       1
+                =        ,                    since 3 on bottom of fraction is cube root, 3 125 = 5
+                      52
+                      1
+                =
+                      25
+
+
+    Example: Express (16a) ÷ (8b) as power of 2.
+
+
+    Solution:   (16a) ÷ (8b) = (24)a ÷ (23)b = 24a ÷ 23b = 24a – 3b.
+
+
+
+
+    Example: Find x if 92x = 27x + 1.
+    C1 MAY 2016 SDB                                                                                    3
+ Solution:   First notice that 9 = 32 and 27 = 33 and so
+             92x = 27x + 1             ⇒ (32)2x = (33)x + 1
+     ⇒       34x = 33x + 3
+     ⇒       4x = 3x + 3               ⇒            x = 3.
+
+
+Surds
+ A surd is a ‘nasty’ root – i.e. a root which is not rational.
+                               3   1        1         5
+     Thus    √64 = 8, �27 = 3 ,                       √−243 = −3 are rational and not surds
+                     5             3
+     and      √5, √45, √−72                               are irrational and are surds.
+
+
+ Simplifying surds
+
+
+ Example: To simplify                   50 we notice that 50 = 25 × 2 = 52 × 2
+     ⇒            50 =    25 × 2 =              25 × 2 = 5 2 .
+
+
+
+ Example: To simplify                  3
+                                           40       we notice that 40 = 8 × 5 = 23 × 5
+     ⇒        3
+                  40 =    3
+                              8×5 =             3
+                                                    8 ×3 5 = 2×3 5.
+
+
+
+ Rationalising the denominator
+
+
+ Rationalising means getting rid of surds.
+     We remember that multiplying (a + b) by (a – b) gives a2 – b2 which has the
+     effect of squaring both a and b at the same time!!
+
+
+                                                                 2+3√5
+ Example: Rationalise the denominator of                                 .
+                                                                 3−√5
+             2+3√5            2+3√5                 3+√5
+ Solution:               =                  ×
+              3−√5                3−√5              3+√5
+                   6+3√5√5+ 9√5+2√5
+             =                         2
+                         32 −�√5�
+
+                  21+11√5
+             =                .
+                     4
+
+
+
+
+ 4                                                                                        C1 MAY 2016 SDB
+2       Quadratic functions
+    A quadratic function is a function ax2 + bx + c, where a, b and c are constants and the
+    highest power of x is 2.
+    The numbers a and b are called the coefficients of x2 and x, and c is the constant term.
+
+
+    Completing the square.
+       a)     The coefficient of x2 must be +1.
+        b)      Halve the coefficient of x, square it then add it and subtract it.
+
+
+    Example: Complete the square in x2 – 6x + 7.
+
+
+    Solution:   a)       The coefficient of x2 is already +1,
+        b)     the coefficient of x is –6, halve it to give –3 then square to give 9 which is
+        then added and subtracted
+        x2 – 6x + 7      = x2 – 6x + (–3)2 – 9 + 7
+                         = (x – 3)2 – 2.
+    Notice      the minimum value of x2 – 6x + 7 is –2 when x = 3,
+                                                                since the minimum value of (x – 3)2 is 0
+
+        ⇒       the vertex of the graph of y = x2 – 6x + 7 (parabola) is at (3, –2).
+
+
+
+    Example: Complete the square in –3x2 – 24x + 5.
+
+
+    Solution: a)      The coefficient of x2 is not +1, so we must take out a factor of –3 first,
+        and then go on to step b).
+                      –3x2 – 24x + 5
+                =     –3(x2 + 8x) + 5
+        b)      =     –3(x2 + 8x + 42 – 16) + 5
+                =     –3(x + 4)2 + 48 + 5
+                =     –3(x + 4)2 + 53
+    Notice      the maximum value of –3x2 – 24x + 5 is +53 when x = –4,
+                                                                since the maximum value of (x + 4)2 is 0
+
+        ⇒       the vertex of the graph of y = –3x2 – 24x + 5 (parabola) is at (–4, 53).
+
+
+
+
+    C1 MAY 2016 SDB                                                                         5
+  Factorising quadratics
+      If all the coefficients are integers (whole numbers) then if we can find factors with
+      rational (fraction) coefficients, then we could have found factors with integer
+      coefficients. There is no point in looking for factors with fractions as coefficients.
+                                                                                  1         3
+  Example: We could factorise x2 – 5x + 6 using fractions as (2x – 4)�2 𝑥 − 2�,
+                       1      3               1       3                    1            3
+      BUT (2x – 4)�2 𝑥 − 2� = 2(x – 2)�2 𝑥 − 2� = (x – 2)�2 × 2 𝑥 − 2 × 2�
+              = (x – 2)(x – 3), factors with integer coefficients, so no point in using fractions.
+
+
+  More complicated expressions
+  Example: Factorise 10x2 + 11x – 6.
+  Solution:   Looking at the 10x2 and the –6 we see that possible factors are
+              (10x ± 1),      (10x ± 2),     (10x ± 3),        (10x ± 6),
+               (5x ± 1),       (5x ± 2),      (5x ± 3),         (5x ± 6),
+               (2x ± 1),       (2x ± 2),      (2x ± 3),         (2x ± 6),
+                (x ± 1),        (x ± 2),       (x ± 3),          (x ± 6),
+      Also the –6 tells us that the factors must have opposite signs, and by trial and error
+      and the factor theorem, or using common sense
+              10x2 + 11x – 6 = (2x + 3)(5x – 2).
+
+
+Solving quadratic equations.
+  By factorising.
+  Example: 3x2 + 2x – 8 = 0 ⇒ (3x – 4)(x + 2) = 0
+                                            4
+      ⇒       3x – 4 = 0 or x + 2 = 0 ⇒ x = 3 or x = –2.
+  Example: x2 + 8x = 0 ⇒ x(x + 8) = 0
+      ⇒       x = 0 or x + 8 = 0
+      ⇒       x = 0 or x = –8
+
+
+      N.B. Do not divide through by x first: you will lose the root of x = 0.
+
+
+  By completing the square
+  Example: x2 – 6x – 4 = 0
+      ⇒       x2 – 6x = 4                  coefficient of x2 is +1, halve –6, square and add 9 to both sides
+
+      ⇒       x2 – 6x + 9 = 4 + 9
+      ⇒       (x – 3)2 = 13
+      (x – 3) = ±√13          ⇒       x = 3 ± √13 = – 0⋅61 or 6⋅61 to 2 D.P.
+
+  6                                                                            C1 MAY 2016 SDB
+By using the formula
+    For a proof of the formula, see the appendix
+    Always try to factorise first.
+                                           −𝑏 ± √𝑏2 −4𝑎𝑐
+    ax2 + bx + c = 0         ⇒       x =                   .
+                                                2𝑎
+
+
+
+Example: Solve the equation 3x2 – x – 5 = 0
+
+
+Solution:   3x2 – x – 5 will not factorise,
+            so we use the formula with a = 3, b = –1, c = –5
+                   −(−1) ± �(−1)2 −4×3×(−5)
+    ⇒       x =                                = –1⋅135 or +1⋅468 to 3 D.P.
+                             2×3
+
+
+
+
+The discriminant, b2 – 4ac
+
+
+The quadratic equation
+                                                     −𝑏 ± √𝑏2 −4𝑎𝑐
+            ax2 + bx + c = 0           ⇒       x =                         will have
+                                                               2𝑎
+    i)      two distinct real roots if b2 – 4ac > 0
+    ii)     only one real root if b2 – 4ac = 0                 (or two coincident real roots)
+                                 2
+    iii)    no real roots if b – 4ac < 0
+
+
+
+Example: For what values of k does the equation 3x2 – kx + 5 = 0 have
+    i)      two distinct real roots,
+    ii)     exactly one real root
+    iii)    no real roots.
+
+
+Solution:   The discriminant         b2 – 4ac = (–k)2 – 4 × 3 × 5 = k2 – 60
+
+
+    ⇒       i)       for two distinct real roots     k2 – 60 > 0
+                     ⇒       k2 > 60            ⇒          k < –√60, or k > +√60
+    and     ii)      for only one real root k2 – 60 = 0
+                     ⇒       k = ±√60
+
+
+    and     iii)     for no real roots k2 – 60 < 0
+                     ⇒       –√60 < k < +√60.
+
+C1 MAY 2016 SDB                                                                                 7
+ Miscellaneous quadratic equations
+
+
+     Example:           Solve 32x – 10 × 3x + 9 = 0
+
+
+     Solution:          Notice that 32x = (3x )2
+
+         so put y = 3x to give
+                   y2 – 10y + 9 = 0
+         ⇒        (y – 9)(y – 1) = 0
+         ⇒         y = 9 or y = 1
+         ⇒         3x = 9 or 3x = 1
+         ⇒         x = 2 or x = 0.
+
+
+     Example:           Solve y – 3�𝑦 + 2 = 0.
+
+
+     Solution:          Put �𝑦 = x to give
+                        x2 – 3x + 2 = 0
+              ⇒         (x – 2)(x – 1)
+              ⇒         x = 2 or 1
+              ⇒         y = x2 = 4 or 1.
+
+
+
+
+Quadratic graphs
+
+ a) If a > 0 the parabola will be ‘the right way up’
+          y                                        y                 y
+
+                    x                                   x
+                                                                                 x
+
+
+
+         b2 – 4ac > 0                       b2 – 4ac = 0         b2 – 4ac < 0
+     2 distinct real roots                 only 1 real root      no real roots
+
+
+
+
+ 8                                                            C1 MAY 2016 SDB
+ b) If a < 0 the parabola will be ‘the wrong way up’
+                                                   y                        y
+           y
+                                                                                        x
+                                                            x
+
+                     x
+
+
+          b2 – 4ac > 0                      b2 – 4ac = 0                b2 – 4ac < 0
+      2 distinct real roots                only 1 real root             no real roots
+
+
+
+ Note:      When sketching the curve of a quadratic function you should always show the
+     value on the y-axis,
+     if you have factorised you should show the values where it meets the x-axis,
+     if you have completed the square you should give the co-ordinates of the vertex.
+
+
+
+
+Simultaneous equations
+ Two linear equations
+
+
+ Example: Solve 3x – 2y = 4                   I
+                     4x + 7y = 15             II
+
+
+ Solution: Make the coefficients of x (or y) equal then add or subtract the equations to
+     eliminate x (or y).
+     4×I ⇒           12x – 8y = 16
+     3 × II ⇒        12x + 21y = 45           Subtracting
+                              –29y = –29
+               ⇒     y=1
+     Put y = 1 in I ⇒ 3x = 4 + 2y = 4 + 2              ⇒    x=2
+     Check in equation two: L.H.S. = 4 × 2 + 7 × 1 = 15 = R.H.S.
+     Answer :        x = 2, y = 1
+
+
+
+
+ C1 MAY 2016 SDB                                                                    9
+One linear equation and one quadratic.
+
+Find x (or y) from the linear equation and substitute in the quadratic equation.
+
+Example: Solve x – 2y = 3                     I
+                     x2 – 2y2 – 3y = 5        II
+
+
+Solution:   From I            x = 2y + 3
+     Substitute in II
+     ⇒ (2y + 3)2 – 2y2 – 3y = 5
+     ⇒      4y2 + 12y + 9 – 2y2 – 3y = 5
+     ⇒      2y2 + 9y + 4 = 0 ⇒ (2y + 1)(y + 4) = 0
+     ⇒      y = –½ or y = –4
+     ⇒      x = 2 or x = –5          using I (do not use II unless you like doing extra work!)
+
+
+Check in the quadratic equation
+     When x = 2 and         y = –½
+            L.H.S. = 2 – 2(–½)2 – 3(–½) = 5 = R.H.S.
+                        2
+
+
+     and when x = –5 and y = –4
+            L.H.S. = (–5)2 – 2(–4)2 – 3(–4) = 25 – 32 + 12 = 5 = R.H.S.
+Answer: x = 2, y = –½        or   x = –5, y = –4
+
+
+
+
+10                                                                          C1 MAY 2016 SDB
+Inequalities
+  Linear inequalities
+      Solving algebraic inequalities is just like solving equations, add, subtract, multiply or
+      divide the same number to, from, etc. BOTH SIDES
+      EXCEPT - if you multiply or divide both sides by a NEGATIVE number then you must
+      TURN THE INEQUALITY SIGN ROUND.
+
+
+  Example: Solve 3 + 2x < 8 + 4x
+
+
+  Solution:     sub 3 from B.S. ⇒ 2x < 5 + 4x
+                sub 4x from B.S. ⇒ –2x < 5
+                divide B.S. by –2 and turn the inequality sign round
+                ⇒ x > – 2⋅5.
+
+
+
+
+  Quadratic inequalities, x2 > k or < k
+
+
+  Example: Solve x2 > 16
+  Solution: We must be careful here since the square of a negative number is positive
+      giving the full range of solutions as
+      ⇒         x < –4 or x > +4.
+
+  Quadratic inequalities, ax2 + bx + c > k or < k
+
+
+      Always sketch a graph and find where the curve meets the x-axis
+
+
+  Example: Find the values of x which satisfy                                y
+                                                                                     y=3x²−5x−2
+                3x2 – 5x – 2 ≥ 0.                                      2
+
+  Solution:
+                                                                       1
+                          2
+      solving          3x – 5x – 2 = 0                                                               x
+      ⇒         (3x + 1)(x – 2) = 0                               −1 −1 /3       1      2        3
+
+      ⇒         x = –1/3 or 2                                         −1
+
+                                                                      −2
+                                         2
+  We want the part of the curve y = 3x – 5x – 2 which is
+  above or on the x-axis                                              −3
+
+  ⇒ x ≤ –1/3 or x ≥ 2                                                 −4
+
+
+
+
+  C1 MAY 2016 SDB                                                                           11
+3        Coordinate geometry
+Distance between two points
+    Distance between P (a1, b1) and Q (a2, b2) is            (a1 − a 2 ) 2 + (b1 − b2 ) 2
+
+Gradient
+                               b2 − b1
+    Gradient of PQ is    m=
+                               a 2 − a1
+                                                                                                       Q (a2, b2)
+Equation of a line
+
+    Equation of the line PQ, above, is y = mx + c                                                        (b2 – b1)
+    and use a point to find c
+    or the equation of the line with gradient m              P (a1, b1)
+                                                                                     (a2 – a1)
+    through the point (x1, y1) is
+         y – y1 = m(x – x1)
+    or the equation of the line through the points (x1, y1) and (x2, y2) is
+         y − y1 y 2 − y1
+               =                 (you do not need to know this one!!)
+         x − x1 x 2 − x1
+
+
+
+Parallel and perpendicular lines
+
+    Two lines are parallel if they have the same gradient
+    and they are perpendicular if the product of their gradients is –1.
+
+                                                               1
+    Example: Find the equation of the line through (4 2, 1) and perpendicular to the line
+       joining the points A (3, 7) and B (6, –5).
+                                      7−−5
+    Solution:   Gradient of AB is     3−6
+                                             = −4
+                                                              1
+         ⇒      gradient of line perpendicular to AB is 4 ,              product of perpendicular gradients is –1
+                                             1                       1
+         so we want the line through (4 2, 1) with gradient 4 .
+                                                                         1
+         Using y – y1 = m(x – x1)         ⇒         y – 1 = ¼ (x – 42)
+                           1
+         ⇒      4y – x = – 2     or       2x – 8y – 1 = 0.
+
+
+
+
+    12                                                                              C1 MAY 2016 SDB
+4       Sequences and series
+
+    A sequence is any list of numbers.
+
+Definition by a formula xn = f(n)
+    Example: The definition xn = 3n2 – 5 gives
+    x1 = 3 × 12 – 5 = –2,   x2 = 3 × 22 – 5 = 7,      x3 = 3 × 32 – 5 = 22, … .
+
+
+Definitions of the form xn+1 = f(xn)
+    These have two parts:–
+        (i)     a starting value (or values)
+        (ii)    a method of obtaining each term from the one(s) before.
+
+
+    Examples: (i)       The definition     x1 = 3 and          xn = 3xn –1 + 2
+                        defines the sequence          3, 11, 35, 107, . . .
+                (ii)    The definition      x1 = 1, x2 = 1,        xn = xn –1 + xn –2
+                        defines the sequence 1, 1, 2, 3, 5, 8, 13, 21, 34, 65, . . . .
+                        This is the Fibonacci sequence.
+
+
+
+Series and Σ notation
+    A series is the sum of the first so many terms of a sequence.
+    For a sequence whose nth term is xn = 2n +3 the sum of the first n terms is a series
+    Sn = x1 + x2 + x3 + x4 . . . + xn    = 5 + 7 + 9 + 11 + . . . + (2n + 3)
+                                                n          n
+    This is written in Σ notation as Sn = ∑ xi =
+                                               i =1
+                                                          ∑ (2i + 3) and is a finite series of n
+                                                          i =1
+    terms.
+                                                                       ∞
+    An infinite series has an infinite number of terms S∞ =           ∑x .
+                                                                      i =1
+                                                                             i
+
+
+
+
+    C1 MAY 2016 SDB                                                                       13
+Arithmetic series
+  An arithmetic series is a series in which each term is a constant amount bigger (or smaller)
+  than the previous term: this constant amount is called the common difference.
+  Examples: 3, 7, 11, 15, 19, 23, . . . .                 with common difference 4
+                  28, 25, 22, 19, 16, 13, . . .           with common difference –3.
+
+  Generally an arithmetic series can be written as
+       Sn = a + (a + d) + (a + 2d) + (a + 3d) + (a + 4d) + . . . upto n terms,
+       where the first term is a and the common difference is d.
+       The nth term          xn = a + (n – 1)d
+       The sum of the first n terms of the above arithmetic series is
+
+       Sn =
+                  n
+                    (2a + (n − 1)d ) ,               or       Sn =
+                                                                     n
+                                                                       (a + l )        where l is the last term.
+                  2                                                  2
+
+  Proof of the formula for the sum of an arithmetic series
+  You must know this proof.
+  First write down the general series and then write it down in reverse order
+       Sn =           a          +         (a + d)        +    (a + 2d) + …           + (a + (n – 1)d)
+  ⇒ Sn = (a + (n – 1)d) + (a + (n – 2)d) + (a + (n – 3)d) + … +                               a
+                                                                                                                ADD
+  ⇒ 2Sn = (2a + (n – 1)d) + (2a + (n – 1)d) + (2a + (n – 1)d) + … (2a + (n – 1)d)
+  ⇒ 2Sn = n(2a + (n – 1)d)
+              𝑛
+  ⇒ Sn = 2 × (2a + (n – 1)d). I
+  This can be written as
+        𝑛
+  Sn = 2 × {a +( a + (n – 1)d)}
+              𝑛
+  ⇒ Sn = 2 × (a + l),            where l is the last term. II
+  You should know both I and II.
+
+
+  Example: Find the nth term and the sum of the first 100 terms of the arithmetic series with
+     3rd term 5 and 7th term 17.
+
+
+  Solution:       x7 = x3 + 4d                                 add d four times to get from the third term to the seventh
+
+       ⇒          17 = 5 + 4d         ⇒        d=3
+       ⇒          x1 = x3 – 2d        ⇒        x1 = 5 – 6 = –1
+       ⇒          nth term      xn = a + (n – 1)d = –1 + (n – 1) × 3
+                                     100
+       and        ⇒       S100 = 2 × (2 × (–1) + (100 – 1) × 3) = 14750.
+  14                                                                                     C1 MAY 2016 SDB
+5       Curve sketching
+Standard graphs
+
+                          4 y                                                 4 y                                                  y
+                          3                                                   3                                                5
+                                    y=x                      y=−x
+                          2                                                   2                                                4
+
+                          1                                                   1                                                3
+                                                   x                                                     x      y=x²
+                                                                                                                               2
+       −4 −3 −2 −1              1   2      3   4       −4    −3    −2   −1            1    2     3   4
+                         −1                                                  −1                                                1
+                                                                                                                                                         x
+                         −2                                                  −2                                −3   −2   −1            1     2      3
+                         −3                                                  −3                                               −1
+
+                         −4                                                  −4                                               −2
+
+
+
+
+                          4 y                                                 4 y                                                  y
+                                                                                                                               5
+                          3         y=x³                                      3
+                                                                                      y=1/x                                    4
+                          2                                                   2                                                            y=1/x²
+                                                                                                                               3
+                          1                                                   1
+                                               x                                                         x                     2
+          −3 −2 −1              1   2      3           −4 −3 −2 −1                    1    2     3       4                     1
+                         −1                                                  −1                                                                                  x
+                         −2                                                  −2                              −4 −3 −2 −1               1        2    3       4
+                                                                                                                              −1
+                         −3                                                  −3
+                                                                                                                              −2
+                         −4                                                  −4
+
+
+
+
+                                                                                                                                   y
+               4 y                                           4 y                                                               5
+                         y=(x−1)(x−2)(x−4)                                                                                                          y=2
+               3                                             3                            y=√x                                 4
+               2                                             2                                                                 3
+               1                                             1                                                                 2
+                                               x                                                     x
+         −1          1    2     3   4   5      6       −1          1    2         3   4    5     6                             1
+                                                                                                                                                                 x
+              −1                                            −1
+                                                                                                             −4 −3 −2 −1               1     2      3        4
+              −2                                            −2                                                                −1
+              −3                                            −3                                                                −2
+              −4                                            −4
+
+
+
+
+    y =3x2 is like y = x2 but steeper: similarly for y = 5x3 and y = 7/x, etc.
+
+
+
+
+    C1 MAY 2016 SDB                                                                                                                        15
+Cubic graphs
+
+
+Some types of cubic graph are shown below:
+
+
+     Coefficient of x3 is positive            Coefficient of x3 is negative
+
+                                                   y=k(a−x)(x−b)(x−c)
+
+
+                                                                         x
+                                                    a           b       c
+                                      x
+                a         b       c
+
+              y=k(x−a)(x−b)(x−c)
+
+
+
+
+                    y=k(x−a)²(x−b)
+
+
+                 a                        x
+                              b                             a                    x
+                                                                     b
+                                                          y=k(x−a)²(b−x)
+
+
+
+
+                y=k(x−a)³                                    y=k(a−x)³
+
+
+
+                              x                                              x
+                      a                                          a
+
+
+
+
+16                                                         C1 MAY 2016 SDB
+Transformations of graphs
+ Translations
+                                                        0
+ (i) If the graph of y = x2 + 3x is translated through � �, +5 in the y-direction, the equation
+                                                        5
+     of the new graph is
+             y = x2 + 3x + 5;
+                                                                          0
+     and, in general, the graph of y = f (x) after a translation through � � has equation
+                                                                          𝑏
+     y = f (x) + b.
+
+
+
+                                                                                         y
+ (ii) If the graph of y = x2 + 3x is translated                                  5
+                 5                                      y=x²+3x                                       y=(x−5)²+3(x−5)
+      through � �, +5 in the x-direction, the                                    4
+                 0                                                               3
+      equation of the new graph is
+                                                                                 2
+             y = (x – 5)2 + 3(x – 5).
+                                                                                 1
+                                                                                                                        x
+                                                        5 −4 −3 −2 −1                        1   2     3   4    5   6
+     and, in general, the graph of y = f (x) after a                         −1
+                      𝑎
+     translation of � � has equation y = f (x – a).                          −2
+                      0
+
+
+     We replace x by (x – a) everywhere in the formula for y:
+     note the minus sign, –a, which seems wrong but is correct!
+
+
+ Example:                                                                            y
+                                                                             6
+
+                                                                             5
+ The graph of y = (x – 3)2 + 2 is the graph of y = x2           y=x²                                   y=(x−3)²+2
+                                                                             4
+ after a translation of �+3�
+                       +2                                                    3
+
+                                                                             2
+
+                                                                             1
+                                                                                                                    x
+                                                           −3     −2   −1                    1   2    3    4    5   6
+                                                                            −1
+
+
+ In general The equation of the graph of y = x2, or y = f (x), becomes                               y = (x – a) 2 + b,
+                                                    𝑎
+ or y = f (x – a) + b, after a translation through � �.
+                                                    𝑏
+
+
+
+
+ C1 MAY 2016 SDB                                                                                           17
+Stretches
+
+
+(i) If the graph of y = f (x) is stretched by a factor of +2 in the y-direction then the new
+    equation is y = 2 × f (x).
+
+
+Example:                                                                                                  y
+                                                                                                  5
+
+                                                                                                  4
+The graph of y = f (x) = x2 – 1 becomes                                                           3
+                2
+y = 2 f (x) = 2(x – 1) after a stretch of factor 2 in the y-direction                             2                     y=x²−1
+
+                                                                                                  1
+                                                                                                                                   x
+                                                                             −3        −2   −1                 1    2      3
+                                                                                                 −1
+In general y = x2 or y = f (x) becomes y = ax2 or y = af (x)
+                                                                                                 −2            y=2(x²−1)
+after a stretch in the y-direction of factor a.
+
+
+(ii) If the graph of y = f (x) is stretched by a factor of +2 in the x-direction then the new
+                        𝑥
+     equation is y = 𝑓 �2�.
+                            𝑥
+     We replace x by �2� everywhere in the formula for y.
+
+
+Example:
+
+                                                                                   4 y
+In this example the graph of                                                                      y=x³−4x
+                                                                                   3
+
+      y = x3 – 4 x                                                                 2
+
+has been stretched by a factor of 2 in the                                         1
+                                                                                                                               x
+x-direction to form a new graph with equation            −5   −4   −3   −2   −1             1         2         3   4          5
+                                                                                  −1
+                            𝑥
+     y = f (x) → y = 𝑓 �2�                                                        −2
+                                                                                                      y=(x/2)³−4(x/2)
+          𝑥 3        𝑥                                                            −3
+⇒ y = �2 � − 4 �2 �
+                                                                                  −4
+
+
+
+
+                                            1                                                     𝑥
+(iii) Note that to stretch by a factor of   2
+                                                in the x-direction we replace x by                1           = 2x so that
+                                                                                                  2
+y = f (x) becomes y = f (2x)
+
+
+
+
+18                                                                           C1 MAY 2016 SDB
+Example:                                                                              y
+                                          2                                               y=0.5(2x)²−(2x)
+In this example the graph of y = 0⋅5x –x                                         5
+
+                                      1                                          4
+has been stretched by a factor of 2 in the x-direction to
+form a new graph with equation                                                   3                        y=0.5x²−x
+
+                                                                                 2
+                            𝑥
+     y = f (x) → y = 𝑓 � 1 � = f (2x)                                            1
+                            2                                                                                                 x
+
+⇒ y = 0⋅5 ×   (2𝑥)2   –(2𝑥) = 2x – 2x 2                         −3   −2    −1                 1     2     3       4           5
+                                                                                −1
+
+                                                     𝑥
+The new equation is formed by replacing x by         1   = 2x in the original equation.
+                                                     2
+
+
+
+
+Reflections in the x-axis
+When reflecting in the x-axis all the positive y-coordinates become negative and vice versa
+⇒    the image of y = f (x) after reflection in the x-axis is y = – f (x).
+
+                                                                                                    4 y
+                                              2
+Example: The image of y = f (x) = x + 2x – 1 after                                                  3
+   reflection in the x-axis is                                                                          y=x²+2x−1
+                                                                                                    2
+       y = f (x) →       y = –f (x)                                                                 1
+                                                                                                                              x
+ ⇒              2
+       y = –(x + 2x – 1)
+                                                                      −4    −3       −2       −1              1       2
+ ⇒     y = –x2 – 2x + 1                                                                            −1
+
+                                                                                                   −2
+                                                                          y=−(x²+2x−1) −3
+
+                                                                                                   −4
+Reflections in the y–axis
+When reflecting in the y-axis
+the y-coordinate for x = +3 becomes the y-coordinate for x = –3 and
+the y-coordinate for x = –2 becomes the y-coordinate for x = +2.
+Thus the equation of the new graph is found by replacing x by –x
+⇒ the image of y = f (x) after reflection in the y–axis is y = f (–x).
+
+
+                                                                                              y
+Example: The image of y = f (x) = x2 + 2x – 1                                             3
+                                                                                                  y=x²+2x−1
+   after reflection in the x-axis is                                                      2
+
+       y = f (x) →       y = f (–x)                                                       1
+                                                                                                                          x
+⇒      y = (–x)2 + 2(–x) – 1                                    −4   −3    −2    −1                1      2       3
+                                                                                      −1          y=(−x)²+2(−x)−1
+⇒      y = x2 – 2x – 1
+                                                                                      −2
+
+
+
+C1 MAY 2016 SDB                                                                                         19
+Summary of transformations
+
+
+Old equation   Transformation                              New equation
+
+                                    𝑎
+y = f (x)      Translation through � �                     y = f (x – a) + b
+                                    𝑏
+
+y = f (x)      Stretch with factor a in the y-direction.   y = a × f (x)
+
+                                                                  𝑥
+y = f (x)      Stretch with factor a in the x-direction.   y = 𝑓 �𝑎�
+
+                                                                         𝑥
+y = f (x)      Enlargement with factor a centre (0, 0)     y = 𝑎 × 𝑓 �𝑎�
+
+                                                           y = f ( ax)
+                                   1
+y = f (x)      Stretch with factor 𝑎 in the x-direction.
+
+
+y = f (x)      Reflection in the x-axis                    y = – f (x)
+
+
+y = f (x)      Reflection in the y-axis                    y = f (–x)
+
+
+
+
+20                                                           C1 MAY 2016 SDB
+6       Differentiation
+General result
+
+    Differentiating is finding the gradient of the curve.
+                    dy
+    y = xn ⇒           = nx n −1 ,        or       f (x) = xn ⇒ f ′(x) = nxn–1
+                    dx
+    Examples:
+                                                            dy
+        a)          y = 3x2 – 7x + 4,                          = 6x – 7
+                                                            dx
+                                                                            −1
+                                               1                        1            7
+        b)          f (x) = 7√x = 7x 2                      f ′(x) = 7 × 2 𝑥 2 =    2√𝑥
+
+                           8                                𝑑𝑦                      −24
+        c)          y=         = 8 x −3                          = 8 × (–3x –4) =   𝑥4
+                           x 3                              𝑑𝑥
+
+        d)          f (x) = (2x + 1)(x – 3)
+                              multiply out first
+                            = 2x2 – 5x – 3                  f ′(x) = 4x – 5
+                           3𝑥 7 − 4𝑥2
+        e)          y =        𝑥5
+                              split up first
+                    3𝑥 7      4𝑥 2                          𝑑𝑦                                 12
+                =       − 𝑥 5 = 3x2 – 4x–3                       = 3×2x – 4×(–3x–4) = 6x + 𝑥 4
+                     𝑥5                                     𝑑𝑥
+
+
+
+Tangents and Normals
+    Tangents
+    Example: Find the equation of the tangent to y = 3x2 – 7x + 5 at the point where x = 2.
+
+
+    Solution:
+        We first find the gradient when x = 2.
+                                           dy                                       dy
+        y = 3x2 – 7x + 5             ⇒             = 6x – 7 and when x = 2,               = 6 × 2 – 7 = 5.
+                                           dx                                       dx
+        so the gradient when x = 2 is 5.
+
+        To find the equation of the line we need the y-coordinate of the point where x = 2.
+        When         x = 2, y = 3 × 22 – 7 × 2 + 5 = 3.
+        ⇒           the equation of the tangent is y – 3 = 5(x – 2)                          using y – y1 = m(x – x1)
+
+        ⇒           y = 5x – 7
+
+
+
+    C1 MAY 2016 SDB                                                                                    21
+Normals
+   (The normal to a curve is the line which is perpendicular to the tangent at that point).
+     We first remember that if two lines with gradients m1 and m2 are perpendicular
+     then m1 × m2 = –1.
+
+
+Example:
+                                                                 2
+     Find the equation of the normal to the curve y = x + 𝑥 at the point where x = 2.
+
+
+Solution:
+     We first find the gradient of the tangent when x = 2.
+                                 𝑑𝑦                          2
+            y = x + 2x –1 ⇒           = 1 – 2 x –2 = 1 – 𝑥2
+                                 𝑑𝑥
+                                                                 2       1
+     ⇒ when x = 2 gradient of the tangent is mT = 1 – 4 = 2.
+                                                                     1
+     If gradient of the normal is mN then mT × mN = –1 ⇒ 2 × mN = –1                  ⇒ mN = –2
+                             2
+     When    x = 2, y = 2 + 2 = 3
+
+     ⇒      the equation of the normal is y – 3 = –2(x – 2)                      using y – y1 = m(x – x1)
+
+     ⇒      y = –2x + 7.
+
+
+
+
+22                                                                           C1 MAY 2016 SDB
+7        Integration
+Indefinite integrals
+                           𝑥𝑛+1
+         ∫ 𝑥𝑛 𝑑𝑥 =         𝑛+1
+                                  +C             provided that n ≠ –1
+
+    N.B.             NEVER FORGET THE ARBITRARY CONSTANT + C.
+
+
+    Examples:
+
+
+    a)            4          4𝑥 −6
+             �        𝑑𝑥 = �       𝑑𝑥
+                 3𝑥 6         3
+                 4   𝑥 −5                    −4
+             =   3
+                   × −5
+                          +       𝐶     =   15𝑥 5
+                                                  +   𝐶.
+
+
+
+    b)           �(3𝑥 − 2)(𝑥 + 1) 𝑑𝑥 =          � 3𝑥 2 + 𝑥 − 2 𝑑𝑥                         multiply out �irst
+
+                       1
+             = x3 + 2 x2 – 2x + C.
+
+
+    c)               𝑥 9 + 5𝑥 2        𝑥 9 5𝑥 2
+                 �              𝑑𝑥 = �    + 5 𝑑𝑥                                             split up �irst
+                         𝑥5            𝑥5   𝑥
+
+             = � 𝑥 4 + 5𝑥 −3 𝑑𝑥
+
+                  𝑥5     𝑥 −2       𝑥5    5
+             =       + 5      + 𝐶 =    −      + 𝐶.
+                  5      −2         5    2𝑥 2
+
+
+
+    Finding the arbitrary constant
+                           𝑑𝑦
+         If you know              and the coordinates of a point on the curve you can find the arbitrary
+                           𝑑𝑥
+         constant, C.
+
+
+                            𝑑𝑦
+    Example: Solve                 = 3x2 – 5, given that the curve passes through the point (2, 4).
+                            𝑑𝑥
+
+
+    Solution:        y = ∫ 3x 2 − 5 dx = x3 – 5x + C
+
+                     y = 4 when x = 2
+         ⇒           4 = 23 – 5 × 2 + C        ⇒       C=6
+         ⇒           y = x3 – 5x + 6.
+
+
+
+
+    C1 MAY 2016 SDB                                                                            23
+Appendix
+Quadratic equation formula proof
+
+       ax2 + bx + c = 0
+  ⇒ ax2 + bx = –c
+                𝑏               𝑐
+  ⇒ x2 +        𝑎
+                    𝑥 = −𝑎                                                                    ÷ by a to make coefficient of x2 = +1
+
+            𝑏               𝑏       2          𝑏2       𝑐
+  ⇒ x2 + 2𝑎 𝑥 + �2𝑎�                     =          −𝑎                                   add (half coefficient of x)2 to both sides
+                                              4𝑎2
+
+               𝑏    2           𝑏 2 −4𝑎𝑐
+  ⇒ �𝑥 + 2𝑎�            =           4𝑎2
+                                                                                                                     complete square
+
+           𝑏                    𝑏 2 −4𝑎𝑐            √𝑏 2 −4𝑎𝑐
+  ⇒ 𝑥 + 2𝑎 = ±� 4𝑎2                           = ±                                                      square root, do not forget ±
+                                                        2𝑎
+
+            −𝑏 ± √𝑏 2 −4𝑎𝑐
+  ⇒ x =                             .
+                     2𝑎
+
+
+
+
+Differentiation from first principles
+                                                                              y
+  If P and Q are close together, the gradient
+                                                                                                         y = f (x)
+  of PQ will be nearly equal to the gradient
+  of the tangent of the curve at P.
+  Let the x-coordinates of M be x, and of N                                                            Q
+  be (x + h).
+                                                                                        P (x,y)
+  ⇒ PM = f (x) and QN = f (x + h)                                                                          L
+
+  ⇒ QL = QN – PM = f (x + h) – f (x)                                                                                        x
+                                                                                              M            N
+  and PL = h.                                                                                   x      x+h
+
+
+
+                                        increase in 𝑦         𝛿𝑦       𝑄𝐿         𝑓 (𝑥 + ℎ) – 𝑓 (𝑥)
+  The gradient of PQ = increase in 𝑥 =                        𝛿𝑥
+                                                                   =   𝑃𝐿
+                                                                            =             ℎ
+
+
+
+  As h → 0, Q gets closer and closer to P, and the gradient of PQ gets closer and closer to the
+  gradient of the curve at P.
+
+
+  We write f ′(x) to mean the gradient of the curve (or tangent) at P,
+                            𝑓 (𝑥 + ℎ) – 𝑓 (𝑥)
+  ⇒ f ′(x) = ℎ𝑙𝑖𝑚𝑖𝑡
+                →0                        ℎ
+                                                     𝑑𝑦                𝛿𝑦
+  and we also write the gradient as                          = 𝛿𝑥𝑙𝑖𝑚𝑖𝑡
+                                                                   → 0 𝛿𝑥
+                                                                          .
+                                                     𝑑𝑥
+
+  24                                                                                                  C1 MAY 2016 SDB
+Example: Find, from first principles, the gradient of f (x) = x3.
+
+
+Solution:    f (x) = x3
+                                     𝑓 (𝑥 + ℎ) – 𝑓 (𝑥)
+             f ′(x)     = ℎ𝑙𝑖𝑚𝑖𝑡
+                             →0                    ℎ
+                                     (𝑥+ℎ)3 − 𝑥 3                           𝑥 3 +3𝑥 2 ℎ+3𝑥ℎ2 +ℎ3 −𝑥 3
+    ⇒        f ′(x)     = ℎ𝑙𝑖𝑚𝑖𝑡
+                             →0
+                                                            =       𝑙𝑖𝑚𝑖𝑡
+                                                                  ℎ→0
+                                               ℎ                                        ℎ
+                                     3𝑥 2 ℎ+3𝑥ℎ2 +ℎ3
+                        = ℎ𝑙𝑖𝑚𝑖𝑡
+                             →0
+                                                                = ℎ𝑙𝑖𝑚𝑖𝑡
+                                                                     →0
+                                                                         3𝑥 2 + 3𝑥ℎ + ℎ2                cancelling h
+                                                   ℎ
+
+    ⇒        f ′(x)     = 3x2 + 0 + 0                                   putting h = 0 (which we can do after cancelling h)
+                                                𝑑𝑦
+    ⇒        f ′(x)     = 3x2 ,        or              = 3x2.
+                                                𝑑𝑥
+
+
+
+
+                                                                                            5
+Example: Find, from first principles, the gradient of f (x) = 𝑥 .
+
+
+                      5
+Solution:    f (x) = 𝑥
+                             𝑙𝑖𝑚𝑖𝑡        𝛿𝑦            𝑙𝑖𝑚𝑖𝑡    𝑓 (𝑥 + ℎ) – 𝑓 (𝑥)
+             f ′(x)     =             � � =
+                            𝛿𝑥 → 0        𝛿𝑥           ℎ→0                  ℎ
+                                      5    5
+                                         −                           5𝑥 − 5(𝑥+ℎ)
+    ⇒        f ′(x)     = ℎ𝑙𝑖𝑚𝑖𝑡
+                             →0
+                                     𝑥+ℎ   𝑥
+                                                       =    𝑙𝑖𝑚𝑖𝑡
+                                                            ℎ→0
+                                          ℎ                            ℎ𝑥(𝑥+ℎ)
+                                          −5ℎ                          −5
+                        = ℎ𝑙𝑖𝑚𝑖𝑡
+                             → 0 ℎ𝑥(𝑥+ℎ)
+                                         = ℎ𝑙𝑖𝑚𝑖𝑡
+                                              → 0 𝑥(𝑥+ℎ)
+                                                                                     cancelling h
+
+                              −5
+    ⇒        f ′(x)     = 𝑥(𝑥+0)                                        putting h = 0 (which we can do after cancelling h)
+
+                            −5                 𝑑𝑦          −5
+    ⇒        f ′(x)     =   𝑥2
+                                 ,    or               = 𝑥2 .
+                                               𝑑𝑥
+
+
+
+
+General formulae
+For any function f (x), the derivative is
+                                                   𝑓 (𝑥 + ℎ) – 𝑓 (𝑥)
+    f ′(x)   = 𝛿𝑥𝑙𝑖𝑚𝑖𝑡  𝛿𝑦
+                       � � =
+                   → 0 𝛿𝑥
+                             𝑙𝑖𝑚𝑖𝑡
+                             ℎ→0                            ℎ
+                          𝑓 (𝑥 + ℎ) – 𝑓 (𝑥−ℎ)
+or f ′(x)    = ℎ𝑙𝑖𝑚𝑖𝑡
+                  →0                 2ℎ
+
+The second formula comes from taking two points, Q and Q′, equally placed on either side
+of P. Q′ has x-coord x − h, and Q has x-coord x + h.
+
+
+
+
+C1 MAY 2016 SDB                                                                                                   25
+Index
+
+differentiation, 21                         completing the square, 6
+  first principles general formulae, 25     discriminant, b2 – 4ac, 7
+  from first principles, 24                 factorising, 6
+distance between two points, 12             formula, 7
+                                            miscellaneous, 8
+equation of a line, 12                      proof of formula, 24
+gradient, 12                              quadratic functions, 5
+graphs                                      completing the square, 5
+  cubic graphs, 16                          factorising, 6
+  reflections, 19                         quadratic graphs, 8
+  standard graphs, 15
+  stretches, 18
+                                          series
+                                            arithmetic, 14
+  translations, 17
+                                            arithmetic, proof of sum, 14
+indices, 3                                  sigma notation, 13
+inequalities                              simultaneous equations
+  linear inequalities, 11                   one linear equations and one quadratic, 10
+  quadratic inequalities, 11                two linear equations, 9
+integration, 23                           surds, 4
+  finding arbitrary constant, 23            rationalising the denominator, 4
+normals, 22                               tangents, 21
+parallel and perpendicular lines, 12
+quadratic equations
+
+
+
+
+   26                                                            C1 MAY 2016 SDB
+

@@ -1,0 +1,1793 @@
+ Pure Core 2
+
+
+Revision Notes
+
+
+
+
+                 June 2016
+Pure Core 2
+1 Algebra .................................................................................................................3
+   Polynomials ..................................................................................................................................... 3
+        Factorising ................................................................................................................................................3
+        Standard results .........................................................................................................................................3
+        Long division ............................................................................................................................................3
+   Remainder theorem ......................................................................................................................... 4
+   Factor theorem ................................................................................................................................. 5
+        Choosing a suitable factor .........................................................................................................................6
+   Cubic equations ............................................................................................................................... 7
+
+2 Trigonometry ........................................................................................................8
+   Radians ............................................................................................................................................ 8
+        Connection between radians and degrees..................................................................................................8
+        Arc length , area of a sector and area of a segment ...................................................................................8
+   Trigonometric functions .................................................................................................................. 9
+        Basic results ..............................................................................................................................................9
+        Exact values for 30o, 45o and 60o ..............................................................................................................9
+   Sine and cosine rules and area of triangle ....................................................................................... 9
+        Sine rule ....................................................................................................................................................9
+        Ambiguous case ...................................................................................................................................... 10
+        Cosine rule .............................................................................................................................................. 10
+        Area of triangle ....................................................................................................................................... 10
+   Graphs of trigonometric functions................................................................................................. 10
+        Graphs of y = sin nx, y = sin(–x), y = sin(x + n) etc. ............................................................................ 11
+   Solving trigonometrical equations................................................................................................. 12
+   Using identities .............................................................................................................................. 13
+
+3 Coordinate Geometry .........................................................................................15
+   Mid point ....................................................................................................................................... 15
+   Distance between two points ......................................................................................................... 15
+   Perpendicular lines ........................................................................................................................ 15
+   Circle ............................................................................................................................................. 15
+        Centre at the origin.................................................................................................................................. 15
+        General equation ..................................................................................................................................... 16
+        Equation of tangent ................................................................................................................................. 17
+        Intersection of line and circle .................................................................................................................. 17
+
+4 Sequences and series ........................................................................................19
+   Geometric series ............................................................................................................................ 19
+        Finite geometric series ............................................................................................................................ 19
+        Infinite geometric series .......................................................................................................................... 20
+        Proof of the formula for the sum of a geometric series ........................................................................... 19
+   Binomial series for positive integral index .................................................................................... 21
+        Pascal’s triangle ...................................................................................................................................... 21
+        Factorials ................................................................................................................................................. 22
+        Binomial coefficients or nCr or 𝒏𝒓 ...................................................................................................... 22
+5 Exponentials and logarithms .............................................................................. 23
+    Graphs of exponentials and logarithms ......................................................................................... 23
+    Rules of logarithms........................................................................................................................ 23
+    Changing the base of a logarithm .................................................................................................. 24
+        A particular case ..................................................................................................................................... 24
+    Equations of the form ax = b ........................................................................................................ 24
+
+6 Differentiation ..................................................................................................... 25
+    Increasing and decreasing functions .............................................................................................. 25
+    Stationary points and local maxima and minima (turning points). ................................................ 25
+        Using second derivative ......................................................................................................................... 26
+        Using gradients before and after ............................................................................................................ 27
+    Maximum and minimum problems ............................................................................................... 28
+
+7 Integration .......................................................................................................... 29
+    Definite integrals ........................................................................................................................... 29
+    Area under curve ........................................................................................................................... 29
+    Numerical integration: the trapezium rule ..................................................................................... 30
+
+8 Appendix ............................................................................................................ 31
+    Binomial coefficients, nCr .............................................................................................................. 31
+        Choosing r objects from n ................................................................................................................... 31
+        n
+          Cr = nCn – r ............................................................................................................................................ 31
+        (a + b)n ................................................................................................................................................... 31
+    Points of inflexion ......................................................................................................................... 32
+        To find a point of inflexion .................................................................................................................... 32
+    Integration...................................................................................................................................... 33
+        Area under graph – sum of rectangles .................................................................................................... 33
+        Integration as ‘anti-differentiation’ ........................................................................................................ 33
+
+Index....................................................................................................................... 34
+
+
+
+
+2                                                                                                                          C2 JUNE 2016 SDB
+1       Algebra
+Polynomials
+    A polynomial is an expression of the form
+                anxn + an –1 xn –1 + . . . a2x2 + a1x + a0
+    where all the powers of x are positive integers or 0.
+    Addition, subtraction and multiplication of polynomials are easy, division must be done by
+    long division.
+
+    Factorising
+    General examples of factorising:
+                2ab + 6ac2 = 2a(b + 3c2)
+                x2 – 5x + 6 = (x – 2)(x – 3)
+                x2 – 6x = x(x – 6)
+                6x2 – 11x – 10 = (3x + 2)(2x – 5)
+                 2ax – 3by – 6ay + bx = 2ax – 6ay + bx – 3by
+                       = 2a(x – 3y) + b(x – 3y)
+                       = (2a + b)(x – 3y)
+
+
+    Standard results
+       x2 – y2 = (x – y)(x + y),           difference of two squares
+                (x + y)2 = x2 + 2xy + y2,
+                (x – y)2 = x2 – 2xy + y2
+
+    Long division
+    Example:
+                                                    3x2 – 5x     + 9
+           2                       4          3
+        2x + 3x – 1            6x      –     x           +   x   – 3
+                                   4          3      2
+                               6x + 9x            – 3x
+                                       –10x + 3x2 +
+                                              3
+                                                             x   – 3
+                                              3      2
+                                       –10x – 15x        + 5x
+                                                     2
+                                                   18x   – 4x    – 3
+                                                     2
+                                                   18x   + 27x   – 9
+                                                         – 31x   + 6
+
+
+    ⇒ when 6x4 – x3 + x – 3 is divided by 2x2 + 3x – 1,
+        the quotient is 3x2 – 5x + 9, and the remainder is –31x + 6.
+
+
+    C2 JUNE 2016 SDB                                                                 3
+Remainder theorem
+
+ If 627 is divided by 6 the quotient is 104 and the remainder is 3.
+ This can be written as 627 = 6 × 104 + 3.
+ In the same way, if a polynomial
+ P(x) = a0 + a1x + a2x2 + ... anxn is divided by (cx + d) to give a quotient, Q(x) with a
+ remainder r, then r will be a constant (since the divisor is of degree one) and we can write
+     P(x) = (cx + d) × Q(x) + r
+     If we now choose the value of x which makes (cx + d) = 0 ⇒ x = –d/c
+     then we have P (−d c ) = 0 × Q(x) + r
+
+     ⇒       P (−d c ) = r.
+
+
+ Theorem: If we put x = –d/c in the polynomial we obtain r, the remainder that we would
+     have after dividing the polynomial by (cx + d).
+
+
+ Example: The remainder when P(x) = 2x3 + ax2 + bx + 9 is divided by (2x – 3) is –6, and
+    when P(x) is divided by (x + 2) the remainder is 1.
+     Find the values of a and b.
+
+ Solution:   (2x – 3) = 0 when x = 3/2,
+             ⇒        dividing P(x) by (2x – 3) gives a remainder
+             P ( 3 2 ) = 2 × ( 3 2 ) 3 + a × ( 3 2 ) 2 + b × ( 3 2 ) + 9 = –6
+
+             ⇒        3a + 2b = –29                       I
+
+     and (x + 2) = 0 when x = –2,
+             ⇒        dividing P(x) by (x + 2) gives a remainder
+             P(–2) = 2 × (–2)3 + a × (–2)2 + b × (–2) + 9 = 1
+             ⇒        4a – 2b = 8                         II
+
+
+     I + II ⇒ 7a = –21
+             ⇒        a = –3
+             using I we get b = –10
+
+
+
+
+ 4                                                                              C2 JUNE 2016 SDB
+Factor theorem
+
+ Theorem: If, in the remainder theorem, r = 0 then (cx + d) is a factor of P(x)
+ ⇒ P (−d c ) = 0    ⇔      (cx + d) is a factor of P(x).
+
+
+ Example: A quadratic equation has solutions (roots) x = –1/2 and x = 3. Find the quadratic
+    equation in the form ax2 + bx + c = 0
+
+
+ Solution: The equation has roots x = – ½ and x = 3
+     ⇒       it must have factors (2x + 1) and (x – 3)                   by the factor theorem
+
+     ⇒       an equation is (2x + 1)(x – 3) = 0
+     ⇒       2x2 – 5x – 3 = 0.                                           or any multiple
+
+
+ Example: Show that (x – 2) is a factor of P(x) = 6x3 – 19x2 + 11x + 6 and hence factorise
+    the expression completely.
+
+
+ Solution: Choose the value of x which makes          (x – 2) = 0, i.e. x = 2
+     ⇒       remainder = P(2) = 6 × 8 – 19 × 4 + 11 × 2 + 6 = 48 – 76 + 22 + 6 = 0
+     ⇒       (x – 2) is a factor by the factor theorem.
+     We have started with a cubic and so we the other factor must be a quadratic, which can
+     be found by long division or by ‘common sense’.
+     ⇒       6x3 – 19x2 + 11x + 6 = (x – 2)(6x2 – 7x – 3)
+     =       (x – 2)(2x – 3)(3x + 1)
+     which is now factorised completely.
+
+
+
+
+ C2 JUNE 2016 SDB                                                                          5
+Choosing a suitable factor
+To choose a suitable factor we look at the coefficient of the highest power of x and the
+constant (the term without an x).
+
+
+Example: Factorise 2x3 + x2 – 13x + 6.
+
+
+Solution: 2 is the coefficient of x3 and 2 has factors of 2 and 1.
+    6 is the constant term and 6 has factors of 1, 2, 3 and 6
+    ⇒        the possible linear factors of 2x3 + x2 – 13x + 6 are
+             (x ± 1),      (x ± 2),      (x ± 3),       (x ± 6)
+             (2x ± 1),     (2x ± 2),     (2x ± 3),      (2x ± 6)
+
+
+    But     (2x ± 2) = 2(x ± 1)   and    (2x ± 6) = 2(x ± 3), so they are not new factors.
+
+
+    We now test the possible factors using the factor theorem until we find one that works.
+          Test   (x – 1), put x = 1     giving 2 × 13 + 12 – 13 × 1 + 6 ≠ 0
+          Test   (x + 1), put x = –1    giving 2 × (–1)3 + (–1)2 – 13 × (–1) + 6 ≠ 0
+          Test   (x – 2), put x = 2     giving 2 × 23 + 22 – 13 × 2 + 6 = 16 + 4 – 26 + 6 = 0
+          and since the result is zero (x – 2) is a factor.
+
+
+    We now divide to give
+    2x3 + x2 – 13x + 6     = (x – 2)(2x2 + 5x – 3)
+                           = (x – 2)(2x – 1)(x + 3).
+
+
+
+
+6                                                                      C2 JUNE 2016 SDB
+Cubic equations
+
+ Factorise using the factor theorem then solve.
+     N.B. The quadratic factor might not factorise in which case you will need to use the
+ formula for this part.
+
+
+ Example: Solve the equation           2x3 + x2 – 3x + 1 = 0.
+
+
+ Solution: Possible factors are (x ± 1) and (2x ± 1).
+     Put x = 1 we have 2 × 13 + 12 – 3×1 + 1 = 1 ≠ 0
+     ⇒ (x – 1) is not a factor
+     Put x = –1 we have 2 × (–1)3 + (–1)2 – 3×(–1) + 1 = 3 ≠ 0
+     ⇒ (x + 1) is not a factor
+                        1                  1 3    1 2      1
+     Putting x = 2          we have    2 × �2� + �2� – 3× 2 + 1 = 0
+     ⇒       (2x – 1) is a factor
+     ⇒       2x3 + x2 – 3x + 1 = (2x – 1)(x2 + x – 1) = 0
+                    1
+     ⇒       x = 2 or x2 + x – 1 = 0          –   this will not factorise so we use the formula
+
+                    1           −1 ±    ( −1) 2 − 4 ×1× ( −1)
+     ⇒       x = 2 or x =                                     = 0⋅618 or –1⋅618 to 3 D.P.
+                                            2 ×1
+
+
+
+
+ C2 JUNE 2016 SDB                                                                        7
+2       Trigonometry
+Radians
+
+              r                         A radian is the angle subtended at the centre of a circle by an arc
+                                        of length equal to the radius.
+         1 radian                   r
+
+
+              r
+
+
+
+
+    Connection between radians and degrees
+    180o = π c
+    Degrees       30           45       60            90    120    135      150       180   270    360
+                  π            π        π             π     2π     3π       5π              3π
+    Radians       /6           /4       /3            /2      /3     /4      /6        π      /2   2π
+
+
+    Arc length , area of a sector and area of a segment
+
+
+
+                          r
+                                                           Arc length s = rθ
+                                                                                  1
+                  θ radians                  s = rθ        Area of sector A = 2 r2θ.
+                           r
+
+
+
+
+                           r
+                                                           Area of segment
+                      θ radians                            = area sector – area of triangle
+                                                             1          1
+                           r
+                                                           = 2 r2θ – 2 r2sinθ.
+
+
+
+
+    8                                                                                       C2 JUNE 2016 SDB
+Trigonometric functions
+  Basic results
+          sin A
+  tan A=        ;      sin(–A) = –sin A;           cos(–A) = cos A;    tan(–A) = –tan A.
+         cos A
+
+
+  Exact values for 30o, 45o and 60o
+
+
+  From the equilateral triangle of side 2 we can see that
+                                                                                        30o
+
+      sin 60o = √3/2                 sin 30o         =   ½                      2
+                                                                                              √3
+               o                              o          √3
+      cos 60 = ½                     cos 30          =        /2
+      tan 60  o
+                    = √3             tan 30o
+                                                     =   1
+                                                             /√3               60o
+
+                                                                                    1
+
+
+  From the isosceles right–angled triangle with sides 1, 1, √2
+  we can see that
+      sin 45o = 1/√2                                                                        √2
+                                                                           1
+      cos 45o = 1/√2
+      tan 45o = 1                                                                           45o
+                                                                                        1
+
+
+
+Sine and cosine rules and area of triangle
+
+                                                    C
+
+
+                                       b                  a
+
+
+                              A                                    B
+                                               c
+
+
+  Sine rule
+                     a     b     c
+                        =     =
+                   sin A sin B sin C
+      be careful – the sine rule always gives you two answers for each angle,
+      so if possible do not use the sine rule to find the largest angle as it might be obtuse;
+      you may be able to use the cosine rule.
+
+
+  C2 JUNE 2016 SDB                                                                               9
+      Ambiguous case
+
+
+      Example: In a triangle PQR, PQ = 10, ∠QPR = 40o and QR = 8.
+                Find ∠PRQ.                                                                                                                    Q
+
+
+
+      Solution: If we draw PQ and an angle of
+                                                                                                               10
+          40o, there are two possible positions for                                                                               8                     8
+          R, giving two values of ∠PRQ.
+                The sine rule gives                                                                     40o
+                                                                                        P
+                       sin 40           sin 𝑅                                                                                R1                               R2
+                                =
+                         8               10
+                ⇒ sin R = 0⋅80348…
+                ⇒ R = 53⋅5o or 180 – 53⋅5 = 126⋅5o                                                                                 both answers are correct
+
+
+
+      Cosine rule
+
+
+                a2 = b2 + c2 – 2bc cosA
+                You will always have unique answers with the cosine rule.
+
+      Area of triangle
+
+                Area of a triangle =                1
+                                                    2   ab sin C = 21 bc sin A = 21 ac sin B .
+
+
+
+
+Graphs of trigonometric functions
+
+                                                                                                                         y             y=tanx
+            y                                                       y
+                                                                                                                     2
+        1                y=sinx                                 1        y=cosx
+                                                                                                                     1
+                                                x                                                   x                                                         x
+−90               90      180     270     360            −90               90     180   270   360             −90                 90    180       270   360
+                                                                                                                    −1
+       −1                                                      −1
+                                                                                                                    −2
+
+
+
+
+            y = sin x                                                   y = cos x                                            y = tan x
+
+
+
+
+      10                                                                                                                      C2 JUNE 2016 SDB
+  Graphs of y = sin nx, y = sin(–x), y = sin(x + n) etc.
+
+
+  You should know the shapes of these graphs
+  y = sin 3x                        y
+                                    y=sin3x
+                                1
+                                                                                                                             x
+                                                      90                   180                  270               360
+                              −1
+
+                              −2
+                                                       y = sin 3x is like y = sin x
+                         but repeats itself 3 times for 0o ≤ x ≤ 360o, or 0 ≤ x ≤ 2π c
+
+                          2 y                                                                                            2 y
+                                                                                                                                    y=tanx          y=tan(−x)= −tanx
+                                        y=sinx
+                          1                                                                                              1
+
+                                                                       x                                                                                                   x
+−180        −90                                  90        180                       −180             −90                                      90                180
+
+                         −1                                                                                         −1
+                                y=sin(−x)= −sinx
+
+                         −2                                                                                         −2
+
+
+
+
+                  y = f (x) = sin x                                                                         y = f (x) = tan x
+  ⇒      for a reflection in the y-axis,                                                      ⇒    for a reflection in the y-axis,
+         f(–x) = sin(–x) = –sinx,                                                                  f(–x) = tan(–x) = –tanx,
+   and for a reflection in the x-axis,                                                        and for a reflection in the x-axis,
+         –f (x) = –sin x                                                                            –f (x) = –tan x
+  ⇒ same graph for both reflections                                                           ⇒ same graph for both reflections
+
+
+  y = cos(–x) and –cos x
+       y = cos(–x) is the same as the graph of y = f (x) = cos x, since the graph of y = cos x
+       is symmetrical about the y-axis, and f (–x) = cos(–x) = cos x.
+                                                                                                                     2 y
+
+
+
+       But y = –cos x = –f (x) is a reflection                                                                       1                y=cosx
+       of y = f (x) = cos x in the x-axis.                                                                                                                             x
+                                                                                     −180             −90                                    90                 180
+
+
+                                                                                                                    −1
+                                                                                                                                      y= −cosx
+
+
+
+                                                                                                                    −2
+
+
+
+                                                                                          2 y
+
+  y = sin(x + 30)
+                                                                                                                                 y=sinx
+                                                                           y=sin(x+30)
+  y = sin(x + 30) is the graph of                                                                                                                                              x
+
+
+                                 − 30 
+                                                                 −90                                         90                      180                  270                  360
+
+
+  y = sin x translated through        .
+                                 0                                                     −2
+
+
+
+
+  C2 JUNE 2016 SDB                                                                                                                                   11
+Solving trigonometrical equations
+
+  Examples: Solve         (a) sin x = 0⋅453,                (b) cos x = –0⋅769,                   (c) sin x = –0⋅876,
+        (d) tan x = 1⋅56,       for 0 ≤ x < 360o.
+
+
+  Solutions:
+  (a)    sin x = 0⋅453                                      y
+                                                                y=sinx
+                                                        1
+  ⇒      x = 26⋅9                             y=0.453
+                                                                                                                                 x
+  using the graph we see that
+                                                                          90               180              270            360
+         x = 180 – 26⋅9                                      x=26.9                x=180−26.9
+                                                     −1
+  ⇒      x = 26⋅9 or 153⋅1
+
+
+  (b)    cos x = –0⋅769                                     y
+                                                                y=cosx
+                                                        1
+  ⇒      x = 140⋅3
+                                                                                                                                 x
+  using the graph we see that
+                                                                          90               180              270            360
+                                              y=−0.769
+         x = 360 – 140⋅3
+                                                     −1
+  ⇒      x = 140⋅3 or 219⋅7                                                      x=140.2         x=360−140.2
+
+
+
+
+  (c)    sin x = – 0⋅876
+                                                                      y
+  ⇒      x = –61⋅2                                                1                        y=sinx
+
+  using the graph we see that                                                                                                          x
+
+         x = 180 + 61⋅2                       −90                                  90              180            270            360
+                                                                      y=−0.876
+  or     x = 360 – 61⋅2                                          −1
+                                                    x=−61.2                                              x=180+61.2     x=360−61.2
+  ⇒      x = 241⋅2 or 298⋅8
+
+                                                                      y
+  (d)    tan x = 1⋅56                                             2
+
+  ⇒      x = 57⋅3                                       y=1.56
+                                                                  1
+  using the graph we see that
+                                                                                                                                       x
+                                                        y=tanx
+         x = 180 + 57⋅3                                                            90              180            270            360
+                                                                          x=57.3                           x=180+57.3
+  ⇒      x = 57⋅3 or 237⋅3                                       −1
+
+
+
+
+  12                                                                                             C2 JUNE 2016 SDB
+                                          𝜋
+  Example: Solve sin (x – 4 ) = 0.5 for 0c ≤ x ≤ 2πc , giving your answers in radians in
+     terms of π.
+                                                                         2 y
+                                              𝜋
+  Solution: First put X = x – 4
+                                                                                y=sinX
+                                                                         1
+                                  𝜋                𝜋    5𝜋      y=0.5
+        sin X = 0⋅5 ⇒ X = 6 or π – 6 = 6                                                                        X
+                                                                                         π/2         π   3π/2   2π
+
+
+                                                                        −1     X=π/6           X=π−π/6
+                            𝜋        𝜋            5𝜋
+        ⇒      X = x – 4 = 6 or                    6
+                      5𝜋        13𝜋
+        ⇒      x = 12 or        12
+                                      .
+
+
+  Example: Solve            cos 2x = 0⋅473 for 0o ≤ x ≤ 360o, giving your answers to the nearest
+     degree.
+  Solution: First put X = 2x and find all solutions of cos X = 0⋅473 for 0o ≤ X ≤ 720o
+         ⇒     X =         61⋅77..., or 360 – 61⋅77… = 298⋅22…
+               or 61⋅77… + 360 = 421.77…, or 298.22… + 360 = 658⋅22…
+               i.e.        X = 61⋅77..., 298⋅22…, 421.77…, 658⋅22…
+                       1
+        ⇒      x = 2 𝑋 = 31o, 149o, 211o, 329o to the nearest degree.
+
+
+
+
+Using identities
+                                              sin A
+  (i)          using tan A ≡
+                                              cos A
+
+
+  Example: Solve 3 sin x = 4 cos x.
+
+
+  Solution: First divide both sides by cos x
+                   sin x
+        ⇒      3         =4           ⇒           3 tan x = 4   ⇒        tan x = 4/3
+                   cos x
+        ⇒      x = 53⋅1o, or 180 + 53⋅1 = 233⋅1o.
+
+
+
+
+  C2 JUNE 2016 SDB                                                                                       13
+(ii)          using     sin2A + cos2A = 1
+
+                                             5
+Example: Given that cos A = 13 and that 270o < A < 360o, find sin A and tan A.
+
+
+Solution: We know that sin2A + cos2A ≡ 1
+    ⇒     sin2A = 1 – cos2A
+                                      5 2        144
+       ⇒      sin2A = 1 − �13� = 169                          y
+
+                                                          1       y=+12/13
+                                 12
+       ⇒      sin A = ± 13.
+                                                                                       y=sinx
+              But 270o < A < 360o                                                                                           x
+
+       ⇒      sin A is negative                                              90         180             270           360
+
+                            12
+       ⇒      sin A = – 13.                                   y=−12/13
+
+
+       Also   tan A =
+                        sin A                            −1
+                                                                                                               *
+                        cos A
+                      −12              –12
+       ⇒ tan A =            13
+                                  =     5
+                                            = –2⋅4.
+                       5
+                        13
+
+
+
+
+Example: Solve 2 sin2x + sin x – cos2x = 1
+
+Solution: Rewriting cos2x in terms of sin x will make life easier
+    Using sin2x + cos2x ≡ 1
+    ⇒     cos2x = 1 – sin2x                         y
+                                                       y=sinx
+               2                2           y=2/3 1
+          2 sin x + sin x – cos x = 1
+    ⇒     2 sin2x + sin x – (1 – sin2x) = 1                                                                                 x
+                                                              90         180                                  270     360
+    ⇒     3 sin2x + sin x – 2 = 0                     x=41.8     x=180−41.8
+                                                 −1
+    ⇒     (3 sin x – 2)(sin x + 1) = 0      y=−1
+                                                                                                              x=270
+
+                        2
+       ⇒       sin x = 3 ⇒                  x = 41⋅8o,
+            o
+       138⋅2 ,
+       or      sin x = –1 ⇒                 x = 270o.
+
+N.B. If you are asked to give answers in radians, you are allowed to work in degrees as
+                                                       𝜋
+above and then convert to radians by multiplying by 180
+       So the answers in radians would be
+       x = 41⋅8103 × π/180 = 0⋅730, or 138⋅1897 × π/180 = 2⋅41, or 270 × π/180 = 3π/2.
+
+                                                                         S        A
+Under no circumstances should you use the                                             diagram.
+                                                                         T        C
+
+You need to understand the graphs and their symmetries, so get used to using them.
+
+
+14                                                                                              C2 JUNE 2016 SDB
+3        Coordinate Geometry
+Mid point
+    The mid point, M, of the line joining P (a1, b1) and Q (a2, b2) is ( 21 (a1 + a2 ), 21 (b1 + b2 )) .
+
+Distance between two points
+
+    Let P and Q be the points (a1 ,b1) and (a2 ,b2).                                                    Q (a2 ,b2)
+
+
+                                                                          M
+    Using Pythagoras’s theorem                                                ×                         b2 – b1
+
+
+
+    PQ = �(𝑎2 − 𝑎1 )2 + (𝑏2 − 𝑏1 )2                 P (a1 ,b1)
+                                                                             a2 – a1
+                                                                                                        A
+
+
+
+
+Perpendicular lines
+    Two lines with gradients m1 and m2 are perpendicular ⇔ m1 × m2 = –1
+
+
+    Example: Find the equation of the line through (1, –5) which is perpendicular to the line
+       with equation y = 2x – 3
+
+
+    Solution: The gradient of y = 2x – 3 is 2
+                                                    1
+         ⇒ Gradient of perpendicular line is – 2
+                                                                 1
+         ⇒ equation of perpendicular line is y – – 5 = – 2 (x – 1)             using y – y1 = m(x – x1)
+
+         ⇒ x + 2y + 9 = 0
+
+
+Circles
+    Centre at the origin
+    Take any point, P, on a circle centre the origin
+    and radius 5.                                                                           y
+                                                                                        r
+    Suppose that P has coordinates (x, y)                                                           P (x, y)
+    Using Pythagoras’ Theorem we have                                                       r
+                                                                                                    y
+     2    2
+    x +y =5    2
+                    ⇒       2    2
+                           x + y = 25
+                                                                                                                     x
+    which is the equation of the circle.                             −r                         x            r
+    and in general the equation of a
+    circle centre (0, 0) and radius r is
+    x2 + y2 = r2.
+                                                                                       −r
+
+
+    C2 JUNE 2016 SDB                                                                                15
+General equation
+
+
+In the circle shown the centre is C, (a, b),                    y
+and the radius is r.
+CQ = x – a and PQ = y – b                                                              P (x, y)
+and, using Pythagoras
+                                                                                r
+                                                                                      y–b
+⇒ CQ + PQ = r
+         2       2     2
+
+
+⇒ (x – a)2 + (y – b)2 = r2,                                                 C x–a Q
+
+
+which is the general equation of a circle.                                                        x
+
+
+Example: Find the centre and radius of the circle whose equation is
+             x2 + y2 – 4x + 6y – 12 = 0.
+
+
+Solution: First complete the square in both x and y to give
+             x2 – 4x + 4 + y2 + 6y + 9 = 12 + 4 + 9 = 25
+     ⇒       (x – 2)2 + (y + 3)2 = 52
+             which is the equation of a circle with centre (2, –3) and radius 5.
+
+
+Example: Find the equation of the circle which has diameter AB, where A is (3, 5), and
+   B is (8, –7).
+
+
+Solution: The centre is the mid point of AB is ( 12 (3 + 8), 12 (5 − 7) ) = (5½, –1)
+                               1        1
+             and the radius is 2 𝐴𝐵 = 2 (8 − 3) + (−7 − 5) =        6⋅5
+                                               2          2
+
+
+
+     ⇒       equation is (x – 5⋅5)2 + (y + 1)2 = 6⋅52.
+
+
+
+
+16                                                                        C2 JUNE 2016 SDB
+    Equation of tangent
+
+
+    Example: Find the equation of the tangent to the circle x2 + 2x + y2 – 4y = 20 at the point
+       (– 4, 6).
+
+
+    Solution: First complete the square in x and in y                                  10 y
+
+        ⇒       x2 + 2x + 1 + y2 – 4y + 4 = 20 + 1 + 4
+                (x + 1)2 + (y – 2)2 = 25.                                          *    5     x²+2x+y²−4y=20
+
+
+                                                                 3x−4y+36=0
+                                                                                       *                   x
+        Second find the gradient of the radius from the
+                                                                  −10         −5                      5
+        centre (–1, 2) to the point (– 4, 6)
+                                       6−2      4
+             gradient of radius = −4−−1 = − 3
+                                                                                       −5
+                                                     3
+⇒            gradient of the tangent at that point is 4 , since
+             the tangent is perpendicular to the radius
+                                                                       4   3
+             and product of gradients of perpendicular lines is –1 = − 3 × 4
+                                                    3
+        ⇒       equation of the tangent is y – 6 = 4 (x – –4)
+        ⇒       3x – 4y + 36 = 0.
+
+
+
+
+    Intersection of line and circle
+
+
+    Example: Find the intersection of the line y = 2x + 4 with the circle x2 + y2 = 5.
+
+
+    Solution: Put y = 2x + 4 in x2 + y2 = 5 to give x2 + (2x + 4)2 = 5
+        ⇒       x2 + 4x2 + 16x + 16 = 5
+        ⇒       5x2 + 16x + 11 = 0
+        ⇒       (5x + 11)(x + 1) = 0
+        ⇒       x = –2⋅2       or –1
+        ⇒       y = – 0⋅4      or 2
+        ⇒       the line and the circle intersect at (–2⋅2, – 0⋅4) and (–1, 2)
+
+
+
+
+    C2 JUNE 2016 SDB                                                                           17
+Showing a line is a tangent to a circle
+
+
+If the two points of intersection are the same point then the line is a tangent.
+
+
+Example: Show that the line 3x + 4y – 10 = 0 is a tangent to the circle
+     x2 + 2x + y2 + 6y = 15.
+
+
+Solution: Find the intersection of the line and circle
+                                                  10−4𝑦
+            3x + 4y – 10 = 0           ⇒     x=     3
+
+     Substituting in the equation of the circle
+             10−4𝑦 2           10−4𝑦
+     ⇒      �   3
+                    � + 2�       3
+                                       � + 𝑦 2 + 6𝑦 = 15
+
+     ⇒      100 – 80y + 16y2 + 60 – 24y + 9y2 + 54y = 135
+     ⇒      25y2 – 50y + 25 = 0
+     ⇒      y2 – 2y + 1 = 0
+     ⇒      (y – 1)2 = 0
+     ⇒      y = 1 only, ⇒ x = 2
+     ⇒      line is a tangent at (2, 1), since there is only one point of intersection
+
+
+
+Note.     You should know that the angle in a semi-circle is a right angle and that the
+perpendicular from the centre to a chord bisects the chord (cuts it exactly in half).
+
+
+
+
+18                                                                        C2 JUNE 2016 SDB
+4       Sequences and series
+Geometric series
+    Finite geometric series
+    A geometric series is a series in which each term is a constant amount times the previous
+    term: this constant amount is called the common ratio.
+    The common ratio can be any non-zero real number.
+
+
+    Examples: 2, 6, 18, 54, 162, 486, . . . . .                          with common ratio 3,
+                 40, 20, 10, 5, 2½, 1¼, . . . . .                        with common ratio ½,
+                 ½, –2, 8, –32, 128, –512, . . . .                       with common ratio –4.
+
+
+    Generally a geometric series can be written as
+        Sn = a + ar + ar2 + ar3 + ar4 + . . . . + arn –1, up to n terms
+    where a is the first term and r is the common ratio.
+
+
+    The nth term is un = arn –1.
+
+
+    The sum of the first n terms of the above geometric series is
+                   (1−𝑟 𝑛 )             (𝑟 𝑛 −1)
+        Sn = 𝑎                    = 𝑎          .
+                    1−𝑟                  𝑟−1
+
+
+
+    Proof of the formula for the sum of a geometric series
+
+
+    You must know this proof.
+
+
+            Sn         = a + ar + ar2 + ar3 + … arn – 2 + arn – 1                         multiply through by r
+
+    ⇒     r × Sn       =                  2
+                                  ar + ar + ar + … ar  3   n–2
+                                                                 + ar   n–1
+                                                                              + ar   n
+                                                                                                       subtract
+
+
+
+    ⇒ Sn – r × Sn = a + 0 + 0 + 0 + … 0                      +     0          – arn
+    ⇒ (1 – r) Sn = a – arn = a(1 – rn)
+                   (1−𝑟 𝑛 )             (𝑟 𝑛 −1)
+    ⇒ Sn = 𝑎                      = 𝑎              .
+                    1−𝑟                  𝑟−1
+
+
+
+    For an infinite series, if –1 < r < +1 ⇔ r < 1 then rn → 0 as n → ∞, and
+                              𝑎
+        Sn → S∞ =                  .
+                           1−𝑟
+
+
+
+    C2 JUNE 2016 SDB                                                                              19
+Example: Find the nth term and the sum of the first 11 terms of the geometric series whose
+   3rd term is 2 and whose 6th term is –16.
+
+
+Solution: x6 = x3 × r3                             multiply by r 3 times to go from the 3rd term to the 6th term
+
+            ⇒         –16 = 2 × r3
+            ⇒         r3 = –8
+            ⇒         r = –2
+     Now x3 = x1 × r2
+            ⇒         x1 = x3 ÷ r2 = 2 ÷ (–2)2
+                             1
+            ⇒         x1 = 2
+                                                   1
+            ⇒         nth term, xn = arn –1 = 2 × (–2)n – 1
+     and the sum of the first 11 terms is
+                  1       (−2)11 −1        −2049
+            S11 = 2 ×      −2−1
+                                      =     −6
+                            1
+     ⇒      S11 = 341 2
+
+
+
+Infinite geometric series
+When the common ratio is between –1 and +1 the series converges to a limit.
+            Sn = a + ar + ar2 + ar3 + ar4 + . . . . up to n terms
+                       (1−𝑟 𝑛 )
+            Sn = 𝑎                .
+                          1−𝑟
+Since |r| < 1 , rn → 0 as n → ∞ and so
+                      𝑎
+     Sn → S∞ =
+                  1−𝑟
+
+
+
+Example: Show that the geometric series
+                                       3
+            S = 16 + 12 + 9 + 6 4 + …
+     converges to a limit and find its sum to infinity.
+
+                                                   12    3
+Solution: Firstly the common ratio is 16 = 4 which lies between –1 and +1 therefore
+    the sum converges to a limit.
+                                       a    16
+     The sum to infinity S∞ =             =
+                                      1− r 1 − 3 4
+     ⇒      S∞ = 64
+
+
+
+
+20                                                                                     C2 JUNE 2016 SDB
+Binomial series for positive integral index
+  Pascal’s triangle
+  When using Pascal’s triangle we think of the top row as row 0.
+
+
+                     row 0                              1
+                     row 1                         1         1
+                     row 2                    1         2         1
+                     row 3                1        3         3         1
+                     row 4            1       4         6         4        1
+                     row 5        1       5        10        10        5       1
+                     row 6    1       6       15        20        15       6       1
+
+
+
+  To expand (a + b)6 we first write out all the terms of ‘degree 6’ in order of decreasing
+  powers of a to give
+        …a6 + …a5b + …a4b2 + …a3b3 + …a2b4 + …ab5 + …b6
+
+
+  and then fill in the coefficients using row 6 of the triangle to give
+         1a6 + 6a5b + 15a4b2 + 20a3b3 + 15a2b4 + 6ab5 + 1b6
+    =    a6 + 6a5b + 15a4b2 + 20a3b3 + 15a2b4 + 6ab5 + b6
+
+
+
+
+  C2 JUNE 2016 SDB                                                                     21
+Factorials
+
+
+     Factorial n, written as n! = n × (n – 1) × (n – 2) × . . . × 3 × 2 × 1.
+     So 5! = 5 × 4 × 3 × 2 × 1 = 120
+                                 𝒏
+Binomial coefficients or nCr or � �
+                                 𝒓
+
+     If we think of row 6 in Pascal’s triangle starting with the 0th term we use the following
+     notation
+
+
+     0th term     1st term   2nd term             3rd term       4th term       5th term         6th term
+           1            6       15                  20             15                 6                1
+       6            6          6                    6              6              6                6
+           C0           C1         C2                   C3             C4             C5               C6
+       6             6          6                   6              6              6                 6
+      � �           � �        � �                 � �            � �            � �               � �
+       0             1          2                   3              4              5                 6
+
+                                        𝑛
+where the binomial coefficients nCr or � � are defined by
+                                        𝑟
+                   𝑛       𝑛!
+           n
+             Cr = � � = (𝑛−𝑟)! 𝑟!
+                   𝑟
+                   𝑛    𝑛(𝑛−1)(𝑛−2)(𝑛−3) ×… up to 𝑟 numbers
+   or      n
+             Cr = � � =
+                   𝑟                     𝑟!
+
+
+
+This is particularly useful for calculating the numbers further down in Pascal’s triangle.
+
+
+Example: The ‘fourth’ number in row 15 is
+                15        15!             15!            15×14×13×12
+     15
+       C4 = �      � = (15−4)!4! =                 =                        = 1365.
+                 4                      11! ×4!              4×3×2×1
+
+
+
+     You can also use nCr button on your calculator.
+
+
+Example: Find the coefficient of x3 in the expansion of (3 – 2x)5.
+
+
+Solution: The term in x3 is        5
+                                       C3 × 32 × (–2x)3                                                since   5
+                                                                                                                   C3 = 10
+
+     is 10 × 9 × (–8x3) = –720x3
+     so the coefficient of x3 is –720.
+
+
+For more ideas on using the binomial coefficients, see the appendix.
+
+
+
+22                                                                                         C2 JUNE 2016 SDB
+5       Exponentials and logarithms
+Graphs of exponentials and logarithms
+                                                                                4 y
+         x                                                                                         y=x
+    y = 2 is an exponential function                                            3     y=2
+                                                                                2
+    and its inverse is the logarithm function
+                                                                                1                y = log2x
+    y = log 2 𝑥.                                                                                             x
+                                                                   −4    −2                  2           4
+                                                                               −1
+                                                                               −2
+    Remember that the graph of an inverse
+    function is the reflection of the original                                 −3
+
+    graph in y = x.                                                            −4
+
+
+
+
+Rules of logarithms
+    log a x = y ⇔       x = ay                             log a xn = n log a x
+    log a xy = log a x + log a y                           log a 1 = 0
+    log a (x ÷ y) = log a x – log a y                      log a a = 1
+
+
+    Example: Find log 3 81.
+
+
+    Solution: Write log 3 81 = y
+        ⇒          81 = 3y       ⇒      y = 4          ⇒       log 3 81 = 4.
+
+
+    To solve ‘log’ equations we can either use the rules of logarithms to end with
+                        log a  = log a         ⇒  = 
+        or              log a  =        ⇒  = a
+
+
+    Example: Solve           log a 40 – 3 log a x = log a 5
+
+
+    Solution: log a 40 – 3 log a x = log a 5
+    ⇒ log a 40 – log a x3 = x log a 5
+    ⇒ log a (40 ÷ x3) = log a 5
+        40
+    ⇒ 𝑥3 = 5
+
+    ⇒ x3 = 8
+    ⇒ x = 2.
+
+
+    C2 JUNE 2016 SDB                                                                                  23
+  Example: Solve log 2 𝑥 + log 2 (𝑥 + 6) = 3 + log 2 (𝑥 + 1).
+                   𝑥(𝑥+6)             𝑥(𝑥+6)
+  Solution: log 2 (𝑥+1) = 3 ⇒         (𝑥+1)
+                                               = 23 = 8
+
+       ⇒     x2 + 6x = 8x + 8        ⇒          x2 – 2x – 8 = 0
+       ⇒     (x – 4)(x + 2) = 0      ⇒          x = 4 or –2
+       But x cannot be negative (you cannot have log 2 𝑥 when x ≤ 0)
+       ⇒      x = 4 only
+
+
+Changing the base of a logarithm
+                   log c b
+       log a b =
+                   log c a
+  Example: Find log 4 29.
+                             log10 29     1 ⋅ 4624
+  Solution: log 4 29=                 =            =          2 ⋅ 43 .
+                              log10 4     0 ⋅ 6021
+
+  A particular case
+               log b b     1
+     log a b =         =                        This gives a source of exam questions.
+               log b a   log b a
+
+
+  Example: Solve              log 4 x – 6 log x 4 = 1
+                                    6
+  Solution: ⇒        log 4 𝑥 –            = 1          ⇒          (log 4 𝑥)2 – log 4 𝑥 – 6 = 0
+                                  log 4 x
+       ⇒     (log 4 𝑥 – 3)( log 4 𝑥 + 2) = 0
+       ⇒     log 4 𝑥 = 3 or –2
+                                                                         1
+       ⇒     x = 43 or 4–2                      ⇒      x = 64 or 16.
+
+
+
+Equations of the form ax = b
+
+  Example: Solve 5x = 13
+
+
+  Solution: Take logs of both sides
+       ⇒     log 10 5x = log 1013
+       ⇒     x log 10 5 = log 1013
+                     log10 13       1 ⋅1139
+       ⇒      x=              =              =      1 ⋅ 59.
+                      log10 5       0 ⋅ 6990
+
+
+  24                                                                             C2 JUNE 2016 SDB
+6       Differentiation
+
+Increasing and decreasing functions
+                                                               dy
+    y is an increasing function if its gradient is positive,      > 0;
+                                                               dx
+                                                               dy
+    y is a decreasing function if its gradient is negative,       <0
+                                                               dx
+
+
+    Example: For what values of x is y = f (x) = x3 – x2 – x + 7 an increasing function.
+
+
+    Solution: y = f (x) = x3 – x2 – x + 7
+                dy
+        ⇒          = f ' (x) = 3x2 – 2x – 1
+                dx
+        For an increasing function we want values of x for which f ' (x) = 3x2 – 2x – 1 > 0
+
+
+
+        Find solutions of f ' (x) = 3x2 – 2x – 1 = 0                          2 f '(x)
+                                                                                   f '(x) =3x²−2x−1
+        ⇒       (3x + 1)(x – 1) = 0
+        ⇒       x = −1/3 or 1                                                 1
+
+        so graph of 3x2 – 2x – 1 meets x-axis at −1/3 and 1
+                                                                                                  x
+        and is above x-axis for                                          −1 −1/3         1        2
+
+        x < −1/3 or x > 1
+                                                                             −1
+        ⇒       f ' (x) > 0 for x < –1/3 or x > 1
+
+
+        So y = x3 – x2 – x + 7 is an increasing function for x < –1/3 or x > 1.
+
+
+
+
+Stationary points and local maxima and minima (turning points).
+
+    Any point where the gradient is zero is called a stationary point.
+    Local maxima and minima are called turning points.
+    The gradient at a local maximum or minimum is 0.
+
+
+
+
+    C2 JUNE 2016 SDB                                                                         25
+         minimum               maximum
+                                                            Stationary points of inflection
+               Turning points
+
+
+
+Therefore to find max and min
+                                                                            dy
+first       – differentiate and find the values of x which give gradient,      , equal to zero:
+                                                                            dx
+                                        d 2y
+second      – find second derivative         and substitute value of x found above –
+                                        dx 2
+                    second derivative positive ⇒ minimum, and
+                    second derivative negative ⇒ maximum:
+              d 2y
+     N.B. If       = 0, it does not help! In this case you will need to find the gradient
+              dx 2
+     just before and just after the value of x.
+     Be careful: you might have a stationary point of inflection
+
+
+third – substitute x to find the value of y and give both coordinates in your answer.
+
+
+Using second derivative
+
+
+Example:
+     Find the local maxima and minima of the curve with equation y = x4 + 4x3 – 8x2 – 7.
+
+
+Solution:
+     y = x4 + 4x3 – 8x2 – 7.
+                   dy
+First       find      = 4x3 + 12x2 – 16x.
+                   dx
+                                           dy
+At maxima and minima the gradient =            =0
+                                           dx
+⇒ 4x3 + 12x2 – 16x = 0         ⇒   x3 + 3x2 – 4x = 0   ⇒ x(x2 + 3x – 4) = 0
+⇒ x(x + 4)(x – 1) = 0      ⇒ x = –4, 0 or 1.
+
+
+
+
+26                                                                      C2 JUNE 2016 SDB
+             d 2y
+Second find     2
+                    = 12x2 + 24x – 16
+             dx
+                  d 2y
+    When x = –4,       = 12 × 16 – 24 × 4 – 16 = 80, positive ⇒ min at x = –4
+                  dx 2
+                  d 2y
+    When x = 0,         = –16, negative, ⇒ max at x = 0
+                  dx 2
+                  d 2y
+    When x = 1,         = 12 + 24 – 16 = 20, positive, ⇒ min at x = 1.
+                  dx 2
+
+Third find y–values: when x = – 4, 0 or 1         ⇒ y = –135, –7 or –10
+
+
+⇒ Maximum at (0, –7) and Minimums at (– 4, –135) and (1, –10).
+
+
+          d2y
+N.B. If        = 0, it does not help! You can have any of max, min or stationary point of
+          dx 2
+inflection.
+
+
+Using gradients before and after
+
+
+Example: Find the stationary points of y = 3x4 – 8x3 + 6x2 + 7.
+
+
+Solution: y = 3x4 – 8x3 + 6x2 + 7
+     dy
+        = 12x3 – 24x2 + 12x = 0 for stationary points
+     dx
+    x(x2 – 2x + 1) = 0      ⇒       x(x – 1)2 = 0 ⇒     x = 0 or 1.
+     d2y
+        2
+          = 36x2 – 48x + 12
+     dx
+    which is 12 (positive) when x = 0 ⇒ minimum at (0, 7)
+    and which is 0 when x = 1, so we must look at gradients before and after.
+     x     =        0.9         1          1.1
+     dy
+           =       +0⋅108       0        +0⋅132
+     dx
+
+
+⇒ stationary point of inflection at (1, 2)
+
+
+N.B.      We could have max, min or stationary point of inflection when the second
+   derivative is zero, so we must look at gradients before and after.
+
+
+C2 JUNE 2016 SDB                                                                27
+Maximum and minimum problems
+ Example:
+ A manufacturer of cans for baked beans wishes to use as little metal as possible in the
+ manufacture of these cans. The cans must have a volume of 500 cm3: how should he design
+ the cans?
+
+
+ Solution:
+
+
+                                    We need to find the radius and height needed to make cans of
+                                    volume 500 cm3 using the minimum possible amount of metal.
+                     h cm
+                                    Suppose that the radius is x cm and that the height is h cm.
+                                    The area of top and bottom together is 2 × πx2 cm2 and the
+             x cm
+                                    area of the curved surface is 2πxh cm2
+                                    ⇒ the total surface area A = 2πx2 + 2πxh cm2.           I
+
+
+ We have a problem here: A is a function not only of x, but also of h.
+ But the volume is 500 cm3 and the volume can also be written as V = πx2h cm3
+                                     500
+ ⇒ πx2h = 500        ⇒          h=
+                                     𝜋𝑥 2
+                                                       500
+ and so I can be written A = 2πx2 + 2πx ×
+                                                       𝜋𝑥 2
+                    1000
+ ⇒ A = 2πx2 +               = 2πx2 + 1000 x–1
+                      x
+      𝑑𝐴                                     1000
+ ⇒         = 4πx – 1000x –2 = 4𝜋𝑥 –                           .
+      𝑑𝑥                                      𝑥2
+                                             𝑑𝐴                     1000
+ For stationary values of A, the area,            =0      ⇒ 4πx =
+                                             𝑑𝑥                      𝑥2
+                                        1000
+ ⇒     4 π x3 =1000         ⇒        x3 = =  79 ⋅ 57747155               ⇒   x=
+                                                                              4 ⋅ 301270069
+                                         4π
+                                             500
+ ⇒ x = 4⋅30 to 3 S.F.           ⇒      h =        = 8.60
+                                             π x2
+ We do not know whether this value gives a maximum or a minimum value of A or a
+ stationary point of inflection
+                     𝑑2𝐴                                          2000
+ so we must find            = 4𝜋 + 2000𝑥 −3 = 4𝜋 +
+                     𝑑𝑥 2                                           𝑥3
+ Clearly this is positive when x = 4⋅30 and thus this gives a minimum of A
+ ⇒ minimum area of metal is 349 cm2
+      when the radius is 4⋅30 cm and the height is 8⋅60 cm.
+
+
+
+ 28                                                                           C2 JUNE 2016 SDB
+7           Integration
+Definite integrals
+    When limits of integration are given.
+                                      3
+    Example: Find                 ∫   1
+                                          6 x 2 − 8 x + 1 dx
+
+                                6 x 2 − 8 x + 1 dx = [2 x 3 − 4 x 2 + x ] 1
+                        3
+                    ∫
+                                                                          3
+    Solution:                                                                          no need for +C as it cancels out
+                        1
+
+
+    = [2 × 33 – 4 × 32 + 3] – [2 × 13 – 4 × 12 + 1]                                                         put top limit in first
+    = [21] – [–1] = 22.
+
+
+Area under curve
+    The integral is the area between the curve and the x–axis, but areas above the axis are
+    positive and areas below the axis are negative.
+    Example: Find the area between the x–axis, x = 0, x = 2 and y = x2 – 4x.
+    Solution:
+                                                                                                    y
+        2
+    ∫   0
+            x 2 − 4 x dx                                                                       2
+                                                                                                                  y=x²−4x
+
+
+                            2                                                                                               x
+        x3                              − 16
+    =  − 2 x 2  = [83 − 8]] − [0 − 0] =      which is negative                                              2        4
+
+       3        0                        3
+                                                                                              −2
+    since the area is below the x–axis
+                                          + 16                                                −4
+    ⇒ required area is
+                                           3
+
+
+    Example: Find the area between the x-axis, x = 1, x = 4 and y = 3x – x2 .
+
+
+    Solution: First sketch the curve to see which bits are above (positive) and which bits are
+    below (negative).
+    y = 3x – x2 = x(3 – x)
+                                                                                   y
+    ⇒ meets x-axis at 0 and 3.                                                 3
+                                                                                            y=3x−x²
+
+                                                                                       A1
+    Area A1, between 1 and 3, is above axis:                                                            x
+                                                                                             3 A2
+    area A2, between 3 and 4, is below axis
+    so we must find these areas separately.
+                                                                              −3
+
+
+
+
+    C2 JUNE 2016 SDB                                                                                                 29
+                   3
+       A1 = ∫ 3 x − x 2 dx
+                  1
+
+                          3
+          3x 2 x 3 
+       =      −  = [4 ⋅ 5] − [1 16 ]                     = 31/3 .
+          2    3 1
+                                                                4
+               4                        3x 2 x 3 
+             ∫ 3x − x                        −  =[2 23 ] − [4 ⋅ 5] =− 1 65
+                              2
+       and                        dx = 
+              3
+                                        2    3 3
+
+  and so area A2 (areas are positive) = +15/6
+  so total area = A1 + A2 = 31/3 + 15/6 = 51/6.
+                                                               4
+                      4                       3x 2 x 3 
+  Note that ∫ 3x − x              2
+                                          dx      −  = [2 23 ] − [1 16 ] = 1 12
+                   1
+                                              2    3 1
+
+       which is A1 – A2 (= 31/3 – 15/6 = 11/2).
+
+
+
+Numerical integration: the trapezium rule
+  Many functions can not be ‘anti–differentiated’ and the trapezium rule is a way of
+  estimating the area under the curve.
+
+
+
+  Divide the area under y = f (x) into n strips,                                y
+  each of width h.                                                                  y=f(x)
+
+
+  Join the top of each strip with a straight line to
+  form a trapezium.
+                                                                                                                             yn
+                                                                                    y0
+                                                                                             y1       y2
+  Then the area under the curve                                                                                                   x
+  ≈ sum of the areas of the trapezia                                                a
+                                                                                         h        h                      h
+                                                                                                                             b
+
+
+
+
+         b
+  ⇒    ∫ f ( x) dx ≈
+         a
+                                  1
+                                  2
+                                          h ( y 0 + y1 ) + 12 h ( y1 + y 2 ) + 12 h ( y 2 + y 3 ) + ... + 12 h ( y n −1 + y n )
+
+         b
+  ⇒    ∫ f ( x) dx ≈
+         a
+                                      1
+                                      2   h ( y0 + y1 + y1 + y2 + y2 + y3 + y3 ... + yn −1 + yn −1 + yn )
+
+         b
+  ⇒    ∫ f ( x) dx ≈
+         a
+                                  1
+                                  2
+                                          h ( y 0 + y n + 2( y1 + y 2 + y 3 + ... + y n −1 ))
+
+  ⇒ area under curve ≈ ½ width of each strip × (‘ends’ + 2 × ‘middles’).
+
+
+
+  30                                                                                                  C2 JUNE 2016 SDB
+8       Appendix
+
+Binomial coefficients, nCr
+
+
+    Choosing r objects from n
+
+
+        If we have n objects, the number of ways we can choose r of these objects is nCr.
+
+
+    n
+     Cr = nCn – r
+        Every time r objects from n must, therefore, be the same as the number of ways of
+        leaving n – r behind. are chosen from n, there are n – r objects left behind; the
+        number of ways of choosing r objects
+        ⇒         n
+                      Cr = nCn – r .
+
+
+        This can be proved algebraically.
+                            𝑛!                 𝑛!                𝑛!
+        n
+            Cn – r = �𝑛−(𝑛−𝑟)�!(𝑛−𝑟)! =   (𝑛−𝑛+𝑟)! (𝑛−𝑟)!
+                                                            = 𝑟! (𝑛−𝑟)! = nCr
+
+
+
+    (a + b)n
+        In the expansion of (a + b)n = (a + b) (a + b) (a + b) (a + b) (a + b)… (a + b) (a + b),
+        where there are n brackets,
+        we can think of forming the term an – rbr by choosing the r letter bs from the n
+        brackets in nCr ways.
+        Thus the coefficient of an – rbr is nCr.
+
+
+
+
+    C2 JUNE 2016 SDB                                                                  31
+Points of inflexion
+
+  A point of inflexion is a maximum or minimum of the gradient.
+  When the gradient is also zero, in which case we have a stationary point of inflexion,
+  otherwise we have an oblique (sloping) point of inflexion.
+
+
+
+     --                                                  + +
+            --
+                 --                                 ++
+                                                  + maximum
+                                                                            minimum
+                                                                            of gradient
+                                                                                                        +
+                                                                                                        +       ---          maximum
+                                                                                                                             of gradient
+  minimum
+                                              +                                               + +
+                                                                                                    +
+                                                                                                                      - --
+  of gradient
+                   -- - -             + +   ++
+                                                     of gradient
+
+                                                                              ++
+                                                                                   ++
+                                                                                          +
+                                                                                                                                --
+                Oblique points of inflexion                                         Stationary points of inflexion
+
+
+
+
+  To find a point of inflexion
+                                                             𝑑2𝑦
+       1. Find the value(s) of x for which                          = 0, x = α, β, …
+                                                             𝑑𝑥 2
+                                              𝑑3𝑦
+       2. Either               show that      ≠ 0 for these values of x
+                                         𝑑𝑥 3
+          or                   show that
+                                                                   𝑑2𝑦                                              𝑑2𝑦
+                               either             x=α– ⇒             2
+                                                                       is +ve and              x=α+ ⇒                      is –ve
+                                                                   𝑑𝑥                                               𝑑𝑥 2
+                                                                   𝑑2𝑦                                              𝑑2𝑦
+                               or                 x=α– ⇒                  is –ve and           x=α+ ⇒                      is +ve
+                                                                   𝑑𝑥 2                                             𝑑𝑥 2
+                               𝑑2𝑦
+                ⇔                      changes sign from x = α –              to      x = α +.
+                               𝑑𝑥 2
+
+
+  Example: Find the point(s) of inflexion on the graph of y = x4 – x3 – 3x2 + 5x + 1.
+
+
+  Solution: y = x4 – x3 – 3x2 + 5x + 1
+                     𝑑𝑦
+        ⇒                  = 4x3 – 3x2 – 6x + 5
+                     𝑑𝑥
+                    𝑑2𝑦
+        ⇒                  = 12x2 – 6x – 6
+                    𝑑𝑥 2
+                    𝑑2𝑦
+                           = 0 ⇒ 6(2x2 – x – 1) = 6(2x + 1)(x – 1) = 0
+                    𝑑𝑥 2
+                           1
+        ⇒           x = – 2 or 1.
+                    𝑑3𝑦
+                           = 24x – 6
+                    𝑑𝑥 3
+                           1          𝑑3𝑦                                     𝑑3𝑦
+                    x=–2 ⇒                 3
+                                             = –18 ≠ 0, and x = 1 ⇒                   = 18 ≠ 0
+                                      𝑑𝑥                                       𝑑𝑥 3
+
+
+  32                                                                                                        C2 JUNE 2016 SDB
+                                               1    1
+      ⇒ points of inflexion at A, (– 2 , –2 16 ),                                                      y
+      and B, (1, 3).                                        y=x⁴−x³−3x²+5x+1                       4
+                                                                                                           B
+                        𝑑𝑦                                                                                 *
+      Notice that            = 0 when x = 1,
+                        𝑑𝑥                                                                                                       x
+               𝑑𝑦       3                 1
+      but           = 1 4 ≠ 0 when x = – 2                  −2                −1                           1                     2
+               𝑑𝑥                                                                       A
+                    1        1                                                              *
+      ⇒ A, (– 2 , –2 16 ), is an oblique point of
+                                                                                                  −4
+      inflexion, and
+          B, (1, 3), is a stationary point of
+      inflexion.
+
+
+
+
+Integration
+  Area under graph – sum of rectangles
+                                                                     y
+                                                                                   y=f(x)
+  In any continuous graph, y = f (x), we can divide the
+  area between x = a and x = b into n strips, each of
+  width δ x.
+  The area under the graph (between the graph, the
+  x-axis and the lines x = a and x = b) is approximately                 y0        y1        y2                             yn
+  the area of the n rectangles, as shown.
+  ⇒ the area under the graph                                                                                                         x
+                                                                              dx        dx                            dx
+           𝑛                                        𝑏
+                                                                         a                                                 b
+
+  𝐴 ≅ � 𝑦𝑖 𝛿𝑥 , and as 𝛿𝑥 → 0,                 𝐴 = � 𝑦 𝑑𝑥
+        𝑖=1                                        𝑎
+
+
+
+
+  Integration as ‘anti-differentiation’
+
+                                                                 y
+  A = area under the curve from x = a to x                           y = f(x)
+
+  δ A = increase in area from x to x + δ x
+  δ A ≅ area of the rectangle shown
+                                                                                                       A       f(x) δ A
+  ⇒ δ A ≈ f (x) × δ x
+      𝛿𝐴
+  ⇒ 𝛿𝑥 ≈ 𝑓(𝑥)
+                                                                                                                      δx                 x
+                                                                                                                           x +δ x
+  As δ x → 0                                                                  a                                   x
+
+               𝑑𝐴
+  we have 𝑑𝑥 = 𝑓(𝑥)
+  ⇒ to find the integral we ‘anti-differentiate’ f (x).
+
+
+
+  C2 JUNE 2016 SDB                                                                                             33
+Index
+
+area of triangle, 9, 10           integrals
+binomial coefficients               area under curve, 29
+  n
+   Cr = nCn – r, 31                 definite, 29
+binomial coefficients, nCr, 31    integration
+binomial series, 21                 as anti-differentiation, 33
+                                    sum of rectangles, 33
+  binomial coefficients, 22
+  n
+   Cr or  n  , 22           logarithm, 23
+        r                         change of base, 24
+                                    rules of logs, 23
+choosing r objects from n, 31     mid point, 15
+circle                            Pascal’s triangle, 21
+  centre at origin, 15
+  general equation, 16            perpendicular lines, 15
+  intersection with line, 17      points of inflexion, 32
+  show line is tangent, 18        polynomials, 3
+  tangent equation, 17              long division, 3
+cosine rule, 10                   radians
+cubic equations, 7                  arc length, 8
+differentiation, 25                 area of sector, 8
+                                    area of segment, 8
+distance between two points, 15
+                                    connection between radians and degrees, 8
+equations                           definition, 8
+  ax = b, 24
+                                  remainder theorem, 4
+exponential, 23                   sine rule, 9
+factor theorem, 5                   ambiguous case, 10
+  choosing a suitable factor, 6
+                                  stationary points
+factorials, 22                      gradients before and after, 27
+factorising                         maxima and minima, 25
+  examples, 3                       maximum and minimum problems, 28
+functions                           second derivative, 26
+  decreasing, 25                  trapezium rule, 30
+  increasing, 25                  trig equations
+geometric series                    solving, 12
+  finite, 19                      trig functions
+  infinite, 20                      basic results, 9
+  nth term, 19                      graphs, 10
+  proof of sum formula, 19          identities, 13
+  sum of infinite series, 20
+  sum of n terms, 19
+                                  turning points, 25
+
+
+
+
+   34                                                        C2 JUNE 2016 SDB
+

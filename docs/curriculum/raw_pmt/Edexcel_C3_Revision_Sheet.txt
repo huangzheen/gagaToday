@@ -1,0 +1,136 @@
+                                 EXAMINATION HINTS
+
+Before the examination
+    Obtain a copy of the formulae book – and use it!
+    Write a list of and LEARN any formulae not in the formulae book
+    Learn basic definitions
+    Make sure you know how to use your calculator!
+    Practise all the past papers - TO TIME!
+
+
+At the start of the examination
+  Read the instructions on the front of the question paper and/or answer booklet
+  Open your formulae book at the relevant page
+
+
+During the examination
+  Read the WHOLE question before you start your answer
+  Start each question on a new page (traditionally marked papers) or
+  Make sure you write your answer within the space given for the question (on-line marked papers)
+  Draw clear well-labelled diagrams
+  Look for clues or key words given in the question
+  Show ALL your working - including intermediate stages
+  Write down formulae before substituting numbers
+  Make sure you finish a ‘prove’ or a ‘show’ question – quote the end result
+  Don’t fudge your answers (particularly if the answer is given)!
+  Don’t round your answers prematurely
+  Make sure you give your final answers to the required/appropriate degree of accuracy
+  Check details at the end of every question (e.g. particular form, exact answer)
+  Take note of the part marks given in the question
+  If your solution is becoming very lengthy, check the original details given in the question
+  If the question says “hence” make sure you use the previous parts in your answer
+  Don’t write in pencil (except for diagrams) or red ink
+  Write legibly!
+  Keep going through the paper – go back over questions at the end if time
+
+
+At the end of the examination
+  If you have used supplementary paper, fill in all the boxes at the top of every page
+                                             C3 KEY POINTS
+
+C3 Algebra and functions
+Simplification of rational expressions (uses factorising and finding common denominators)
+Domain and range of functions
+Inverse function, f–1(x) [ ff–1(x) = f–1f(x) = x]
+Knowledge and use of: domain of f = range of f–1; range of f = domain of f–1
+Composite functions e.g. fg(x)
+The modulus function
+Use of transformations (as in C1) with functions used in C3
+
+       Transformation                                    Description
+                                                                   ⎛0⎞
+ y = f(x) + a         a>0         Translation of y = f(x) through ⎜⎜ ⎟⎟
+                                                                   ⎝a⎠
+                                                                   ⎛ – a⎞
+ y = f(x + a)         a>0         Translation of y = f(x) through ⎜⎜ ⎟⎟
+                                                                   ⎝ 0 ⎠
+
+y = af(x)             a>0         Stretch of y = f(x) parallel to y-axis with scale factor a
+
+
+                                                                                             1
+ y = f(ax)            a>0         Stretch of y = f(x) parallel to x-axis with scale factor
+                                                                                             a
+                                  For y ≥ 0, sketch y = f(x)
+   y = |f(x)|                     For y < 0, reflect y = f(x) in the x-axis
+
+                                  For x ≥ 0, sketch y = f(x)
+   y = f(|x|)                     For x < 0, reflect [y = f(x) for x > 0] in the y-axis
+
+Also useful
+
+   y = –f(x)                      Reflection of y = f(x) in the x-axis (line y = 0)
+
+
+   y = f(–x)                      Reflection of y = f(x) in the y-axis (line x = 0)
+
+
+
+C3 Trigonometry
+            1                   1                 1    cos x
+sec x =           cosec x =           cot x =        =
+          cos x               sin x             tan x sin x
+
+sin2x + cos2x = 1;      1 + tan2x = sec2x;        1 + cot2x = cosec2x
+
+
+sin(A ± B) = sinAcosB ± cosAsinB                  cos(A ± B) = cosAcosB m sinAsinB
+                             tan A ± tan B
+               tan(A ± B) =
+                            1 m tan A tan B
+                                                                                               2 tan x
+sin 2x = 2sin x cos x; cos 2x = cos2x – sin2x = 2 cos2x – 1 = 1 – 2 sin2x;        tan 2x =
+                                                                                             1 − tan 2 x
+Graphs of inverse trig. functions
+– π/2 ≤ arcsin x ≤ π/2         0 ≤ arccos x ≤ π   – π/2 < arctan x < π/2
+Expressing acosθ + bsinθ in the form rcos(θ ± α) or rsin(θ ± α) and applications (e.g. solving
+equations, maxima, minima)
+
+
+C3 Exponentials and logarithms
+Graphs of y = ex and y = lnx and use of transformations to sketch e.g. y = e3x + 2
+Solutions to equations using ex and lnx (e.g. e2x + 1 = 3)
+exlna = ax
+
+
+C3 Differentiation
+d (e x )                d (e kx )                 d (ln x) 1                    d (ln kx) 1
+         = ex                     = ke kx                 =                              =
+  dx                       dx                        dx     x                       dx     x
+
+d (sin kx)                        d (cos kx)                      d (tan kx)
+           = k cos kx                        = –k sin kx                     = k sec kx
+                                                                                    2
+    dx                                dx                              dx
+
+Differentiation of other trig. functions: see formulae book
+
+                dy dy du                                   dy     1
+Chain rule        =  ×                                        =
+                dx du dx                                   dx ⎛ dyx ⎞
+                                                                ⎜ ⎟
+                                                                ⎝ dy ⎠
+                                                                                    du    dv
+                                                                  d( uv )       v      −u
+                  d(uv)    dv    du                                                 dx    dx
+Product rule            =u    +v                 Quotient rule              =
+                   dx      dx    dx                                dx                  v2
+
+
+C3 Numerical methods
+For a continuous function, a change in sign of f(x) in the interval (a, b) ⇒ a root of f(x) = 0 in the
+interval (a, b)
+Accuracy of roots by choosing an interval (e.g. 1.47 to 2 d.pl. test f(1.465) and f(1.475) for change
+of sign)
+Iterative methods: rearranging equations in the form xn+1 = f(xn) and using repeated iterations
+

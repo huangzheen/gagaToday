@@ -1,0 +1,150 @@
+                 The Big 50 Revision Guidelines - C2 OPHS
+
+
+The Big 50 Revision Guidelines for C2
+
+
+1. Know how to simplify algebraic fractions by division and cancelling,
+   especially by recognising factors of a2  b2
+
+2. Know how to divide a polynomial by (x  p) using long division or by
+   inspection
+
+3. Understand how to factorise a polynomial using the Factor Theorem
+
+4. Know how to use and interpret the Remainder Theorem
+
+5. Know how to find the midpoint of a line between two points
+
+6. Know how to find the distance between two points on a line
+
+7. Know how to find and use the equation of a                    circle
+   (x  a)2  (y  b)2  r 2
+
+
+8. Know how to use Geometric sequences and series, and the
+   associated formulae
+
+9. Know how to use Geometric progressions and how to find the nth
+   term of a sequence
+
+10.Know how to use geometric sequences to solve problems
+
+11.Know how to find the sum of a geometric series
+
+12.Know when and how to use the sum to infinity of a geometric series
+
+    1
+                  The Big 50 Revision Guidelines - C2 OPHS
+
+
+13.Understand and use Pascal’s Triangle to find binomial coefficients
+
+14.Know how to calculate with combinations and factorial notation
+
+                                 n
+15.Know how to use nCr or   in the Binomial expansion
+                                 r
+
+
+16.Know how to expand (a  bx)n using the Binomial expansion
+
+17.              Know how to use the Sine rule to find missing sides    of
+      any triangle
+
+18.Know how to use the Sine rule to find unknown angles of any
+      triangle
+
+19.Know when to look for the “ambiguous case” of the Sine rule and
+      finding two solutions for a missing angle in such cases
+
+20.Know how to use the Cosine rule to find an unknown side of any
+      triangle
+
+21.Know how to use the Cosine rule to find a missing angle in any
+      triangle
+
+22. Know when and how to use the Sine rule, the Cosine rule and
+      Pythagoras’ theorem in order to solve triangles completely
+
+23.Know how to calculate the area of a general triangle using sine.
+
+24.Know how to use radians to measure angles
+
+25.Know how to find the length of the arc of a circle
+
+
+       2
+                The Big 50 Revision Guidelines - C2 OPHS
+
+
+26.Know how to find the area of a sector of a circle
+
+27.Know how to find the area of a segment of a circle
+
+28.Understand the properties of the Sine, Cosine and Tangent functions
+   and the relationships between them
+
+29.Know how to interpret the values of the three trigonometric
+   functions in the four quadrants (A, S, T, C Diagram)
+
+30.Know how to find and use the exact values in surd form for the trig
+   functions of 0º, 30º, 45º, 60º, 90º, 180º and related angles
+
+31.Recognise and use the graphs of Sine  , Cosine  and Tangent 
+   and their reciprocal functions Cosecant  , Secant  and Cotangent
+   
+
+32.Know how to apply simple transformations of Sin  , Cos  and Tan
+   
+
+33.Know how to derive and use simple trigonometric identities
+
+34.Know how to solve simple trig equations
+
+35.Know how to solve equations of the form                 sin(n   )  k ,
+
+   cos(n   )  k or tan(n   )  k
+
+
+36.Know how to solve quadratic trig equations
+
+37.Know how to sketch and use the function y  a x
+
+38.Know how to write expressions as logarithms
+
+       3
+              The Big 50 Revision Guidelines - C2 OPHS
+
+
+39.Know how to calculate using logarithms to base 10
+
+40.Understand and use the Laws of logarithms
+
+41.Know how to solve equations of the form a x  b
+
+42.Know how to change the base of logarithms
+
+43.Understand and use Increasing & decreasing functions
+
+44.Know how to find and distinguish between Stationary points:
+   maximum, minimum and points of inflexion
+
+45.Know how to use turning points to solve problems
+
+46.Know how to calculate and apply simple definite integration
+
+47.Know how to calculate the Area under a curve
+
+48.Know how to interpret an Area under a curve that gives negative
+   values
+
+49.Know how to find the Area between a straight line and a curve
+
+50.Know how to apply the trapezium rule to approximate areas
+
+
+
+
+    4
+

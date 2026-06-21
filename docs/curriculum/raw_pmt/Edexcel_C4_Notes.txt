@@ -1,0 +1,2345 @@
+ Pure Core 4
+
+
+Revision Notes
+
+
+
+                 June 2016
+Pure Core 4
+
+1         Algebra .................................................................................................................3
+    Partial fractions ..................................................................................................................................................... 3
+
+2         Coordinate Geometry ...........................................................................................5
+    Parametric equations ............................................................................................................................................. 5
+        Conversion from parametric to Cartesian form .................................................................................................................. 6
+        Area under curve given parametrically .............................................................................................................................. 7
+
+3         Sequences and series ..........................................................................................8
+    Binomial series (1 + x)n for any n ....................................................................................................................... 8
+
+4         Differentiation ..................................................................................................... 10
+                                        𝑑𝑦            𝑑𝑥
+    Relationship between                      and          ...................................................................................................................... 10
+                                        𝑑𝑥            𝑑𝑦
+    Implicit differentiation ........................................................................................................................................ 10
+    Parametric differentiation ................................................................................................................................... 11
+    Exponential functions, a x ................................................................................................................................... 11
+    Related rates of change ....................................................................................................................................... 12
+    Forming differential equations ............................................................................................................................ 13
+
+5         Integration........................................................................................................... 14
+                                    1
+    Integrals of ex and ......................................................................................................................................... 14
+                          𝑥
+    Standard integrals ............................................................................................................................................... 14
+    Integration using trigonometric identities ........................................................................................................... 14
+    Integration by ‘reverse chain rule’ ...................................................................................................................... 15
+        Integrals of tan x and cot x ............................................................................................................................................... 16
+        Integrals of sec x and cosec x ........................................................................................................................................... 17
+    Integration using partial fractions ....................................................................................................................... 17
+    Integration by substitution, indefinite ................................................................................................................. 17
+    Integration by substitution, definite .................................................................................................................... 19
+        Choosing the substitution ................................................................................................................................................. 20
+    Integration by parts ............................................................................................................................................. 21
+    Area under curve ................................................................................................................................................. 22
+    Volume of revolution .......................................................................................................................................... 23
+        Volume of revolution about the x–axis............................................................................................................................. 23
+        Volume of revolution about the y–axis............................................................................................................................. 23
+    Parametric integration ......................................................................................................................................... 24
+    Differential equations.......................................................................................................................................... 25
+        Separating the variables ................................................................................................................................................... 25
+    Exponential growth and decay ............................................................................................................................ 26
+
+
+
+
+      C4 JUNE 2016 SDB                                                                                                                                                                    1
+6         Vectors ............................................................................................................... 27
+    Notation ...............................................................................................................................................................27
+    Definitions, adding and subtracting, etcetera ......................................................................................................27
+        Parallel and non - parallel vectors ..................................................................................................................................... 28
+        Modulus of a vector and unit vectors ................................................................................................................................ 29
+        Position vectors................................................................................................................................................................. 30
+        Ratios ................................................................................................................................................................................ 30
+        Proving geometrical theorems .......................................................................................................................................... 31
+    Three dimensional vectors...................................................................................................................................32
+        Length, modulus or magnitude of a vector ....................................................................................................................... 32
+        Distance between two points............................................................................................................................................. 32
+    Scalar product......................................................................................................................................................32
+        Perpendicular vectors ........................................................................................................................................................ 33
+        Angle between vectors ...................................................................................................................................................... 34
+        Angle in a triangle............................................................................................................................................................. 33
+    Vector equation of a straight line ........................................................................................................................35
+    Geometrical problems .........................................................................................................................................35
+    Intersection of two lines ......................................................................................................................................37
+        2 Dimensions .................................................................................................................................................................... 37
+        3 Dimensions .................................................................................................................................................................... 37
+
+7         Appendix ............................................................................................................ 38
+    Binomial series (1 + x)n for any n – proof .........................................................................................................38
+    Derivative of xq for q rational ..........................................................................................................................38
+      1
+    ∫ 𝑥 𝑑𝑥 for negative limits ...................................................................................................................................39
+    Integration by substitution – why it works ..........................................................................................................40
+    Parametric integration .........................................................................................................................................40
+    Separating the variables – why it works ..............................................................................................................41
+
+Index ........................................................................................................................... 42
+
+
+
+
+                                                                                                                                                                    C4 JUNE 2016 SDB
+2
+1       Algebra
+Partial fractions
+
+    1) You must start with a proper fraction: i.e. the degree of the numerator must be less than
+       the degree of the denominator.
+        If this is not the case you must first do long division to find quotient and remainder.
+
+
+    2) (a)      Linear factors (not repeated)
+                     ......                 A
+                                       ≡          + ........
+                (ax − b)(. . . . . . )   (ax − b)
+        (b)     Linear repeated factors (squared)
+                      ......                  A           B
+                                        ≡            +          + ........
+                (ax − b) (. . . . . . )
+                         2
+                                          (ax − b) 2
+                                                       (ax − b)
+        (c)     Quadratic factors)
+                    ......                Ax + B
+                                       ≡            + ........
+                (ax + b)(. . . . . . )
+                       2
+                                         (ax 2 + b)
+                       ......                    Ax + B
+          or                                ≡               + ........
+                (ax + bx + c)(. . . . . . )
+                       2
+                                              (ax + bx + c)
+                                                 2
+
+
+
+
+                               5 − x + 2x 2
+    Example:    Express                           in partial fractions.
+                             (1 − x)(1 + x 2 )
+    Solution:   The degree of the numerator, 2, is less than the degree of the denominator, 3, so
+        we do not need long division and can write
+
+                 5 − x + 2x 2                A     Bx + C
+                                    ≡            +                        multiply both sides by (1–x)(1+x2)
+                (1 − x)(1 + x 2 )           1− x   1+ x2
+        ⇒       5 – x + 2x2 ≡ A(1 + x2) + (Bx + C)(1 – x)
+        ⇒       5 – 1 + 2 = 2A          ⇒        A=3                                clever value!, put x = 1
+
+        ⇒       5=A+C                ⇒           C=2                                   easy value, put x = 0
+
+        ⇒       2=A–B                ⇒           B=1                               equate coefficients of x2
+
+                 5 − x + 2x 2                 3      x+2
+        ⇒                               ≡         +       .
+                (1 − x)(1 + x 2 )            1− x   1+ x2
+
+
+    Note: You can put in any value for x, so you can always find as many equations as you
+        need to solve for A, B, C, D . . . .
+
+
+    C4 JUNE 2016 SDB                                                                                       3
+                                       x 2 − 7 x + 22
+    Example:        Express                                    in partial fractions.
+                                     (2 x − 1)( x − 3) 2
+
+
+    Solution:     The degree of the numerator, 2, is less than the degree of the denominator,
+           3, so we do not need long division and can write
+              x 2 − 7 x + 22                 A          B         C
+                                      ≡           +            +                          multiply by denominator
+            (2 x − 1)( x − 3) 2            2x − 1   ( x − 3) 2   x−3
+           ⇒        x2 – 7x + 22 ≡ A(x – 3)2 + B(2x – 1) + C(2x – 1)(x – 3)
+           ⇒        9 – 21 + 22 = 5B                ⇒           B=2                           clever value, put x = 3
+                    1       7             5 2
+           ⇒        4
+                      − 2 + 22 = �2� 𝐴 ⇒                        A=3                          clever value, put x = ½
+
+           ⇒        22 = 9A – B + 3C                ⇒           C = –1                          easy value, put x = 0
+
+                       x 2 − 7 x + 22                 3          2                      1
+           ⇒                                    ≡          +                    −
+                     (2 x − 1)( x − 3) 2            2x − 1   ( x − 3) 2                x−3
+
+
+                                      x 3 + x 2 − 9x − 3
+    Example:        Express                                       in partial fractions.
+                                            x2 − 9
+
+
+    Solution:    Firstly the degree of the numerator is not less than the degree of the
+           denominator so we must divide top by bottom.
+    x2 – 9 ) x3     + x2           – 9x         –   3           ( x+1
+             x3                    – 9x
+                            x2                  –   3
+                            x2                  –   9
+                                                    6
+
+            x 3 + x 2 − 9x − 3                               6
+    ⇒                          = x+1 +
+                  x2 − 9                                   x −9
+                                                           2
+
+
+    Factorise to give x2 – 9 = (x – 3)(x + 3) and write
+              6                        6            A     B
+                        ≡                        ≡     +                                multiplying by denominator
+            x −9
+               2
+                                ( x − 3)( x + 3)   x−3   x+3
+    ⇒      6 ≡ A(x + 3) + B(x – 3)
+    ⇒      6 = 6A                ⇒        A=1                                                clever value, put x = 3
+
+    ⇒      6 = –6B               ⇒        B = –1                                             clever value, put x = –3
+
+            x 3 + x 2 − 9x − 3                              1     1
+    ⇒                          = x+1 +                         −
+                  x2 − 9                                   x−3   x+3
+
+
+
+
+                                                                                                   C4 JUNE 2016 SDB
+4
+2       Coordinate Geometry
+Parametric equations
+    If we define x and y in terms of a single variable (the letters t or θ are often used) then this
+    variable is called a parameter: we then have the parametric equation of a curve.
+
+
+    Example: x = 2 + t, y = t 2 – 3 is the parametric equation of a curve. Find
+        (i)     the points where the curve meets the x-axis,
+        (ii)    the points of intersection of the curve with the line y = 2x + 1.
+
+    Solution:
+        (i)     The curve meets the x-axis when y = 0         ⇒ t2 = 3    ⇒ t = ±√3
+        ⇒       curve meets the x-axis at (2 – √3, 0) and (2 + √3, 0).
+        (ii)    Substitute for x and y in the equation of the line
+                y = 2x + 1, and y = t 2 – 3, x = 2 + t
+        ⇒       t 2 – 3 = 2(2 + t) + 1
+        ⇒       t2 – 2t – 8 = 0   ⇒ (t – 4)(t + 2) = 0
+        ⇒       t = 4 or –2
+        ⇒       the points of intersection are (6, 13) and (0, 1).
+
+
+    Example: Find whether the curves x = 2t + 3, y = t2 – 2 and x = s – 1, y = s – 3 intersect.
+             If they do give the point of intersection, otherwise give reasons why they do not
+             intersect.
+
+
+    Solution:   If they intersect there must be values of t and s (not necessarily the same), which
+                make their x-coordinates equal, so for these values of t and s
+        ⇒       2t + 3 = s – 1⇒ s = 2t + 4
+                The y-coordinates must also be equal for the same values of t and s
+        ⇒       t2 – 2 = s – 3 = (2t + 4) – 3 = 2t + 1                   since s = 2t + 4
+
+        ⇒       t2 – 2t – 3 = 0 ⇒        (t – 3)(t + 1) = 0
+        ⇒       t = 3, s = 10 or t = –1, s = 2
+        ⇒       Curves intersect at t = 3 giving (9, 7). Check s = 10 gives (9, 7).
+        Or      curves intersect at t = –1 giving (1, –1). Check s = 2 giving (1, –1).
+
+
+
+
+    C4 JUNE 2016 SDB                                                                                   5
+Conversion from parametric to Cartesian form
+
+    Eliminate the parameter (t or θ or …) to form an equation between x and y only.
+    Example: Find the Cartesian equation of the curve given by y = t 2 – 3, x = t + 2.
+
+    Solution:        x=t+2      ⇒ t = x – 2, and y = t 2 – 3
+
+        ⇒            y = (x – 2)2 – 3,
+                     which is the Cartesian equation of a parabola with vertex at (2, –3)
+
+
+    With trigonometric parametric equations the formulae
+        sin2 t + cos2 t = 1          and           sec2t – tan2 t = 1
+    will often be useful.
+
+
+    Example: Find the Cartesian equation of the curve given by
+                     y = 3sin t + 2, x = 3cos t – 1.
+
+
+    Solution:        Re-arranging we have
+                      y−2                          x +1
+        sin t =           , and          cos t =        , which together with sin2 t + cos2 t = 1
+                       3                             3
+              y − 2
+                          2
+                                 x + 1
+                                             2
+
+    ⇒                       +                  = 1
+              3                3 
+    ⇒        (x + 1)2 + (y – 2)2 = 9
+             which is the Cartesian equation of a circle with centre (–1, 2) and radius 3.
+
+
+    Example: Find the Cartesian equation of the curve given by y = 3tan t, x = 4sec t.
+        Hence sketch the curve.
+
+
+    Solution:        Re-arranging we have                                                    y
+                      y                      x                                                       x²/16−y²/9=1
+         tan t =        , and     sec t =      ,                                         4
+                      3                      4
+                                                                                         2
+        which together with sec2 t – tan2 t = 1
+                                                                                                                        x
+                x2       y2                                         −8   −6   −4   −2            2       4     6    8
+        ⇒              − 2      = 1
+                42       3                                                              −2
+
+
+                                                                                        −4
+        which is the standard equation of a
+        hyperbola with centre (0, 0)
+        and x-intercepts (4, 0), (–4, 0).
+
+
+                                                                                                      C4 JUNE 2016 SDB
+6
+Area under curve given parametrically
+
+
+  We know that the area between a curve and the x-axis is given by A = ∫ 𝑦 𝑑𝑥
+       dA
+  ⇒       = y.
+       dx
+                                           dA dA dx                 dA    dx
+  But, from the chain rule                   =  ×            ⇒         =y
+                                           dt dx dt                 dt    dt
+  Integrating with respect to t
+                       dx
+  ⇒ A = ∫y                dt .
+                       dt
+
+
+  Example: Find the area between the curve y = t 2 – 1, x = t 3 + t, the x-axis and the lines
+           x = 0 and x = 2.
+
+                                             2
+  Solution:           The area is A = � 𝑦 𝑑𝑥 .
+                                             0
+                                 ?
+                                     𝑑𝑥
+      ⇒               A = � 𝑦           𝑑𝑡                                        we must write limits for t, not x
+                             ?       𝑑𝑡
+
+                                                      dx
+      Firstly we need to find y and                      in terms of t.
+                                                      dt
+                                      dx
+           y = t2 – 1 and                = 3t2 + 1.
+                                      dt
+      Secondly we are integrating with respect to t and so the limits of integration must be for
+      values of t.
+           x = 0 ⇒ t = 0, and
+           x = 2 ⇒ t3 + t = 2                    ⇒ t3 + t – 2 = 0   ⇒ (t – 1)(t2 + t + 2) = 0     ⇒ t = 1 only.
+              so the limits for t are from 0 to 1
+                         1       dx
+      ⇒ A = ∫                y      dt = ∫ 1 (t2 – 1) (3t2 + 1) dt
+                         0       dt        0
+
+
+                       3t4 – 2t2 – 1 dt
+                  1
+      =       ∫   0
+
+                                       1
+               3t 5 2t 3 
+      =        5 − 3 − t  = − 1 15
+                                   1
+
+                         0
+
+
+  Note that in simple problems you may be able to eliminate t and find ∫ 𝑦 𝑑𝑥 in the usual
+  manner. However there will be some problems where this is difficult and the above technique
+  will be better.
+
+
+
+   C4 JUNE 2016 SDB                                                                                                   7
+3       Sequences and series
+Binomial series (1 + x)n for any n
+
+                                     n(n − 1)        n(n − 1)(n − 2) 3
+        (1 + x)n = 1 + nx +                   × x2 +                × x + ....
+                                        2!                  3!
+        This converges provided that |x| < 1.
+
+
+    Example: Expand (1 + 3x) –2, giving the first four terms, and state the values of x for
+        which the series is convergent.
+
+    Solution:
+                                                               (−2)×(−3)                   (−2)×(−3)×(−4)
+            (1 + 3x) –2         = 1 + (–2) × 3x +                    2!
+                                                                               × (3𝑥)2 +             3!
+                                                                                                                  × (3𝑥)3
+        = 1 – 6x + 27x2 – 108x3 + ...
+        This series is convergent when |3x| < 1                  ⇔         |x| < 1/3.
+
+                                                                                                       1
+    Example: Use the previous example to find an approximation for                                           .
+                                                                                                  0 ⋅ 9997 2
+                                      1
+    Solution:    Notice that                = 0⋅9997 –2 = (1 + 3x)–2 when x = – 0⋅0001.
+                                 0 ⋅ 9997 2
+
+
+        So writing x = – 0⋅0001 in the expansion 1 – 6x + 27x2 – 108x3
+        0⋅9997 –2 ≈ 1 + 0⋅0006 + 0⋅00000027 + 0⋅000000000108 = 1⋅000600270108
+        The correct answer to 13 decimal places is 1⋅0006002701080                                                    not bad eh?
+
+
+                                          1
+    Example: Expand (4 − x) , giving all terms up to and including the term in x3, and state
+                                          2
+
+
+        for what values of x the series is convergent.
+
+
+    Solution:    As the formula holds for (1 + x)n we first re-write
+                                                   1                       1
+                                      1
+                                       x2       x2
+                            1
+
+                  (4 − x)   2
+                                = 4 1 −  = 2 × 1 − 
+                                      2
+                                                                                           and now we can use the formula
+                                     4          4
+             1 x              1
+                                     × − 12      x
+                                                       2         1
+                                                                     × − 12 × − 23      x
+                                                                                              3
+                                                                                                        
+    = 2 × 1 +  −  +           2
+                                              × −        +     2
+                                                                                     × −         + .....
+             2  4                  2!         4                      3!            4             
+                                                                                                       
+
+                x   x2   x3
+    = 2 –         −    −    .
+                4   64 512
+    This expansion converges for              x
+                                              4
+                                                  <1       ⇔     |x| < 4.
+
+
+                                                                                                                 C4 JUNE 2016 SDB
+8
+                                              3 x −1
+Example: Find the expansion of                        in ascending powers of x up to x2.
+                                             x − x −6
+                                               2
+
+
+Solution:   First write in partial fractions
+      3 x −1    2   1
+⇒            =    +    , which must now be written as
+     x − x−6
+      2
+               x+3 x−2
+       2           1
+              −              =   2
+                                     (1+ 3x ) −1 − 12 (1 − 2x ) −1
+    3(1+ 3x )   2(1 − 2x )       3
+
+
+
+     2           x  (−1)(−2)  x     1            − x  (−1)(−2)  − x  
+                                      2                                            2
+
+=         1 + (−1)  +                 −      1 + ( −1)      +             
+     3          3      2!  3        2            2       2!  2  
+
+    1   17 x   11x 2
+=     −      −       .
+    6    36     216
+
+
+
+
+C4 JUNE 2016 SDB                                                                           9
+4        Differentiation
+
+                                     𝒅𝒚              𝒅𝒙
+Relationship between                      and
+                                     𝒅𝒙              𝒅𝒚
+         𝑑𝑦 𝑑𝑥                       𝑑𝑦         1
+           ×   =1            ⇒          =       𝑑𝑥                  using the chain rule
+         𝑑𝑥 𝑑𝑦                       𝑑𝑥         𝑑𝑦
+
+                                     dy                       dx   1
+         So if   y = 3x2     ⇒          = 6x          ⇒          =    .
+                                     dx                       dy   6x
+
+
+Implicit differentiation
+     This is just the chain rule when we do not know explicitly what y is as a function of x.
+
+
+     Examples: The following examples use the chain rule (or implicit differentiation)
+         𝑑(𝑦 3 )   𝑑(𝑦 3 ) 𝑑𝑦         𝑑𝑦
+                 =        ×    = 3𝑦 2
+          𝑑𝑥        𝑑𝑦      𝑑𝑥        𝑑𝑥
+         𝑑(sin 𝑦)   𝑑(sin 𝑦)   𝑑𝑦         𝑑𝑦
+                  =          ×    = cos 𝑦
+           𝑑𝑥         𝑑𝑦       𝑑𝑥         𝑑𝑥
+         𝑑(5𝑥 2 𝑦)               𝑑𝑦
+                   = 10𝑥𝑦 + 5𝑥 2                                                  using the product rule
+           𝑑𝑥                    𝑑𝑥
+          d 2
+             (
+             x + 3y
+                    3
+                      )          (2
+                      = 3 x 2 + 3y ×
+                                     d 2
+                                            )
+                                        x + 3y            (        ) = 3 (x + 3 y ) ×  2 x + 3 dy
+                                                                            2       2               
+                                                                                                    
+          dx                         dx                                                         dx  
+
+
+     Example: Find the gradient of, and the equation of, the tangent to the curve
+            x2 + y2 – 3xy = –1 at the point (1, 2).
+
+
+     Solution:   Differentiating x2 + y2 – 3xy = –1 with respect to x gives
+                      dy           dy 
+            2x + 2y     –  3 y + 3x  = 0
+                      dx           dx 
+                 dy   3y − 2x                             dy
+            ⇒       =                       ⇒                = 4         when x = 1 and y = 2.
+                 dx   2 y − 3x                            dx
+            Equation of the tangent is y – 2 = 4(x – 1)
+                 ⇒         y = 4x – 2.
+
+
+
+
+                                                                                               C4 JUNE 2016 SDB
+10
+Parametric differentiation
+
+                                                𝑑𝑦
+      𝑑𝑦   𝑑𝑦 𝑑𝑡                   𝑑𝑦           𝑑𝑡
+         =   ×                 ⇒      =         𝑑𝑥
+      𝑑𝑥   𝑑𝑡 𝑑𝑥                   𝑑𝑥           𝑑𝑡
+
+
+  Example: A curve has parametric equations x = t 2 + t, y = t 3 – 3t.
+     (i) Find the equation of the normal at the point where t = 2.
+     (ii) Find the points with zero gradient.
+
+  Solution:
+      (i)     When t = 2, x = 6 and y = 2.
+       dy                dx
+          = 3t 2 − 3 and    = 2t + 1
+       dt                dt
+                      𝑑𝑦
+              𝑑𝑦      𝑑𝑡       3𝑡 2 − 3   9
+      ⇒          =    𝑑𝑥   =            =            when t = 2
+              𝑑𝑥      𝑑𝑡
+                               2𝑡 + 1     5
+                                                                    −5
+      Thus the gradient of the normal at the point (6, 2) is         9
+                                     −5
+      and its equation is y – 2 = 9 (x – 6)                  ⇒    5x + 9y = 48.
+                                     dy   3t 2 − 3
+      (ii)    gradient = 0 when         =          = 0
+                                     dx    2t + 1
+      ⇒       3t2 – 3 = 0
+      ⇒       t = ±1
+      ⇒       points with zero gradient are (0, 2) and (2, –2).
+
+
+
+
+Exponential functions, ax
+
+      Proof (i)     y = ax
+      ⇒      ln y = ln ax = x ln a
+             1 𝑑𝑦               𝑑𝑦
+      ⇒           = ln 𝑎   ⇒       = 𝑦 ln a
+             𝑦 𝑑𝑥               𝑑𝑥
+              𝑑(𝑎 𝑥 )
+      ⇒               = 𝑎 𝑥 ln a
+               𝑑𝑥
+
+                                            𝑥
+      Proof (ii)       y = ax = �𝑒 ln 𝑎 �       = 𝑒 𝑥 ln 𝑎        since a = 𝑒 ln 𝑎
+              𝑑𝑦
+      ⇒       𝑑𝑥
+                   = 𝑒 𝑥 ln 𝑎 × ln a = 𝑎 𝑥 ln a                   chain rule
+              𝑑(𝑎 𝑥 )
+      ⇒               = 𝑎 𝑥 ln a
+               𝑑𝑥
+
+
+
+
+  C4 JUNE 2016 SDB                                                                   11
+                                                    2
+     Example:       Find the derivative of 𝑦 = 3𝑥 .
+
+
+                    𝑑𝑦    𝑥2
+                                  𝑑(𝑥 2 )     2
+     𝑆𝑜𝑙𝑢𝑡𝑖𝑜𝑛:         = 3 ln 3 ×         = 3𝑥 ln 3 × 2𝑥
+                    𝑑𝑥             𝑑𝑥
+
+
+     Example:       Find the derivative of 𝑦 = 5sin 𝑥 .
+
+
+                    𝑑𝑦                 𝑑(sin 𝑥)
+     𝑆𝑜𝑙𝑢𝑡𝑖𝑜𝑛:         = 5sin 𝑥 ln 5 ×          = 5sin 𝑥 ln 5 × cos 𝑥
+                    𝑑𝑥                   𝑑𝑥
+
+
+
+
+Related rates of change
+     We can use the chain rule to relate one rate of change to another.
+     Example:    A spherical snowball is melting at a rate of 96 cm3 s –1 when its radius is 12 cm.
+           Find the rate at which its surface area is decreasing at that moment.
+
+
+                                      4
+     Solution:   We know that V = 3 πr3 and that A = 4π r2.
+         Using the chain rule we have
+          dV   dV dr              dr                      dV
+             =    ×    = 4π r 2 ×    ,          since        = 4π r 2
+          dt   dr   dt            dt                      dr
+             dV            dr
+     ⇒          = 4 π r2 ×
+             dt            dt
+                                    dr
+     ⇒      96 = 4 × π × 122 ×
+                                    dt
+             dr    1
+     ⇒          =          cm s-1
+             dt   6π
+
+
+         Using the chain rule again
+          dA dA dr            dr                          dA
+             =   ×   = 8π r ×    ,              since        = 8π r
+          dt   dr dt          dt                          dr
+           dA                 1
+     ⇒        = 8 × π × 12 ×    = 16 cm 2 s −1
+           dt                6π
+
+
+                                                                                     C4 JUNE 2016 SDB
+12
+Forming differential equations
+
+  Example: The mass of a radio-active substance at time t is decaying at a rate which is
+        proportional to the mass present at time t. Find a differential equation connecting the
+        mass m and the time t.
+                                  dm
+  Solution:   Remember that          means the rate at which the mass is increasing so in this
+                                  dt
+        case we must consider the rate of decay as a negative increase
+                  dm
+        ⇒            ∝ –m
+                  dt
+                  dm
+        ⇒            = – km, where k is the (positive) constant of proportionality.
+                  dt
+                  1
+       ⇒      �     𝑑𝑚 = � −𝑘𝑡 𝑑𝑡
+                  𝑚
+                                    1
+              ⇒         ln m = − 2 kt 2 + ln A
+                  𝑚     1
+        ⇒     ln � � = − 𝑘𝑡 2
+                  𝐴     2
+                          1   2
+       ⇒      𝑚 = 𝐴𝑒 −2𝑘𝑡
+
+
+
+
+  C4 JUNE 2016 SDB                                                                               13
+5        Integration
+                                       𝟏
+Integrals of ex and
+                                       𝒙
+
+         ∫ e dx = e + c
+             x                 x
+
+
+
+         ⌠ 1 dx = ln | x | + c
+                                                          for a further treatment of this result, see the appendix
+         ⌡x
+
+
+                     x 3 + 3x
+     Example: Find ⌠
+                             dx
+                   ⌡ x2
+
+                       ⌠ x + 3x
+                          3
+                                     ⌠ x + 3 dx = ½ x2 + 3 ln x + c.
+                                dx = 
+     Solution:         
+                       ⌡ x  2
+                                     ⌡     x
+
+
+Standard integrals
+
+         x must be in RADIANS when integrating trigonometric functions.
+
+
+                 f (x)
+                                           ∫ f ( x) dx            f (x)
+                                                                                           ∫ f ( x) dx
+                   n
+                                              x n +1
+                  x                                               sin x                      – cos x
+                                              n +1
+                  1
+                  x                         ln x               cos x                        sin x
+                  ex                           ex             sec x tan x                     sec x
+                                                                     2
+                                                                 sec x                        tan x
+                                                             cosec x cot x                  – cosec x
+                                                                         2
+                                                               cosec x                       – cot x
+
+
+
+
+Integration using trigonometric identities
+
+
+     Example: Find            ∫ cot x dx .
+                                   2
+
+
+
+
+     Solution:        cot2 x = cosec2 x – 1
+         ⇒        ∫ cot x dx = ∫ cosec x − 1 dx
+                          2                            2
+
+
+
+
+         =        – cot x – x + c.
+
+
+
+
+                                                                                                C4 JUNE 2016 SDB
+14
+  Example: Find ∫ sin 2 x dx.
+
+  Solution:       sin2 x = ½ (1 – cos 2x)
+      ⇒       ∫ sin x dx = ∫
+                      2                1
+                                           2   (1 − cos 2 x) dx
+
+      =       ½ x – ¼ sin 2x + c.
+  You cannot change x to 3x in the above result to find ∫ sin 2 3x dx .                                  see next example
+
+  Example: Find ∫ sin 2 3x dx .
+
+  Solution:       sin2 3x = ½ (1 – cos 2 × 3x) = ½ (1 – cos 6x)
+      ⇒       ∫ sin 3x dx = ∫
+                      2                    1
+                                               2   (1 − cos 6 x) dx
+
+      =           ½ x – 1/12 sin 6x + c.
+
+
+  Example: Find           ∫ sin 3x cos 5x dx.
+
+  Solution:       Using the formula 2 sin A cos B = sin(A + B) + sin(A – B)
+      This formula is NOT in the formula booklet – you can use the formulae for sin(A ± B) and add them
+
+                  ∫ sin 3x cos 5x dx
+      =           1
+                    /2 ∫ sin 8x + sin (–2x) dx
+                                             =                        1
+                                                                          /2 ∫ sin 8x – sin 2x dx
+                   1
+      =           – /16 cos 8x + ¼ cos 2x + c.
+
+
+
+Integration by ‘reverse chain rule’
+
+  Some integrals which are not standard functions can be integrated by thinking of the chain
+  rule for differentiation.
+  Example: Find ∫ sin 4 3x cos 3x dx .
+
+  Solution:       ∫ sin 3x cos 3x dx
+                          4
+
+
+
+                                                                                        4   du
+      If we think of u = sin 3x, then the integrand looks like u                               if we ignore the
+                                                                                            dx
+      constants, which would integrate to give 1/5 u5
+      so we differentiate u5 = sin5 3x
+
+      to give
+                   d
+                   dx
+                      (
+                      sin 5 3x   ) = 5(sin 3x )× 3 cos 3x = 15 sin 3x cos 3x
+                                                    4                               4
+
+
+
+      which is 15 times what we want and so
+
+      ∫ sin 3x cos 3x dx =
+              4                        1
+                                      15
+                                               sin 5 3x + c
+
+
+
+  C4 JUNE 2016 SDB                                                                                                     15
+                                        x
+     Example: Find ∫                                  dx
+                                    (2 x − 3)
+                                       2
+
+
+                                x
+     Solution:       ∫ (2 x − 3) dx
+                             2
+
+
+
+                                                                                                      1 du
+         If we think of u = (2x2 – 3), then the integrand looks like                                       if we ignore the
+                                                                                                      u dx
+         constants, which would integrate to ln u
+         so we differentiate ln u = ln 2x2 – 3
+
+         to give
+                       d
+                       dx
+                         (ln 2 x 2 − 3=       )             1
+                                                          2x − 3
+                                                                 × 4=
+                                                                   2
+                                                                    x
+                                                                                            4x
+                                                                                        (2 x 2 − 3)
+         which is 4 times what we want and so
+                   x
+         ∫ (2 x − 3) dx = ¼ ln 2x – 3 + c.
+                                                               2
+                 2
+
+
+                                     𝑓 ′ (𝑥)
+         𝐈𝐧 𝐠𝐞𝐧𝐞𝐫𝐚𝐥              �           𝑑𝑥 = ln|𝑓(𝑥)| + 𝑐
+                                     𝑓(𝑥)
+                                               2
+     𝐸𝑥𝑎𝑚𝑝𝑙𝑒:           Find � 𝑥𝑒 2𝑥 𝑑𝑥
+                                             𝑑             2                   2
+     Solution:       First consider 𝑑𝑥 �𝑒 2𝑥 � = 4x 𝑒 2𝑥 , which is 4 × the integrand
+                                                      2
+                         2𝑥 2
+                                      𝑒 2𝑥
+         ⇒       � 𝑥𝑒            𝑑𝑥 =      +𝑐
+                                        4
+
+
+     𝐸𝑥𝑎𝑚𝑝𝑙𝑒:           Find � 53𝑥 𝑑𝑥
+                                              𝑑
+     Solution:       We know that 𝑑𝑥 (53𝑥 ) = 53𝑥 ln 5 × 3,                                           using the chain rule
+
+                                            53𝑥
+         ⇒       � 53𝑥 𝑑𝑥 =                       +𝑐
+                                           3 ln 5
+
+
+Integrals of tan x and cot x
+                                 sin x          − sin x
+         ∫ tan x dx = ∫                dx = − ∫         dx ,
+                                 cos x          cos x
+                                           f '( x )
+         and we now have ∫ =dx                                         ln f ( x ) + c
+                                           f ( x)
+                     ⇒           ∫ tan x dx = – ln cos x + c
+                     ⇒           ∫ tan x dx = ln sec x + c
+         cot x can be integrated by a similar method to give
+                                 ∫ cot x dx = ln sin x + c
+
+                                                                                                                      C4 JUNE 2016 SDB
+16
+Integrals of sec x and cosec x
+
+
+                     sec x (sec x + tan x)       sec 2 x + sec x tan x
+      ∫ sec x dx = ∫                       dx = ∫ sec x + tan x dx
+                        sec x + tan x
+      The top is now the derivative of the bottom
+                           f ' ( x)
+      and we have ∫                 dx = ln f ( x) + c
+                            f ( x)
+      ⇒       ∫ sec x dx = ln sec x + tan x + c
+      and similarly
+              ∫ cosec x dx = –ln cosec x + cot x + c
+
+
+Integration using partial fractions
+      For use with algebraic fractions where the denominator factorises.
+                          6x
+  Example: Find ∫                   dx
+                     x +x−2    2
+
+                                   6x
+  Solution: First express                 in partial fractions.
+                              x +x−2
+                                2
+
+
+            6x               6x            A           B
+                   ≡                   ≡        +
+         x +x−2
+          2
+                      ( x − 1)( x + 2)   x −1        x+2
+        ⇒     6x ≡ A(x + 2) + B(x – 1).
+              put x = 1             ⇒      A = 2,
+              put x = –2            ⇒      B=4
+                          6x                   2        4
+        ⇒      ∫ x + x − 2 dx = ∫ x − 1 + x + 2 dx
+                      2
+
+
+        =     2 ln |x – 1| + 4 ln |x + 2| + c.
+
+
+
+
+Integration by substitution, indefinite
+      (i)     Use the given substitution involving x and u, (or find a suitable substitution).
+                                   du    dx
+      (ii)    Find either             or    , whichever is easier and re-arrange to find dx in terms
+                                   dx    du
+              of du, i.e dx = …... du
+      (iii)   Use the substitution in (i) to make the integrand a function of u, and use your
+              answer to (ii) to replace dx by ...... du.
+      (iv)    Simplify and integrate the function of u.
+      (v)     Use the substitution in (i) to write your answer in terms of x.
+
+
+
+   C4 JUNE 2016 SDB                                                                               17
+     Example:    Find ∫ x 3x 2 − 5 dx using the substitution u = 3x2 – 5.
+
+     Solution:   (i)        u = 3x2 – 5
+                 du                                             du
+         (ii)       = 6x                     ⇒          dx =
+                 dx                                             6x
+         (iii)   We can see that there an x will cancel, and √3𝑥 2 − 5 = √𝑢
+                                                                du            u
+                 ∫ x 3x − 5 dx =
+                       2
+                                                      ∫ x u 6x       =   ∫   6
+                                                                                du
+                                                            3
+                                1                           2
+                       1                              1 u
+                       6∫
+         (iv)    =        u     2
+                                        du    =         × 3      + c
+                                                      6   2
+                                    3
+
+               (3x 2 − 5) 2
+         (v) =                              + c
+                    9
+
+                               1
+     Example:    Find ∫            dx using the substitution x = tan u.
+                             1+ x2
+
+
+     Solution:   (i)        x = tan u.
+                 dx
+         (ii)       = sec 2 u                 ⇒       dx = sec2 u du.
+                 du
+                        1                               1
+         (iii)   ∫ 1+ x     2
+                                    dx = ∫
+                                                   1 + tan u
+                                                          2
+                                                             sec 2 u du
+
+                              sec 2 u
+         (iv)    =          ∫ sec 2 u du                       since 1 + tan2 u = sec2 u
+
+                 =          ∫ du             =      u + c
+
+         (v)     =          tan –1 x + c.
+
+
+
+
+                                        3x
+     Example: Find ∫                              dx using the substitution u2 = x2 – 4.
+                                    x −42
+
+
+
+
+     Solution:   (i)        u2 = x2 – 4.
+         (ii)    Do not re-arrange as 𝑢 = √𝑥 2 − 4
+                 We know that
+                                             d 2
+                                             dx
+                                                  ( )
+                                                u = 2u
+                                                       du
+                                                       dx
+                                                          so differentiating gives
+
+                       du                                       u
+                 2u       = 2x                    ⇒     dx =      du .
+                       dx                                       x
+                                                                                           C4 JUNE 2016 SDB
+18
+      (iii)   We can see that an x will cancel and                                x 2 − 4 = u so
+
+                       3x                          3x   u
+              ∫                       dx = ∫          ×   du
+                      x2 − 4                       u    x
+
+      (iv)    =          ∫ 3 du                =    3u + c
+
+
+      (v)     =          3 x2 − 4 + c
+
+
+  A justification of this technique is given in the appendix.
+
+
+
+
+Integration by substitution, definite
+
+  If the integral has limits then proceed as before but remember to change the limits from
+  values of x to the corresponding values of u.
+      Add     (ii) (a) Change limits from x to u, and
+      new     (v)        Put in limits for u.
+
+                         6
+  Example: Find ∫ x 3x − 2 dx using the substitution u = 3x – 2.
+                 2
+
+
+  Solution:   (i)        u = 3x – 2.
+               du                                   du
+      (ii)        = 3            ⇒         dx =
+               dx                                    3
+      (ii) (a) Change limits from x to u
+              x = 2 ⇒ u = 3 × 2 – 2 = 4, and x = 6 ⇒ u = 3 × 6 – 2 = 16
+                                                           u+2 2
+                                                                     1
+                                                   16                        du
+                      x 3 x − 2 dx = ∫                        ×u
+                  6
+      (iii)   ∫   2                                4        3                 3
+                                           3           1
+                                 16
+      (iv)    =          1
+                         9   ∫   4
+                                       u   2
+                                               + 2u    2
+                                                                du
+                                                           16
+                            52       3
+                                        
+                         1 
+                                + 2× 3 
+                                      2
+                             u      u
+              =          9  5          
+                            2      2
+                                         4
+
+      (v)     =          1
+                         9
+                             [ × 1024 +
+                             2
+                             5
+                                                   4
+                                                   3
+                                                       × 64] –       1
+                                                                     9
+                                                                         [ × 32 + × 8] = 52⋅4 to 3 S.F.
+                                                                         2
+                                                                         5
+                                                                                    4
+                                                                                    3
+
+
+
+
+  C4 JUNE 2016 SDB                                                                                        19
+Choosing the substitution
+
+
+     In general put u equal to the ‘awkward bit’ – but there are some special cases where this will
+     not help.
+         ∫ 𝑥 3 (𝑥 2 + 1)5 𝑑𝑥                put u = x2 + 1
+             3𝑥
+         ∫ (𝑥−2)2 𝑑𝑥                        put u = x – 2
+
+         ∫ 𝑥√2𝑥 + 5 𝑑𝑥                      put u = 2x + 5               or     u2 = 2x + 5
+                                            𝑥𝑛
+         ∫ 𝑥 𝑛 √4 − 𝑥 2 𝑑𝑥      or       ∫ √4−𝑥 2 dx
+                  put u or u2 = 4 – x2                     only if n is ODD
+                  put x = 2 sin u                          only if n is EVEN (or zero)
+                  this makes √4 − 𝑥 2 = √4 cos2 𝑢 = 2 cos u
+
+
+         There are many more possibilities – use your imagination!!
+
+
+     Example: Find I = ∫ √16 − 𝑥 2 𝑑𝑥, and express your answer in as simple a form as
+        possible.
+
+
+     Solution:    This is of the form ∫ 𝑥 𝑛 √16 − 𝑥 2 𝑑𝑥 where n = 0, an even number
+         ⇒        use the substitution x = 4 sin u,
+         ⇒        dx = 4 cos u du
+         ⇒        I = ∫ √16 − 16 sin2 𝑢 × 4 cos 𝑢 𝑑𝑢
+                    = ∫ 16 cos2 𝑢 𝑑𝑢           =       8 ∫ 1 + cos 2𝑢 𝑑𝑢
+                                1
+                    = 8 �𝑢 + 2 sin 2𝑢� + 𝑐
+                                                       𝑥
+                  x = 4 sin u   ⇒ u = arcsin �4�,
+                                                       𝑥
+                  but sin 2𝑢 = sin �2 arcsin �4�� is not in the simplest form.
+                                               1
+                  Instead write I = 8 �𝑢 + 2 × 2sin 𝑢 cos 𝑢� + 𝑐,
+
+                                                                 𝑥 2
+                  use cos 𝑢 = √1 − sin2 𝑢 = �1 − �4�
+
+                                     𝑥             𝑥              𝑥 2
+         ⇒        I = 8 arcsin �4� + 8 × 4 × �1 − �4� + c
+                                     𝑥     𝑥
+                    = 8 arcsin �4� + 2 √16 − 𝑥 2 + c
+
+
+
+
+                                                                                              C4 JUNE 2016 SDB
+20
+Integration by parts
+
+  The product rule for differentiation is
+
+
+             𝑑(𝑢𝑣)     𝑑𝑣     𝑑𝑢         𝑑𝑣   𝑑(𝑢𝑣)     𝑑𝑢
+                   = 𝑢    + 𝑣        ⇒ 𝑢    =       − 𝑣
+              𝑑𝑥       𝑑𝑥     𝑑𝑥         𝑑𝑥    𝑑𝑥       𝑑𝑥
+                𝑑𝑣                𝑑𝑢
+  ⟹          �𝑢     𝑑𝑥 = 𝑢𝑣 − � 𝑣     𝑑𝑥
+                𝑑𝑥                𝑑𝑥
+
+
+
+  To integrate by parts
+                                      dv
+      (i)       choose u and
+                                      dx
+                                 du
+      (ii)      find v and
+                                 dx
+      (iii)     substitute in formula and integrate.
+
+
+
+
+  Example: Find ∫ x sin x dx
+
+  Solution:     (i)        Choose u = x, because it disappears when differentiated
+                   dv
+      and choose      = sin x
+                   dx
+                       du
+      (ii)      u=x ⇒      = 1 and
+                       dx
+                𝑑𝑣
+                   = sin 𝑥 ⇒ 𝑣 = − cos 𝑥
+                𝑑𝑥
+
+
+                      dv                      du
+      (iii)     ∫ u dx dx = uv − ∫ v dx dx
+      ⇒         ∫ x sin x dx = –x cos x – ∫ 1× (− cos x) dx
+      =         –x cos x + sin x + c.
+
+
+
+
+  C4 JUNE 2016 SDB                                                                   21
+     Example: Find       ∫ ln x dx
+                                                               dv
+     Solution:    (i)    It does not look like a product, u       , but if we take u = ln x and
+                                                               dx
+                  dv            dv
+                     = 1 then u    = ln x × 1 = ln x
+                  dx            dx
+                               du   1               dv
+          (ii)    u = ln x ⇒      =   and              = 1 ⇒ v =x
+                               dx   x               dx
+                                                     1
+          (iii)   ∫ ln x ×1 dx = x ln x − ∫ x × x dx
+                                 =       x ln x – x + c.
+
+
+
+
+Area under curve
+     We found in Core 2 that the area under the curve is written
+                      𝑏
+     as the integral ∫𝑎 𝑦 𝑑𝑥.
+     We can consider the area as approximately the sum of the
+     rectangles shown.
+     If each rectangle has width δx and if the heights of the
+     rectangles are y1, y2, ..., yn                                         a                     b
+     then the area of the rectangles is approximately the area
+     under the curve
+      b
+
+     ∑ y δ x ≅ ∫ y dx
+                   b
+
+                   a
+      a
+
+                                  b
+                        we have ∑ y δ x → ∫ y dx
+                                                b
+     and as δx → 0
+                                                a
+                                  a
+
+     This last result is true for any integrable function y.
+
+
+
+
+                                                                                       C4 JUNE 2016 SDB
+22
+Volume of revolution                                                         y = f (x)
+
+                   y
+
+
+
+
+                                        y
+
+                                                                                         x
+                             a                                       b
+
+
+
+
+                                        x
+
+                                            x + δx
+
+  If the curve of y = f (x) is rotated about the x–axis then the volume of the shape formed can
+  be found by considering many slices each of width δx: one slice is shown.
+  The volume of this slice (a disc) is approximately π y2δx
+                                                             b
+  ⇒ Sum of volumes of all slices from a to b         ≈       ∑π y δ x
+                                                             a
+                                                                 2
+
+
+
+                                                         b
+  and as δx → 0 we have (using the result above ∑ y δ x → ∫ y dx )
+                                                                         b
+
+                                                                         a
+                                                         a
+
+                         b
+  ⇒ Volume ≈ ∑ π y 2 δ x → ∫ π y 2 dx .
+                                   b
+
+                                   a
+                         a
+
+
+Volume of revolution about the x–axis
+  Volume when y = f (x), between x = a and x = b, is rotated about the x–axis
+               b
+  is V =   ∫   a
+                   π y 2 dx .
+
+
+Volume of revolution about the y–axis
+  Volume when y = f (x) , between y = c and y = d, is rotated about the y–axis
+               d
+  is V =   ∫   c
+                   π x 2 dy .
+  Volume of rotation about the y-axis is not in the syllabus but is included for completeness.
+
+
+
+
+   C4 JUNE 2016 SDB                                                                              23
+Parametric integration
+     When x and y are given in parametric form we can find integrals using the techniques in
+     integration by substitution.
+                         𝑑𝑥
+     � 𝑦 𝑑𝑥 = � 𝑦 𝑑𝑡 𝑑𝑡                                                think of ‘cancelling’ the ‘dt’s
+
+
+     See the appendix for a justification of this result.
+
+
+     Example: If x = tan t and y = sin t, find the area under the curve from x = 0 to x = 1.
+                                                                      dx
+     Solution:    The area = ∫ y dx for some limits on x = ∫ y           dt for limits on t.
+                                                                      dt
+         We know that y = sin t, and also that
+                                       dx
+                  x = tan t ⇒             = sec 2 t
+                                       dt
+                                                                𝜋
+         Finding limits for t: x = 0 ⇒ t = 0, and x = 1 ⇒ t = 4
+                                              𝜋
+                              1
+                                              4   𝑑𝑥
+         ⇒ area = � 𝑦 𝑑𝑥 = � 𝑦                       𝑑𝑡
+                          0                0      𝑑𝑡
+              𝜋                            𝜋
+              4                            4
+         = � sin 𝑡 sec 2 𝑡 𝑑𝑡 = � tan 𝑡 sec 𝑡 𝑑𝑡
+             0                            0
+                     𝜋
+                     4
+         = �sec 𝑡�       = √2 − 1
+                     0
+
+
+
+
+     To find a volume of revolution we need ∫ π y 2 dx and we proceed as above writing
+
+                                  𝑑𝑥
+     � 𝜋𝑦 2 𝑑𝑥 = � 𝜋𝑦 2 𝑑𝑡 𝑑𝑡
+
+                                                                               y
+                                                                          30         x=t²−1, y=t³
+Example:          The curve shown has parametric equations
+                  x = t2 − 1, y = t3.                                     20
+           The region, R, between x = 0 and x = 8 above the x-axis
+           is rotated about the x-axis through 2π radians. Find the
+                                                                          10
+           volume generated.                                                             R
+
+                                                                                                    x
+                                                                                     4          8
+
+
+
+                                                                                      C4 JUNE 2016 SDB
+24
+                             8
+Solution:           V = ∫ π y 2 dx .
+                             0
+
+
+            Change limits to t:
+            x = 0 ⇒ t = ±1 and x = 8 ⇒ t = 3,
+            but the curve is above the x-axis ⇒ y = t3 > 0 ⇒ t > 0, ⇒ t = +1, or 3
+                                                         dx
+            also y = t3, x = t2 − 1 ⇒                       = 2t
+                                                         dt
+                         8                           3
+                                                             𝑑𝑥
+            ⇒ 𝑉 = � 𝜋𝑦 𝑑𝑥 = � 𝜋𝑦 2   2
+                                                                𝑑𝑡
+                        0                        1           𝑑𝑡
+                3                                        3
+            = � 𝜋(𝑡 3 )2 × 2𝑡 𝑑𝑡 = 2𝜋 � 𝑡 7 𝑑𝑡
+                1                                        1
+
+                                             π
+                                               (3 − 1)
+                                 3
+                        t8 
+                    2π  
+                                                 8
+            =                            =
+                        8 1                4
+
+
+
+
+Differential equations
+Separating the variables
+                                                                 dy
+  Example: Solve the differential equation                          = 3 y + xy .
+                                                                 dx
+                    dy
+  Solution:            = 3 y + xy = y(3 + x)
+                    dx
+       We first ‘cheat’ by separating the x s and y s onto different sides of the equation.
+                    1
+       ⇒              dy = (3 + x) dx and then put in the integral signs
+                    y
+                     1
+       ⇒            � 𝑑𝑦 = � 3 + 𝑥 𝑑𝑥
+                     𝑦
+                                             1
+       ⇒             ln y = 3x + 2 x2 + c.
+  See the appendix for a justification of this technique.
+
+
+
+
+   C4 JUNE 2016 SDB                                                                           25
+Exponential growth and decay
+Example:     A radio-active substance decays at a rate which is proportional to the mass of the
+      substance present. Initially 25 grams are present and after 8 hours the mass has
+      decreased to 20 grams. Find the mass after 1 day.
+
+
+Solution:       Let m grams be the mass of the substance at time t.
+         dm
+            is the rate of increase of m so, since the mass is decreasing,
+         dt
+         dm                               1 dm
+            = − km               ⇒             =          −k
+         dt                               m dt
+                   1
+        ⇒        ∫ m dm = ∫ − k dt
+        ⇒       ln|𝑚|= −kt + ln|𝐴|                  see ** below
+                    𝑚
+        ⇒       ln � 𝐴 � = –kt
+
+        ⇒        m = Ae − kt .
+
+     When t = 0, m = 25        ⇒ A = 25
+        ⇒       m = 25e–kt.
+        When t = 8, m = 20
+        ⇒               20 = 25e–8k               ⇒            e–8k = 0⋅8
+        ⇒               –8k = ln 0⋅8              ⇒            k = 0⋅027892943
+                                           –24 × 0⋅027892943
+        So when t = 24,          m = 25e                        = 12⋅8.
+        Answer 12⋅8 grams after 1 day.
+
+
+     ** Writing the arbitrary constant as ln|𝐴| is a nice trick. If you don’t like this you can write
+                ln|𝑚|= −kt + c
+        ⇒       |𝑚| = 𝑒 −𝑘𝑡+𝑐 = 𝑒 𝑐 𝑒 −𝑘𝑡
+        ⇒       m = A𝑒 −𝑘𝑡 ,              writing 𝑒 𝑐 = 𝐴.
+
+
+
+
+                                                                                     C4 JUNE 2016 SDB
+26
+6       Vectors
+Notation
+    The book and exam papers like writing vectors in the form
+        a = 3i – 4j + 7k.
+    It is allowed, and sensible, to re-write vectors in column form
+                              3 
+    i.e. a = 3i – 4j + 7k = − 4 .
+                             
+                             7 
+
+Definitions, adding and subtracting, etcetera
+    A vector has both magnitude (length) and direction. If you always think of a vector as a
+    translation you will not go far wrong.
+Directed line segments
+               �����⃗ is the vector from A to B,
+    The vector 𝐴𝐵
+                                                                                       B
+    (or the translation which takes A to B).
+    This is sometimes called the
+    displacement vector from A to B.                             A
+
+
+Vectors in co-ordinate form
+    Vectors can also be thought of as column vectors,                                  B
+                             7 
+    thus in the diagram AB =   .                                                     3
+                              3
+                                                                 A         7
+Negative vectors
+
+    �����⃗
+                                                      − 7 
+    𝐴𝐵 is the 'opposite' of �����⃗
+                            𝐵𝐴 and so �����⃗ �����⃗ =   .
+                                      𝐵𝐴 = −𝐴𝐵
+                                                       − 3
+Adding and subtracting vectors
+    (i) Using a diagram
+        Geometrically this can be done using a triangle (or a parallelogram):
+        Adding:
+                                                                       a
+                             a               b
+                                                                                a+b
+
+
+                                     a +b                                  b
+
+
+
+
+        The sum of two vectors is called the resultant of those vectors.
+
+
+
+
+    C4 JUNE 2016 SDB                                                                           27
+         Subtracting:
+                                              b
+
+
+                                 a–b
+
+                                                   a
+
+
+
+
+     (ii) Using coordinates
+                 a   c     a + c            a   c     a − c
+                 b  + d  = b + d      and   b  − d  = b − d  .
+                                                            
+
+
+
+
+Parallel and non - parallel vectors
+
+Parallel vectors
+     Two vectors are parallel if they have the same direction
+     ⇔ one is a multiple of the other.
+     Example: Which two of the following vectors are parallel?
+                  6  − 4 2
+                 − 3,  2 , 1 .
+                      
+                             6   − 3  − 4      6                 − 4
+     Solution:   Notice that   =    ×   and so   is parallel to  
+                             − 3  2 2          − 3               2 
+                2                      − 4
+           but   is not a multiple of   and so cannot be parallel to the other two
+               1                       2 
+     vectors.
+
+
+                                                             4
+     Example: Find a vector of length 15 in the direction of   .
+                                                             − 3
+                   4
+     Solution: a =   has length         a = �𝒂� =    4 2 + 32 = 5
+                   − 3
+                                                                      4    12 
+          and so the required vector of length 15 = 3 × 5 is 3a = 3 ×   =   .
+                                                                      − 3 − 9
+
+
+
+
+                                                                              C4 JUNE 2016 SDB
+28
+Non-parallel vectors
+  If a and b are not parallel and if α a + β b = γ a + δ b, then
+  αa – γ a = δ b – β b ⇒ (α – γ) a = (δ – β) b
+  but a and b are not parallel and one cannot be a multiple of the other
+  ⇒ (α – γ) = 0 = (δ – β )
+  ⇒ α =γ       and     δ = β.
+
+
+  Example: If a and b are not parallel and if
+          b + 2a + β b = α a + 3b – 5a, find the values of α and β.
+
+
+  Solution:    Since a and b are not parallel, the coefficients of a and b must ‘balance out’
+               ⇒       2= α–5     ⇒     α = 7 and 1 + β = 3          ⇒ β = 2.
+
+
+Modulus of a vector and unit vectors
+Modulus
+  The modulus of a vector is its magnitude or length.
+     �����⃗ = �7� then the modulus of �����⃗
+  If 𝐴𝐵                                           �����⃗ � = √72 + 32 = √58
+                                      𝐴𝐵 is 𝐴𝐵 = �𝐴𝐵
+               3
+                −3
+  Or, if c = � � then the modulus of c is c = �𝒄� = �(−3)2 + 52 = √34
+                 5
+
+
+
+Unit vectors
+  A unit vector is one with length 1.
+                                                  − 12
+  Example: Find a unit vector in the direction of     .
+                                                   5 
+
+
+                   − 12
+                         has length �𝒂� = a = 12 + 5 = 13 ,
+                                                        2    2
+  Solution:   a = 
+                    5  
+                                                         − 12     −1312 
+      and so the required unit vector is 131 × a = 131 ×       =  5  .
+                                                          5       13 
+
+
+
+
+   C4 JUNE 2016 SDB                                                                        29
+Position vectors
+
+
+     If A is the point (–1, 4) then the position vector of A is the vector from the origin to A,
+                                     − 1
+     usually written as �����⃗
+                         𝑂𝐴 = a =   .
+                                     4
+                                                                    y
+     For two points A and B the position vectors are                        A
+                                                                                        b–a
+     �����⃗     �����⃗ = b
+     𝑂𝐴 = a and 𝑂𝐵                                                      a
+                                                                                                 B
+                        �����⃗ go from A → O → B
+     To find the vector 𝐴𝐵
+                                                                                    b
+     giving   �����⃗
+              𝐴𝐵 = –a + b = b – a                               O                                    x
+
+
+
+
+Ratios
+  Example: A, B are the points (2, 1) and (4, 7). M lies on AB in the ratio 1 : 3. Find the
+      coordinates of M.
+                         �����⃗     2
+     Solution :          𝐴𝐵 = � �                                                               B
+                                    6
+                                 1 2         0∙5
+         ������⃗ = 1 �����⃗
+         𝐴𝑀            𝐴𝐵 = 4 � � = �            �
+                   4                6        1∙5                                            3
+         ������⃗                        2       0∙5
+         𝑂𝑀 = �����⃗ 𝑂𝐴 + ������⃗
+                                𝐴𝑀 = � � + �       �
+                                        1       1∙5
+                                                                                        M
+         ⇒         ������⃗ = �2 ∙ 5�
+                   𝑂𝑀                                                               1
+                                  2∙5
+                                                                                A
+         ⇒                      M is (2⋅5, 2⋅5)
+                                                            O
+
+
+
+
+                                                                                                C4 JUNE 2016 SDB
+30
+Proving geometrical theorems
+
+
+  Example:          In a triangle OBC let M and N be the midpoints of OB and OC.
+       Prove that BC = 2 MN and that BC is parallel to MN.
+
+
+  Solution:                           �����⃗ as b, and 𝑂𝐶
+                    Write the vectors 𝑂𝐵               �����⃗ as c.
+                                                                                                      O
+             ������⃗ = ½ 𝑂𝐵
+        Then 𝑂𝑀          �����⃗ = ½ b
+        and ������⃗
+             𝑂𝑁 = ½ 𝑂𝐶   �����⃗ = ½ c.
+                �������⃗ , go from M to O using –½ b and
+        To find 𝑀𝑁                                                                        M
+        then from O to N using ½ c
+                                                                                              b                   N
+  ⇒     �������⃗
+        𝑀𝑁           = –½ b + ½ c
+                                                                                                              c
+  ⇒     �������⃗
+        𝑀𝑁           = ½c –½b                                                     B
+
+
+
+                     �����⃗ , go from B to O using –b and
+       Also, to find 𝐵𝐶                                                                                                    C
+       then from O to C using c
+         �����⃗ = –b + c = c – b .
+       ⇒ 𝐵𝐶
+       But �������⃗
+           𝑀𝑁 = –½ b + ½ c = ½ (c – b) = ½ BC
+  ⇒ BC is parallel to MN
+       and BC is twice as long as MN.
+
+
+Example:            P lies on OA in the ratio 2 : 1, and Q lies on OB in the ratio 2 : 1. Prove that PQ
+                    is parallel to AB and that PQ = 2/3 AB.
+                                                                                                  A
+                                                                                              1
+Solution:           Let a = �����⃗      �����⃗
+                            𝑂𝐴, and b = 𝑂𝐵                                                P
+
+       ⇒            �����⃗ �����⃗ + 𝑂𝐵
+                    𝐴𝐵 = −𝑂𝐴        �����⃗ = b − a
+                                                                                      2
+       �����⃗ =
+       𝑂𝑃            2   �����⃗ =
+                         𝑂𝐴         2      ������⃗ =
+                                        a, 𝑂𝑄          2   �����⃗ =
+                                                           𝑂𝐵         2
+                                                                          b
+                     3              3                  3              3
+                                                                              O
+                                                                                              2
+       and         �����⃗ �����⃗ + 𝑂𝑄
+                   𝑃𝑄 = −𝑂𝑃        ������⃗ = 2/3 b − 2/3 a                                                Q   1
+                                                                                                                       B
+                         = 2/3 (b − a)
+                               �����⃗
+                         = 2/3 𝐴𝐵
+                     ⇒           PQ is parallel to AB and
+                     ⇒           PQ = 2/3 AB.
+
+
+
+
+   C4 JUNE 2016 SDB                                                                                                   31
+Three dimensional vectors
+Length, modulus or magnitude of a vector
+                                                            a1 
+                                                    𝑂𝐴 =  a2  is
+     The length, modulus or magnitude of the vector �����⃗
+                                                            
+                                                            a3 
+
+          �����⃗� = �𝒂� =a = a12 + a2 2 + a32` ,
+         �𝑂𝐴
+         a sort of three dimensional Pythagoras.
+
+
+Distance between two points
+  To find the distance between A, (a1, a2, a3) and B, (b1, b2, b3) we need to find the length of
+             �����⃗ .
+  the vector 𝐴𝐵
+                           b1      a1      b1 − a1 
+     �����⃗
+     𝐴𝐵 = b – a         =b2  −  a2  =b2 − a2 
+                           b3    a3    b3 − a3 
+
+        �����⃗ � = AB =
+     ⇒ �𝐴𝐵                 (b − a ) + (b − a ) + (b − a )
+                                        2              2               2
+                                1   1         2    2           3   3
+
+
+
+
+Scalar product
+         a . b = ab cos θ
+         where a and b are the lengths of a and b                          b
+         and θ is the angle measured from a to b.                              θ
+                                                                                   a
+
+Note that       (i)       a . a = aa cos 0o = a2
+
+                (ii)        .                .
+                          a (b + c) = a b + a c .          .
+                (iii)     a.b = b.a                                            since cosθ = cos (–θ)
+
+
+
+In co-ordinate form
+                         a  b 
+                a . b =  1  .  1  = a1b1 + a 2 b2 = ab cos θ
+                        a 2  b2 
+                         a1   b1 
+         or     a . b = a 2  . b2  = a1b1 + a 2 b2 + a 3 b3 = ab cos θ .
+                           
+                         a 3  b3 
+
+
+
+
+                                                                                       C4 JUNE 2016 SDB
+32
+Perpendicular vectors
+  If a and b are perpendicular then θ = 90o and cos θ = 0
+  thus a perpendicular to b ⇒ a . b = 0
+  and a . b = 0 ⇒ either a is perpendicular to b                   or     a or b = 0.
+
+
+  Example: Find the values of λ so that a = 3i – 2λj + 2k and
+  b = 2i + λj + 6k          are perpendicular.
+
+  Solution:           Since a and b are perpendicular a . b = 0
+        3  2
+  ⇒     −2λ  .  λ  =       0      ⇒     6 − 2 λ 2 + 12=    0
+              
+        2   6 
+
+  ⇒ λ2 = 9             ⇒ λ = ± 3.
+
+
+                                                                 1          3
+  Example:                                                           
+                      Find a vector which is perpendicular to a, − 1 , and b, 1 .
+                                                                             
+                                                                  2       1
+
+                                         p
+  Solution:           Let the vector c,  q  , be perpendicular to both a and b.
+                                         
+                                         r 
+
+        p          1                    p          3
+  ⇒    q       .   − 1 = 0     and     q       .   1 = 0
+                                                    
+        r         2                 r        1
+
+  ⇒ p − q + 2r = 0              and   3p + q + r = 0.
+        Adding these equations gives 4p + 3r = 0.
+        Notice that there will never be a unique solution to these problems, so having
+        eliminated one variable, q, we find p in terms of r, and then find q in terms of r.
+                     − 3r                  5r
+  ⇒       p=                  ⇒       q=
+                      4                    4
+                                     −43r 
+                                     
+  ⇒     c is any vector of the form  54r  ,
+                                     r 
+
+                                                                         − 3
+        and we choose a sensible value of r = 4 to give                   .
+                                                                        5 
+                                                                         4 
+
+
+
+
+   C4 JUNE 2016 SDB                                                                           33
+Angle between vectors
+
+
+     Example: Find the angle between the vectors
+          �����⃗ = 4i – 5j + 2k
+          𝑂𝐴                           �����⃗ = –i + 2j – 3k,
+                                   and 𝑂𝐴                         to the nearest degree.
+
+
+     Solution:   First re-write as column vectors (if you want)
+               4         − 1
+          a = − 5 and b =  2 
+                   
+                         
+               2      − 3
+
+          a = �𝒂� =     4 2 + 5 2 + 2 2 = 45 = 3 5 ,       b = �𝒃� =     12 + 2 2 + 3 2 =       14
+                       4              − 1
+          and a . b = − 5        .    2  = –4 – 10 – 6 = –20
+                                      
+                       2           − 3
+
+          a.b     = ab cos θ       ⇒       –20 = 3 5 × 14 cosθ
+                       − 20
+     ⇒    cos θ =                 = – 0.796819
+                       3 70
+     ⇒    θ = 143o to the nearest degree.
+
+
+Angle in a triangle
+You must take care to find the angle requested, not ‘180 minus the angle requested’.
+
+
+Example:         A, (–1, 2, 4), B, (2, 3, 0), and C, (0, 2, -3) form a triangle. Find the angle ∠BAC.
+
+
+Solution:
+∠BAC = α, which is the angle between the vectors
+                                                                                      A
+�����⃗
+𝐴𝐵 and �����⃗
+       𝐴𝐶 .                                                                                 β
+Note that the angle between �����⃗  �����⃗ is the angle β,
+                             𝐵𝐴 and 𝐴𝐶                                                α
+which is not the angle requested.
+
+
+Then proceed as in the example above.
+                                                                   B
+                                                                                                     C
+
+
+
+
+                                                                                       C4 JUNE 2016 SDB
+34
+Vector equation of a straight line
+
+
+       x
+  r =  y  is usually used as the position vector of a
+       
+       z 
+                                                                                       R
+                                                                                              
+  general point, R.
+                                                                       A
+  In the diagram the line  passes through the point
+  A and is parallel to the vector b.
+                                                                                r
+  To go from O to R first go to A, using a, and then
+                                                                   a
+  from A to R using some multiple of b.
+
+
+  ⇒ The equation of a straight line through the point                      b
+  A and parallel to the vector b is                            O
+
+          r = a + λ b.
+
+
+  Example: Find the vector equation of the line through the points M, (2, –1, 4),
+        and N, (–5, 3, 7).
+
+
+  Solution:                                                                                �������⃗ .
+              We are looking for the line through M (or N) which is parallel to the vector 𝑀𝑁
+                            − 5   2     − 7 
+          �������⃗ = n – m = 3 − − 1 =  4 
+          𝑀𝑁                           
+                                         
+                             7   4   3 
+
+                              2     − 7
+      ⇒       equation is r = − 1 + λ  4  .
+                                   
+                                      
+                               4   3 
+
+
+  Example:    Show that the point P, (–1, 7, 10), lies on the line
+              1   − 1
+          r = 3 + λ 2  .
+                 
+                   
+              4  3 
+
+  Solution:   The x co-ord of P is –1 and of the line is 1 – λ
+      ⇒       –1 = 1 – λ ⇒ λ = 2.
+      In the equation of the line this gives y = −1 + 2 × 4 = 7 and z = 4 + 2 × 3 = 10
+      ⇒       P, (–1, 7, 10) does lie on the line.
+
+
+
+
+  C4 JUNE 2016 SDB                                                                                35
+Geometrical problems
+
+First DRAW a large diagram to see what is happening; this should then tell you how to use your
+vectors to solve the problem.
+                                                                                                  1          −1
+Example:       Find A′ the reflection of the point A (2, 4, 0) in the line l, r = � 4 � + 𝜆 � 2 �.
+                                                                                              −1              1
+
+
+Solution:     From the diagram we can see that                               A (2, 4, 0) ×                           l
+       AA′ is perpendicular to l.
+       So, if we can find the point B, where AB is                                           B×
+       perpendicular to l, we will be able to find A′ ,
+       since �����⃗ �������⃗.
+              𝐴𝐵 = 𝐵𝐴′                                          (1, 4, −1)
+                                                                       ×                          A′ ×
+
+
+       B is a point on l
+                               1−𝜆
+       ⇒        �����⃗ = 𝒃 = � 4 + 2𝜆 � for some value of λ.
+                𝑂𝐵
+                              −1 + 𝜆
+                                                      −1
+       b is perpendicular to l, and l is parallel to � 2 �
+                                                       1
+                       −1               1−𝜆         −1
+       ⇒        b . � 2 � = 0 ⇒ � 4 + 2𝜆 � . � 2 � = 0
+                        1              −1 + 𝜆        1
+       ⇒       −1 + λ + 8 + 4λ −1 + λ = 0 ⇒ λ = −1
+                     1 − −1           2
+       ⇒       b=� 4−2 � = � 2 �
+                     −1 − 1           −2
+                                  2        2       0
+               �����⃗ = 𝒃 − 𝒂 = � 2 � − �4� = �−2�
+               𝐴𝐵
+                                 −2        0       −2
+                                          2       0      2
+       ⇒       �������⃗
+               𝑂𝐴′ = 𝑂𝐴 �����⃗ + 2 �����⃗
+                                   𝐴𝐵 = �4� + 2 �−2� = � 0 �
+                                          0      −2     −4
+       ⇒       the reflection of A (2, 4, 0) in l is A′ (2, 0, −4).
+
+
+
+
+                                                                                                      C4 JUNE 2016 SDB
+36
+Intersection of two lines
+2 Dimensions
+
+
+  Example: Find the intersection of the lines
+                   2         −1                         1     1
+       1 , r =   + λ          ,        and       2, r =
+                                                            3 + μ  −1 .
+                   3         
+                                2                                  
+  Solution: We are looking for values of λ and µ which give the same x and y
+      co-ordinates on each line.
+       Equating x co-ords        ⇒       2–λ =1+µ
+       equating y co-ords        ⇒       3 + 2λ = 3 – µ
+               Adding                    ⇒        5+λ=4          ⇒ λ = –1       ⇒      µ = 2
+               ⇒         lines intersect at (3, 1).
+
+
+3 Dimensions
+  This is similar to the method for 2 dimensions with one important difference – you can not be
+  certain whether the lines intersect without checking.
+  You will always (or nearly always) be able to find values of λ and µ by equating
+  x coordinates and y coordinates but the z coordinates might or might not be equal and
+  must be checked.
+  Example: Investigate whether the lines
+                   2   − 1                             − 3      1
+        1,    r = 1 + λ 2 
+                                       and                    
+                                                   2, r =  1  + µ 3     intersect
+                        
+                   3  1                             5     1
+
+       and if they do find their point of intersection.
+
+
+  Solution: If the lines intersect we can find values of λ and µ to give the same x, y and z
+         coordinates in each equation.
+       Equating x coords         ⇒       2–λ      = –3 + µ,              I
+       equating y coords         ⇒       1 + 2λ = 1 + 3µ,                II
+       equating z coords         ⇒       3+λ      = 5 + µ.               III
+       2 × I + II ⇒ 5 = –5 + 5µ ⇒ µ = 2,                  in I ⇒ λ = 3.
+       We must now check to see if we get the same point for the values of λ and µ
+              In  1, λ = 3 gives the point (–1, 7, 6);
+
+              in  2, µ = 2 gives the point (–1, 7, 7).
+       The x and y co-ords are equal (as expected!), but the z co-ordinates are different and so
+       the lines do not intersect.
+
+   C4 JUNE 2016 SDB                                                                                37
+7        Appendix
+
+Binomial series (1 + x)n for any n – proof
+     Suppose that
+            f (x) = (1 + x)n = a + bx + cx2 + dx3 + ex4 + …
+         put x = 0, ⇒ 1 = a
+     ⇒ f ′(x) = n(1 + x)n − 1 = b + 2cx + 3dx2 + 4ex3 + …
+         put x = 0, ⇒ n = b
+     ⇒ f ′′(x) = n(n − 1)(1 + x)n − 2 = 2c + 3 × 2dx + 4 × 3ex2 + …
+                                                         𝑛(𝑛−1)
+         put x = 0, ⇒ n(n − 1) = 2c ⇒                      2!
+                                                                   =𝑐
+
+     ⇒ f ′′′(x) = n(n − 1)(n − 2)(1 + x)n − 3 = 3 × 2d + 4 × 3 × 2ex + …
+                                                                                𝑛(𝑛−1)(𝑛−2)
+         put x = 0, ⇒ n(n − 1)(n − 2) = 3 × 2d ⇒                                    3!
+                                                                                              =𝑑
+     Continuing this process, we have
+         𝑛(𝑛−1)(𝑛−2)(𝑛−3)                           𝑛(𝑛−1)(𝑛−2)(𝑛−3)(𝑛−4)
+                  4!
+                                 = 𝑒 and                          5!
+                                                                                    = 𝑓, etc.
+     giving f (x) = (1 + x)n
+                       𝑛(𝑛−1)          𝑛(𝑛−1)(𝑛−2)              𝑛(𝑛−1)(𝑛−2)(𝑛−3)                𝑛(𝑛−1)(𝑛−2)(𝑛−3)(𝑛−4)
+       = 1 + nx +        2!
+                                𝑥2 +           3!
+                                                         𝑥3 +               4!
+                                                                                         𝑥4 +            5!
+                                                                                                                        𝑥5 + …
+             𝑛(𝑛−1)(𝑛−2) … (𝑛−𝑟+1)
+         +               𝑟!
+                                         𝑥𝑟 + …
+
+     Showing that this is convergent for x < 1, is more difficult!
+
+
+Derivative of xq for q rational
+                                                                       𝑟
+     Suppose that q is any rational number, 𝑞 = 𝑠 , where r and s are integers, s                                   ≠ 0.
+                                               𝑟
+     Then                     y = xq = 𝑥 ⁄𝑠 ⇒ ys = xr
+                                                                           𝑑𝑦
+     Differentiating with respect to x ⇒ s × 𝑦 𝑠−1 𝑑𝑥 = r × xr − 1
+                  𝑑𝑦             𝑟     𝑥 𝑟−1         𝑟    𝑥 𝑟−1                      𝑥 𝑟−1                                       𝑟
+         ⇒                    = 𝑠 × 𝑦 𝑠−1 = 𝑠 × 𝑦 𝑠 × 𝑦 = 𝑞 × 𝑦 𝑠 × 𝑦                                                since q =
+                  𝑑𝑥                                                                                                             𝑠
+
+                  𝑑𝑦                     𝑥 𝑟−1
+         ⇒                    = 𝑞 × 𝑥 𝑟 × 𝑥 𝑞 = qx q − 1                                                 since ys = xr and y = xq
+                  𝑑𝑥
+         which follows the rule found for xn, where n is an integer.
+
+
+
+
+                                                                                                               C4 JUNE 2016 SDB
+38
+ 𝟏
+∫ 𝒙 𝒅𝒙 for negative limits
+  We know that the ‘area’ under any curve, from
+  x = a to x = b is approximately
+                                     𝑏                                                         y
+       𝑏
+  � 𝑦 𝛿𝑥              →         � 𝑦 𝑑𝑥,                 𝑎𝑠 𝛿𝑥 → 0
+       𝑎                        𝑎                                            a                     δx                  b
+
+  If the curve is above the x-axis, all the y values are positive, and if a < b then all values of δ x
+  are positive, and so the integral is positive.
+                                           −𝑏
+           −𝑏
+            1
+        �     𝑑𝑥 = �ln|x|�                        = ln 𝑏 − ln 𝑎
+         −𝑎 𝑥
+                                           −𝑎
+                                −3       1
+  Example: Find             ∫   −1       x
+                                           dx .
+
+  Solution: The integral wanted is shown as A′ in                                                      y
+
+        the diagram.                                                                               1
+
+           By symmetry |𝐴′| = A (A positive)                                                                   A                x
+                                                                            −3    −2 A'   −1               1       2       3
+           and we need to decide whether the integral is
+           +A or − A.                                                                          −1
+
+           From x = −1 to x = −3, we are going in the
+           direction of x decreasing
+           ⇒ all δ x are negative.
+           And the graph is below the x-axis,
+
+           ⇒        the y values are negative,                 ⇒     y δ x is positive
+                                                        −3
+           ⇒        ∑−3
+                     −1 𝑦 𝛿𝑥 > 0 = ∫−1 𝑦 𝑑𝑥 > 0
+
+           ⇒        the integral is positive and equal to A.
+                                                     1
+                                                       dx = [ ln x ] 13 = ln 3 − ln 1 = ln 3
+                                                    3
+           The integral, A′ = A = ∫
+                                                   1 x
+
+                           −3   1
+           ⇒ A′ = ∫               dx = ln 3
+                          −1    x
+  Notice that this is what we get if we write ln x in place of ln x
+               −3   1
+           ∫          dx = [ ln | x |] −−31 = ln 3 – ln 1 = ln 3
+               −1   x
+  As it will always be possible to use symmetry in this way, since we can never have one
+  positive and one negative limit (because there is a discontinuity at x = 0), it is correct to write
+  ln |𝑥| for the integral of 1/x .
+
+
+
+
+     C4 JUNE 2016 SDB                                                                                                          39
+Integration by substitution – why it works
+     We show the general method with an example.
+
+
+            𝑦 = � 𝑥 2 �1 + 𝑥 3 𝑑𝑥
+
+            𝑑𝑦
+     ⟹         = 𝑥 2 �1 + 𝑥 3                                              integrand = 𝑥 2 √1 + 𝑥 3
+            𝑑𝑥
+            Choose u = 1 + x3
+            𝑑𝑢                𝑑𝑥    1                                                            𝑑𝑢
+     ⇒          = 3𝑥 2 ⟹         =                                    rearrange to give 𝑑𝑥 =
+            𝑑𝑥                𝑑𝑢   3𝑥 2                                                          3𝑥 2
+            𝑑𝑦     𝑑𝑦 𝑑𝑥
+     But       =       ×
+            𝑑𝑢     𝑑𝑥 𝑑𝑢
+                      𝑑𝑦 𝑑𝑥
+     ⇒      𝑦 = �        ×   𝑑𝑢
+                      𝑑𝑥 𝑑𝑢
+           𝑑𝑦
+               = 𝑥 2 √𝑢                                       leave the x2 because it appears in dx
+           𝑑𝑥
+                           1                             this is the same as writing the integrand in
+         𝑦 = � 𝑥 2 √𝑢 × 2 𝑑𝑢
+                          3𝑥                                   terms of u, and then replacing dx by
+                                                                                        𝑑𝑥        𝑑𝑢
+                                                                                           𝑑𝑢  =
+                                                                                        𝑑𝑢        3𝑥 2
+
+
+
+     The essential part of this method, writing the integrand in terms of u, and then replacing dx
+        𝑑𝑥
+     by 𝑑𝑢 𝑑𝑢, will be the same for all integrations by substitution.
+
+
+Parametric integration
+     This is similar to integration by substitution.
+
+
+                                      𝑑𝐴
+            𝐴 = � 𝑦 𝑑𝑥         ⇒         = 𝑦
+                                      𝑑𝑥
+            𝑑𝐴   𝑑𝑡
+     ⇒         ×    = 𝑦
+            𝑑𝑡   𝑑𝑥
+            𝑑𝐴       𝑑𝑥
+     ⇒         = 𝑦 ×
+            𝑑𝑡       𝑑𝑡
+                     𝑑𝑥
+     ⇒      𝐴 = �𝑦      𝑑𝑡
+                     𝑑𝑡
+
+
+
+
+                                                                                     C4 JUNE 2016 SDB
+40
+Separating the variables – why it works
+  We show this with an example.
+                     𝑑𝑦         𝑑𝑦
+  If y = 6y3 then 𝑑𝑥 = 18y2 𝑑𝑥
+                     𝑑𝑦
+  and so ∫ 18𝑦 2 𝑑𝑥 𝑑𝑥 = ∫ 18𝑦 2 𝑑𝑦 = 6𝑦 3 + 𝑐
+  Notice that we ‘cancel’ the dx.
+
+
+                          𝑑𝑦
+  Example: Solve 𝑑𝑥 = x2 sec y
+
+
+              𝑑𝑦
+  Solution:   𝑑𝑥
+                   = x2 sec y
+                      𝑑𝑦
+      ⇒       cos y 𝑑𝑥 = x2
+                           𝑑𝑦
+      ⇒       ∫ cos 𝑦 𝑑𝑥 𝑑𝑥 = ∫ 𝑥 2 𝑑𝑥
+      ⇒       ∫ cos 𝑦 𝑑𝑦 = ∫ 𝑥 2 𝑑𝑥              ‘cancelling’ the dx
+
+      ⇒       sin y = 13 𝑥 3 + c
+
+
+
+
+  C4 JUNE 2016 SDB                                                41
+Index
+
+Binomial expansion                           Parametric differentiation, 11
+   convergence, 8                            Parametric integration, 40
+   for any n, 8                                 areas, 24
+   proof - for any n, 38                        volumes, 24
+Differential equations                       Partial fractions, 3
+   exponential growth and decay, 26             integration, 17
+   forming, 13                                  linear repeated factors, 4
+   separating the variables, 25                 linear unrepeated factors, 3
+Differentiation                                 quadratic factors, 3
+   derivative of xq for q rational, 38          top heavy fractions, 4
+   exponential functions, ax, 11             Scalar product, 32
+   related rates of change, 12                  perpendicular vectors, 33
+Implicit differentiation, 10                    properties, 32
+Integration                                  Vectors, 27
+   1
+     /x for negative limits, 39                 adding and subtracting, 27
+   by parts, 21                                 angle between vectors, 34
+   by substitution – why it works, 40           angle in a triangle, 34
+   choosing the substitution, 20                displacement vector, 27
+   ex, 14                                       distance between 2 points, 32
+   ln x, 14                                     equation of a line, 35
+   parametric, 24                               geometrical problems, 36
+   parametric – why it works, 40                intersection of two lines, 37
+   reverse chain rule, 15                       length of 3-D vector, 32
+   sec x and cosec x, 17                        modulus, 29
+   separating variables – why it works, 41      non-parallel vectors, 29
+   standard integrals, 14                       parallel vectors, 28
+   substitution, definite, 19                   position vector, 30
+   substitution, indefinite, 17                 proving geometrical theorems, 31
+   tan x and cot x, 16                          ratios, 30
+   using partial fractions, 17                  unit vector, 29
+   using trigonometric identities, 14
+   volume of revolution, 23
+Parameters
+   area under curve, 7
+   equation of circle, 6
+   equation of hyperbola, 6
+   intersection of two curves, 5
+   parametric equations of curves, 5
+   parametric to Cartesian form, 6
+   trig functions, 6
+
+
+
+
+                                                                              C4 JUNE 2016 SDB
+42
+
