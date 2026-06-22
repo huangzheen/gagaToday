@@ -20,6 +20,12 @@ function handleBackToCity() {
   store.returnToCity();
 }
 
+function handleBackToHome() {
+  store.returnToHome();
+}
+
+const isAtHome = computed(() => store.currentScene === 'host_home');
+
 function handleToggleLanguage() {
   store.toggleLanguage();
 }
@@ -103,7 +109,10 @@ function handleMicRecord() {
 
           <!-- 底部操作 -->
           <div class="actions">
-            <button class="action-btn back" @click="handleBackToCity">
+            <button v-if="isAtHome" class="action-btn back" @click="handleBackToHome">
+              ← 回家
+            </button>
+            <button v-else class="action-btn back" @click="handleBackToCity">
               ← 返回城市地图
             </button>
             <button class="action-btn mic" @click="handleMicRecord">

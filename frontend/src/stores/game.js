@@ -48,7 +48,8 @@ export const useGameStore = defineStore('game', () => {
   });
 
   // ===== 场景状态 =====
-  const currentScene = ref('city');   // 'city' | 'host_home' | 'school' | ...
+  const currentView = ref('home');  // 'home' | 'city' | 'scene'
+  const currentScene = ref(null);   // null | 'host_home' | 'school' | ...
   const currentNpc = ref(null);
 
   // ===== 对话状态 =====
@@ -122,6 +123,49 @@ export const useGameStore = defineStore('game', () => {
   }
 
   /**
+   * 家里吃早饭 — 增加体力 + 心情
+   */
+  function eatBreakfast() {
+    if (playerState.value.time_block !== 'morning') return;
+    playerState.value = applyEffects(playerState.value, {
+      energy: 10,
+      mood: 5,
+      life_xp: 2,
+    }, 'eat_breakfast');
+  }
+
+  /**
+   * 跟 Schneider 太太打招呼 — 打开 DialogueBox
+   */
+  function greetHost() {
+    currentScene.value = 'host_home';
+    currentNpc.value = dialogueScripts.value['host_home'] || null;
+    dialogueState.value = {
+      open: !!currentNpc.value,
+      turnIndex: 0,
+      useEnglish: false,
+    };
+  }
+
+  /**
+   * 从寄宿家庭出门 — 推进到 commute 时段 + 切到 city 视图
+   */
+  function leaveHome() {
+    playerState.value = advanceTimeBlock(playerState.value);
+    currentView.value = 'city';
+    triggerDailyEvent();
+  }
+
+  /**
+   * 回到寄宿家庭(放学后/傍晚) — 推进到 evening 时段 + 切到 home 视图
+   */
+  function returnHome() {
+    playerState.value = advanceTimeBlock(playerState.value);
+    currentView.value = 'home';
+    triggerDailyEvent();
+  }
+
+  /**
    * 进入 POI(从 Phaser CityScene 点击场景点触发)
    * 行为:travel 路线结算 + 切换 currentScene + 自动开 DialogueBox
    * 末尾:触发 daily_event(可能弹窗 + 解锁任务)
@@ -141,8 +185,16 @@ export const useGameStore = defineStore('game', () => {
   }
 
   function returnToCity() {
-    currentScene.value = 'city';
+    currentScene.value = null;
     currentNpc.value = null;
+    currentView.value = 'city';
+    dialogueState.value = { ...dialogueState.value, open: false };
+  }
+
+  function returnToHome() {
+    currentScene.value = null;
+    currentNpc.value = null;
+    currentView.value = 'home';
     dialogueState.value = { ...dialogueState.value, open: false };
   }
 
@@ -244,6 +296,7 @@ export const useGameStore = defineStore('game', () => {
     playerState,
     stats,
     activeTasks,
+    currentView,
     currentScene,
     currentNpc,
     dialogueState,
@@ -261,6 +314,11 @@ export const useGameStore = defineStore('game', () => {
     // actions
     enterScene,
     returnToCity,
+    returnToHome,
+    eatBreakfast,
+    greetHost,
+    leaveHome,
+    returnHome,
     toggleLanguage,
     nextTurn,
     selectOption,

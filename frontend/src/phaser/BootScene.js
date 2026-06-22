@@ -47,7 +47,7 @@ export default class BootScene extends Phaser.Scene {
   }
 
   create() {
-    // 加载完成后切到城市场景
-    this.scene.start('CityScene');
+    // 默认从寄宿家庭开始(Gastfmailie),玩家吃早饭/打招呼后点"出门"才进 CityScene
+    this.scene.start('HomeScene');
   }
 }

@@ -3,11 +3,13 @@ import { onMounted, onUnmounted, ref, watch } from 'vue';
 import Phaser from 'phaser';
 import { useGameStore } from '@/stores/game';
 import BootScene from '@/phaser/BootScene';
+import HomeScene from '@/phaser/HomeScene';
 import CityScene from '@/phaser/CityScene';
 
 const gameStore = useGameStore();
 const containerRef = ref(null);
 let game = null;
+let lastView = null;
 
 onMounted(() => {
   game = new Phaser.Game({
@@ -21,7 +23,7 @@ onMounted(() => {
       mode: Phaser.Scale.FIT,
       autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: [BootScene, CityScene],
+    scene: [BootScene, HomeScene, CityScene],
   });
 
   // Phaser 点击事件 → 通知 Vue store
@@ -32,6 +34,24 @@ onMounted(() => {
   game.events.on('returnToCity', () => {
     gameStore.returnToCity();
   });
+
+  // 寄宿家庭内部事件
+  game.events.on('homeAction', (action) => {
+    if (action === 'eat_breakfast') gameStore.eatBreakfast();
+    if (action === 'greet_host') gameStore.greetHost();
+    if (action === 'leave_home') gameStore.leaveHome();
+  });
+});
+
+// 监听 Vue store 的 currentView 切换 Phaser scene
+watch(() => gameStore.currentView, (newView) => {
+  if (!game || newView === lastView) return;
+  lastView = newView;
+  if (newView === 'home') {
+    game.scene.start('HomeScene');
+  } else if (newView === 'city') {
+    game.scene.start('CityScene');
+  }
 });
 
 onUnmounted(() => {

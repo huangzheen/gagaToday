@@ -1,8 +1,10 @@
 import Phaser from 'phaser';
+import locations from '@/content/munich/locations.json';
+import routes from '@/content/munich/routes.json';
 
 /**
- * 柏林城市顶视图 RPG 场景
- * 展示 Berlin 三个场景点 + 玩家可点击进入对话
+ * 慕尼黑城市顶视图 RPG 场景
+ * 展示 MVP 场景点 + 玩家可点击进入对话
  */
 export default class CityScene extends Phaser.Scene {
   constructor() {
@@ -16,8 +18,8 @@ export default class CityScene extends Phaser.Scene {
     // 背景 — 用深棕色模拟 RPG Maker 风格地图
     this.cameras.main.setBackgroundColor('#2d261d');
 
-    // 顶部:柏林城市标题
-    this.add.text(width / 2, 32, '✦ BERLIN ✦', {
+    // 顶部:慕尼黑城市标题
+    this.add.text(width / 2, 32, '✦ MÜNCHEN ✦', {
       fontFamily: 'Courier New, monospace',
       fontSize: '32px',
       color: '#f4d35e',
@@ -31,59 +33,52 @@ export default class CityScene extends Phaser.Scene {
       color: '#8a7a60',
     }).setOrigin(0.5);
 
-    // 三个场景点 — 用场景缩略图 + 标签
-    const points = [
-      {
-        id: 'hauptbahnhof',
-        x: 180,
-        y: 230,
-        texture: 'scene_hauptbahnhof',
-        name: 'Hauptbahnhof',
-        npc: 'Peter',
-        difficulty: 'A1',
-        english: 100,
-      },
-      {
-        id: 'cafe_einstein',
-        x: 512,
-        y: 350,
-        texture: 'scene_cafe',
-        name: 'Café Einstein',
-        npc: 'Anna',
-        difficulty: 'A1',
-        english: 50,
-      },
-      {
-        id: 'kreuzberg',
-        x: 840,
-        y: 260,
-        texture: 'scene_kreuzberg',
-        name: 'Kreuzberg',
-        npc: 'Street Vendor',
-        difficulty: 'A2',
-        english: 70,
-      },
-    ];
+    const points = locations.map((location) => ({
+      id: location.id,
+      x: Math.round(location.x * width),
+      y: Math.round(location.y * height),
+      texture: location.asset,
+      name: location.name_de,
+      npc: location.npc,
+      difficulty: location.difficulty,
+      english: location.englishAvailable,
+    }));
+
+    this.drawRoutes(width, height);
 
     points.forEach((p) => {
       this.createScenePoint(p);
     });
 
-    // 底部提示
     this.add.text(width / 2, height - 30, '点击场景点进入对话', {
       fontFamily: 'Courier New, monospace',
       fontSize: '13px',
       color: '#6a5a40',
     }).setOrigin(0.5);
 
-    // 连线 — 三个点之间的"走遍德国"路径
+  }
+
+  drawRoutes(width, height) {
+    const pointsById = new Map(locations.map((location) => [
+      location.id,
+      {
+        x: Math.round(location.x * width),
+        y: Math.round(location.y * height),
+      },
+    ]));
+
     const graphics = this.add.graphics();
     graphics.lineStyle(3, 0x4a3a2a, 0.5);
-    graphics.beginPath();
-    graphics.moveTo(180, 230);
-    graphics.lineTo(512, 350);
-    graphics.lineTo(840, 260);
-    graphics.strokePath();
+
+    routes.forEach((route) => {
+      const from = pointsById.get(route.from);
+      const to = pointsById.get(route.to);
+      if (!from || !to) return;
+      graphics.beginPath();
+      graphics.moveTo(from.x, from.y);
+      graphics.lineTo(to.x, to.y);
+      graphics.strokePath();
+    });
   }
 
   createScenePoint(point) {
@@ -118,11 +113,8 @@ export default class CityScene extends Phaser.Scene {
     frame.setStrokeStyle(2, 0xc9956b, 1);
     container.add(frame);
 
-    // 交互区
-    container.setInteractive(
-      new Phaser.Geom.Rectangle(-110, -72, 220, 145),
-      Phaser.Geom.Rectangle.Contains
-    );
+    // 交互区:用默认 hitArea(整个 container size),让 Phaser 用 Rectangle.contains
+    container.setInteractive({ useHandCursor: true });
 
     container.on('pointerover', () => {
       frame.setStrokeStyle(3, 0xf4d35e, 1);
