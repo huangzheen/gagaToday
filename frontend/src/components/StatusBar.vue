@@ -10,9 +10,9 @@ const dateLabel = computed(() => {
 });
 
 const moodIcon = computed(() => {
-  if (store.stats.mood >= 70) return '😊';
-  if (store.stats.mood >= 40) return '😐';
-  return '😔';
+  if (store.stats.mood >= 70) return ':)';
+  if (store.stats.mood >= 40) return ':|';
+  return ':(';
 });
 
 const energyColor = computed(() => {
@@ -20,6 +20,20 @@ const energyColor = computed(() => {
   if (store.stats.energy >= 30) return '#e8a83a';
   return '#d94545';
 });
+
+const canAdvance = computed(() => {
+  return store.nextTimeBlock !== null && !store.dialogueState.open;
+});
+
+const isNight = computed(() => store.currentTimeBlock === 'night');
+
+function handleAdvance() {
+  if (isNight.value) {
+    store.endDay();
+  } else {
+    store.advanceTime();
+  }
+}
 </script>
 
 <template>
@@ -40,7 +54,7 @@ const energyColor = computed(() => {
         <span class="value">{{ store.stats.mood }}</span>
       </div>
       <div class="stat">
-        <span class="icon">⚡</span>
+        <span class="icon">EN</span>
         <div class="bar">
           <div class="fill" :style="{ width: store.stats.energy + '%', background: energyColor }"></div>
         </div>
@@ -57,19 +71,43 @@ const energyColor = computed(() => {
     <!-- 语言能力 -->
     <div class="cell languages">
       <div class="lang de">
-        <span class="flag">🇩🇪</span>
+        <span class="flag">DE</span>
         <span class="level">{{ store.stats.language.german }}</span>
       </div>
       <div class="lang en">
-        <span class="flag">🇬🇧</span>
+        <span class="flag">EN</span>
         <span class="level">{{ store.stats.language.english }}</span>
       </div>
     </div>
 
     <!-- 当前位置 -->
     <div class="cell right">
-      <div class="loc-icon">📍</div>
+      <div class="loc-icon">LOC</div>
       <div class="loc-text">{{ store.stats.location.toUpperCase() }}</div>
+    </div>
+
+    <!-- 时间块 + 推进按钮 -->
+    <div class="time-strip">
+      <div class="time-info">
+        <span class="time-label">UHRZEIT</span>
+        <span class="time-value">{{ store.currentTimeLabel }}</span>
+      </div>
+      <button
+        class="advance-btn"
+        :class="{ night: isNight }"
+        :disabled="!canAdvance"
+        @click="handleAdvance"
+        :title="isNight ? '结束今天,睡觉结算' : `推进到下一时段: ${store.nextTimeBlock}`"
+      >
+        {{ isNight ? '💤 Schlafen · 睡觉' : `▶ ${store.nextTimeBlock || '—'}` }}
+      </button>
+    </div>
+
+    <!-- 当前任务 -->
+    <div class="task-strip">
+      <span class="task-label">AKTIV</span>
+      <span class="task-title">{{ store.activeTasks[0]?.title_zh || '自由探索' }}</span>
+      <span v-if="store.activeTasks.length > 1" class="task-more">+{{ store.activeTasks.length - 1 }}</span>
     </div>
   </header>
 </template>
@@ -78,12 +116,14 @@ const energyColor = computed(() => {
 .status-bar {
   display: grid;
   grid-template-columns: 1fr 1.2fr 0.6fr 0.8fr 0.7fr;
-  gap: 12px;
+  grid-template-rows: auto auto auto;
+  gap: 8px 12px;
   align-items: center;
-  padding: 10px 16px;
+  padding: 8px 16px;
   background: linear-gradient(180deg, #3a2f23 0%, #2d261d 100%);
   font-family: 'Courier New', monospace;
-  height: 72px;
+  min-height: 96px;
+  position: relative;
 }
 
 .cell {
@@ -114,9 +154,7 @@ const energyColor = computed(() => {
   gap: 6px;
 }
 
-.stat .icon {
-  font-size: 14px;
-}
+.stat .icon { font-size: 14px; }
 
 .bar {
   width: 80px;
@@ -191,5 +229,103 @@ const energyColor = computed(() => {
   color: #f4d35e;
   font-weight: bold;
   letter-spacing: 2px;
+}
+
+/* 时间块 strip */
+.time-strip {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px 0;
+  border-top: 1px solid #4a3a2a;
+}
+
+.time-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.time-label {
+  color: #8a7a60;
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+.time-value {
+  color: #e8d5b0;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.advance-btn {
+  padding: 6px 14px;
+  background: #5a4a3a;
+  border: 2px solid #c9956b;
+  border-radius: 3px;
+  color: #f4d35e;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.advance-btn:hover:not(:disabled) {
+  background: #6a5a4a;
+  border-color: #f4d35e;
+  transform: translateX(2px);
+}
+
+.advance-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.advance-btn.night {
+  background: #2a2a4a;
+  border-color: #7a7aaa;
+  color: #b8b8d8;
+}
+
+.advance-btn.night:hover:not(:disabled) {
+  background: #3a3a5a;
+  border-color: #d8d8f8;
+}
+
+/* 任务 strip */
+.task-strip {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 20px;
+  padding-top: 4px;
+  border-top: 1px solid #4a3a2a;
+}
+
+.task-label {
+  color: #8a7a60;
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+.task-title {
+  color: #e8d5b0;
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.task-more {
+  background: #c9956b;
+  color: #1a1410;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 1px 6px;
+  border-radius: 8px;
 }
 </style>

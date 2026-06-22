@@ -2,6 +2,8 @@
 import StatusBar from './components/StatusBar.vue';
 import GameCanvas from './components/GameCanvas.vue';
 import DialogueBox from './components/DialogueBox.vue';
+import EventModal from './components/EventModal.vue';
+import DaySummaryModal from './components/DaySummaryModal.vue';
 </script>
 
 <template>
@@ -12,11 +14,13 @@ import DialogueBox from './components/DialogueBox.vue';
     </main>
     <footer class="game-footer">
       <span class="footer-text pixel-text">
-        🎮 Auf nach Deutschland! | 一个 15 岁中国学生的德国留学 RPG
+        Auf nach Deutschland! | 慕尼黑 30 天德国留学生活 RPG
       </span>
       <span class="footer-version">v0.1.0 · Skeleton</span>
     </footer>
     <DialogueBox />
+    <EventModal />
+    <DaySummaryModal />
   </div>
 </template>
 
@@ -47,10 +51,7 @@ import DialogueBox from './components/DialogueBox.vue';
   font-size: 12px;
 }
 
-.footer-text {
-  color: #f4d35e;
-}
-
+.footer-text { color: #f4d35e; }
 .footer-version {
   color: #6a5a40;
   font-family: 'Courier New', monospace;

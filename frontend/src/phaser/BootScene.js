@@ -26,10 +26,12 @@ export default class BootScene extends Phaser.Scene {
       progressBox.destroy();
     });
 
-    // 加载柏林 3 场景
-    this.load.image('scene_hauptbahnhof', '/assets/scenes/berlin/hauptbahnhof_interior.png');
-    this.load.image('scene_cafe', '/assets/scenes/berlin/cafe_einstein.png');
-    this.load.image('scene_kreuzberg', '/assets/scenes/berlin/street_kreuzberg.png');
+    // 慕尼黑场景图(mvp-0.1, 2026-06-22 matrix_generate_image 生成)
+    this.load.image('scene_home', '/assets/scenes/munich/host_home.png');
+    this.load.image('scene_school', '/assets/scenes/munich/school.png');
+    this.load.image('scene_bakery', '/assets/scenes/munich/bakery.png');
+    this.load.image('scene_supermarket', '/assets/scenes/munich/supermarket.png');
+    this.load.image('scene_library', '/assets/scenes/munich/library.png');
 
     // 加载 NPC 立绘
     this.load.image('anna_neutral', '/assets/characters/anna/anna_neutral.png');

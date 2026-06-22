@@ -11,9 +11,8 @@ const currentTurn = computed(() => {
 
 const npcPortrait = computed(() => store.currentNpc?.npc_portrait);
 
-function handleOption(optionText) {
-  // 演示:玩家选择后给反馈
-  store.changeMood(+5);
+function handleOption(optionText, optionIndex) {
+  store.selectOption(optionIndex);
   store.nextTurn();
 }
 
@@ -93,7 +92,7 @@ function handleMicRecord() {
               v-for="(opt, idx) in currentTurn.options_de"
               :key="idx"
               class="option-btn"
-              @click="handleOption(opt)"
+              @click="handleOption(opt, idx)"
             >
               <span class="option-text">{{ opt }}</span>
               <button class="mic-mini" @click.stop="handleMicRecord" title="用麦克风说出这句话">
