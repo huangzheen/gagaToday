@@ -1,0 +1,338 @@
+[
+  {
+    "id": "asset_ref_user_marienplatz_cathedral",
+    "asset_path": "assets/references/user_2026_06_21/慕尼黑大教堂.png",
+    "original_path": "docs/慕尼黑大教堂.png",
+    "asset_category": "reference",
+    "asset_subtype": "scene_reference",
+    "usability": "reference",
+    "spec": {
+      "width": 1672,
+      "height": 941,
+      "color_palette": "AI-generated warm gold + blue",
+      "format": "png",
+      "transparent": false,
+      "file_size_kb": 2676
+    },
+    "style_guide_ref": "docs/ART_ASSETS.md#2-场景背景",
+    "linked_entities": {
+      "location_id": ["loc_munich_marienplatz"],
+      "note_zh": "用户提供的慕尼黑大教堂参考图；提示 Marienplatz 场景的方向"
+    },
+    "ai_generation_prompt": null,
+    "confidence": 0.85,
+    "notes_zh": "用户决策（2026-06-21）：全标 reference；非慕尼黑大教堂真实照片，是 AI 生成的慕尼黑氛围图",
+    "source_records": ["source_user_provided_20260621"],
+    "review_status": "draft"
+  },
+  {
+    "id": "asset_ref_user_ubahn",
+    "asset_path": "assets/references/user_2026_06_21/ubahn.png",
+    "original_path": "docs/ubahn.png",
+    "asset_category": "reference",
+    "asset_subtype": "transport_reference",
+    "usability": "reference",
+    "spec": {
+      "width": 1672,
+      "height": 941,
+      "color_palette": "AI-generated cool blue + white",
+      "format": "png",
+      "transparent": false,
+      "file_size_kb": 2500
+    },
+    "style_guide_ref": "docs/ART_ASSETS.md#2-场景背景",
+    "linked_entities": {
+      "location_id": ["loc_munich_hauptbahnhof"],
+      "note_zh": "U-Bahn 风格参考；可提示慕尼黑 U-Bahn 车站 / 列车内场景方向"
+    },
+    "confidence": 0.80,
+    "notes_zh": "U-Bahn 通用参考；具体型号（U3 / U6 等）需 MVP 后精修",
+    "source_records": ["source_user_provided_20260621"],
+    "review_status": "draft"
+  },
+  {
+    "id": "asset_ref_user_home_with_mom",
+    "asset_path": "assets/references/user_2026_06_21/在家与妈妈.png",
+    "original_path": "docs/在家与妈妈.png",
+    "asset_category": "reference",
+    "asset_subtype": "scene_reference",
+    "usability": "reference",
+    "spec": {
+      "width": 1672,
+      "height": 941,
+      "color_palette": "warm domestic",
+      "format": "png",
+      "transparent": false,
+      "file_size_kb": 2332
+    },
+    "style_guide_ref": "docs/ART_ASSETS.md#2-场景背景",
+    "linked_entities": {
+      "location_id": ["loc_munich_host_home"],
+      "note_zh": "家庭场景参考；提示寄宿家庭 / 与家人视频通话场景方向"
+    },
+    "confidence": 0.80,
+    "notes_zh": "国内家庭场景参考；慕尼黑寄宿家庭场景需根据此风格 + 巴伐利亚元素重画",
+    "source_records": ["source_user_provided_20260621"],
+    "review_status": "draft"
+  },
+  {
+    "id": "asset_ref_user_dinner_with_girlfriend",
+    "asset_path": "assets/references/user_2026_06_21/与女友吃饭.png",
+    "original_path": "docs/与女友吃饭.png",
+    "asset_category": "reference",
+    "asset_subtype": "scene_reference",
+    "usability": "reference",
+    "spec": {
+      "width": 1672,
+      "height": 941,
+      "color_palette": "warm restaurant",
+      "format": "png",
+      "transparent": false,
+      "file_size_kb": 2373
+    },
+    "style_guide_ref": "docs/ART_ASSETS.md#2-场景背景",
+    "linked_entities": {
+      "location_id": ["loc_munich_cafe_or_mensa"],
+      "note_zh": "餐厅 / 食堂场景参考；与友人 / 同学 / 朋友吃饭的方向"
+    },
+    "confidence": 0.78,
+    "notes_zh": "餐厅氛围参考；MVP 不直接进游戏（涉及恋爱关系风险）",
+    "source_records": ["source_user_provided_20260621"],
+    "review_status": "draft"
+  },
+  {
+    "id": "asset_ref_user_alianz",
+    "asset_path": "assets/references/user_2026_06_21/Alianz.png",
+    "original_path": "docs/Alianz.png",
+    "asset_category": "reference",
+    "asset_subtype": "brand_reference",
+    "usability": "reference",
+    "spec": {
+      "width": 1672,
+      "height": 941,
+      "color_palette": "blue + corporate",
+      "format": "png",
+      "transparent": false,
+      "file_size_kb": 2555
+    },
+    "style_guide_ref": "docs/ART_ASSETS.md#4-城市 / 品牌参考",
+    "linked_entities": {
+      "bill_id": ["bill_insurance_health_monthly"],
+      "note_zh": "Allianz 保险品牌参考；可能用于健康保险 / 财务相关 UI"
+    },
+    "confidence": 0.70,
+    "notes_zh": "Allianz 是真实保险公司；如用于游戏 UI 需考虑版权；建议改用通用保险图标",
+    "source_records": ["source_user_provided_20260621"],
+    "review_status": "draft"
+  },
+  {
+    "id": "asset_ref_user_image_0",
+    "asset_path": "assets/references/user_2026_06_21/image.png",
+    "original_path": "docs/image.png",
+    "asset_category": "reference",
+    "asset_subtype": "general_reference",
+    "usability": "reference",
+    "spec": {
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "transparent": false,
+      "file_size_kb": 1750
+    },
+    "style_guide_ref": "docs/ART_ASSETS.md#general",
+    "linked_entities": {},
+    "confidence": 0.50,
+    "notes_zh": "通用参考图（image.png 根目录散图）；用户决策：全标 reference；具体内容/用途未明确，建议人工审核后归类",
+    "source_records": ["source_user_provided_20260621"],
+    "review_status": "draft"
+  },
+  {
+    "id": "asset_ref_user_image1",
+    "asset_path": "assets/references/user_2026_06_21/image0.png",
+    "original_path": "docs/image0.png",
+    "asset_category": "reference",
+    "asset_subtype": "general_reference",
+    "usability": "reference",
+    "spec": {
+      "width": 1536,
+      "height": 1024,
+      "format": "png",
+      "transparent": false,
+      "file_size_kb": 2354
+    },
+    "style_guide_ref": "docs/ART_ASSETS.md#general",
+    "linked_entities": {},
+    "confidence": 0.50,
+    "notes_zh": "通用参考图；尺寸 1536x1024 略不同；待审核归类",
+    "source_records": ["source_user_provided_20260621"],
+    "review_status": "draft"
+  },
+  {
+    "id": "asset_ref_user_image2",
+    "asset_path": "assets/references/user_2026_06_21/image2.png",
+    "original_path": "docs/image2.png",
+    "asset_category": "reference",
+    "asset_subtype": "general_reference",
+    "usability": "reference",
+    "spec": {
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "transparent": false,
+      "file_size_kb": 1538
+    },
+    "style_guide_ref": "docs/ART_ASSETS.md#general",
+    "linked_entities": {},
+    "confidence": 0.50,
+    "notes_zh": "通用参考图；待审核归类",
+    "source_records": ["source_user_provided_20260621"],
+    "review_status": "draft"
+  },
+  {
+    "id": "asset_ref_user_image3",
+    "asset_path": "assets/references/user_2026_06_21/image3.png",
+    "original_path": "docs/image3.png",
+    "asset_category": "reference",
+    "asset_subtype": "general_reference",
+    "usability": "reference",
+    "spec": {
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "transparent": false,
+      "file_size_kb": 1538
+    },
+    "style_guide_ref": "docs/ART_ASSETS.md#general",
+    "linked_entities": {},
+    "confidence": 0.50,
+    "notes_zh": "通用参考图；与 image2.png 文件大小完全相同（1537852 bytes），可能是同源图；待审核归类",
+    "source_records": ["source_user_provided_20260621"],
+    "review_status": "draft"
+  },
+  {
+    "id": "asset_ref_user_image4",
+    "asset_path": "assets/references/user_2026_06_21/image4.png",
+    "original_path": "docs/image4.png",
+    "asset_category": "reference",
+    "asset_subtype": "general_reference",
+    "usability": "reference",
+    "spec": {
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "transparent": false,
+      "file_size_kb": 2220
+    },
+    "style_guide_ref": "docs/ART_ASSETS.md#general",
+    "linked_entities": {},
+    "confidence": 0.50,
+    "notes_zh": "通用参考图；待审核归类",
+    "source_records": ["source_user_provided_20260621"],
+    "review_status": "draft"
+  },
+  {
+    "id": "asset_ref_user_image5",
+    "asset_path": "assets/references/user_2026_06_21/image5.png",
+    "original_path": "docs/image5.png",
+    "asset_category": "reference",
+    "asset_subtype": "general_reference",
+    "usability": "reference",
+    "spec": {
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "transparent": false,
+      "file_size_kb": 1430
+    },
+    "style_guide_ref": "docs/ART_ASSETS.md#general",
+    "linked_entities": {},
+    "confidence": 0.50,
+    "notes_zh": "通用参考图；待审核归类",
+    "source_records": ["source_user_provided_20260621"],
+    "review_status": "draft"
+  },
+  {
+    "id": "asset_ref_user_image6",
+    "asset_path": "assets/references/user_2026_06_21/image6.png",
+    "original_path": "docs/image6.png",
+    "asset_category": "reference",
+    "asset_subtype": "general_reference",
+    "usability": "reference",
+    "spec": {
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "transparent": false,
+      "file_size_kb": 1305
+    },
+    "style_guide_ref": "docs/ART_ASSETS.md#general",
+    "linked_entities": {},
+    "confidence": 0.50,
+    "notes_zh": "通用参考图；待审核归类",
+    "source_records": ["source_user_provided_20260621"],
+    "review_status": "draft"
+  },
+  {
+    "id": "asset_ref_user_image7",
+    "asset_path": "assets/references/user_2026_06_21/image7.png",
+    "original_path": "docs/image7.png",
+    "asset_category": "reference",
+    "asset_subtype": "general_reference",
+    "usability": "reference",
+    "spec": {
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "transparent": false,
+      "file_size_kb": 1519
+    },
+    "style_guide_ref": "docs/ART_ASSETS.md#general",
+    "linked_entities": {},
+    "confidence": 0.50,
+    "notes_zh": "通用参考图；待审核归类",
+    "source_records": ["source_user_provided_20260621"],
+    "review_status": "draft"
+  },
+  {
+    "id": "asset_ref_user_image8",
+    "asset_path": "assets/references/user_2026_06_21/image8.png",
+    "original_path": "docs/image8.png",
+    "asset_category": "reference",
+    "asset_subtype": "general_reference",
+    "usability": "reference",
+    "spec": {
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "transparent": false,
+      "file_size_kb": 1195
+    },
+    "style_guide_ref": "docs/ART_ASSETS.md#general",
+    "linked_entities": {},
+    "confidence": 0.50,
+    "notes_zh": "通用参考图；待审核归类",
+    "source_records": ["source_user_provided_20260621"],
+    "review_status": "draft"
+  },
+  {
+    "id": "asset_ref_user_matrix_media",
+    "asset_path": "assets/references/user_2026_06_21/matrix-media-1782070737533-0d279ab9.png",
+    "original_path": "matrix-media-1782070737533-0d279ab9.png",
+    "asset_category": "reference",
+    "asset_subtype": "general_reference",
+    "usability": "reference",
+    "spec": {
+      "width": 1200,
+      "height": 896,
+      "format": "png",
+      "transparent": false,
+      "file_size_kb": 1489
+    },
+    "style_guide_ref": "docs/ART_ASSETS.md#general",
+    "linked_entities": {},
+    "confidence": 0.50,
+    "notes_zh": "根目录 matrix MCP 生成的图；尺寸 1200x896 略不同；待审核归类",
+    "source_records": ["source_user_provided_20260621"],
+    "review_status": "draft"
+  }
+]

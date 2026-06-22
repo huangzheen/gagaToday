@@ -1,0 +1,247 @@
+[
+  {
+    "id": "npc_frau_schneider",
+    "name_de": "Frau Schneider",
+    "name_zh": "Schneider 太太",
+    "role": "Gastmutter",
+    "age_band": "adult",
+    "fictionalized": true,
+    "location_ids": ["host_home"],
+    "portrait": "/assets/characters/frau_schneider/neutral.png",
+    "personality": ["patient", "warm", "practical", "slightly_strict"],
+    "background_zh": "慕尼黑本地寄宿家庭女主人,52 岁,3 个孩子已成年。负责主角日常起居、德国规矩和文化适应。",
+    "language_profile": {
+      "default_language": "de",
+      "lang_pref": { "de": 0.7, "en": 0.3, "zh": 0 },
+      "can_speak_english": true,
+      "english_level": "B1",
+      "patience_with_beginners": "high",
+      "a1_task_fit": true,
+      "a2_task_fit": true
+    },
+    "relationship_defaults": {
+      "friendship": 20,
+      "trust": 40,
+      "familiarity": 30,
+      "conflict": 0,
+      "parent_like_trust": 35
+    },
+    "tags": ["gastfamily", "authority", "cultural_guide"],
+    "source_records": ["source_npc_manual_mvp"],
+    "safety_rating": "all_ages",
+    "review_status": "draft"
+  },
+  {
+    "id": "npc_herr_schneider",
+    "name_de": "Herr Schneider",
+    "name_zh": "Schneider 先生",
+    "role": "Gastvater",
+    "age_band": "adult",
+    "fictionalized": true,
+    "location_ids": ["host_home"],
+    "portrait": "/assets/characters/herr_schneider/neutral.png",
+    "personality": ["quiet", "humorous", "engineer"],
+    "background_zh": "55 岁,西门子工程师,负责家中水电 / 自行车维修。话不多但关键时刻出现。",
+    "language_profile": {
+      "default_language": "de",
+      "lang_pref": { "de": 0.85, "en": 0.15, "zh": 0 },
+      "can_speak_english": true,
+      "english_level": "A2",
+      "patience_with_beginners": "medium",
+      "a1_task_fit": true
+    },
+    "relationship_defaults": {
+      "friendship": 15,
+      "trust": 35,
+      "familiarity": 25,
+      "conflict": 0
+    },
+    "tags": ["gastfamily", "engineer"],
+    "source_records": ["source_npc_manual_mvp"],
+    "safety_rating": "all_ages",
+    "review_status": "draft"
+  },
+  {
+    "id": "npc_anna_bakery",
+    "name_de": "Anna",
+    "name_zh": "Anna 店长",
+    "role": "Bäckerei-Inhaberin",
+    "age_band": "adult",
+    "fictionalized": true,
+    "location_ids": ["bakery"],
+    "portrait": "/assets/characters/anna/smile.png",
+    "personality": ["warm", "talkative", "business_savvy", "neighborly"],
+    "background_zh": "慕尼黑本地面包店店长,40 岁,面包店由家族经营 20 年。她会耐心纠正主角的德语发音。注:此 NPC 最初版本在柏林设定中,本批次复用为慕尼黑场景,标记 'reused_berlin→munich'。",
+    "language_profile": {
+      "default_language": "de",
+      "lang_pref": { "de": 0.8, "en": 0.2, "zh": 0 },
+      "can_speak_english": true,
+      "english_level": "B2",
+      "patience_with_beginners": "very_high",
+      "a1_task_fit": true
+    },
+    "relationship_defaults": {
+      "friendship": 25,
+      "trust": 35,
+      "familiarity": 30,
+      "conflict": 0
+    },
+    "tags": ["merchant", "cultural_guide", "language_practice", "reused"],
+    "reuse_note": "原 NPC ID 'anna_café_berlin' 在柏林场景。本批以 'anna_bakery' ID 复用,后续可精修立绘与对话。",
+    "source_records": ["source_npc_anna_berlin_reused"],
+    "safety_rating": "all_ages",
+    "review_status": "draft"
+  },
+  {
+    "id": "npc_peter_german_classmate",
+    "name_de": "Peter",
+    "name_zh": "Peter(德国同学)",
+    "role": "Mitschüler",
+    "age_band": "teen",
+    "fictionalized": true,
+    "location_ids": ["school", "englischer_garten", "viktualienmarkt"],
+    "portrait": "/assets/characters/peter/smile.png",
+    "personality": ["friendly", "sporty", "tech_savvy", "curious_about_china"],
+    "background_zh": "17 岁,主角的德国同班同学,足球校队 + 学校 Coding Club。第一个主动用英语跟主角搭话的德国学生。",
+    "language_profile": {
+      "default_language": "de",
+      "lang_pref": { "de": 0.9, "en": 0.1, "zh": 0 },
+      "can_speak_english": true,
+      "english_level": "C1",
+      "patience_with_beginners": "high",
+      "a1_task_fit": true,
+      "a2_task_fit": true
+    },
+    "relationship_defaults": {
+      "friendship": 30,
+      "trust": 25,
+      "familiarity": 15,
+      "conflict": 0
+    },
+    "tags": ["classmate", "sport", "tech", "language_exchange"],
+    "source_records": ["source_npc_manual_mvp"],
+    "safety_rating": "all_ages",
+    "review_status": "draft"
+  },
+  {
+    "id": "npc_herr_brown_math",
+    "name_de": "Mr. Brown",
+    "name_zh": "Brown 老师(数学)",
+    "role": "Math Teacher",
+    "age_band": "adult",
+    "fictionalized": true,
+    "location_ids": ["school"],
+    "portrait": "/assets/characters/herr_brown/neutral.png",
+    "personality": ["rigorous", "fair", "slightly_dry_humor", "supportive"],
+    "background_zh": "40 岁英国籍数学老师,在慕尼黑国际学校教 A-Level Mathematics,默认用英语授课。",
+    "language_profile": {
+      "default_language": "en",
+      "lang_pref": { "en": 0.95, "de": 0.05, "zh": 0 },
+      "can_speak_english": true,
+      "english_level": "native",
+      "patience_with_beginners": "medium",
+      "a1_task_fit": false
+    },
+    "relationship_defaults": {
+      "friendship": 15,
+      "trust": 30,
+      "familiarity": 20,
+      "teacher_trust": 35
+    },
+    "tags": ["teacher", "math", "english_speaker"],
+    "source_records": ["source_npc_manual_mvp"],
+    "safety_rating": "all_ages",
+    "review_status": "draft"
+  },
+  {
+    "id": "npc_frau_mueller_deutsch",
+    "name_de": "Frau Müller",
+    "name_zh": "Müller 老师(德语)",
+    "role": "Deutschlehrerin",
+    "age_band": "adult",
+    "fictionalized": true,
+    "location_ids": ["school"],
+    "portrait": "/assets/characters/frau_mueller/smile.png",
+    "personality": ["encouraging", "methodical", "warm"],
+    "background_zh": "38 岁德国本地德语老师,教授 Deutsch als Zweitsprache(DaZ)。会用慢速德语 + 重复练习。",
+    "language_profile": {
+      "default_language": "de",
+      "lang_pref": { "de": 0.9, "en": 0.1, "zh": 0 },
+      "can_speak_english": true,
+      "english_level": "B2",
+      "patience_with_beginners": "very_high",
+      "a1_task_fit": true
+    },
+    "relationship_defaults": {
+      "friendship": 20,
+      "trust": 40,
+      "familiarity": 25,
+      "teacher_trust": 40
+    },
+    "tags": ["teacher", "deutsch", "language_practice"],
+    "source_records": ["source_npc_manual_mvp"],
+    "safety_rating": "all_ages",
+    "review_status": "draft"
+  },
+  {
+    "id": "npc_li_ming_chinese_classmate",
+    "name_zh": "李明",
+    "name_de": "Li Ming",
+    "role": "中国留学生同学",
+    "age_band": "teen",
+    "fictionalized": true,
+    "location_ids": ["school", "host_home", "englischer_garten"],
+    "portrait": "/assets/characters/li_ming/neutral.png",
+    "personality": ["outgoing", "experienced", "helpful", "home_sick_at_times"],
+    "background_zh": "17 岁,上海人,在慕尼黑 1 年,德语 B1。会主动帮新来的主角熟悉环境,但偶尔想家。",
+    "language_profile": {
+      "default_language": "zh",
+      "lang_pref": { "zh": 0.5, "de": 0.4, "en": 0.1 },
+      "can_speak_english": true,
+      "can_speak_chinese": true,
+      "english_level": "B1",
+      "german_level": "B1",
+      "patience_with_beginners": "high",
+      "a1_task_fit": true
+    },
+    "relationship_defaults": {
+      "friendship": 35,
+      "trust": 30,
+      "familiarity": 20,
+      "shared_culture_bond": true
+    },
+    "tags": ["classmate", "chinese", "buddy", "language_exchange"],
+    "source_records": ["source_npc_manual_mvp"],
+    "safety_rating": "all_ages",
+    "review_status": "draft"
+  },
+  {
+    "id": "npc_frau_wagner_library",
+    "name_de": "Frau Wagner",
+    "name_zh": "Wagner 太太(图书馆)",
+    "role": "Bibliothekarin",
+    "age_band": "adult",
+    "fictionalized": true,
+    "location_ids": ["library"],
+    "portrait": "/assets/characters/frau_wagner/neutral.png",
+    "personality": ["quiet", "precise", "helpful"],
+    "background_zh": "50 岁市立图书馆管理员,帮主角办借书卡 + 推荐德语分级读物。",
+    "language_profile": {
+      "default_language": "de",
+      "lang_pref": { "de": 0.85, "en": 0.15, "zh": 0 },
+      "can_speak_english": true,
+      "english_level": "B1",
+      "patience_with_beginners": "high",
+      "a1_task_fit": true
+    },
+    "relationship_defaults": {
+      "friendship": 15,
+      "trust": 30,
+      "familiarity": 10
+    },
+    "tags": ["library", "study_support"],
+    "source_records": ["source_npc_manual_mvp"],
+    "safety_rating": "all_ages",
+    "review_status": "draft"
+  }
+]

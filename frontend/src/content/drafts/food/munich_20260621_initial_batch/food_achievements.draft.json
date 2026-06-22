@@ -1,0 +1,102 @@
+[
+  {
+    "id": "ach_first_brotchen",
+    "title_zh": "第一次独自买小面包",
+    "description_zh": "用德语在面包店完成一次点餐。",
+    "trigger": {
+      "type": "dialogue_success",
+      "dialogue_id": "dlg_bakery_order_a1"
+    },
+    "rewards": {
+      "german_xp": 10,
+      "life_xp": 5
+    },
+    "category": "first_time",
+    "source_records": ["source_game_design_manual"],
+    "review_status": "draft"
+  },
+  {
+    "id": "ach_first_zum_mitnehmen",
+    "title_zh": "学会说 'zum Mitnehmen'",
+    "description_zh": "成功使用德语 zum Mitnehmen(打包)完成点餐。",
+    "trigger": {
+      "type": "dialogue_phrase",
+      "phrase": "zum Mitnehmen"
+    },
+    "rewards": {
+      "german_xp": 5,
+      "culture_xp": 3
+    },
+    "category": "language_milestone",
+    "source_records": ["source_game_design_manual"],
+    "review_status": "draft"
+  },
+  {
+    "id": "ach_first_schnitzel",
+    "title_zh": "第一次吃 Schnitzel",
+    "description_zh": "在德国餐厅点了 Schnitzel 并吃完。",
+    "trigger": {
+      "type": "food_consumed",
+      "food_item_id": "food_schnitzel"
+    },
+    "rewards": {
+      "culture_xp": 8,
+      "mood_effect": "high"
+    },
+    "category": "food_milestone",
+    "source_records": ["source_game_design_manual"],
+    "review_status": "draft"
+  },
+  {
+    "id": "ach_week_budget_under_25",
+    "title_zh": "一周午餐预算不超过 25 EUR",
+    "description_zh": "连续 7 天午餐开销控制在 25 EUR 以内(平均 3.5 EUR/天)。",
+    "trigger": {
+      "type": "weekly_budget_check",
+      "category": "lunch",
+      "max_eur": 25
+    },
+    "rewards": {
+      "life_xp": 15,
+      "parent_trust": 5
+    },
+    "category": "budget_milestone",
+    "source_records": ["source_game_design_manual"],
+    "review_status": "draft"
+  },
+  {
+    "id": "ach_first_self_cooked_dinner",
+    "title_zh": "第一次自己做晚饭",
+    "description_zh": "成功完成一次 recipe_* 任务并吃自己做的晚餐。",
+    "trigger": {
+      "type": "recipe_complete",
+      "recipe_id_min_difficulty": 1
+    },
+    "rewards": {
+      "cooking_skill_xp": 5,
+      "parent_trust": 3,
+      "life_xp": 5
+    },
+    "category": "cooking_milestone",
+    "source_records": ["source_game_design_manual"],
+    "review_status": "draft"
+  },
+  {
+    "id": "ach_invite_friend_dinner",
+    "title_zh": "第一次请同学吃自制食物",
+    "description_zh": "邀请德国同学 / 中国同学来家里吃饭,自己做饭款待。",
+    "trigger": {
+      "type": "social_event",
+      "event_subtype": "hosted_meal",
+      "self_cooked": true
+    },
+    "rewards": {
+      "friendship": 15,
+      "cooking_skill_xp": 10,
+      "culture_xp": 8
+    },
+    "category": "social_milestone",
+    "source_records": ["source_game_design_manual"],
+    "review_status": "draft"
+  }
+]

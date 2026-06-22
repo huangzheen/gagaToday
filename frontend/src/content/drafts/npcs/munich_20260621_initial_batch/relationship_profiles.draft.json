@@ -1,0 +1,121 @@
+[
+  {
+    "id": "rel_profile_frau_schneider",
+    "npc_id": "npc_frau_schneider",
+    "dimensions": {
+      "friendship": 20,
+      "trust": 40,
+      "familiarity": 30,
+      "respect": 50,
+      "conflict": 0,
+      "parent_like_trust": 35,
+      "dependency": 10,
+      "shared_memory": 5
+    },
+    "growth_rate": {
+      "friendship": "medium",
+      "trust": "slow_until_event",
+      "parent_like_trust": "fast_with_homework"
+    },
+    "boundary_notes": "不允许晚于 22:00 回家,不允许无理由缺勤。违规降低 trust 与 parent_like_trust。",
+    "trigger_events": [
+      "host_curfew_violation",
+      "host_chores_help",
+      "host_first_self_cooked_dinner"
+    ],
+    "review_status": "draft"
+  },
+  {
+    "id": "rel_profile_anna_bakery",
+    "npc_id": "npc_anna_bakery",
+    "dimensions": {
+      "friendship": 25,
+      "trust": 35,
+      "familiarity": 30,
+      "respect": 25,
+      "conflict": 0,
+      "shared_memory": 0,
+      "language_comfort": 10
+    },
+    "growth_rate": {
+      "friendship": "fast_when_visit_regularly",
+      "language_comfort": "fast_when_practice_daily"
+    },
+    "boundary_notes": "Anna 关心但不会主动社交。玩家需要主动去面包店。",
+    "trigger_events": [
+      "first_brotchen_order",
+      "anniversary_bakery",
+      "wrong_pronunciation_correction"
+    ],
+    "review_status": "draft"
+  },
+  {
+    "id": "rel_profile_peter_german_classmate",
+    "npc_id": "npc_peter_german_classmate",
+    "dimensions": {
+      "friendship": 30,
+      "trust": 25,
+      "familiarity": 15,
+      "respect": 25,
+      "conflict": 0,
+      "shared_memory": 0,
+      "language_exchange_credit": 5
+    },
+    "growth_rate": {
+      "friendship": "fast_with_shared_activity",
+      "trust": "slow_until_share_personal"
+    },
+    "boundary_notes": "Peter 是同学,不是恋人。关系上限 = 朋友 + 偶尔周末一起出去玩。",
+    "trigger_events": [
+      "first_practice_together",
+      "first_invite_to_game",
+      "first_share_chinese_snack"
+    ],
+    "review_status": "draft"
+  },
+  {
+    "id": "rel_profile_li_ming",
+    "npc_id": "npc_li_ming_chinese_classmate",
+    "dimensions": {
+      "friendship": 35,
+      "trust": 30,
+      "familiarity": 20,
+      "shared_culture_bond": 30,
+      "homesickness_bridge": 15,
+      "conflict": 0
+    },
+    "growth_rate": {
+      "friendship": "fast",
+      "homesickness_bridge": "episodic"
+    },
+    "boundary_notes": "李明承担 '学长 / 同乡' 角色,会帮主角适应。但他也是 17 岁未成年人,游戏内无恋爱线。",
+    "trigger_events": [
+      "first_chat_in_mandarin",
+      "first_invite_home_dinner",
+      "first_homesickness_talk"
+    ],
+    "review_status": "draft"
+  },
+  {
+    "id": "rel_profile_frau_mueller",
+    "npc_id": "npc_frau_mueller_deutsch",
+    "dimensions": {
+      "friendship": 20,
+      "trust": 40,
+      "familiarity": 25,
+      "teacher_trust": 40,
+      "conflict": 0,
+      "language_comfort": 30
+    },
+    "growth_rate": {
+      "teacher_trust": "steady_with_homework",
+      "language_comfort": "fast_with_speaking"
+    },
+    "trigger_events": [
+      "first_pronunciation_corrected",
+      "first_a1_quiz_pass",
+      "first_self_intro"
+    ],
+    "review_status": "draft"
+  }
+]

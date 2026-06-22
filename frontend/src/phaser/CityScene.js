@@ -15,28 +15,26 @@ export default class CityScene extends Phaser.Scene {
     const width = this.scale.width;
     const height = this.scale.height;
 
-    // 背景 — 用深棕色模拟 RPG Maker 风格地图
-    this.cameras.main.setBackgroundColor('#2d261d');
+    this.cameras.main.setBackgroundColor('#18202a');
+    this.drawMapBase(width, height);
 
-    // 顶部:慕尼黑城市标题
-    this.add.text(width / 2, 32, '✦ MÜNCHEN ✦', {
-      fontFamily: 'Courier New, monospace',
-      fontSize: '32px',
-      color: '#f4d35e',
-      stroke: '#000',
-      strokeThickness: 4,
+    this.add.text(width / 2, 30, 'MÜNCHEN · DAY 1', {
+      fontFamily: 'Arial, sans-serif',
+      fontSize: '28px',
+      fontStyle: 'bold',
+      color: '#fff3cf',
     }).setOrigin(0.5);
 
-    this.add.text(width / 2, 60, 'Year 12 · September · Woche 1', {
-      fontFamily: 'Courier New, monospace',
+    this.add.text(width / 2, 58, '寄宿家庭、学校、面包店、超市、图书馆构成第一天闭环', {
+      fontFamily: 'Arial, sans-serif',
       fontSize: '14px',
-      color: '#8a7a60',
+      color: '#aab8bf',
     }).setOrigin(0.5);
 
     const points = locations.map((location) => ({
       id: location.id,
-      x: Math.round(location.x * width),
-      y: Math.round(location.y * height),
+      x: Phaser.Math.Clamp(Math.round(location.x * width), 140, width - 180),
+      y: Phaser.Math.Clamp(Math.round(location.y * height), 120, height - 120),
       texture: location.asset,
       name: location.name_de,
       npc: location.npc,
@@ -50,12 +48,48 @@ export default class CityScene extends Phaser.Scene {
       this.createScenePoint(p);
     });
 
-    this.add.text(width / 2, height - 30, '点击场景点进入对话', {
-      fontFamily: 'Courier New, monospace',
+    this.add.text(width / 2, height - 24, '点击地点进入生活场景 · 路线会消耗时间、体力和欧元', {
+      fontFamily: 'Arial, sans-serif',
       fontSize: '13px',
-      color: '#6a5a40',
+      color: '#8aa0a8',
     }).setOrigin(0.5);
 
+  }
+
+  drawMapBase(width, height) {
+    const graphics = this.add.graphics();
+
+    graphics.fillStyle(0x202936, 1);
+    graphics.fillRect(0, 0, width, height);
+
+    graphics.fillStyle(0x263344, 1);
+    graphics.fillRoundedRect(70, 95, width - 140, height - 155, 18);
+
+    graphics.lineStyle(18, 0x3a6e83, 0.4);
+    graphics.beginPath();
+    graphics.moveTo(0, height * 0.62);
+    graphics.lineTo(width * 0.28, height * 0.54);
+    graphics.lineTo(width * 0.56, height * 0.66);
+    graphics.lineTo(width, height * 0.58);
+    graphics.strokePath();
+
+    graphics.lineStyle(5, 0x59636c, 0.55);
+    for (let x = 110; x < width - 120; x += 120) {
+      graphics.beginPath();
+      graphics.moveTo(x, 120);
+      graphics.lineTo(x + 60, height - 105);
+      graphics.strokePath();
+    }
+    for (let y = 135; y < height - 110; y += 86) {
+      graphics.beginPath();
+      graphics.moveTo(90, y);
+      graphics.lineTo(width - 90, y + 30);
+      graphics.strokePath();
+    }
+
+    graphics.fillStyle(0x1d513f, 0.5);
+    graphics.fillRoundedRect(width * 0.61, height * 0.16, 240, 120, 22);
+    graphics.fillRoundedRect(width * 0.09, height * 0.58, 220, 110, 22);
   }
 
   drawRoutes(width, height) {
@@ -68,7 +102,7 @@ export default class CityScene extends Phaser.Scene {
     ]));
 
     const graphics = this.add.graphics();
-    graphics.lineStyle(3, 0x4a3a2a, 0.5);
+    graphics.lineStyle(4, 0xf1c36a, 0.42);
 
     routes.forEach((route) => {
       const from = pointsById.get(route.from);
@@ -83,60 +117,70 @@ export default class CityScene extends Phaser.Scene {
 
   createScenePoint(point) {
     const container = this.add.container(point.x, point.y);
-    container.setSize(220, 200);
+    container.setSize(150, 128);
 
-    // 缩略图(用 Phaser 缩放)
-    const thumb = this.add.image(0, 0, point.texture);
-    thumb.setDisplaySize(200, 130);
+    const shadow = this.add.ellipse(0, 40, 104, 24, 0x000000, 0.24);
+    container.add(shadow);
+
+    const card = this.add.rectangle(0, 0, 128, 96, 0x111821, 0.92);
+    card.setStrokeStyle(2, 0xe6c16c, 0.95);
+    container.add(card);
+
+    const thumb = this.add.image(0, -10, point.texture);
+    thumb.setDisplaySize(112, 58);
     container.add(thumb);
 
-    // 场景名称
-    const nameText = this.add.text(0, 80, point.name, {
-      fontFamily: 'Courier New, monospace',
-      fontSize: '14px',
-      color: '#f4d35e',
-      stroke: '#000',
-      strokeThickness: 2,
+    const pin = this.add.circle(-52, -38, 12, 0x7fd1b9, 1);
+    pin.setStrokeStyle(2, 0xffffff, 0.9);
+    container.add(pin);
+
+    const nameText = this.add.text(0, 35, point.name, {
+      fontFamily: 'Arial, sans-serif',
+      fontSize: '13px',
+      fontStyle: 'bold',
+      color: '#fff3cf',
     }).setOrigin(0.5);
     container.add(nameText);
 
-    // NPC + 难度 + 英文可用度
-    const infoText = this.add.text(0, 96, `${point.npc} · ${point.difficulty} · EN ${point.english}%`, {
-      fontFamily: 'Courier New, monospace',
+    const infoText = this.add.text(0, 52, `${point.npc} · ${point.difficulty} · EN ${point.english}%`, {
+      fontFamily: 'Arial, sans-serif',
       fontSize: '10px',
-      color: '#c9956b',
+      color: '#aab8bf',
     }).setOrigin(0.5);
     container.add(infoText);
 
-    // 边框(像素艺术风格)
-    const frame = this.add.rectangle(0, 0, 220, 145, 0x000000, 0);
-    frame.setStrokeStyle(2, 0xc9956b, 1);
-    container.add(frame);
+    const emitClick = () => {
+      this.game.events.emit('scenePointClicked', point.id);
+    };
 
-    // 交互区:用默认 hitArea(整个 container size),让 Phaser 用 Rectangle.contains
-    container.setInteractive({ useHandCursor: true });
+    container.setInteractive(new Phaser.Geom.Rectangle(-64, -48, 128, 96), Phaser.Geom.Rectangle.Contains);
+    card.setInteractive({ useHandCursor: true });
+    thumb.setInteractive({ useHandCursor: true });
 
     container.on('pointerover', () => {
-      frame.setStrokeStyle(3, 0xf4d35e, 1);
+      card.setStrokeStyle(3, 0x7fd1b9, 1);
+      card.setFillStyle(0x182839, 0.98);
       this.tweens.add({
         targets: container,
-        scale: 1.05,
+        y: point.y - 5,
+        scale: 1.04,
         duration: 100,
       });
     });
 
     container.on('pointerout', () => {
-      frame.setStrokeStyle(2, 0xc9956b, 1);
+      card.setStrokeStyle(2, 0xe6c16c, 0.95);
+      card.setFillStyle(0x111821, 0.92);
       this.tweens.add({
         targets: container,
+        y: point.y,
         scale: 1,
         duration: 100,
       });
     });
 
-    container.on('pointerdown', () => {
-      // 发送事件给 Vue
-      this.game.events.emit('scenePointClicked', point.id);
-    });
+    container.on('pointerdown', emitClick);
+    card.on('pointerdown', emitClick);
+    thumb.on('pointerdown', emitClick);
   }
 }

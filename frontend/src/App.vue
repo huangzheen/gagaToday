@@ -4,6 +4,7 @@ import GameCanvas from './components/GameCanvas.vue';
 import DialogueBox from './components/DialogueBox.vue';
 import EventModal from './components/EventModal.vue';
 import DaySummaryModal from './components/DaySummaryModal.vue';
+import MvpHud from './components/MvpHud.vue';
 import { useGameStore } from '@/stores/game';
 import { computed } from 'vue';
 
@@ -25,11 +26,14 @@ const locationHint = computed(() => {
     <!-- 左上角紧凑状态卡 -->
     <StatusBar />
 
+    <!-- 右侧 MVP 操作与任务面板 -->
+    <MvpHud />
+
     <!-- 右下角场景提示 + 推进时间 -->
     <div class="scene-hint">
       <span class="hint-loc">{{ locationHint }}</span>
       <button
-        v-if="store.currentView !== 'scene' && !store.dialogueState.open"
+        v-if="store.currentView !== 'scene' && !store.dialogueState?.open"
         class="hint-advance"
         :class="{ night: store.currentTimeBlock === 'night' }"
         @click="store.currentTimeBlock === 'night' ? store.endDay() : store.advanceTime()"
@@ -84,8 +88,8 @@ const locationHint = computed(() => {
   font-family: 'Courier New', monospace;
   font-size: 12px;
   color: #f4d35e;
-  border-radius: 2px;
-  letter-spacing: 1px;
+  border-radius: 4px;
+  letter-spacing: 0;
 }
 
 .hint-advance {
@@ -100,7 +104,7 @@ const locationHint = computed(() => {
   font-weight: bold;
   cursor: pointer;
   transition: all 0.15s;
-  letter-spacing: 1px;
+  letter-spacing: 0;
 }
 
 .hint-advance:hover {
@@ -113,5 +117,21 @@ const locationHint = computed(() => {
   background: rgba(40, 30, 60, 0.92);
   border-color: #8a7aaa;
   color: #d8c8f8;
+}
+
+@media (max-width: 820px) {
+  .scene-hint {
+    left: 12px;
+    right: 12px;
+    bottom: 8px;
+    justify-content: space-between;
+  }
+
+  .hint-loc {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }
 </style>

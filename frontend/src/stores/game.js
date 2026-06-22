@@ -8,11 +8,13 @@ import playerStart from '@/content/munich/player_start.json';
 import dailyEvents from '@/content/munich/daily_events.json';
 import {
   applyEffects,
+  clearPlayerState,
   completeTask,
   createPlayerState,
   getActiveTasks,
   loadPlayerState,
   savePlayerState,
+  spendMoney,
   toStatusBarStats,
   travelTo,
   unlockTask,
@@ -28,6 +30,29 @@ const TIME_BLOCK_LABEL = {
   after_school: '放学后 · Freizeit',
   evening: '傍晚 · Zuhause',
   night: '夜晚 · Schlafen',
+};
+
+const LOCATION_ACTIONS = {
+  host_home: [
+    { id: 'eat_breakfast', label: '吃早饭', de: 'Frühstück', detail: '+体力 +心情', primary: true },
+    { id: 'greet_host', label: '向 Schneider 太太问早', de: 'Guten Morgen', detail: '练一句 A1 问候' },
+    { id: 'leave_home', label: '出门去学校', de: 'Zur Schule', detail: '进入慕尼黑地图', primary: true },
+    { id: 'reply_parent', label: '回复父母消息', de: 'Nachricht', detail: '+父母信任 -压力' },
+    { id: 'sleep', label: '睡觉结算', de: 'Schlafen', detail: '结束 Day 1', primary: true },
+  ],
+  school: [
+    { id: 'school_intro', label: '课堂自我介绍', de: 'Vorstellen', detail: '和 Herr Weber 对话', primary: true },
+    { id: 'finish_classes', label: '完成第一天课程', de: 'Unterricht', detail: '+学习经验，进入放学后', primary: true },
+  ],
+  bakery: [
+    { id: 'bakery_dialogue', label: '用德语买 Brötchen', de: 'Bestellen', detail: '-€1.20 +德语XP', primary: true },
+  ],
+  supermarket: [
+    { id: 'buy_groceries', label: '买晚餐食材', de: 'Einkaufen', detail: '-€8.40 +生活XP', primary: true },
+  ],
+  library: [
+    { id: 'study_library', label: '安静自习 45 分钟', de: 'Lernen', detail: '+数学XP -体力', primary: true },
+  ],
 };
 
 /**
@@ -48,7 +73,7 @@ export const useGameStore = defineStore('game', () => {
   });
 
   // ===== 场景状态 =====
-  const currentView = ref('home');  // 'home' | 'city' | 'scene'
+  const currentView = ref(playerState.value.location_id === 'host_home' ? 'home' : 'city');  // 'home' | 'city' | 'scene'
   const currentScene = ref(null);   // null | 'host_home' | 'school' | ...
   const currentNpc = ref(null);
 
@@ -71,6 +96,20 @@ export const useGameStore = defineStore('game', () => {
   const taskCatalog = ref(tasks);
   const dialogueScripts = ref(dialogues);
   const eventCatalog = ref(dailyEvents);
+  const recentNotices = ref([]);
+
+  const currentLocation = computed(() => scenePoints.value.find((location) => location.id === playerState.value.location_id) || null);
+  const completedTaskIds = computed(() => new Set(playerState.value.completed_task_ids));
+  const completion = computed(() => ({
+    total: taskCatalog.value.length,
+    done: playerState.value.completed_task_ids.length,
+  }));
+  const latestTransactions = computed(() => playerState.value.transactions.slice(-4).reverse());
+  const latestLog = computed(() => playerState.value.action_log.slice(-5).reverse());
+  const suggestedActions = computed(() => {
+    const actions = LOCATION_ACTIONS[playerState.value.location_id] || [];
+    return actions.filter((action) => canRunAction(action.id));
+  });
 
   // ===== Actions =====
 
@@ -83,6 +122,15 @@ export const useGameStore = defineStore('game', () => {
     triggerDailyEvent();
   }
 
+  function pushNotice(title, body = '') {
+    recentNotices.value.unshift({
+      id: `notice_${Date.now()}_${recentNotices.value.length}`,
+      title,
+      body,
+    });
+    recentNotices.value = recentNotices.value.slice(0, 4);
+  }
+
   /**
    * 检查当前位置 + 当前 time_block + 当前 day 是否匹配一个 daily_event
    * 匹配则:set_flags + unlock_task + 显示弹窗
@@ -92,7 +140,9 @@ export const useGameStore = defineStore('game', () => {
     const event = eventCatalog.value.find((e) => (
       e.day === ps.date.day &&
       e.time_block === ps.time_block &&
-      e.location_id === ps.location_id
+      e.location_id === ps.location_id &&
+      (e.required_flags || []).every((flag) => ps.flags?.[flag]) &&
+      !(e.sets_flags || []).some((flag) => ps.flags?.[flag])
     ));
     if (!event) return null;
 
@@ -132,6 +182,7 @@ export const useGameStore = defineStore('game', () => {
       mood: 5,
       life_xp: 2,
     }, 'eat_breakfast');
+    pushNotice('早餐完成', 'Brötchen 和咖啡让你精神了一些。');
   }
 
   /**
@@ -153,6 +204,9 @@ export const useGameStore = defineStore('game', () => {
   function leaveHome() {
     playerState.value = advanceTimeBlock(playerState.value);
     currentView.value = 'city';
+    currentScene.value = null;
+    currentNpc.value = null;
+    playerState.value.location_id = 'host_home';
     triggerDailyEvent();
   }
 
@@ -171,9 +225,18 @@ export const useGameStore = defineStore('game', () => {
    * 末尾:触发 daily_event(可能弹窗 + 解锁任务)
    */
   function enterScene(sceneId) {
-    const result = travelTo(playerState.value, routePresets.value, sceneId);
+    let result = travelTo(playerState.value, routePresets.value, sceneId);
     playerState.value = result.playerState;
+
+    if (sceneId === 'school' && playerState.value.active_task_ids.includes('task_day01_get_to_school')) {
+      if (playerState.value.time_block === 'commute') {
+        playerState.value = advanceTimeBlock(playerState.value);
+      }
+      completeTaskIfActive('task_day01_get_to_school', '准时到校', '你赶上了第一节课，父母信任上升。');
+    }
+
     currentScene.value = sceneId;
+    currentView.value = 'scene';
     currentNpc.value = dialogueScripts.value[sceneId] || null;
     dialogueState.value = {
       open: !!currentNpc.value,
@@ -195,6 +258,7 @@ export const useGameStore = defineStore('game', () => {
     currentScene.value = null;
     currentNpc.value = null;
     currentView.value = 'home';
+    playerState.value.location_id = 'host_home';
     dialogueState.value = { ...dialogueState.value, open: false };
   }
 
@@ -224,6 +288,17 @@ export const useGameStore = defineStore('game', () => {
     }, `dialogue_option:${currentScene.value}#${optionIndex}`);
   }
 
+  function openDialogue(locationId = playerState.value.location_id) {
+    currentScene.value = locationId;
+    currentNpc.value = dialogueScripts.value[locationId] || null;
+    dialogueState.value = {
+      open: !!currentNpc.value,
+      turnIndex: 0,
+      useEnglish: false,
+    };
+    if (!currentNpc.value) pushNotice('这里暂时没有对话', '可以先完成地点动作或去下一个地点。');
+  }
+
   function changeMood(delta) {
     playerState.value = applyEffects(playerState.value, { mood: delta }, 'manual_mood_change');
   }
@@ -235,11 +310,104 @@ export const useGameStore = defineStore('game', () => {
     ));
     if (matchingTask) {
       playerState.value = completeTask(playerState.value, taskCatalog.value, matchingTask.id);
+      pushNotice('任务完成', matchingTask.title_zh);
     }
   }
 
   function completeActiveTask(taskId) {
     playerState.value = completeTask(playerState.value, taskCatalog.value, taskId);
+  }
+
+  function completeTaskIfActive(taskId, title, body) {
+    if (!playerState.value.active_task_ids.includes(taskId)) return false;
+    playerState.value = completeTask(playerState.value, taskCatalog.value, taskId);
+    pushNotice(title, body);
+    return true;
+  }
+
+  function finishClasses() {
+    if (playerState.value.location_id !== 'school') return;
+    let nextState = playerState.value;
+    while (nextState.time_block !== 'after_school') {
+      nextState = advanceTimeBlock(nextState);
+    }
+    playerState.value = applyEffects(nextState, {
+      energy: -12,
+      stress: 4,
+      german_xp: 6,
+      math_xp: 8,
+      life_xp: 3,
+    }, 'finish_first_school_day');
+    pushNotice('第一天课程结束', '你记下了作业，也终于可以去面包店练习点单。');
+    triggerDailyEvent();
+  }
+
+  function buyGroceries() {
+    if (playerState.value.location_id !== 'supermarket') return;
+    playerState.value = spendMoney(playerState.value, 8.4, 'groceries:dinner');
+    playerState.value = applyEffects(playerState.value, { energy: -3, life_xp: 4, mood: 1 }, 'buy_groceries');
+    pushNotice('买到晚餐食材', '你开始对欧元预算有一点真实感觉了。');
+  }
+
+  function studyLibrary() {
+    if (playerState.value.location_id !== 'library') return;
+    playerState.value = applyEffects(playerState.value, {
+      energy: -8,
+      stress: -3,
+      mood: 2,
+      math_xp: 10,
+      german_xp: 3,
+    }, 'study_library');
+    pushNotice('自习完成', '图书馆很安静，你完成了一页数学桥接题。');
+  }
+
+  function replyParent() {
+    const canReply = playerState.value.active_task_ids.includes('task_day01_reply_parent');
+    if (!canReply) return;
+    completeTaskIfActive('task_day01_reply_parent', '已回复父母', '你报了平安，妈妈回了一个放心的表情。');
+  }
+
+  function goHome() {
+    playerState.value = {
+      ...playerState.value,
+      location_id: 'host_home',
+    };
+    while (!['evening', 'night'].includes(playerState.value.time_block)) {
+      playerState.value = advanceTimeBlock(playerState.value);
+    }
+    currentView.value = 'home';
+    currentScene.value = null;
+    currentNpc.value = null;
+    dialogueState.value = { ...dialogueState.value, open: false };
+    triggerDailyEvent();
+  }
+
+  function canRunAction(actionId) {
+    const ps = playerState.value;
+    if (actionId === 'eat_breakfast') return ps.location_id === 'host_home' && ps.time_block === 'morning' && !ps.action_log.some((entry) => entry.payload?.reason === 'eat_breakfast');
+    if (actionId === 'greet_host') return ps.location_id === 'host_home' && ['morning', 'evening'].includes(ps.time_block);
+    if (actionId === 'leave_home') return ps.location_id === 'host_home' && ['morning', 'commute'].includes(ps.time_block);
+    if (actionId === 'reply_parent') return ps.location_id === 'host_home' && ps.active_task_ids.includes('task_day01_reply_parent');
+    if (actionId === 'sleep') return ps.location_id === 'host_home' && ps.time_block === 'night';
+    if (actionId === 'school_intro') return ps.location_id === 'school';
+    if (actionId === 'finish_classes') return ps.location_id === 'school' && !['after_school', 'evening', 'night'].includes(ps.time_block);
+    if (actionId === 'bakery_dialogue') return ps.location_id === 'bakery';
+    if (actionId === 'buy_groceries') return ps.location_id === 'supermarket';
+    if (actionId === 'study_library') return ps.location_id === 'library';
+    return false;
+  }
+
+  function runLocationAction(actionId) {
+    if (actionId === 'eat_breakfast') eatBreakfast();
+    if (actionId === 'greet_host') greetHost();
+    if (actionId === 'leave_home') leaveHome();
+    if (actionId === 'reply_parent') replyParent();
+    if (actionId === 'sleep') endDay();
+    if (actionId === 'school_intro') openDialogue('school');
+    if (actionId === 'finish_classes') finishClasses();
+    if (actionId === 'bakery_dialogue') openDialogue('bakery');
+    if (actionId === 'buy_groceries') buyGroceries();
+    if (actionId === 'study_library') studyLibrary();
   }
 
   /**
@@ -248,7 +416,11 @@ export const useGameStore = defineStore('game', () => {
    * 然后进入 daySummary 结算弹窗
    */
   function endDay() {
-    if (playerState.value.time_block !== 'night') return;
+    if (playerState.value.time_block !== 'night') {
+      while (playerState.value.time_block !== 'night') {
+        playerState.value = advanceTimeBlock(playerState.value);
+      }
+    }
     playerState.value = applyEffects(playerState.value, {
       energy: 100 - playerState.value.status.energy,
       stress: -10,
@@ -286,7 +458,22 @@ export const useGameStore = defineStore('game', () => {
     triggerDailyEvent();
   }
 
+  function resetGame() {
+    clearPlayerState();
+    playerState.value = createPlayerState(playerStart);
+    currentView.value = 'home';
+    currentScene.value = null;
+    currentNpc.value = null;
+    currentEvent.value = null;
+    daySummary.value = null;
+    recentNotices.value = [];
+    dialogueState.value = { open: false, turnIndex: 0, useEnglish: false };
+    triggerDailyEvent();
+  }
+
   // ===== 自动存档 =====
+  triggerDailyEvent();
+
   watch(playerState, (value) => {
     savePlayerState(value);
   }, { deep: true });
@@ -305,6 +492,13 @@ export const useGameStore = defineStore('game', () => {
     nextTimeBlock,
     currentEvent,
     daySummary,
+    currentLocation,
+    completion,
+    completedTaskIds,
+    latestTransactions,
+    latestLog,
+    suggestedActions,
+    recentNotices,
     // content refs
     scenePoints,
     routePresets,
@@ -324,6 +518,11 @@ export const useGameStore = defineStore('game', () => {
     selectOption,
     changeMood,
     completeActiveTask,
+    runLocationAction,
+    openDialogue,
+    finishClasses,
+    goHome,
+    resetGame,
     advanceTime,
     triggerDailyEvent,
     dismissEvent,

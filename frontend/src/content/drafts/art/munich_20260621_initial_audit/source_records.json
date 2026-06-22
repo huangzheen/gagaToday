@@ -1,0 +1,53 @@
+[
+  {
+    "id": "source_ai_matrix_generate_image_20260621",
+    "type": "ai_generated",
+    "label_zh": "matrix MCP (matrix_generate_image) AI 生成稿",
+    "url": null,
+    "retrieved_at": "2026-06-21T10:00:00Z",
+    "license_zh": "AI 生成的版权归属需用户确认；建议作为 placeholder / usable MVP 资产，Phase 2 重画精修",
+    "notes_zh": "15 张 MVP 占位稿；prompt 模板见 docs/ART_ASSETS.md §AI 批量生成工作流",
+    "asset_ids": [
+      "asset_char_anna_neutral", "asset_char_anna_smile", "asset_char_anna_surprise", "asset_char_anna_thinking",
+      "asset_char_peter_neutral", "asset_char_peter_smile", "asset_char_peter_surprise", "asset_char_peter_thinking",
+      "asset_scene_cafe_einstein", "asset_scene_hauptbahnhof_interior", "asset_scene_street_kreuzberg",
+      "asset_ui_button_normal", "asset_ui_dialogue_box", "asset_ui_mic_button", "asset_ui_city_badge_berlin"
+    ]
+  },
+  {
+    "id": "source_ai_matrix_generate_image_20260621_test",
+    "type": "ai_generated",
+    "label_zh": "matrix MCP 试跑稿（首测）",
+    "url": null,
+    "retrieved_at": "2026-06-21T09:30:00Z",
+    "license_zh": "试跑稿，不入正式资产",
+    "notes_zh": "_test/ 目录下 2 张（anna_test_v1.png, cafe_test_v1.png）",
+    "asset_ids": ["asset_test_anna_v1", "asset_test_cafe_v1"]
+  },
+  {
+    "id": "source_user_provided_20260621",
+    "type": "user_provided",
+    "label_zh": "用户提供参考图（2026-06-21）",
+    "url": null,
+    "retrieved_at": "2026-06-21T13:00:00Z",
+    "license_zh": "用户提供，版权归属用户；全部按 reference 处理",
+    "notes_zh": "15 张：慕尼黑大教堂 / U-Bahn / 在家与妈妈 / 与女友吃饭 / Alianz / image.png / image0-8.png / matrix-media-*.png",
+    "asset_ids": [
+      "asset_ref_user_marienplatz_cathedral", "asset_ref_user_ubahn", "asset_ref_user_home_with_mom",
+      "asset_ref_user_dinner_with_girlfriend", "asset_ref_user_alianz",
+      "asset_ref_user_image_0", "asset_ref_user_image1", "asset_ref_user_image2", "asset_ref_user_image3",
+      "asset_ref_user_image4", "asset_ref_user_image5", "asset_ref_user_image6", "asset_ref_user_image7",
+      "asset_ref_user_image8", "asset_ref_user_matrix_media"
+    ]
+  },
+  {
+    "id": "source_art_assets_style_guide",
+    "type": "manual",
+    "label_zh": "ART_ASSETS.md 风格指南",
+    "url": "docs/ART_ASSETS.md",
+    "retrieved_at": "2026-06-21T13:00:00Z",
+    "license_zh": "项目内部文档",
+    "notes_zh": "美术风格、调色板、规格、命名规范的唯一权威来源",
+    "asset_ids": []
+  }
+]

@@ -1,0 +1,56 @@
+[
+  {
+    "id": "memory_anna_first_brötchen",
+    "npc_id": "npc_anna_bakery",
+    "shared_memory_type": "first_visit",
+    "summary_zh": "主角第一次在面包店点了 'Ein Brötchen, bitte'。Anna 纠正了发音(短促的 ö)。",
+    "linked_event_ids": ["rel_event_anna_first_order"],
+    "trigger_condition": "dialogue_id=dlg_bakery_order_a1 AND pronunciation_corrected=true",
+    "review_status": "draft"
+  },
+  {
+    "id": "memory_peter_first_football",
+    "npc_id": "npc_peter_german_classmate",
+    "shared_memory_type": "first_invite",
+    "summary_zh": "Peter 第一次邀请主角去 Englischer Garten 踢球。",
+    "linked_event_ids": ["rel_event_peter_first_invite"],
+    "trigger_condition": "event_rel_peter_first_invite completed",
+    "review_status": "draft"
+  },
+  {
+    "id": "memory_frau_schneider_first_curfew_warning",
+    "npc_id": "npc_frau_schneider",
+    "shared_memory_type": "rule_set",
+    "summary_zh": "Schneider 太太在第一晚明确说了 22:00 门禁。",
+    "linked_event_ids": ["hook_frau_schneider_first_curfew_warning"],
+    "trigger_condition": "first_night_home",
+    "review_status": "draft"
+  },
+  {
+    "id": "memory_li_ming_first_homesick_talk",
+    "npc_id": "npc_li_ming_chinese_classmate",
+    "shared_memory_type": "emotional",
+    "summary_zh": "李明第一次主动跟主角聊想家。",
+    "linked_event_ids": ["rel_event_li_ming_homesickness_talk"],
+    "trigger_condition": "stress_above_60",
+    "review_status": "draft"
+  },
+  {
+    "id": "memory_frau_schneider_first_cooked",
+    "npc_id": "npc_frau_schneider",
+    "shared_memory_type": "milestone",
+    "summary_zh": "主角第一次为 Schneider 一家做早餐。",
+    "linked_event_ids": ["rel_event_frau_schneider_first_cooked_dinner"],
+    "trigger_condition": "recipe_egg_toast complete AND npc_location=host_home",
+    "review_status": "draft"
+  },
+  {
+    "id": "memory_frau_mueller_self_intro_pass",
+    "npc_id": "npc_frau_mueller_deutsch",
+    "shared_memory_type": "language_milestone",
+    "summary_zh": "主角在德语课通过 A1 自我介绍。",
+    "linked_event_ids": ["rel_event_frau_mueller_first_a1_quiz"],
+    "trigger_condition": "test_de_week01_intro passed",
+    "review_status": "draft"
+  }
+]

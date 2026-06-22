@@ -3,80 +3,108 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>München Pixel Map — FF6 Style Demo</title>
+  <title>München 16-bit Pixel Map Demo</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      background: #0a0e14;
+      background: #0a1428;
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      font-family: monospace;
+      font-family: 'Courier New', monospace;
     }
-    #game-container { position: relative; }
+    #game-container {
+      position: relative;
+      border: 2px solid #c9956b;
+      border-radius: 2px;
+      box-shadow: 0 0 40px rgba(201, 149, 107, 0.15);
+    }
     #loading {
       position: absolute; inset: 0;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
       color: #f4d35e; font-size: 18px; gap: 16px;
-      background: #0a0e14; z-index: 10;
+      background: #0a1428; z-index: 10;
+      transition: opacity 0.4s ease;
     }
     #loading .bar {
-      width: 280px; height: 6px;
-      background: #1a2332; border-radius: 3px; overflow: hidden;
+      width: 280px; height: 4px;
+      background: #1a2a4a; border-radius: 2px; overflow: hidden;
     }
     #loading .bar-fill {
       width: 0%; height: 100%;
       background: #c9956b;
       transition: width 0.3s;
     }
-    .control-bar {
-      position: fixed; bottom: 0; left: 0; right: 0;
-      background: rgba(10,14,20,0.92);
-      border-top: 1px solid #2a3a4a;
-      padding: 10px 20px;
-      display: flex; align-items: center; justify-content: center;
-      gap: 18px; color: #8aa0a8; font-size: 11px; z-index: 20;
+    .page-wrap {
+      display: flex; flex-direction: column; align-items: center; gap: 16px;
     }
-    .control-bar kbd {
-      background: #1a2332; padding: 2px 7px; border-radius: 3px;
-      border: 1px solid #2a3a4a; color: #f4d35e; font-size: 10px;
+    .map-header {
+      color: #f4d35e; font-size: 13px;
+      text-align: center; letter-spacing: 3px;
     }
-    .control-bar a {
-      color: #c9956b; text-decoration: none;
+    .map-header span {
+      color: #6a8aaa; font-size: 10px; letter-spacing: 1px;
     }
-    .control-bar a:hover { color: #f4d35e; }
+    .controls {
+      display: flex; align-items: center; gap: 16px;
+      padding: 8px 20px;
+      background: rgba(10, 20, 40, 0.9);
+      border: 1px solid #2a4a6a;
+      border-radius: 2px;
+    }
+    .controls kbd {
+      background: #1a2a4a; padding: 2px 7px; border-radius: 2px;
+      border: 1px solid #3a5a7a; color: #f4d35e; font-size: 10px;
+    }
+    .controls span {
+      color: #6a8aaa; font-size: 10px;
+    }
+    .controls a {
+      color: #c9956b; text-decoration: none; font-size: 10px;
+      padding: 4px 10px; border: 1px solid #3a5a7a;
+      border-radius: 2px; cursor: pointer;
+    }
+    .controls a:hover {
+      background: #1a2a4a; color: #f4d35e;
+    }
   </style>
 </head>
 <body>
 
-<div id="game-container">
-  <div id="loading">
-    <span>🗺️ 加载慕尼黑像素地图...</span>
-    <div class="bar"><div class="bar-fill" id="load-bar"></div></div>
+<div class="page-wrap">
+  <div class="map-header">
+    MÜNCHEN · ALTSTADT<br>
+    <span>10 Sehenswürdigkeiten · 16-bit Pixel Map</span>
   </div>
-</div>
 
-<div class="control-bar">
-  <span><kbd>W A S D</kbd> / 方向键 移动</span>
-  <span>🖱️ 拖拽 + 滚轮缩放</span>
-  <span>⭐ 点击金色标记查看 POI</span>
-  <a href="javascript:void(0)" onclick="resetCamera()">🎯 重置视角</a>
+  <div id="game-container">
+    <div id="loading">
+      <span>🗺️ 加载 Altstadt 像素地图…</span>
+      <div class="bar"><div class="bar-fill" id="load-bar"></div></div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <span><kbd>W A S D</kbd> / 方向键</span>
+    <span>🖱️ 拖拽 · 滚轮缩放</span>
+    <span>⭐ 点击标记查看详情</span>
+    <a id="btn-reset">🎯 Marienplatz</a>
+  </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js"></script>
 <script>
-// ===== 数据加载 =====
 const base = '/public/assets/munich_map';
 
 async function loadJSON(url) {
   const res = await fetch(url);
-  if (!res.ok) throw new Error(`加载失败: ${url}`);
+  if (!res.ok) throw new Error('Failed: ' + url);
   return res.json();
 }
 
-// ===== 场景定义 (与 MunichMapScene.js 一致) =====
+// ── Phaser Scene ──
 class MunichMapScene extends Phaser.Scene {
   constructor() {
     super({ key: 'MunichMapScene' });
@@ -87,15 +115,16 @@ class MunichMapScene extends Phaser.Scene {
   }
 
   create() {
-    const tilemapData = this.cache.json.get('tilemap');
-    const { cols, rows, tileWidth, tileHeight } = tilemapData;
-    const layerData = tilemapData.layers[0].data;
+    const tm = this.cache.json.get('tilemap');
+    const { cols, rows, tileWidth, tileHeight } = tm;
+    const layerData = tm.layers[0].data;
     const pois = this.cache.json.get('pois');
 
     this.tileW = tileWidth;
     this.tileH = tileHeight;
-    this.mapCols = cols;
-    this.mapRows = rows;
+
+    const mapW = cols * tileWidth;
+    const mapH = rows * tileHeight;
 
     // 列主序 → 行主序
     const rowData = [];
@@ -107,17 +136,16 @@ class MunichMapScene extends Phaser.Scene {
     }
 
     const map = this.make.tilemap({ data: rowData, tileWidth, tileHeight });
-    const tileset = map.addTilesetImage('munich_tileset', 'munich_tileset', tileWidth, tileHeight, 0, 0);
-    this.layer = map.createLayer(0, tileset, 0, 0);
+    const ts = map.addTilesetImage('munich_tileset', 'munich_tileset', tileWidth, tileHeight, 0, 0);
+    this.layer = map.createLayer(0, ts, 0, 0);
 
-    this.cameras.main.setBackgroundColor('#18202a');
+    // 羊皮纸底色
+    this.cameras.main.setBackgroundColor('#f0deb8');
 
-    const mapPixelW = cols * tileWidth;
-    const mapPixelH = rows * tileHeight;
-    this.cameras.main.setBounds(0, 0, mapPixelW, mapPixelH);
-    this.cameras.main.setZoom(2.5);
+    // 相机
+    this.cameras.main.setBounds(0, 0, mapW, mapH);
+    this.cameras.main.setZoom(2);
 
-    // 定位到 Marienplatz
     const marien = pois.find(p => p.name === 'Marienplatz');
     if (marien) {
       this.cameras.main.centerOn(
@@ -127,7 +155,7 @@ class MunichMapScene extends Phaser.Scene {
     }
 
     // POI 标记
-    pois.forEach(poi => this.createPOIMarker(poi));
+    pois.forEach(poi => this.createQuestMarker(poi));
 
     // 按键
     this.cursors = this.input.keyboard.createCursorKeys();
@@ -139,105 +167,110 @@ class MunichMapScene extends Phaser.Scene {
     };
 
     // 拖拽
-    this.input.on('pointermove', (pointer) => {
-      if (pointer.isDown) {
-        this.cameras.main.scrollX -= pointer.velocity.x * 0.3;
-        this.cameras.main.scrollY -= pointer.velocity.y * 0.3;
+    this.input.on('pointermove', (p) => {
+      if (p.isDown) {
+        this.cameras.main.scrollX -= p.velocity.x * 0.3;
+        this.cameras.main.scrollY -= p.velocity.y * 0.3;
       }
     });
 
     // 滚轮
-    this.input.on('wheel', (pointer, gObj, dx, dy) => {
-      const z = Phaser.Math.Clamp(this.cameras.main.zoom - dy * 0.002, 1, 4);
+    this.input.on('wheel', (p, g, dx, dy) => {
+      const z = Phaser.Math.Clamp(this.cameras.main.zoom - dy * 0.003, 1, 4);
       this.cameras.main.setZoom(z);
     });
-
-    // 标题 + 提示
-    const hLabel = this.add.text(mapPixelW / 2, 8,
-      'MÜNCHEN — Altstadt  |  ' + pois.length + ' Sehenswürdigkeiten', {
-        fontFamily: 'monospace', fontSize: '10px', color: '#f4d35e',
-      }).setOrigin(0.5).setScrollFactor(0).setDepth(100);
-
-    // POI 计数
-    this.add.text(mapPixelW - 10, mapPixelH - 10,
-      'Daten: © OpenStreetMap | 16px Tile', {
-        fontFamily: 'monospace', fontSize: '7px', color: '#4a5a6a',
-      }).setOrigin(1, 1).setScrollFactor(0).setDepth(100);
   }
 
-  createPOIMarker(poi) {
+  createQuestMarker(poi) {
     const cx = poi.col * this.tileW + this.tileW / 2;
     const cy = poi.row * this.tileH + this.tileH / 2;
 
-    // 金色菱形
-    const marker = this.add.polygon(cx, cy - 8,
-      [0, -7, 6, 0, 0, 7, -6, 0], 0xf4d35e, 1);
-    marker.setStrokeStyle(1, 0xd4a020, 1);
+    // RPG 感叹号
+    const ex = this.add.text(cx, cy - 14, '!', {
+      fontFamily: 'Arial Black, Impact, sans-serif',
+      fontSize: '18px', fontStyle: 'bold', color: '#f4d35e',
+      stroke: '#000', strokeThickness: 3,
+    }).setOrigin(0.5).setDepth(10);
     this.tweens.add({
-      targets: marker, y: cy - 13,
-      scale: { from: 1, to: 0.85 },
-      duration: 1200, yoyo: true, repeat: -1, ease: 'Sine.easeInOut',
+      targets: ex, y: cy - 20,
+      duration: 900, yoyo: true, repeat: -1, ease: 'Sine.easeInOut',
     });
 
-    // 光晕
-    const glow = this.add.circle(cx, cy - 8, 10, 0xf4d35e, 0.12);
+    // 光圈
+    const ring = this.add.circle(cx, cy, 8, 0xf4d35e, 0.2).setDepth(9);
     this.tweens.add({
-      targets: glow, alpha: { from: 0.12, to: 0.04 },
-      scale: { from: 1, to: 1.6 },
-      duration: 1600, yoyo: true, repeat: -1, ease: 'Sine.easeInOut',
+      targets: ring, scale: { from: 0.8, to: 1.8 },
+      alpha: { from: 0.2, to: 0 },
+      duration: 1500, repeat: -1, ease: 'Sine.easeInOut',
     });
 
-    // 标签
-    const label = this.add.text(cx, cy - 18, poi.name, {
-      fontFamily: 'monospace', fontSize: '7px', color: '#fff3cf',
-      backgroundColor: 'rgba(0,0,0,0.55)',
-      padding: { x: 3, y: 1 },
-    }).setOrigin(0.5, 1);
+    // 标签 (hover)
+    const label = this.add.text(cx, cy - 24, poi.name, {
+      fontFamily: '"Courier New", monospace', fontSize: '10px',
+      color: '#0a1428', backgroundColor: 'rgba(244,211,94,0.75)',
+      padding: { x: 5, y: 2 },
+    }).setOrigin(0.5, 1).setDepth(10).setAlpha(0);
 
-    // 点击
-    const hit = this.add.rectangle(cx, cy, 32, 32, 0x000000, 0);
+    // 菱形
+    const diamond = this.add.polygon(cx, cy - 6,
+      [0, -6, 6, 0, 0, 6, -6, 0], 0xc9956b, 1
+    ).setDepth(9).setStrokeStyle(1, 0x8a6a3a, 1);
+
+    // 热区
+    const hit = this.add.rectangle(cx, cy, 40, 40, 0x000000, 0).setDepth(11);
     hit.setInteractive({ useHandCursor: true });
     hit.on('pointerover', () => {
-      label.setColor('#f4d35e');
-      label.setBackgroundColor('rgba(20,30,50,0.85)');
+      label.setAlpha(1);
+      diamond.setFillStyle(0xf4d35e, 1);
+      ex.setColor('#fff');
     });
     hit.on('pointerout', () => {
-      label.setColor('#fff3cf');
-      label.setBackgroundColor('rgba(0,0,0,0.55)');
+      label.setAlpha(0);
+      diamond.setFillStyle(0xc9956b, 1);
+      ex.setColor('#f4d35e');
     });
-    hit.on('pointerdown', () => this.showPOIInfo(poi));
-
-    this.poiGroup = this.poiGroup || this.add.group();
-    this.poiGroup.addMultiple([marker, glow, label, hit]);
+    hit.on('pointerdown', () => this.showInfo(poi));
   }
 
-  showPOIInfo(poi) {
-    if (this.infoBox) { this.infoBox.destroy(); }
+  showInfo(poi) {
+    if (this.box) { this.box.destroy(); this.box = null; }
+    const cam = this.cameras.main;
     const cx = poi.col * this.tileW + this.tileW / 2;
     const cy = poi.row * this.tileH + this.tileH / 2;
+    const sx = cx - cam.scrollX;
+    const sy = cy - cam.scrollY - 32;
 
-    this.infoBox = this.add.container(cx, cy - 42);
-    const bg = this.add.rectangle(0, 0, 170, 38, 0x0a0e1a, 0.92);
-    bg.setStrokeStyle(1, 0xc9956b, 0.9);
-    this.infoBox.add(bg);
+    this.box = this.add.container(0, 0).setScrollFactor(0).setDepth(300);
+    const bg = this.add.rectangle(0, 0, 220, 60, 0x0a1428, 0.94);
+    bg.setStrokeStyle(2, 0xc9956b, 0.9);
+    this.box.add(bg);
 
-    const t = this.add.text(0, -8, poi.name, {
-      fontFamily: 'monospace', fontSize: '9px', color: '#f4d35e',
-    }).setOrigin(0.5);
-    this.infoBox.add(t);
+    this.box.add(this.add.text(0, -16, poi.name, {
+      fontFamily: '"Courier New", monospace', fontSize: '13px',
+      fontStyle: 'bold', color: '#f4d35e',
+    }).setOrigin(0.5));
 
-    const d = this.add.text(0, 8, poi.desc, {
-      fontFamily: 'monospace', fontSize: '7px', color: '#aab8bf',
-    }).setOrigin(0.5);
-    this.infoBox.add(d);
+    this.box.add(this.add.text(0, 6, poi.desc, {
+      fontFamily: '"Courier New", monospace', fontSize: '10px', color: '#aab8bf',
+    }).setOrigin(0.5));
+
+    this.box.add(this.add.text(0, 22, 'Altstadt · 慕尼黑', {
+      fontFamily: '"Courier New", monospace', fontSize: '8px', color: '#4a6a8a',
+    }).setOrigin(0.5));
+
+    this.box.setPosition(sx, sy);
 
     this.time.delayedCall(4000, () => {
-      if (this.infoBox) { this.infoBox.destroy(); this.infoBox = null; }
+      if (this.box) {
+        this.tweens.add({ targets: this.box, alpha: 0, duration: 300,
+          onComplete: () => { if (this.box) { this.box.destroy(); this.box = null; } }
+        });
+      }
     });
   }
 
   update() {
-    const speed = 4;
+    const speed = 5;
     let dx = 0, dy = 0;
     if (this.cursors.left.isDown || this.wasd.A.isDown) dx -= speed;
     if (this.cursors.right.isDown || this.wasd.D.isDown) dx += speed;
@@ -249,11 +282,11 @@ class MunichMapScene extends Phaser.Scene {
     }
   }
 
-  resetToMarienplatz() {
+  resetToMarien() {
     const pois = this.cache.json.get('pois');
     const m = pois.find(p => p.name === 'Marienplatz');
     if (m) {
-      this.cameras.main.setZoom(2.5);
+      this.cameras.main.setZoom(2);
       this.cameras.main.centerOn(
         m.col * this.tileW + this.tileW / 2,
         m.row * this.tileH + this.tileH / 2,
@@ -262,60 +295,49 @@ class MunichMapScene extends Phaser.Scene {
   }
 }
 
-// ===== 启动 =====
+// ── 启动 ──
 let game;
 
 async function init() {
-  const barFill = document.getElementById('load-bar');
-
-  // 先加载数据
-  barFill.style.width = '10%';
+  const bar = document.getElementById('load-bar');
+  bar.style.width = '10%';
   const tilemap = await loadJSON(base + '/tilemap.json');
-  barFill.style.width = '50%';
+  bar.style.width = '50%';
   const pois = await loadJSON(base + '/pois.json');
-  barFill.style.width = '80%';
+  bar.style.width = '80%';
 
-  // 创建 Phaser Game
   game = new Phaser.Game({
     type: Phaser.AUTO,
     parent: 'game-container',
-    width: 1024,
+    width: 960,
     height: 640,
-    backgroundColor: '#18202a',
+    backgroundColor: '#f0deb8',
     pixelArt: true,
     roundPixels: true,
-    scale: {
-      mode: Phaser.Scale.FIT,
-      autoCenter: Phaser.Scale.CENTER_BOTH,
-    },
+    scale: { mode: Phaser.Scale.FIT, autoCenter: Phaser.Scale.CENTER_BOTH },
     scene: [MunichMapScene],
     callbacks: {
-      postBoot: (game) => {
-        // 注入 tilemap + pois 到 cache
-        game.cache.json.add('tilemap', tilemap);
-        game.cache.json.add('pois', pois);
+      postBoot: (g) => {
+        g.cache.json.add('tilemap', tilemap);
+        g.cache.json.add('pois', pois);
       },
     },
   });
 
-  barFill.style.width = '100%';
+  bar.style.width = '100%';
   setTimeout(() => {
-    document.getElementById('loading').style.opacity = '0';
-    setTimeout(() => {
-      document.getElementById('loading').style.display = 'none';
-    }, 400);
-  }, 500);
+    const el = document.getElementById('loading');
+    el.style.opacity = '0';
+    setTimeout(() => el.style.display = 'none', 400);
+  }, 300);
 }
 
-// 全局重置函数
-function resetCamera() {
+document.getElementById('btn-reset').addEventListener('click', () => {
   if (game) {
-    const scene = game.scene.getScene('MunichMapScene');
-    if (scene && scene.resetToMarienplatz) {
-      scene.resetToMarienplatz();
-    }
+    const sc = game.scene.getScene('MunichMapScene');
+    if (sc && sc.resetToMarien) sc.resetToMarien();
   }
-}
+});
 
 init();
 </script>

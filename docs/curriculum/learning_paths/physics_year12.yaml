@@ -1,0 +1,789 @@
+metadata:
+  subject: physics
+  exam_board: edexcel_ial
+  level: a-level
+  source: Physics & Maths Tutor (PMT) Edexcel IAL + Edexcel 2018 spec
+  source_url: https://www.physicsandmathstutor.com/physics-revision/a-level-edexcel-ial/
+  specification_url: https://qualifications.pearson.com/en/qualifications/edexcel-international-a-levels/physics-2018.html
+  total_units: 4
+  total_kp: 39
+  total_lessons: 39
+  total_past_papers: 119
+  total_by_topic_qp_ms: 50
+units:
+- id: unit-1
+  code: WPH11/01
+  name: Mechanics and Materials
+  spec_sections:
+  - 1.3 Mechanics
+  - 1.4 Materials
+  paper_structure:
+    total_marks: 80
+    duration_minutes: 90
+    question_format:
+    - 'Section A: 10 MCQ (10 marks)'
+    - 'Section B: short-answer + structured (70 marks)'
+  weight_to_ias: 50%
+  weight_to_ial: 25%
+  primary_notes_pdf: docs/curriculum/raw_pmt/Physics_Notes/Unit1_Combined_Notes.pdf
+  past_papers_dir: docs/curriculum/raw_pmt/Physics_papers/Unit-1/
+  past_paper_files:
+    qp:
+    - QP/January 2020 QP.pdf
+    - QP/January 2021 QP.pdf
+    - QP/January 2022 QP.pdf
+    - QP/January 2023 QP.pdf
+    - QP/January 2024 QP.pdf
+    - QP/June 2021 QP.pdf
+    - QP/June 2022 QP.pdf
+    - QP/June 2023 QP.pdf
+    - QP/June 2024 QP.pdf
+    - QP/October 2020 QP.pdf
+    - QP/October 2021 QP.pdf
+    - QP/October 2022 QP.pdf
+    - QP/October 2023 QP.pdf
+    - QP/October 2024 QP.pdf
+    - QP/Specimen QP.pdf
+    ms:
+    - MS/January 2020 MS.pdf
+    - MS/January 2021 MS.pdf
+    - MS/January 2022 MS.pdf
+    - MS/January 2023 MS.pdf
+    - MS/January 2024 MS.pdf
+    - MS/June 2021 MS.pdf
+    - MS/June 2022 MS.pdf
+    - MS/June 2023 MS.pdf
+    - MS/June 2024 MS.pdf
+    - MS/October 2020 MS.pdf
+    - MS/October 2021 MS.pdf
+    - MS/October 2022 MS.pdf
+    - MS/October 2023 MS.pdf
+    - MS/October 2024 MS.pdf
+    - MS/Specimen MS.pdf
+  topics:
+  - id: 1.3-mechanics
+    name: Mechanics (1.3)
+    lessons:
+    - id: p1-l01-vectors
+      name: Vectors and Scalars
+      kp_id: kp_alevels_physics_unit1_1
+      spec_ref: '1.3'
+      difficulty: 2/5
+      exercises:
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-1/Vectors QP.pdf
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-1/Vectors MS.pdf
+      learning_objectives:
+      - Distinguish scalar vs vector quantities
+      - Add vectors graphically and by components
+      - Apply cosine rule for two non-perpendicular vectors
+      suggested_papers:
+      - January 2024 QP.pdf
+    - id: p1-l02-kinematics
+      name: Kinematics (suvat equations)
+      kp_id: kp_alevels_physics_unit1_2
+      spec_ref: '1.3'
+      difficulty: 2/5
+      exercises:
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-1/Kinematics QP.pdf
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-1/Kinematics MS.pdf
+      learning_objectives:
+      - Apply the four suvat equations
+      - Interpret s-t and v-t graphs
+      - Solve 1D motion problems
+      suggested_papers:
+      - June 2023 QP.pdf Q1, Q2
+    - id: p1-l03-projectile-motion
+      name: Projectile Motion (2D under gravity)
+      kp_id: kp_alevels_physics_unit1_3
+      spec_ref: '1.3'
+      difficulty: 3/5
+      exercises:
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-1/Kinematics QP.pdf
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-1/Kinematics MS.pdf
+      learning_objectives:
+      - Split projectile motion into independent horizontal/vertical
+      - Apply suvat in each direction
+      - Calculate range, max height, time of flight
+      suggested_papers:
+      - June 2024 QP.pdf Q11 (projectile Q)
+    - id: p1-l04-dynamics
+      name: Dynamics (Newton's Three Laws)
+      kp_id: kp_alevels_physics_unit1_4
+      spec_ref: '1.3'
+      difficulty: 3/5
+      exercises:
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-1/Forces and Moments QP.pdf
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-1/Forces and Moments MS.pdf
+      learning_objectives:
+      - Apply F=ma (and identify W=mg)
+      - Draw and use free-body diagrams
+      - Solve problems on inclines, pulleys, connected bodies
+      suggested_papers:
+      - October 2023 QP.pdf Q13-Q15
+    - id: p1-l05-moments
+      name: Moments, Couples and Equilibrium
+      kp_id: kp_alevels_physics_unit1_5
+      spec_ref: '1.3'
+      difficulty: 3/5
+      exercises:
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-1/Forces and Moments QP.pdf
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-1/Forces and Moments MS.pdf
+      learning_objectives:
+      - Calculate moment M=Fd
+      - Apply principle of moments for equilibrium
+      - Identify a couple (two equal opposite parallel forces)
+      suggested_papers:
+      - June 2022 QP.pdf Q14
+    - id: p1-l06-energy-power
+      name: Work, Energy and Power
+      kp_id: kp_alevels_physics_unit1_6
+      spec_ref: '1.3'
+      difficulty: 3/5
+      exercises:
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-1/Work, Energy and Power QP.pdf
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-1/Work, Energy and Power MS.pdf
+      learning_objectives:
+      - Apply W=Fs cos θ
+      - Use energy conservation (KE, GPE, elastic)
+      - Calculate power P=W/t = Fv
+      suggested_papers:
+      - January 2023 QP.pdf Q11 (energy bar chart)
+    - id: p1-l07-momentum-impulse
+      name: Momentum and Impulse (1D)
+      kp_id: kp_alevels_physics_unit1_7
+      spec_ref: '1.3'
+      difficulty: 3/5
+      exercises:
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-1/Momentum QP.pdf
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-1/Momentum MS.pdf
+      learning_objectives:
+      - Apply p=mv and impulse FΔt=Δp
+      - Solve 1D elastic and inelastic collisions
+      - Solve 1D explosions
+      suggested_papers:
+      - June 2021 QP.pdf Q15-Q17
+  - id: 1.4-materials
+    name: Materials (1.4)
+    lessons:
+    - id: p1-l08-density-upthrust
+      name: Density and Upthrust
+      kp_id: kp_alevels_physics_unit1_8
+      spec_ref: '1.4'
+      difficulty: 2/5
+      exercises:
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-1/Density and Upthrust QP.pdf
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-1/Density and Upthrust MS.pdf
+      learning_objectives:
+      - Calculate density ρ=m/V
+      - Apply Archimedes principle (upthrust = ρgV)
+      - Determine floating/sinking
+      suggested_papers:
+      - Specimen QP.pdf Q5
+    - id: p1-l09-fluid-pressure
+      name: Fluid Pressure and Flow
+      kp_id: kp_alevels_physics_unit1_9
+      spec_ref: '1.4'
+      difficulty: 3/5
+      exercises:
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-1/Fluids QP.pdf
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-1/Fluids MS.pdf
+      learning_objectives:
+      - Calculate P=F/A and P=ρgh
+      - Apply Pascal's principle
+      - Apply continuity equation
+      suggested_papers:
+      - October 2022 QP.pdf Q12
+    - id: p1-l10-hookes-law
+      name: Hooke's Law and Elastic Deformation
+      kp_id: kp_alevels_physics_unit1_10
+      spec_ref: '1.4'
+      difficulty: 2/5
+      exercises:
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-1/Hooke's Law and Young's Modulus QP.pdf
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-1/Hooke's Law and Young's Modulus MS.pdf
+      learning_objectives:
+      - Apply F=kx within elastic limit
+      - Interpret F-x graphs (linear region = gradient k)
+      - Distinguish elastic vs plastic deformation
+      suggested_papers:
+      - January 2022 QP.pdf Q10
+    - id: p1-l11-youngs-modulus
+      name: Stress, Strain and Young's Modulus
+      kp_id: kp_alevels_physics_unit1_11
+      spec_ref: '1.4'
+      difficulty: 3/5
+      exercises:
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-1/Hooke's Law and Young's Modulus QP.pdf
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-1/Hooke's Law and Young's Modulus MS.pdf
+      learning_objectives:
+      - Calculate tensile stress σ=F/A and strain ε=ΔL/L
+      - Apply E=σ/ε
+      - Interpret stress-strain graphs (yield, ultimate, breaking)
+      suggested_papers:
+      - June 2023 QP.pdf Q12
+    - id: p1-l12-drag-viscosity
+      name: Drag, Terminal Velocity and Stokes' Law
+      kp_id: kp_alevels_physics_unit1_12
+      spec_ref: '1.4'
+      difficulty: 3/5
+      exercises:
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-1/Fluids QP.pdf
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-1/Fluids MS.pdf
+      learning_objectives:
+      - Distinguish Stokes (laminar, F∝v) and drag (turbulent, F∝v²)
+      - Apply F=6πηrv
+      - Identify terminal velocity condition W=F_d
+      suggested_papers:
+      - October 2024 QP.pdf Q14
+- id: unit-2
+  code: WPH12/01
+  name: Waves and Electricity
+  spec_sections:
+  - 2.3 Waves and Particle Nature of Light
+  - 2.4 Electric Circuits
+  paper_structure:
+    total_marks: 80
+    duration_minutes: 90
+    question_format:
+    - 'Section A: 10 MCQ (10 marks)'
+    - 'Section B: short-answer + structured (70 marks)'
+  weight_to_ias: 50%
+  weight_to_ial: 25%
+  primary_notes_pdf: docs/curriculum/raw_pmt/Physics_Notes/Unit2_Combined_Notes.pdf
+  detailed_notes:
+  - docs/curriculum/raw_pmt/Physics_Notes/Unit2_Detailed_2.3_Waves_Particle.pdf
+  - docs/curriculum/raw_pmt/Physics_Notes/Unit2_Detailed_2.4_Electric_Circuits.pdf
+  past_papers_dir: docs/curriculum/raw_pmt/Physics_papers/Unit-2/
+  past_paper_files:
+    qp:
+    - QP/January 2021 QP.pdf
+    - QP/January 2022 QP.pdf
+    - QP/January 2023 QP.pdf
+    - QP/January 2024 QP.pdf
+    - QP/June 2021 QP.pdf
+    - QP/June 2022 QP.pdf
+    - QP/June 2023 QP.pdf
+    - QP/June 2024 QP.pdf
+    - QP/October 2020 QP.pdf
+    - QP/October 2021 QP.pdf
+    - QP/October 2022 QP.pdf
+    - QP/October 2023 QP.pdf
+    - QP/October 2024 QP.pdf
+    - QP/Specimen QP.pdf
+    ms:
+    - MS/January 2020 MS.pdf
+    - MS/January 2021 MS.pdf
+    - MS/January 2022 MS.pdf
+    - MS/January 2023 MS.pdf
+    - MS/January 2024 MS.pdf
+    - MS/June 2021 MS.pdf
+    - MS/June 2022 MS.pdf
+    - MS/June 2023 MS.pdf
+    - MS/June 2024 MS.pdf
+    - MS/October 2020 MS.pdf
+    - MS/October 2021 MS.pdf
+    - MS/October 2022 MS.pdf
+    - MS/October 2023 MS.pdf
+    - MS/October 2024 MS.pdf
+    - MS/Specimen MS.pdf
+  topics:
+  - id: 2.3-waves-particle-nature
+    name: Waves and Particle Nature of Light (2.3)
+    lessons:
+    - id: p2-l01-progressive-waves
+      name: Progressive Waves (basics)
+      kp_id: kp_alevels_physics_unit2_1
+      spec_ref: '2.3'
+      difficulty: 2/5
+      exercises:
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-2/Waves QP.pdf
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-2/Waves MS.pdf
+      learning_objectives:
+      - Distinguish transverse vs longitudinal
+      - Use v=fλ and T=1/f
+      - Calculate phase difference
+    - id: p2-l02-waves-strings
+      name: Waves on Strings and Stationary Waves
+      kp_id: kp_alevels_physics_unit2_2
+      spec_ref: '2.3'
+      difficulty: 3/5
+      exercises:
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-2/Waves on Strings QP.pdf
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-2/Waves on Strings MS.pdf
+      learning_objectives:
+      - Apply v=√(T/μ)
+      - Identify harmonics on a string (λ=2L/n)
+      - Describe nodes and antinodes
+    - id: p2-l03-refraction-tir
+      name: Refraction, TIR and Polarisation
+      kp_id: kp_alevels_physics_unit2_3
+      spec_ref: '2.3'
+      difficulty: 3/5
+      exercises:
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-2/Refraction, Reflection and Polarisation QP 1.pdf
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-2/Refraction, Reflection and Polarisation MS.pdf
+      learning_objectives:
+      - Apply Snell's law n₁sinθ₁=n₂sinθ₂
+      - Calculate critical angle and TIR conditions
+      - Explain polarisation
+    - id: p2-l04-diffraction-interference
+      name: Diffraction and Interference (Young's DS)
+      kp_id: kp_alevels_physics_unit2_4
+      spec_ref: '2.3'
+      difficulty: 3/5
+      exercises:
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-2/Diffraction QP.pdf
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-2/Diffraction MS.pdf
+      learning_objectives:
+      - Apply Young's double-slit λ=ax/D
+      - Identify constructive (nλ) and destructive ((n+½)λ) interference
+      - Describe single-slit diffraction pattern
+    - id: p2-l05-photons-photoelectric
+      name: Photons and the Photoelectric Effect
+      kp_id: kp_alevels_physics_unit2_8
+      spec_ref: '2.3'
+      difficulty: 3/5
+      exercises:
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-2/Photons QP.pdf
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-2/Photons MS.pdf
+      learning_objectives:
+      - Apply photon energy E=hf
+      - Apply Einstein photoelectric equation hf=φ+E_k(max)
+      - Explain why threshold frequency matters
+    - id: p2-l06-wave-particle-duality
+      name: Wave-Particle Duality and de Broglie
+      kp_id: kp_alevels_physics_unit2_9
+      spec_ref: '2.3'
+      difficulty: 3/5
+      exercises:
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-2/Photons QP.pdf
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-2/Photons MS.pdf
+      learning_objectives:
+      - Apply de Broglie λ=h/p=h/(mv)
+      - State evidence for wave-particle duality
+      - Use h=6.63×10⁻³⁴ J s
+    - id: p2-l07-intensity-inverse-square
+      name: Intensity of Radiation (Inverse Square Law)
+      kp_id: kp_alevels_physics_unit2_10
+      spec_ref: '2.3'
+      difficulty: 2/5
+      exercises:
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-2/Intensity of Radiation QP.pdf
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-2/Intensity of Radiation MS.pdf
+      learning_objectives:
+      - Calculate intensity I=P/A
+      - Apply inverse square law I=k/r²
+      - Estimate power received by a detector
+  - id: 2.4-electric-circuits
+    name: Electric Circuits (2.4)
+    lessons:
+    - id: p2-l08-charge-current-emf
+      name: Charge, Current, Energy and EMF
+      kp_id: kp_alevels_physics_unit2_5
+      spec_ref: '2.4'
+      difficulty: 2/5
+      exercises:
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-2/Charge, Energy and Current QP.pdf
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-2/Charge, Energy and Current MS.pdf
+      learning_objectives:
+      - Apply I=ΔQ/Δt
+      - Describe drift velocity I=nAvq
+      - Define EMF and p.d.
+    - id: p2-l09-resistance-resistivity
+      name: Resistance, Resistivity and Components
+      kp_id: kp_alevels_physics_unit2_6
+      spec_ref: '2.4'
+      difficulty: 2/5
+      exercises:
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-2/Resistance, Components and Resistivity QP.pdf
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-2/Resistance, Components and Resistivity MS.pdf
+      learning_objectives:
+      - Apply Ohm's law V=IR
+      - Apply resistivity ρ=RA/L
+      - Interpret I-V characteristics (ohmic, filament, diode)
+    - id: p2-l10-potential-dividers-emf
+      name: Potential Dividers, EMF and Internal Resistance
+      kp_id: kp_alevels_physics_unit2_7
+      spec_ref: '2.4'
+      difficulty: 3/5
+      exercises:
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-2/Potential Dividers, EMF and Internal Resistance QP.pdf
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-2/Potential Dividers, EMF and Internal Resistance MS.pdf
+      learning_objectives:
+      - Apply V_out=V_in×R₂/(R₁+R₂)
+      - Apply Kirchhoff's laws
+      - Apply V=ε-Ir
+- id: unit-3
+  code: WPH13/01
+  name: Practical Skills in Physics I
+  spec_sections:
+  - 3.1 Planning/implementing/evaluating experiments
+  - 3.2 Core Practicals
+  paper_structure:
+    total_marks: 50
+    duration_minutes: 75
+    question_format:
+    - All structured / free-response (no MCQ)
+    - 4 questions, each based on a CP context
+  weight_to_ias: 31.25%
+  weight_to_ial: 12.5%
+  past_papers_dir: docs/curriculum/raw_pmt/Physics_papers/Unit-3/
+  past_paper_files:
+    qp:
+    - QP/January 2020 QP.pdf
+    - QP/January 2021 QP.pdf
+    - QP/January 2022 QP.pdf
+    - QP/January 2023 QP.pdf
+    - QP/January 2024 QP.pdf
+    - QP/June 2021 QP.pdf
+    - QP/June 2022 QP.pdf
+    - QP/June 2023 QP.pdf
+    - QP/June 2024 QP.pdf
+    - QP/October 2020 QP.pdf
+    - QP/October 2021 QP.pdf
+    - QP/October 2022 QP.pdf
+    - QP/October 2023 QP.pdf
+    - QP/October 2024 QP.pdf
+    - QP/Specimen QP.pdf
+    ms:
+    - MS/January 2020 MS.pdf
+    - MS/January 2021 MS.pdf
+    - MS/January 2022 MS.pdf
+    - MS/January 2023 MS.pdf
+    - MS/January 2024 MS.pdf
+    - MS/June 2021 MS.pdf
+    - MS/June 2022 MS.pdf
+    - MS/June 2023 MS.pdf
+    - MS/June 2024 MS.pdf
+    - MS/October 2020 MS.pdf
+    - MS/October 2021 MS.pdf
+    - MS/October 2022 MS.pdf
+    - MS/October 2023 MS.pdf
+    - MS/October 2024 MS.pdf
+    - MS/Specimen MS.pdf
+  topics:
+  - id: 3.2-core-practicals
+    name: Core Practicals (CP1-CP8)
+    lessons:
+    - id: p3-l01-cp1-free-fall
+      name: CP1 — Acceleration of a Freely-Falling Object
+      kp_id: kp_alevels_physics_unit3_1
+      spec_ref: 3.2.CP1
+      difficulty: 3/5
+      exercises:
+      - docs/curriculum/raw_pmt/Physics_Notes/Unit3_CP1_Free_Fall.pdf
+      learning_objectives:
+      - Use light gates / data logger for free-fall
+      - Calculate g from velocity vs time or v² vs distance
+      - Identify systematic (air resistance) and random errors
+      suggested_papers:
+      - June 2023 QP.pdf Q1 (CP1-based scenario)
+    - id: p3-l02-cp2-viscosity
+      name: CP2 — Viscosity of a Liquid
+      kp_id: kp_alevels_physics_unit3_2
+      spec_ref: 3.2.CP2
+      difficulty: 3/5
+      exercises:
+      - docs/curriculum/raw_pmt/Physics_Notes/Unit3_CP2_Viscosity.pdf
+      learning_objectives:
+      - Apply Stokes' law η=2r²g(ρ_ball-ρ_liq)/(9v_terminal)
+      - Verify terminal velocity reached
+      - Account for container wall correction
+    - id: p3-l03-cp3-youngs-modulus
+      name: CP3 — Young Modulus of a Material
+      kp_id: kp_alevels_physics_unit3_3
+      spec_ref: 3.2.CP3
+      difficulty: 3/5
+      exercises:
+      - docs/curriculum/raw_pmt/Physics_Notes/Unit3_CP3_Young_Modulus.pdf
+      learning_objectives:
+      - Use Searle's apparatus to measure extension vs load
+      - Plot stress-strain or F-ΔL graph
+      - Calculate E from gradient
+    - id: p3-l04-cp4-speed-sound
+      name: CP4 — Speed of Sound in Air
+      kp_id: kp_alevels_physics_unit3_4
+      spec_ref: 3.2.CP4
+      difficulty: 2/5
+      exercises:
+      - docs/curriculum/raw_pmt/Physics_Notes/Unit3_CP4_Speed_of_Sound.pdf
+      learning_objectives:
+      - Use resonance tube to find λ from successive resonances
+      - Calculate v=fλ
+      - Identify and correct for end-correction
+    - id: p3-l05-cp5-vibrating-string
+      name: CP5 — Frequency of a Vibrating String
+      kp_id: kp_alevels_physics_unit3_5
+      spec_ref: 3.2.CP5
+      difficulty: 2/5
+      exercises:
+      - docs/curriculum/raw_pmt/Physics_Notes/Unit3_CP5_Frequency_String.pdf
+      learning_objectives:
+      - Use sonometer to verify f=(1/2L)√(T/μ)
+      - Plot f² vs T to confirm linear relationship
+      - Calculate μ from gradient
+    - id: p3-l06-cp6-diffraction-grating
+      name: CP6 — Wavelength of Light Using Diffraction Grating
+      kp_id: kp_alevels_physics_unit3_6
+      spec_ref: 3.2.CP6
+      difficulty: 3/5
+      exercises:
+      - docs/curriculum/raw_pmt/Physics_Notes/Unit3_CP6_Diffraction_Grating.pdf
+      learning_objectives:
+      - Apply d sinθ=nλ for grating
+      - Measure angle for first/second order maxima
+      - Average left/right to reduce alignment error
+    - id: p3-l07-cp7-resistivity
+      name: CP7 — Electrical Resistivity of a Material
+      kp_id: kp_alevels_physics_unit3_7
+      spec_ref: 3.2.CP7
+      difficulty: 2/5
+      exercises:
+      - docs/curriculum/raw_pmt/Physics_Notes/Unit3_CP7_Resistivity.pdf
+      learning_objectives:
+      - Measure R of wire for different lengths
+      - Apply ρ=RA/L
+      - Plot R vs L to find ρ/A from gradient
+    - id: p3-l08-cp8-emf-internal-r
+      name: CP8 — EMF and Internal Resistance
+      kp_id: kp_alevels_physics_unit3_8
+      spec_ref: 3.2.CP8
+      difficulty: 3/5
+      exercises:
+      - docs/curriculum/raw_pmt/Physics_Notes/Unit3_CP8_EMF.pdf
+      learning_objectives:
+      - Measure V and I for varying external R
+      - Plot V vs I to find ε (intercept) and r (gradient)
+      - Apply ε=I(R+r)
+- id: unit-4
+  code: WPH14/01
+  name: Further Mechanics, Fields and Particles
+  spec_sections:
+  - 4.3 Further Mechanics
+  - 4.4 Electric and Magnetic Fields
+  - 4.5 Nuclear and Particle Physics
+  paper_structure:
+    total_marks: 90
+    duration_minutes: 105
+    question_format:
+    - 'Section A: 10 MCQ (10 marks)'
+    - 'Section B: short-answer + structured (80 marks)'
+  weight_to_ial: 25%
+  weight_to_a2: 50%
+  primary_notes_pdf: docs/curriculum/raw_pmt/Physics_Notes/Unit4_Combined_Notes.pdf
+  detailed_notes:
+  - docs/curriculum/raw_pmt/Physics_Notes/Unit4_Detailed_4.3_Further_Mechanics.pdf
+  - docs/curriculum/raw_pmt/Physics_Notes/Unit4_Detailed_4.4_Electric_Magnetic_Fields.pdf
+  - docs/curriculum/raw_pmt/Physics_Notes/Unit4_Detailed_4.5_Nuclear_Particle.pdf
+  past_papers_dir: docs/curriculum/raw_pmt/Physics_papers/Unit-4/
+  past_paper_files:
+    qp:
+    - QP/January 2020 QP.pdf
+    - QP/January 2021 QP.pdf
+    - QP/January 2022 QP.pdf
+    - QP/January 2023 QP.pdf
+    - QP/January 2024 QP.pdf
+    - QP/June 2021 QP.pdf
+    - QP/June 2022 QP.pdf
+    - QP/June 2023 QP.pdf
+    - QP/June 2024 QP.pdf
+    - QP/October 2020 QP.pdf
+    - QP/October 2021 QP.pdf
+    - QP/October 2022 QP.pdf
+    - QP/October 2023 QP.pdf
+    - QP/October 2024 QP.pdf
+    - QP/Specimen QP.pdf
+    ms:
+    - MS/January 2020 MS.pdf
+    - MS/January 2021 MS.pdf
+    - MS/January 2022 MS.pdf
+    - MS/January 2023 MS.pdf
+    - MS/January 2024 MS.pdf
+    - MS/June 2021 MS.pdf
+    - MS/June 2022 MS.pdf
+    - MS/June 2023 MS.pdf
+    - MS/June 2024 MS.pdf
+    - MS/October 2020 MS.pdf
+    - MS/October 2021 MS.pdf
+    - MS/October 2022 MS.pdf
+    - MS/October 2023 MS.pdf
+    - MS/October 2024 MS.pdf
+    - MS/Specimen MS.pdf
+  topics:
+  - id: 4.3-further-mechanics
+    name: Further Mechanics (4.3)
+    lessons:
+    - id: p4-l01-momentum-2d
+      name: Impulse and Momentum in 2D (Collisions)
+      kp_id: kp_alevels_physics_unit4_1
+      spec_ref: '4.3'
+      difficulty: 3/5
+      exercises:
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-4/Impulse and Momentum QP.pdf
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-4/Impulse and Momentum MS.pdf
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-4/Impulse and Momentum 2 QP.pdf
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-4/Impulse and Momentum 2 MS.pdf
+      learning_objectives:
+      - Apply momentum conservation in 2D components
+      - Solve 2D collisions and explosions
+      - Distinguish elastic vs inelastic in 2D
+    - id: p4-l02-circular-motion
+      name: Circular Motion
+      kp_id: kp_alevels_physics_unit4_2
+      spec_ref: '4.3'
+      difficulty: 3/5
+      exercises:
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-4/Circular Motion QP.pdf
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-4/Circular Motion MS.pdf
+      learning_objectives:
+      - Apply a=v²/r=ω²r
+      - Identify centripetal force as net inward force
+      - Solve conical pendulum and banked curve problems
+  - id: 4.4-electric-magnetic-fields
+    name: Electric and Magnetic Fields (4.4)
+    lessons:
+    - id: p4-l03-electric-fields
+      name: Electric Fields (Point Charges and Parallel Plate)
+      kp_id: kp_alevels_physics_unit4_3
+      spec_ref: '4.4'
+      difficulty: 3/5
+      exercises:
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-4/Electric Fields QP.pdf
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-4/Electric Fields MS.pdf
+      learning_objectives:
+      - Apply E=F/Q and E=V/d
+      - Apply E=kQ/r² for point charges
+      - Apply Coulomb's law F=kQ₁Q₂/r²
+    - id: p4-l04-capacitance
+      name: Capacitance (Parallel Plate)
+      kp_id: kp_alevels_physics_unit4_4
+      spec_ref: '4.4'
+      difficulty: 2/5
+      exercises:
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-4/Capacitance QP.pdf
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-4/Capacitance MS.pdf
+      learning_objectives:
+      - Apply C=Q/V and C=ε₀A/d
+      - Combine capacitors in series and parallel
+      - Calculate energy stored ½CV²
+    - id: p4-l05-rc-circuits
+      name: Charging and Discharging Capacitors (RC Circuits)
+      kp_id: kp_alevels_physics_unit4_5
+      spec_ref: '4.4'
+      difficulty: 3/5
+      exercises:
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-4/Capacitance QP.pdf
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-4/Capacitance MS.pdf
+      learning_objectives:
+      - Apply time constant τ=RC
+      - Apply V(t)=V₀(1-e^(-t/τ)) charging
+      - Apply V(t)=V₀e^(-t/τ) discharging
+    - id: p4-l06-magnetic-force
+      name: Magnetic Fields and Force on a Current
+      kp_id: kp_alevels_physics_unit4_6
+      spec_ref: '4.4'
+      difficulty: 3/5
+      exercises:
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-4/Magnetic Fields and EM Induction QP.pdf
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-4/Magnetic Fields and EM Induction MS.pdf
+      learning_objectives:
+      - Apply F=BIL sin θ (force on current)
+      - Apply F=BQv sin θ (Lorentz force on moving charge)
+      - Use Fleming's left-hand rule
+    - id: p4-l07-em-induction
+      name: Electromagnetic Induction (Faraday, Lenz)
+      kp_id: kp_alevels_physics_unit4_7
+      spec_ref: '4.4'
+      difficulty: 3/5
+      exercises:
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-4/Magnetic Fields and EM Induction QP.pdf
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-4/Magnetic Fields and EM Induction MS.pdf
+      learning_objectives:
+      - Apply Faraday's law ε=-NdΦ/dt
+      - Apply Lenz's law (induced current opposes change)
+      - Apply transformer ratio V_p/V_s=N_p/N_s
+    - id: p4-l08-charged-particles
+      name: Charged Particles in Fields
+      kp_id: kp_alevels_physics_unit4_8
+      spec_ref: '4.4'
+      difficulty: 3/5
+      exercises:
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-4/Charged Particles in Fields QP.pdf
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-4/Charged Particles in Fields MS.pdf
+      learning_objectives:
+      - Apply r=mv/(BQ) for circular motion in B
+      - Apply eV=½mv² for accelerating p.d.
+      - Calculate e/m from mass spectrometer
+  - id: 4.5-nuclear-particle
+    name: Nuclear and Particle Physics (4.5)
+    lessons:
+    - id: p4-l09-nuclear-particles
+      name: Nuclear and Particle Physics (Quarks, Radioactivity, Half-Life)
+      kp_id: kp_alevels_physics_unit4_9
+      spec_ref: '4.5'
+      difficulty: 3/5
+      exercises:
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-4/Nuclear and Particle Physics QP.pdf
+      - docs/curriculum/raw_pmt/Physics_questions/Unit-4/Nuclear and Particle Physics MS.pdf
+      learning_objectives:
+      - Identify quarks (u,d,s,c,b,t) and antiparticles
+      - Compose hadrons (baryons 3q, mesons qq̄)
+      - Apply N(t)=N₀e^(-λt) and t_½=ln2/λ
+      - Apply E=mc²
+mock_exams:
+- id: mock-1
+  title: Unit 1 (Mechanics and Materials) Mock — Specimen Paper
+  subject: physics
+  unit: unit-1
+  format: 80 marks / 90 min (10 MCQ + structured)
+  suggested_date: Year 12 Spring Term (March-April)
+  paper_ref: docs/curriculum/raw_pmt/Physics_papers/Unit-1/Specimen QP.pdf
+  ms_ref: docs/curriculum/raw_pmt/Physics_papers/Unit-1/Specimen MS.pdf
+  target_score: 70/80 (87.5%) → A*
+- id: mock-2
+  title: Unit 2 (Waves and Electricity) Mock — Specimen Paper
+  subject: physics
+  unit: unit-2
+  format: 80 marks / 90 min (10 MCQ + structured)
+  suggested_date: Year 12 Summer Term (May-June)
+  paper_ref: docs/curriculum/raw_pmt/Physics_papers/Unit-2/Specimen QP.pdf
+  ms_ref: docs/curriculum/raw_pmt/Physics_papers/Unit-2/Specimen MS.pdf
+  target_score: 70/80 (87.5%) → A*
+- id: mock-3
+  title: Unit 3 (Practical Skills I) Mock — Specimen Paper
+  subject: physics
+  unit: unit-3
+  format: 50 marks / 75 min (all structured)
+  suggested_date: Year 12 Summer Term (May-June)
+  paper_ref: docs/curriculum/raw_pmt/Physics_papers/Unit-3/Specimen QP.pdf
+  ms_ref: docs/curriculum/raw_pmt/Physics_papers/Unit-3/Specimen MS.pdf
+  target_score: 44/50 (88%) → A*
+- id: mock-4
+  title: Unit 4 (Further Mechanics/Fields/Particles) Mock — Specimen Paper
+  subject: physics
+  unit: unit-4
+  format: 90 marks / 105 min (10 MCQ + structured)
+  suggested_date: Year 13 Autumn Term (November-December)
+  paper_ref: docs/curriculum/raw_pmt/Physics_papers/Unit-4/Specimen QP.pdf
+  ms_ref: docs/curriculum/raw_pmt/Physics_papers/Unit-4/Specimen MS.pdf
+  target_score: 79/90 (87.8%) → A*
+- id: mock-5
+  title: Unit 1 Real Past Paper Mock — January 2024
+  subject: physics
+  unit: unit-1
+  format: 80 marks / 90 min (10 MCQ + structured)
+  suggested_date: Year 12 Easter Revision
+  paper_ref: docs/curriculum/raw_pmt/Physics_papers/Unit-1/January 2024 QP.pdf
+  ms_ref: docs/curriculum/raw_pmt/Physics_papers/Unit-1/January 2024 MS.pdf
+  target_score: 70/80 (87.5%) → A*
+qc_notes:
+- 39 KP across 4 units — 12+10+8+9. Each KP has description, key_formulae, common_mistakes, by_topic_refs.
+- Each unit has 1 primary_notes_pdf + relevant Detailed notes (2.3, 2.4, 4.3, 4.4, 4.5, 8 CPs).
+- 50 by-topic QP/MS sourced from PMT Set N (Edexcel IAL flagged). Unit 3 has no by-topic QP — only CP notes.
+- 119 past papers downloaded across 4 units × ~30 papers × 2 (QP+MS) for years 2020-2024 + Specimen.
+- Mock exams reference real Specimen + January 2024 papers with target scores aligned to A* (87.5%+).
+- 'Unit 3 weight: 50 marks (was 40 in old spec, 2018 spec increased). Unit 4 weight: 90 marks / 105 min (was 80 / 95).'
+- 'Lesson numbering: p1-l01-p1-l12 (Unit 1), p2-l01-p2-l10 (Unit 2), p3-l01-p3-l08 (Unit 3), p4-l01-p4-l09 (Unit 4).'
+- All KP IDs follow `kp_alevels_physics_unit{N}_{NN}` naming.
+- Lesson IDs follow `p{N}-l{NN}-{topic-slug}` naming.
+- Unit 5 (Thermodynamics/Radiation/Oscillations/Cosmology) and Unit 6 (Practical II) NOT included — user scoped to 1-4.

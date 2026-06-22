@@ -16,18 +16,20 @@ import urllib.error
 # 覆盖: Marienplatz · Rathaus · Frauenkirche · Viktualienmarkt · Hofbräuhaus · Residenz
 BBOX = (48.132, 11.563, 48.143, 11.588)  # south, west, north, east
 
-# 地图网格尺寸 (tiles)
-COLS, ROWS = 100, 90
+# 地图网格尺寸 (tiles) — 32px 瓦片
+COLS, ROWS = 80, 70
 
-# Tile types (对应 tileset 索引)
-T_GRASS     = 0
-T_ROAD      = 1
-T_BUILDING  = 2
-T_SIDEWALK  = 3
-T_WATER     = 4
-T_PARK      = 5
-T_PLAZA     = 6
-T_POI_MARK  = 7  # 兴趣点高亮
+# Tile types (对应 tileset_v2 索引)
+# 0-2 草地 | 3 道路 | 4-8 建筑 | 9 人行道 | 10 水面
+# 11-12 公园 | 13 广场 | 14-15 POI | 16 羊皮纸
+T_GRASS     = 0    # 会被随机化为 0-2
+T_ROAD      = 3
+T_BUILDING  = 4    # 会被随机化为 4-8
+T_SIDEWALK  = 9
+T_WATER     = 10
+T_PARK      = 11   # 会被随机化为 11-12
+T_PLAZA     = 13
+T_POI_MARK  = 14   # 会被随机化为 14-15
 
 # ── POI 定义 (名称, lat, lng, 描述) ──
 POIS = [
@@ -352,13 +354,28 @@ def main():
     pois = place_pois(grid, COLS, ROWS, BBOX)
     print(f"⭐ POI: {len(pois)} 个", flush=True)
 
-    # 6. 输出 JSON
-    out_dir = "frontend/public/assets/munich_map"
+    # 6. 随机化变体: 草地 0→0~2, 建筑 4→4~8, 公园 11→11~12, POI 14→14~15
+    import random
+    random.seed(2026)
+    for c in range(COLS):
+        for r in range(ROWS):
+            v = grid[c][r]
+            if v == T_GRASS:
+                grid[c][r] = random.randint(0, 2)
+            elif v == T_BUILDING:
+                grid[c][r] = random.randint(4, 8)
+            elif v == T_PARK:
+                grid[c][r] = random.randint(11, 12)
+            elif v == T_POI_MARK:
+                grid[c][r] = random.randint(14, 15)
+
+    # 7. 输出 JSON
+    out_dir = "assets/munich_map"
     tilemap = {
         "cols": COLS,
         "rows": ROWS,
-        "tileWidth": 16,
-        "tileHeight": 16,
+        "tileWidth": 32,
+        "tileHeight": 32,
         "bbox": {"south": BBOX[0], "west": BBOX[1], "north": BBOX[2], "east": BBOX[3]},
         "layers": [{
             "name": "ground",

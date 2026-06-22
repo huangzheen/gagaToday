@@ -1,0 +1,59 @@
+{
+  "schema_version": "draft-v1",
+  "generated_at": "2026-06-21",
+  "generated_by": "restaurant-import-agent",
+  "restaurant_id": "restaurant_munich_hofbraeuhaus",
+  "data_source_warning": "All crowd data here is GAMEPLAY-LEVEL ESTIMATE. No official queue data is published. Hofbräuhaus has no reservation system for the main Schwemme floor (communal tables) — seats are first-come-first-served. Upper-floor Festsaal accepts reservations.",
+  "crowd_estimates": {
+    "by_day_and_time": {
+      "weekday_monday_to_thursday": {
+        "11_to_12": {"level": "low", "queue_minutes_estimate": {"low": 0, "typical": 2, "high": 5}},
+        "12_to_14": {"level": "high", "queue_minutes_estimate": {"low": 5, "typical": 12, "high": 25}},
+        "14_to_17": {"level": "medium", "queue_minutes_estimate": {"low": 0, "typical": 5, "high": 12}},
+        "17_to_20": {"level": "very_high", "queue_minutes_estimate": {"low": 10, "typical": 20, "high": 40}},
+        "20_to_22": {"level": "very_high", "queue_minutes_estimate": {"low": 5, "typical": 15, "high": 30}},
+        "22_to_close": {"level": "medium", "queue_minutes_estimate": {"low": 0, "typical": 5, "high": 10}}
+      },
+      "weekend_friday_evening": {
+        "all_evening": {"level": "very_high", "queue_minutes_estimate": {"low": 15, "typical": 30, "high": 60}}
+      },
+      "weekend_saturday": {
+        "11_to_14": {"level": "very_high", "queue_minutes_estimate": {"low": 10, "typical": 20, "high": 45}},
+        "14_to_18": {"level": "very_high", "queue_minutes_estimate": {"low": 15, "typical": 25, "high": 50}},
+        "18_to_close": {"level": "very_high", "queue_minutes_estimate": {"low": 10, "typical": 25, "high": 45}}
+      },
+      "weekend_sunday": {
+        "11_to_14": {"level": "very_high", "queue_minutes_estimate": {"low": 10, "typical": 20, "high": 40}},
+        "14_to_18": {"level": "high", "queue_minutes_estimate": {"low": 5, "typical": 15, "high": 30}},
+        "18_to_close": {"level": "very_high", "queue_minutes_estimate": {"low": 5, "typical": 15, "high": 30}}
+      }
+    },
+    "seasonal_multipliers": {
+      "oktoberfest_sept_early_oct": {"multiplier": 1.5, "notes": "WirtshausWiesn and global Oktoberfest attention spike traffic."},
+      "fasching_karneval": {"multiplier": 1.3, "notes": "Pre-Lenten carnival brings costume parties."},
+      "christmas_market_dec": {"multiplier": 1.4, "notes": "Marienplatz Weihnachtsmarkt draws Altstadt crowds."},
+      "summer_holiday_jul_aug": {"multiplier": 1.2, "notes": "Tourist season, beer garden full."},
+      "regular_school_term_sep_to_jul_excl_holidays": {"multiplier": 1.0, "notes": "Baseline."}
+    },
+    "floor_specific_notes": {
+      "schwemme_ground_floor": "Most crowded. Communal tables, live band. No reservation.",
+      "braustuberl_first_floor": "Quieter. Some reservation possible.",
+      "festsaal_upper_floor": "Reserved for events and groups.",
+      "beer_garden_courtyard": "Calmer when weather permits. Closed in winter."
+    },
+    "game_use": {
+      "high_crowd_threshold_minutes": 15,
+      "recommended_player_arrival_strategy": "For a calm cultural visit, go 11:00 opening on a weekday. Avoid Sat 18-22 and during Oktoberfest.",
+      "language_task_aligns_with_crowd": "Practicing 'Tisch reservieren' (phone reservation) works against the no-reservation policy on Schwemme — better teach 'finding a shared table' as the cultural norm.",
+      "queue_patience_lesson": "Evening rush: expect 10-20 min wait + then sharing a 10-seat table with strangers. This IS the Bavarian experience."
+    },
+    "confidence": 0.45,
+    "source": {
+      "type": "estimated",
+      "label": "Gameplay estimate pending review",
+      "basis": "Inferred from: (1) Hofbräuhaus's 1000-seat Schwemme + global tourism, (2) review snippets mentioning 'loud', 'packed', 'no seats after 19:00', (3) Beer hall convention. Not based on Google Popular Times or official queue data."
+    },
+    "needs_review": true
+  },
+  "review_status": "draft"
+}

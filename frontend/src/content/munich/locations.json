@@ -1,0 +1,67 @@
+[
+  {
+    "id": "host_home",
+    "name_de": "Gastfamilie",
+    "name_zh": "寄宿家庭",
+    "type": "home",
+    "difficulty": "A1",
+    "englishAvailable": 100,
+    "npc": "Frau Schneider",
+    "x": 0.16,
+    "y": 0.68,
+    "asset": "scene_home",
+    "mvpRole": "daily_start_end"
+  },
+  {
+    "id": "school",
+    "name_de": "Internationale Schule",
+    "name_zh": "国际学校",
+    "type": "school",
+    "difficulty": "A1",
+    "englishAvailable": 100,
+    "npc": "Herr Weber",
+    "x": 0.36,
+    "y": 0.34,
+    "asset": "scene_school",
+    "mvpRole": "learning_core"
+  },
+  {
+    "id": "bakery",
+    "name_de": "Bäckerei am Platz",
+    "name_zh": "广场面包店",
+    "type": "bakery",
+    "difficulty": "A1",
+    "englishAvailable": 40,
+    "npc": "Anna",
+    "x": 0.55,
+    "y": 0.56,
+    "asset": "scene_bakery",
+    "mvpRole": "ai_speech_task"
+  },
+  {
+    "id": "supermarket",
+    "name_de": "Supermarkt",
+    "name_zh": "超市",
+    "type": "grocery",
+    "difficulty": "A1",
+    "englishAvailable": 30,
+    "npc": "Kassierer",
+    "x": 0.72,
+    "y": 0.72,
+    "asset": "scene_supermarket",
+    "mvpRole": "budget_cooking"
+  },
+  {
+    "id": "library",
+    "name_de": "Stadtbibliothek",
+    "name_zh": "市立图书馆",
+    "type": "library",
+    "difficulty": "A1",
+    "englishAvailable": 60,
+    "npc": "Bibliothekarin",
+    "x": 0.70,
+    "y": 0.28,
+    "asset": "scene_library",
+    "mvpRole": "study_relationship"
+  }
+]

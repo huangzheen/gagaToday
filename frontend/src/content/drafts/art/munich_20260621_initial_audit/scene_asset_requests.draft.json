@@ -1,0 +1,527 @@
+[
+  {
+    "id": "req_scene_host_home_interior",
+    "requested_category": "scene",
+    "requested_subject": "寄宿家庭学生房间内部（host_home_interior）",
+    "suggested_spec": {
+      "width": 1280,
+      "height": 720,
+      "color_palette": "PICO-8 + Munich warm gold #D4A847 + blue #3066BE",
+      "format": "png",
+      "transparent": false,
+      "style": "16-bit pixel art",
+      "anti_aliasing": "off"
+    },
+    "suggested_style_ref": "docs/ART_ASSETS.md#2-场景背景",
+    "priority": "critical",
+    "linked_entities": {
+      "location_id": ["loc_munich_host_home"],
+      "npc_id": ["npc_frau_schneider"]
+    },
+    "ai_generation_strategy": "16-bit pixel art German host family student room interior, warm wood tones, single bed with Bavarian quilt, desk with laptop, bookshelf with German books, window with curtains showing Munich suburban view, Bavarian atmosphere, hard pixel edges, retro JRPG background, atmospheric warm lighting, clean composition, no text",
+    "notes_zh": "第 1 天起点场景，必须有；建议参考 在家与妈妈.png 的家庭氛围 + 慕尼黑巴伐利亚元素",
+    "source_records": ["asset_ref_user_home_with_mom"],
+    "review_status": "draft"
+  },
+  {
+    "id": "req_scene_school_interior",
+    "requested_category": "scene",
+    "requested_subject": "国际学校教室（school_interior）",
+    "suggested_spec": {
+      "width": 1280,
+      "height": 720,
+      "color_palette": "Munich warm + cool academic",
+      "format": "png",
+      "transparent": false,
+      "style": "16-bit pixel art"
+    },
+    "suggested_style_ref": "docs/ART_ASSETS.md#2-场景背景",
+    "priority": "critical",
+    "linked_entities": {
+      "location_id": ["loc_munich_school"],
+      "npc_id": ["npc_deutsch_teacher", "npc_math_teacher"]
+    },
+    "ai_generation_strategy": "16-bit pixel art German international school classroom interior, desks, whiteboard with German phrases, educational posters, natural light from windows, clean academic atmosphere, hard pixel edges, retro JRPG background, clean composition, no text",
+    "notes_zh": "第 1 天关键场景（自我介绍）；MVP 必须",
+    "source_records": [],
+    "review_status": "draft"
+  },
+  {
+    "id": "req_scene_bakery_interior",
+    "requested_category": "scene",
+    "requested_subject": "慕尼黑面包店内部（bakery_interior）",
+    "suggested_spec": {
+      "width": 1280,
+      "height": 720,
+      "color_palette": "Munich warm gold + bread browns",
+      "format": "png",
+      "transparent": false,
+      "style": "16-bit pixel art"
+    },
+    "suggested_style_ref": "docs/ART_ASSETS.md#2-场景背景",
+    "priority": "critical",
+    "linked_entities": {
+      "location_id": ["loc_munich_bakery"],
+      "npc_id": ["npc_anna_bakery_placeholder"]
+    },
+    "ai_generation_strategy": "16-bit pixel art German Bäckerei bakery interior, wooden display with Brötchen and Brezel, glass counter, price tags, morning light, warm cozy atmosphere, hard pixel edges, retro JRPG background, clean composition",
+    "notes_zh": "第 1 天关键场景（买 Brötchen，€1.20）；MVP 必须；可参考 cafe_einstein.png 的暖色木质风格",
+    "source_records": ["asset_scene_cafe_einstein"],
+    "review_status": "draft"
+  },
+  {
+    "id": "req_scene_grocery_interior",
+    "requested_category": "scene",
+    "requested_subject": "德国超市内部（supermarket_interior）",
+    "suggested_spec": {
+      "width": 1280,
+      "height": 720,
+      "color_palette": "clean white + green EDEKA / red REWE / blue ALDI / yellow LIDL",
+      "format": "png",
+      "transparent": false,
+      "style": "16-bit pixel art"
+    },
+    "suggested_style_ref": "docs/ART_ASSETS.md#2-场景背景",
+    "priority": "high",
+    "linked_entities": {
+      "location_id": ["loc_munich_grocery"]
+    },
+    "ai_generation_strategy": "16-bit pixel art German supermarket interior, aisles with food shelves, fresh produce section, bread aisle, checkout counter, clean modern atmosphere, hard pixel edges, retro JRPG background, clean composition, no text or readable text",
+    "notes_zh": "第 1 周超市购物场景；建议 EDEKA / REWE / ALDI 任一品牌；通用化处理避免品牌侵权",
+    "source_records": [],
+    "review_status": "draft"
+  },
+  {
+    "id": "req_scene_library_interior",
+    "requested_category": "scene",
+    "requested_subject": "慕尼黑公共图书馆（library_interior）",
+    "suggested_spec": {
+      "width": 1280,
+      "height": 720,
+      "color_palette": "warm wood + book colors",
+      "format": "png",
+      "transparent": false,
+      "style": "16-bit pixel art"
+    },
+    "suggested_style_ref": "docs/ART_ASSETS.md#2-场景背景",
+    "priority": "high",
+    "linked_entities": {
+      "location_id": ["loc_munich_library"],
+      "npc_id": ["npc_librarian"]
+    },
+    "ai_generation_strategy": "16-bit pixel art Munich public library interior, wooden bookshelves, study desks, warm reading lamp light, quiet academic atmosphere, hard pixel edges, retro JRPG background, clean composition",
+    "notes_zh": "学习场景；MVP 第 2-3 周需要",
+    "source_records": [],
+    "review_status": "draft"
+  },
+  {
+    "id": "req_scene_sports_field",
+    "requested_category": "scene",
+    "requested_subject": "慕尼黑球场 / 体育馆（sports_field）",
+    "suggested_spec": {
+      "width": 1280,
+      "height": 720,
+      "color_palette": "green grass + sky blue",
+      "format": "png",
+      "transparent": false,
+      "style": "16-bit pixel art"
+    },
+    "suggested_style_ref": "docs/ART_ASSETS.md#2-场景背景",
+    "priority": "medium",
+    "linked_entities": {
+      "location_id": ["loc_munich_sports"]
+    },
+    "ai_generation_strategy": "16-bit pixel art Munich outdoor sports field, green grass, simple goal posts, clear sky, casual sports atmosphere, hard pixel edges, retro JRPG background, clean composition",
+    "notes_zh": "体育 / 社团场景；MVP 第 2-3 周需要",
+    "source_records": [],
+    "review_status": "draft"
+  },
+  {
+    "id": "req_scene_marienplatz_exterior",
+    "requested_category": "scene",
+    "requested_subject": "Marienplatz 广场（marienplatz_exterior）",
+    "suggested_spec": {
+      "width": 1280,
+      "height": 720,
+      "color_palette": "Munich warm gold + blue sky",
+      "format": "png",
+      "transparent": false,
+      "style": "16-bit pixel art"
+    },
+    "suggested_style_ref": "docs/ART_ASSETS.md#2-场景背景",
+    "priority": "critical",
+    "linked_entities": {
+      "location_id": ["loc_munich_marienplatz"]
+    },
+    "ai_generation_strategy": "16-bit pixel art Munich Marienplatz square, Neues Rathaus with Glockenspiel, golden light, tourists, Bavarian atmosphere, hard pixel edges, retro JRPG background, atmospheric, clean composition, no readable text",
+    "notes_zh": "周末探索 / 城市打卡关键场景；MVP 必须；可参考 慕尼黑大教堂.png 的暖金色调",
+    "source_records": ["asset_ref_user_marienplatz_cathedral"],
+    "review_status": "draft"
+  },
+  {
+    "id": "req_scene_ubahn_station",
+    "requested_category": "scene",
+    "requested_subject": "慕尼黑 U-Bahn 站（ubahn_station）",
+    "suggested_spec": {
+      "width": 1280,
+      "height": 720,
+      "color_palette": "cool blue + gray + Munich subway yellow",
+      "format": "png",
+      "transparent": false,
+      "style": "16-bit pixel art"
+    },
+    "suggested_style_ref": "docs/ART_ASSETS.md#2-场景背景",
+    "priority": "critical",
+    "linked_entities": {
+      "location_id": ["loc_munich_hauptbahnhof"]
+    },
+    "ai_generation_strategy": "16-bit pixel art Munich U-Bahn station interior, U-Bahn logo on wall, ticket machines, platform with train arriving, clean modern German transit atmosphere, hard pixel edges, retro JRPG background, atmospheric, clean composition",
+    "notes_zh": "交通关键场景；MVP 必须；可参考 ubahn.png",
+    "source_records": ["asset_ref_user_ubahn", "asset_scene_hauptbahnhof_interior"],
+    "review_status": "draft"
+  },
+  {
+    "id": "req_scene_deutsches_museum",
+    "requested_category": "scene",
+    "requested_subject": "Deutsches Museum（museum_exterior）",
+    "suggested_spec": {
+      "width": 1280,
+      "height": 720,
+      "color_palette": "river blue + museum stone",
+      "format": "png",
+      "transparent": false,
+      "style": "16-bit pixel art"
+    },
+    "suggested_style_ref": "docs/ART_ASSETS.md#2-场景背景",
+    "priority": "medium",
+    "linked_entities": {
+      "location_id": ["loc_munich_deutsches_museum"]
+    },
+    "ai_generation_strategy": "16-bit pixel art Deutsches Museum Munich exterior, Isar river nearby, museum building on island, sunny day, Bavarian atmosphere, hard pixel edges, retro JRPG background, clean composition, no readable text",
+    "notes_zh": "周末探索场景；MVP 第 3-4 周需要",
+    "source_records": [],
+    "review_status": "draft"
+  },
+  {
+    "id": "req_scene_cafe_or_mensa",
+    "requested_category": "scene",
+    "requested_subject": "慕尼黑咖啡馆或食堂（cafe_or_mensa）",
+    "suggested_spec": {
+      "width": 1280,
+      "height": 720,
+      "color_palette": "warm wood + green plants",
+      "format": "png",
+      "transparent": false,
+      "style": "16-bit pixel art"
+    },
+    "suggested_style_ref": "docs/ART_ASSETS.md#2-场景背景",
+    "priority": "high",
+    "linked_entities": {
+      "location_id": ["loc_munich_cafe_or_mensa"]
+    },
+    "ai_generation_strategy": "16-bit pixel art Munich student Mensa / cafe interior, long tables, simple food counter, students eating, warm casual atmosphere, hard pixel edges, retro JRPG background, clean composition",
+    "notes_zh": "Mensa 食堂 / 咖啡馆场景；MVP 第 1 周需要；可参考 cafe_einstein.png 的暖色木质风格",
+    "source_records": ["asset_scene_cafe_einstein"],
+    "review_status": "draft"
+  },
+  {
+    "id": "req_char_deutsch_teacher",
+    "requested_category": "character",
+    "requested_subject": "德语老师 Frau / Herr（4 表情）",
+    "suggested_spec": {
+      "width": 192,
+      "height": 256,
+      "color_palette": "PICO-8 + Munich warm",
+      "format": "png",
+      "transparent": true,
+      "style": "16-bit pixel art"
+    },
+    "suggested_style_ref": "docs/ART_ASSETS.md#1-角色立绘",
+    "priority": "critical",
+    "linked_entities": {
+      "npc_id": ["npc_deutsch_teacher"],
+      "location_id": ["loc_munich_school"]
+    },
+    "ai_generation_strategy": "16-bit pixel art German Deutsch teacher character portrait, female 40s or male 40s, professional attire, glasses, friendly smile, hard pixel edges no anti-aliasing, limited 16-color palette, retro JRPG style, transparent background, front-facing",
+    "notes_zh": "第 1 天关键 NPC（自我介绍对话）；MVP 必须",
+    "source_records": [],
+    "review_status": "draft"
+  },
+  {
+    "id": "req_char_math_teacher",
+    "requested_category": "character",
+    "requested_subject": "数学老师 Herr Brown（4 表情）",
+    "suggested_spec": {
+      "width": 192,
+      "height": 256,
+      "color_palette": "PICO-8 + academic",
+      "format": "png",
+      "transparent": true,
+      "style": "16-bit pixel art"
+    },
+    "suggested_style_ref": "docs/ART_ASSETS.md#1-角色立绘",
+    "priority": "high",
+    "linked_entities": {
+      "npc_id": ["npc_math_teacher_brown"],
+      "location_id": ["loc_munich_school"]
+    },
+    "ai_generation_strategy": "16-bit pixel art math teacher character portrait, British expat male 30s-40s, smart casual, neat appearance, friendly expression, hard pixel edges no anti-aliasing, limited 16-color palette, retro JRPG style, transparent background, front-facing",
+    "notes_zh": "A-levels / AS Math 老师；MVP 第 2 周需要",
+    "source_records": [],
+    "review_status": "draft"
+  },
+  {
+    "id": "req_char_host_mother",
+    "requested_category": "character",
+    "requested_subject": "寄宿家庭 Gastmutter（4 表情）",
+    "suggested_spec": {
+      "width": 192,
+      "height": 256,
+      "color_palette": "PICO-8 + warm domestic",
+      "format": "png",
+      "transparent": true,
+      "style": "16-bit pixel art"
+    },
+    "suggested_style_ref": "docs/ART_ASSETS.md#1-角色立绘",
+    "priority": "critical",
+    "linked_entities": {
+      "npc_id": ["npc_frau_schneider"],
+      "location_id": ["loc_munich_host_home"]
+    },
+    "ai_generation_strategy": "16-bit pixel art German Gastmutter character portrait, female 50s, warm maternal appearance, Bavarian dirndl-inspired or casual domestic clothing, kind eyes, hard pixel edges no anti-aliasing, limited 16-color palette, retro JRPG style, transparent background, front-facing",
+    "notes_zh": "第 1 天关键 NPC（早晨对话）；MVP 必须；NPC 智能体将定义 Frau Schneider 等具体身份",
+    "source_records": [],
+    "review_status": "draft"
+  },
+  {
+    "id": "req_char_german_classmate",
+    "requested_category": "character",
+    "requested_subject": "德国同学（同班同学，4 表情）",
+    "suggested_spec": {
+      "width": 192,
+      "height": 256,
+      "color_palette": "PICO-8 + student casual",
+      "format": "png",
+      "transparent": true,
+      "style": "16-bit pixel art"
+    },
+    "suggested_style_ref": "docs/ART_ASSETS.md#1-角色立绘",
+    "priority": "high",
+    "linked_entities": {
+      "npc_id": ["npc_german_classmate"],
+      "location_id": ["loc_munich_school"]
+    },
+    "ai_generation_strategy": "16-bit pixel art German student character portrait, age 16-17, casual student clothing, friendly smile, hard pixel edges no anti-aliasing, limited 16-color palette, retro JRPG style, transparent background, front-facing",
+    "notes_zh": "学校同学 NPC；MVP 第 1 周需要",
+    "source_records": [],
+    "review_status": "draft"
+  },
+  {
+    "id": "req_char_chinese_friend",
+    "requested_category": "character",
+    "requested_subject": "中国留学生朋友（4 表情）",
+    "suggested_spec": {
+      "width": 192,
+      "height": 256,
+      "color_palette": "PICO-8 + Asian",
+      "format": "png",
+      "transparent": true,
+      "style": "16-bit pixel art"
+    },
+    "suggested_style_ref": "docs/ART_ASSETS.md#1-角色立绘",
+    "priority": "high",
+    "linked_entities": {
+      "npc_id": ["npc_chinese_friend"],
+      "location_id": ["loc_munich_school"]
+    },
+    "ai_generation_strategy": "16-bit pixel art Chinese international student character portrait, age 16-17, casual student clothing, friendly approachable appearance, hard pixel edges no anti-aliasing, limited 16-color palette, retro JRPG style, transparent background, front-facing",
+    "notes_zh": "中国留学生朋友 NPC；MVP 第 1 周需要；可与玩家建立中文沟通渠道",
+    "source_records": [],
+    "review_status": "draft"
+  },
+  {
+    "id": "req_char_librarian",
+    "requested_category": "character",
+    "requested_subject": "图书馆管理员（4 表情）",
+    "suggested_spec": {
+      "width": 192,
+      "height": 256,
+      "color_palette": "PICO-8 + quiet academic",
+      "format": "png",
+      "transparent": true,
+      "style": "16-bit pixel art"
+    },
+    "suggested_style_ref": "docs/ART_ASSETS.md#1-角色立绘",
+    "priority": "medium",
+    "linked_entities": {
+      "npc_id": ["npc_librarian"],
+      "location_id": ["loc_munich_library"]
+    },
+    "ai_generation_strategy": "16-bit pixel art German librarian character portrait, age 50-60, glasses, neat professional appearance, calm expression, hard pixel edges no anti-aliasing, limited 16-color palette, retro JRPG style, transparent background, front-facing",
+    "notes_zh": "图书馆管理员 NPC；MVP 第 2 周需要",
+    "source_records": [],
+    "review_status": "draft"
+  },
+  {
+    "id": "req_ui_mic_recording",
+    "requested_category": "ui",
+    "requested_subject": "录音按钮 recording 状态",
+    "suggested_spec": {
+      "width": 1024,
+      "height": 1024,
+      "color_palette": "red + animated",
+      "format": "png",
+      "transparent": true,
+      "style": "16-bit pixel art"
+    },
+    "suggested_style_ref": "docs/ART_ASSETS.md#3-UI 元素",
+    "priority": "high",
+    "linked_entities": {},
+    "ai_generation_strategy": "16-bit pixel art microphone button recording state, red circle with white mic icon, sound waves emanating, hard pixel edges, transparent background",
+    "notes_zh": "AI 语音任务录音中状态",
+    "source_records": [],
+    "review_status": "draft"
+  },
+  {
+    "id": "req_ui_mic_processing",
+    "requested_category": "ui",
+    "requested_subject": "录音按钮 processing 状态",
+    "suggested_spec": {
+      "width": 1024,
+      "height": 1024,
+      "color_palette": "yellow + spinner",
+      "format": "png",
+      "transparent": true,
+      "style": "16-bit pixel art"
+    },
+    "suggested_style_ref": "docs/ART_ASSETS.md#3-UI 元素",
+    "priority": "high",
+    "linked_entities": {},
+    "ai_generation_strategy": "16-bit pixel art microphone button processing state, yellow circle with loading spinner, hard pixel edges, transparent background",
+    "notes_zh": "AI 评估中状态",
+    "source_records": [],
+    "review_status": "draft"
+  },
+  {
+    "id": "req_ui_button_hover",
+    "requested_category": "ui",
+    "requested_subject": "按钮 hover 状态",
+    "suggested_spec": {
+      "width": 1024,
+      "height": 1024,
+      "color_palette": "brown hover variant",
+      "format": "png",
+      "transparent": true,
+      "style": "16-bit pixel art"
+    },
+    "suggested_style_ref": "docs/ART_ASSETS.md#3-UI 元素",
+    "priority": "medium",
+    "linked_entities": {},
+    "ai_generation_strategy": "16-bit pixel art UI button hover state, slightly lighter brown, hard pixel edges, transparent background",
+    "notes_zh": "按钮 hover 状态",
+    "source_records": [],
+    "review_status": "draft"
+  },
+  {
+    "id": "req_ui_button_disabled",
+    "requested_category": "ui",
+    "requested_subject": "按钮 disabled 状态",
+    "suggested_spec": {
+      "width": 1024,
+      "height": 1024,
+      "color_palette": "gray",
+      "format": "png",
+      "transparent": true,
+      "style": "16-bit pixel art"
+    },
+    "suggested_style_ref": "docs/ART_ASSETS.md#3-UI 元素",
+    "priority": "medium",
+    "linked_entities": {},
+    "ai_generation_strategy": "16-bit pixel art UI button disabled state, gray muted, hard pixel edges, transparent background",
+    "notes_zh": "按钮 disabled 状态",
+    "source_records": [],
+    "review_status": "draft"
+  },
+  {
+    "id": "req_ui_city_badge_munich",
+    "requested_category": "ui",
+    "requested_subject": "慕尼黑城市徽章 city_badge_munich.png",
+    "suggested_spec": {
+      "width": 1024,
+      "height": 1024,
+      "color_palette": "Munich warm gold #D4A847 + blue #3066BE",
+      "format": "png",
+      "transparent": true,
+      "style": "16-bit pixel art"
+    },
+    "suggested_style_ref": "docs/ART_ASSETS.md#3-UI 元素",
+    "priority": "critical",
+    "linked_entities": {
+      "city_id": ["munich"]
+    },
+    "ai_generation_strategy": "16-bit pixel art city badge for Munich, Bavarian diamond pattern, 'MÜNCHEN' text clearly written, hard pixel edges, retro JRPG style, isolated transparent background",
+    "notes_zh": "MVP 必须；替代 city_badge_berlin.png",
+    "source_records": [],
+    "review_status": "draft"
+  },
+  {
+    "id": "req_ui_phone_frame",
+    "requested_category": "ui",
+    "requested_subject": "手机界面框架 phone_frame",
+    "suggested_spec": {
+      "width": 1024,
+      "height": 1024,
+      "color_palette": "modern phone UI",
+      "format": "png",
+      "transparent": true,
+      "style": "16-bit pixel art"
+    },
+    "suggested_style_ref": "docs/ART_ASSETS.md#3-UI 元素",
+    "priority": "high",
+    "linked_entities": {},
+    "ai_generation_strategy": "16-bit pixel art smartphone frame UI mockup, simple iOS/Android hybrid style, status bar with time and battery, hard pixel edges, retro JRPG style, transparent background",
+    "notes_zh": "手机 / 消息 / 邮件 UI 的容器",
+    "source_records": [],
+    "review_status": "draft"
+  },
+  {
+    "id": "req_ui_task_panel",
+    "requested_category": "ui",
+    "requested_subject": "任务面板背景 task_panel",
+    "suggested_spec": {
+      "width": 1024,
+      "height": 1024,
+      "color_palette": "warm parchment",
+      "format": "png",
+      "transparent": true,
+      "style": "16-bit pixel art"
+    },
+    "suggested_style_ref": "docs/ART_ASSETS.md#3-UI 元素",
+    "priority": "high",
+    "linked_entities": {},
+    "ai_generation_strategy": "16-bit pixel art task list panel background, parchment paper texture, list area, hard pixel edges, retro JRPG style, transparent background",
+    "notes_zh": "任务列表 UI 背景",
+    "source_records": [],
+    "review_status": "draft"
+  },
+  {
+    "id": "req_ui_feedback_card",
+    "requested_category": "ui",
+    "requested_subject": "反馈卡背景 feedback_card",
+    "suggested_spec": {
+      "width": 1024,
+      "height": 1024,
+      "color_palette": "parchment + vintage",
+      "format": "png",
+      "transparent": true,
+      "style": "16-bit pixel art"
+    },
+    "suggested_style_ref": "docs/ART_ASSETS.md#3-UI 元素",
+    "priority": "medium",
+    "linked_entities": {},
+    "ai_generation_strategy": "16-bit pixel art feedback card background, vintage parchment texture, decorative border, hard pixel edges, retro JRPG style, transparent background",
+    "notes_zh": "学习反馈卡 UI 背景",
+    "source_records": [],
+    "review_status": "draft"
+  }
+]

@@ -1,0 +1,93 @@
+[
+  {
+    "id": "cooking_step_intro_pan_heat",
+    "recipe_id": "recipe_egg_toast",
+    "step_order": 1,
+    "type": "click",
+    "target": "pan",
+    "duration_seconds": null,
+    "label_de": "Pfanne auf den Herd stellen",
+    "label_zh": "把平底锅放到炉子上",
+    "tip_zh": "中火预热 30 秒再放黄油",
+    "fail_message_zh": "忘了开火?没熟的食物可不行哦",
+    "review_status": "draft"
+  },
+  {
+    "id": "cooking_step_butter_melt",
+    "recipe_id": "recipe_egg_toast",
+    "step_order": 2,
+    "type": "timer",
+    "target": "butter",
+    "duration_seconds": 20,
+    "label_de": "Butter schmelzen lassen",
+    "label_zh": "等黄油融化",
+    "tip_zh": "黄油冒泡但不变棕色就是好了",
+    "fail_message_zh": "黄油烧焦会发苦",
+    "review_status": "draft"
+  },
+  {
+    "id": "cooking_step_egg_crack",
+    "recipe_id": "recipe_egg_toast",
+    "step_order": 3,
+    "type": "click",
+    "target": "egg",
+    "duration_seconds": null,
+    "label_de": "Ei aufschlagen",
+    "label_zh": "打入鸡蛋",
+    "tip_zh": "锅边敲,不要直接在锅中央,避免碎壳",
+    "fail_message_zh": "碎壳掉进锅里,要挑出来哦",
+    "review_status": "draft"
+  },
+  {
+    "id": "cooking_step_egg_wait",
+    "recipe_id": "recipe_egg_toast",
+    "step_order": 4,
+    "type": "timer",
+    "target": "egg",
+    "duration_seconds": 90,
+    "label_de": "Eiweiß stocken lassen",
+    "label_zh": "等蛋白凝固(约 90 秒)",
+    "tip_zh": "蛋黄还能晃动就是溏心",
+    "fail_message_zh": "蛋白没凝固就翻面会破",
+    "review_status": "draft"
+  },
+  {
+    "id": "cooking_step_pasta_water_boil",
+    "recipe_id": "recipe_spaghetti_tomato",
+    "step_order": 1,
+    "type": "timer",
+    "target": "water",
+    "duration_seconds": 240,
+    "label_de": "Wasser zum Kochen bringen",
+    "label_zh": "烧开水(约 4 分钟)",
+    "tip_zh": "加盐!水咸了面才入味",
+    "fail_message_zh": "没加盐的面寡淡无味",
+    "review_status": "draft"
+  },
+  {
+    "id": "cooking_step_pasta_add",
+    "recipe_id": "recipe_spaghetti_tomato",
+    "step_order": 2,
+    "type": "click",
+    "target": "pasta",
+    "duration_seconds": null,
+    "label_de": "Spaghetti ins Wasser geben",
+    "label_zh": "把意面放进沸水",
+    "tip_zh": "一次放,不要一根根放(会粘)",
+    "fail_message_zh": "面没散开,煮出来会结块",
+    "review_status": "draft"
+  },
+  {
+    "id": "cooking_step_pasta_cook",
+    "recipe_id": "recipe_spaghetti_tomato",
+    "step_order": 3,
+    "type": "timer",
+    "target": "pasta",
+    "duration_seconds": 540,
+    "label_de": "9 Minuten kochen lassen",
+    "label_zh": "煮 9 分钟(al dente)",
+    "tip_zh": "剩 1 分钟时尝一根,要有咬劲",
+    "fail_message_zh": "煮过头变烂面",
+    "review_status": "draft"
+  }
+]

@@ -1,0 +1,133 @@
+[
+  {
+    "id": "rel_event_frau_schneider_low_energy",
+    "npc_id": "npc_frau_schneider",
+    "trigger": {
+      "type": "low_energy",
+      "max_energy": 35
+    },
+    "summary_zh": "Schneider 太太看到你晚上精神不好,提醒你早点休息。",
+    "effects": {
+      "mood": 2,
+      "stress": -2,
+      "trust": 1,
+      "parent_like_trust": 1
+    },
+    "safety_rating": "all_ages",
+    "review_status": "draft"
+  },
+  {
+    "id": "rel_event_frau_schneider_curfew_violation",
+    "npc_id": "npc_frau_schneider",
+    "trigger": {
+      "type": "time_block_past_22",
+      "without_permission": true
+    },
+    "summary_zh": "Schneider 太太因为你没按时回来,严肃提醒你规矩。",
+    "effects": {
+      "trust": -5,
+      "parent_like_trust": -8,
+      "stress": 5,
+      "freedom_score": -1
+    },
+    "safety_rating": "all_ages",
+    "review_status": "draft"
+  },
+  {
+    "id": "rel_event_frau_schneider_first_cooked_dinner",
+    "npc_id": "npc_frau_schneider",
+    "trigger": {
+      "type": "recipe_complete",
+      "recipe_id": "recipe_egg_toast"
+    },
+    "summary_zh": "主角第一次给 Schneider 一家做了早餐。Schneider 太太非常感动,parent_like_trust 上升。",
+    "effects": {
+      "parent_like_trust": 8,
+      "friendship": 5,
+      "mood": 4
+    },
+    "safety_rating": "all_ages",
+    "review_status": "draft"
+  },
+  {
+    "id": "rel_event_anna_first_order",
+    "npc_id": "npc_anna_bakery",
+    "trigger": {
+      "type": "dialogue_success",
+      "dialogue_id": "dlg_bakery_order_a1"
+    },
+    "summary_zh": "Anna 看到主角第一次独立完成点餐,夸奖发音。",
+    "effects": {
+      "friendship": 3,
+      "language_comfort": 5,
+      "german_xp": 10
+    },
+    "safety_rating": "all_ages",
+    "review_status": "draft"
+  },
+  {
+    "id": "rel_event_peter_first_invite",
+    "npc_id": "npc_peter_german_classmate",
+    "trigger": {
+      "type": "lunch_chat_count",
+      "min_count": 3
+    },
+    "summary_zh": "Peter 邀请主角周末一起去 Englischer Garten 踢球。",
+    "effects": {
+      "friendship": 5,
+      "familiarity": 4
+    },
+    "safety_rating": "all_ages",
+    "review_status": "draft"
+  },
+  {
+    "id": "rel_event_li_ming_homesickness_talk",
+    "npc_id": "npc_li_ming_chinese_classmate",
+    "trigger": {
+      "type": "stress_above_threshold",
+      "min_stress": 60,
+      "context": "after_school"
+    },
+    "summary_zh": "李明找主角聊聊想家的情绪,提供情绪支持。",
+    "effects": {
+      "stress": -8,
+      "mood": 5,
+      "friendship": 3,
+      "shared_culture_bond": 5
+    },
+    "safety_rating": "all_ages",
+    "review_status": "draft"
+  },
+  {
+    "id": "rel_event_herr_brown_homework_on_time",
+    "npc_id": "npc_herr_brown_math",
+    "trigger": {
+      "type": "homework_submitted_on_time",
+      "subject": "mathematics",
+      "count": 5
+    },
+    "summary_zh": "Brown 老师注意到主角连续 5 次按时交作业,teacher_trust 上升。",
+    "effects": {
+      "teacher_trust": 5,
+      "english_xp": 5
+    },
+    "safety_rating": "all_ages",
+    "review_status": "draft"
+  },
+  {
+    "id": "rel_event_frau_mueller_first_a1_quiz",
+    "npc_id": "npc_frau_mueller_deutsch",
+    "trigger": {
+      "type": "test_passed",
+      "test_id": "test_de_week01_intro"
+    },
+    "summary_zh": "主角通过第一周 A1 小测,Frau Müller 表扬。",
+    "effects": {
+      "teacher_trust": 6,
+      "german_xp": 15,
+      "mood": 4
+    },
+    "safety_rating": "all_ages",
+    "review_status": "draft"
+  }
+]

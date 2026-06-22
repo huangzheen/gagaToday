@@ -1,0 +1,62 @@
+[
+  {
+    "id": "knowledge_frauenkirche_arch",
+    "location_id": "explore_munich_frauenkirche",
+    "category": "Geschichte",
+    "title_zh": "为什么 Frauenkirche 屋顶是绿色的?",
+    "body_zh": "Frauenkirche(圣母教堂)建于 1468-1488,后期(1525)加了铜皮屋顶,氧化后形成标志性的绿色。两座 98.5 米的塔楼在 19 世纪前一直是慕尼黑最高建筑。",
+    "gameplay_use": ["history_qa", "checkin_reward"],
+    "source_records": ["source_frauenkirche_arch_wiki"],
+    "review_status": "draft"
+  },
+  {
+    "id": "knowledge_deutsches_museum_science_history",
+    "location_id": "explore_munich_deutsches_museum",
+    "category": "Bildung",
+    "title_zh": "为什么德国有这么多技术博物馆?",
+    "body_zh": "Deutsches Museum 由 Oskar von Miller 创立于 1903 年,是世界最早的科学技术博物馆之一。德国工业革命后,科学 + 工程 + 制造业传统深厚,博物馆是这种文化延续。",
+    "gameplay_use": ["checkin_reward", "school_writing_material"],
+    "source_records": ["source_deutsches_museum_official", "source_oskar_von_miller_wiki"],
+    "review_status": "draft"
+  },
+  {
+    "id": "knowledge_englischer_garten_size",
+    "location_id": "explore_munich_englischer_garten",
+    "category": "Geographie",
+    "title_zh": "Englischer Garten 比纽约中央公园还大吗?",
+    "body_zh": "是的!Englischer Garten 占地约 3.7 km²,比纽约中央公园(3.4 km²)还大,是世界最大城市公园之一。1789 年由 Benjamin Thompson(Count Rumford)设计。",
+    "gameplay_use": ["first_visit_surprise", "knowledge_card_unlock"],
+    "source_records": ["source_englischer_garten_wiki"],
+    "review_status": "draft"
+  },
+  {
+    "id": "knowledge_marienplatz_glockenspiel_history",
+    "location_id": "explore_munich_marienplatz",
+    "category": "Geschichte",
+    "title_zh": "新市政厅钟琴(Glockenspiel)的故事",
+    "body_zh": "新市政厅建于 1867-1909,钟琴有 43 口钟 + 32 个人偶。每天 11/12/17 点报时,表演 1516 年慕尼黑婚礼 + Schäfflertanz(箍桶匠舞),约 15 分钟。",
+    "gameplay_use": ["checkin_event", "language_practice"],
+    "source_records": ["source_marienplatz_glockenspiel"],
+    "review_status": "draft"
+  },
+  {
+    "id": "knowledge_nymphenburg_history",
+    "location_id": "explore_munich_schloss_nymphenburg",
+    "category": "Geschichte",
+    "title_zh": "宁芬堡宫的起源",
+    "body_zh": "Nymphenburg 始建于 1664 年,作为巴伐利亚选帝侯 Ferdinand Maria 送给妻子的夏宫。1715-1719 加建两侧画廊(Pagodenburg / Badenburg)。",
+    "gameplay_use": ["history_qa", "checkin_reward"],
+    "source_records": ["source_nymphenburg_wiki"],
+    "review_status": "draft"
+  },
+  {
+    "id": "knowledge_viktualienmarkt_history",
+    "location_id": "explore_munich_viktualienmarkt",
+    "category": "Kultur",
+    "title_zh": "Viktualienmarkt 为什么这么有名?",
+    "body_zh": "Viktualienmarkt 自 1807 年以来是慕尼黑中心食品市场,140 多个摊位。Maypole(Maibaum)每年重立,代表不同行会。是体验慕尼黑生活方式的必到之地。",
+    "gameplay_use": ["weekend_event", "social_practice"],
+    "source_records": ["source_viktualienmarkt_wiki"],
+    "review_status": "draft"
+  }
+]

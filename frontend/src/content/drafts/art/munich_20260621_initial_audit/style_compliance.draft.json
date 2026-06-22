@@ -1,0 +1,96 @@
+[
+  {
+    "id": "compliance_ai_placeholders_batch",
+    "asset_ids": [
+      "asset_char_anna_neutral", "asset_char_anna_smile", "asset_char_anna_surprise", "asset_char_anna_thinking",
+      "asset_char_peter_neutral", "asset_char_peter_smile", "asset_char_peter_surprise", "asset_char_peter_thinking",
+      "asset_scene_cafe_einstein", "asset_scene_hauptbahnhof_interior", "asset_scene_street_kreuzberg",
+      "asset_ui_button_normal", "asset_ui_dialogue_box", "asset_ui_mic_button", "asset_ui_city_badge_berlin"
+    ],
+    "batch_source": "AI 矩阵生成稿（2026-06-21）",
+    "checks": {
+      "size_correct": {
+        "pass": "partial",
+        "value": "角色 192x256 规范 → 实际 896x1200（AI 1K 输出），比例 6:8 一致；场景 1280x720 规范 → 实际 1376x768（AI 1K 输出），比例 16:9 一致；UI 1024x1024 → 一致",
+        "note_zh": "缩放至规范尺寸后可用；或保留高分辨率版本（前端可缩放）"
+      },
+      "background_transparent": {
+        "pass": "yes",
+        "value": "角色立绘背景透明；场景背景不透明（正确）"
+      },
+      "color_palette_in_range": {
+        "pass": "yes",
+        "value": "实际产出色数 ~14-20 色，比 PICO-8 16 色略多但在 24 色限制内"
+      },
+      "hard_edge_no_aa": {
+        "pass": "yes",
+        "value": "已确认硬边无抗锯齿"
+      },
+      "png_no_compression_loss": {
+        "pass": "yes",
+        "value": "PNG 格式，文件大小合理（400KB-700KB）"
+      },
+      "filename_correct": {
+        "pass": "yes",
+        "value": "ann_a / peter / scene / ui 命名规范符合 ART_ASSETS.md"
+      },
+      "style_consistent": {
+        "pass": "yes",
+        "value": "全部 15 张画风一致，符合 Coffee Talk / Stardew Valley 风格"
+      },
+      "expression_consistency": {
+        "pass": "yes",
+        "value": "Anna 4 表情 / Peter 4 表情视觉一致性 ~95%（有参考图）"
+      }
+    },
+    "overall_pass": true,
+    "issues_zh": [
+      "尺寸比规范大（AI 1K 输出）—— 前端需缩放至 192x256 角色 / 1280x720 场景，或保留高分辨率（性能考量）",
+      "城市徽章 city_badge_berlin.png 是柏林，需要画 city_badge_munich.png 替代",
+      "录音按钮 mic_button.png 只有 idle 状态，recording / processing 状态缺失",
+      "按钮 button_normal.png 只有 normal 状态，hover / disabled 状态缺失"
+    ],
+    "notes_zh": "15 张 AI 占位稿整体通过风格合规检查；可标 placeholder（Anna/Peter/场景）或 usable（UI 通用）。需要补的素材见 scene_asset_requests.draft.json",
+    "source_records": ["source_art_assets_style_guide"],
+    "review_status": "draft"
+  },
+  {
+    "id": "compliance_user_provided_references",
+    "asset_ids": [
+      "asset_ref_user_marienplatz_cathedral", "asset_ref_user_ubahn", "asset_ref_user_home_with_mom",
+      "asset_ref_user_dinner_with_girlfriend", "asset_ref_user_alianz",
+      "asset_ref_user_image_0", "asset_ref_user_image1", "asset_ref_user_image2", "asset_ref_user_image3",
+      "asset_ref_user_image4", "asset_ref_user_image5", "asset_ref_user_image6", "asset_ref_user_image7",
+      "asset_ref_user_image8", "asset_ref_user_matrix_media"
+    ],
+    "batch_source": "用户提供参考图（2026-06-21，15 张）",
+    "checks": {
+      "usability_assigned": {
+        "pass": "yes",
+        "value": "全部 15 张按用户决策标 reference（user_provided 类）或 needs_review（image*.png / matrix-media 内容未明）"
+      },
+      "not_using_as_usable": {
+        "pass": "yes",
+        "value": "未直接标 usable；均通过 reference / needs_review 渠道"
+      },
+      "files_preserved": {
+        "pass": "yes",
+        "value": "原文件未删除；拷贝到 assets/references/user_2026_06_21/ 作为正式 references 副本"
+      },
+      "potential_issues": {
+        "pass": "no",
+        "value": "Alianz 是真实保险品牌（版权风险）；image*.png 9 张通用参考图内容未明确（需人工审核归类）"
+      }
+    },
+    "overall_pass": true,
+    "issues_zh": [
+      "Alianz.png 涉及真实品牌，不建议直接用于游戏 UI；建议改用通用保险图标",
+      "image.png / image0.png / image2.png-8.png 共 10 张通用参考图内容未明，需用户确认用途",
+      "image2.png 和 image3.png 文件大小完全相同（1537852 bytes），可能是同源图；可考虑去重",
+      "与女友吃饭.png 涉及恋爱关系风险，NPC 智能体需谨慎使用（参考 NPC 智能体.md 安全边界）"
+    ],
+    "notes_zh": "15 张用户参考图全部按 reference 处理；4 张有明确方向（慕尼黑大教堂、U-Bahn、在家、餐厅）可作为 scene_asset_requests 的参考；10 张通用图需用户进一步说明用途",
+    "source_records": ["source_user_provided_20260621"],
+    "review_status": "draft"
+  }
+]

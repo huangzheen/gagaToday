@@ -1,0 +1,52 @@
+[
+  {
+    "id": "culture_card_bakery_breakfast",
+    "food_item_id": "food_brotchen",
+    "category": "Essen",
+    "title_zh": "德国面包店为什么这么重要?",
+    "body_zh": "德国 Bäckerei 是社区生活的核心。清晨排队买 Brötchen 是日常仪式,也是和店主 Anna 这样的人建立稳定关系的方式。Brot(大面包)+Brötchen(小面包)+Brezel(八字面包) 是早餐三件套。",
+    "gameplay_use": ["bakery_dialogue", "knowledge_reward"],
+    "source_records": ["source_food_bakery_public"],
+    "review_status": "draft"
+  },
+  {
+    "id": "culture_card_weisswurst_zwoelf_uhr",
+    "food_item_id": "food_weisswurst",
+    "category": "Essen",
+    "title_zh": "为什么 Weißwurst 不能 12 点后吃?",
+    "body_zh": "Weißwurst 是巴伐利亚传统早餐香肠,因不含防腐剂传统上要在中午 12 点前吃完(zwölf Uhr Regel)。现代已放宽,但文化上仍是清晨专属。配 Brezn + Helles(啤酒)+ süßer Senf。",
+    "gameplay_use": ["bavarian_culture", "morning_ritual_event"],
+    "source_records": ["source_food_weisswurst_tradition"],
+    "review_status": "draft"
+  },
+  {
+    "id": "culture_card_kafkultur",
+    "food_item_id": "food_kaffee",
+    "category": "Essen",
+    "title_zh": "德国咖啡馆 Kaffee und Kuchen 文化",
+    "body_zh": "下午 15-17 点是 Kaffee und Kuchen(咖啡配蛋糕)时间,德国人把它当作正式 social 仪式。学生党可以用它练习 Nachmittag 闲聊场景。",
+    "gameplay_use": ["afternoon_event", "social_practice"],
+    "source_records": ["source_food_kaffee_kultur"],
+    "review_status": "draft"
+  },
+  {
+    "id": "culture_card_abendbrot",
+    "food_item_id": null,
+    "category": "Essen",
+    "title_zh": "Abendbrot:德国晚餐的极简哲学",
+    "body_zh": "Abendbrot(晚上面包)是德国晚餐传统:简单切几片 Brot + Käse + Wurst + 蔬菜。寄宿家庭晚餐常见场景,也是学做饭 / 跟家庭融合的触发点。",
+    "gameplay_use": ["host_family_event", "cooking_intro"],
+    "source_records": ["source_food_abendbrot"],
+    "review_status": "draft"
+  },
+  {
+    "id": "culture_card_schulbrot",
+    "food_item_id": "food_brotchen",
+    "category": "Essen",
+    "title_zh": "德国学生 Schulbrot 自带午餐",
+    "body_zh": "德国中小学生不带食堂热饭,而是早上从家里带 Schulbrot(面包盒)。游戏里可作为 '如何准备自己的 Lunchbox' 文化任务。",
+    "gameplay_use": ["school_lunch_task", "budget_friendly"],
+    "source_records": ["source_food_schulbrot_tradition"],
+    "review_status": "draft"
+  }
+]

@@ -1,0 +1,104 @@
+{
+  "schema_version": "draft-v1",
+  "generated_at": "2026-06-21",
+  "generated_by": "restaurant-import-agent",
+  "restaurant_id": "restaurant_munich_hofbraeuhaus",
+  "price_overview": {
+    "currency": "EUR",
+    "official_pdf_menu_url": null,
+    "official_pdf_menu_status": "not_publicly_indexed",
+    "official_pdf_menu_search_attempts": [
+      "https://www.hofbraeuhaus.de/wp-content/uploads/Speisekarte_Hofbraeuhaus.pdf -> 404",
+      "https://www.hofbraeuhaus.de/brauerei/speisen -> 404",
+      "https://www.hofbraeuhaus.de/en/bier-und-essen/unsere-speisen -> 404",
+      "official site lists dishes by name only, no prices"
+    ],
+    "fallback_used": "Standard Munich beer-hall price ranges (2024-2026) cross-referenced with public review snippets that mention prices.",
+    "fallback_confidence": 0.55,
+    "fallback_basis": "Bavarian-standard pricing for traditional Wirtshaus + tourist surcharge at Altstadt landmark + 2024-2026 inflation drift."
+  },
+  "price_notes": [
+    {
+      "category": "food_main",
+      "items": ["Schweinshaxe", "Schweinsbraten", "Hendl", "Käsespätzle", "Brotzeitteller"],
+      "price_band_eur": [12.0, 23.0],
+      "confidence": 0.55,
+      "source": "estimated",
+      "needs_review": true,
+      "human_action_required": "Cross-check against an in-restaurant menu or PDF screenshot of the official Speisekarte. Confirm no surcharge for the upstairs Festsaal."
+    },
+    {
+      "category": "food_soup",
+      "items": ["Leberknödelsuppe"],
+      "price_band_eur": [7.0, 9.5],
+      "confidence": 0.55,
+      "source": "estimated",
+      "needs_review": true
+    },
+    {
+      "category": "food_sausage_breakfast",
+      "items": ["Weißwurst mit Brezn"],
+      "price_band_eur": [9.0, 12.0],
+      "confidence": 0.55,
+      "source": "estimated",
+      "needs_review": true,
+      "human_action_required": "Confirm whether Weißwurst is included in the morning-only menu or all-day. Some restaurants only serve before 14:00."
+    },
+    {
+      "category": "food_bread_side",
+      "items": ["Brezn", "Sauerkraut", "Kartoffelsalat"],
+      "price_band_eur": [3.5, 5.5],
+      "confidence": 0.65,
+      "source": "estimated",
+      "needs_review": true
+    },
+    {
+      "category": "food_dessert",
+      "items": ["Kaiserschmarrn", "Apfelstrudel", "Bayerische Creme"],
+      "price_band_eur": [4.0, 12.0],
+      "confidence": 0.55,
+      "source": "estimated",
+      "needs_review": true
+    },
+    {
+      "category": "drink_non_alcoholic",
+      "items": ["Apfelschorle", "Spezi", "Mineralwasser", "Kaffee", "Tee"],
+      "price_band_eur": [2.5, 4.8],
+      "confidence": 0.65,
+      "source": "estimated",
+      "needs_review": true
+    },
+    {
+      "category": "drink_alcoholic",
+      "items": ["Hofbräu Original Maß", "Hofbräu Weisse Maß", "Hofbräu Dunkel Maß"],
+      "price_band_eur": [10.5, 13.5],
+      "confidence": 0.60,
+      "source": "estimated",
+      "needs_review": true,
+      "notes": "Maß (1L) beer prices have been relatively stable in Munich 2024-2026 around €11.50-12.50. Cross-check essential."
+    }
+  ],
+  "surcharge_notes": [
+    {
+      "type": "festsaal_upper_floor",
+      "estimated_surcharge_eur": null,
+      "notes": "The Festsaal (upper-floor ballroom) may carry a different price tier. Verify if menu is uniform across Schwemme / Bräustüberl / Festsaal.",
+      "needs_review": true
+    },
+    {
+      "type": "oktoberfest_seasonal",
+      "estimated_surcharge_percent": null,
+      "notes": "During WirtshausWiesn (in-house Oktoberfest celebration, typically mid-Sep to early Oct), some items have seasonal pricing. Verify.",
+      "needs_review": true
+    }
+  ],
+  "tips_and_extras": {
+    "tip_norm": "5-10% of total, often 'aufrunden' (round up) or 'Stimmt so' (keep the change).",
+    "bread_service_charge_eur": null,
+    "cover_charge_eur": null,
+    "needs_review": true,
+    "notes": "German restaurants sometimes add a small cover/bread charge (Brot und Gedeck, ~1-3 EUR) not listed online. Confirm."
+  },
+  "review_status": "draft",
+  "agent_action": "DO NOT publish without human verification of all price_eur values."
+}

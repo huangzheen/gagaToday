@@ -1,0 +1,59 @@
+[
+  {
+    "id": "nutrition_egg_toast",
+    "recipe_id": "recipe_egg_toast",
+    "calories_estimate": 380,
+    "protein_g": 18,
+    "carbs_g": 30,
+    "fat_g": 20,
+    "fiber_g": 2,
+    "disclaimer_zh": "游戏估算数值,不是营养学结论。",
+    "source_records": ["source_nutrition_db_usda"],
+    "review_status": "draft"
+  },
+  {
+    "id": "nutrition_spaghetti_tomato",
+    "recipe_id": "recipe_spaghetti_tomato",
+    "calories_estimate": 520,
+    "protein_g": 17,
+    "carbs_g": 95,
+    "fat_g": 8,
+    "fiber_g": 6,
+    "disclaimer_zh": "游戏估算数值,加橄榄油/奶酪会显著改变。",
+    "source_records": ["source_nutrition_db_usda"],
+    "review_status": "draft"
+  },
+  {
+    "id": "nutrition_brezn_butter",
+    "recipe_id": "recipe_brezn_butter",
+    "calories_estimate": 350,
+    "protein_g": 9,
+    "carbs_g": 50,
+    "fat_g": 13,
+    "fiber_g": 3,
+    "disclaimer_zh": "Brezn 大份热量较高,运动后可放心食用。",
+    "source_records": ["source_nutrition_db_usda"],
+    "review_status": "draft"
+  },
+  {
+    "id": "nutrition_kartoffelsalat",
+    "recipe_id": "recipe_kartoffelsalat",
+    "calories_estimate": 290,
+    "protein_g": 5,
+    "carbs_g": 45,
+    "fat_g": 9,
+    "fiber_g": 4,
+    "disclaimer_zh": "南德版本用油醋汁,热量比德北蛋黄酱版低。",
+    "source_records": ["source_nutrition_db_usda"],
+    "review_status": "draft"
+  },
+  {
+    "id": "nutrition_alcohol_policy",
+    "recipe_id": null,
+    "category": "policy",
+    "note_zh": "未成年玩家:游戏内不显示酒精类菜品效果,不作为消费选项。咖啡因(咖啡/可乐)按 realistic 影响 energy,不模拟成瘾。",
+    "disclaimer_zh": "游戏数值,非医学建议。",
+    "source_records": ["source_game_design_minor_policy"],
+    "review_status": "draft"
+  }
+]

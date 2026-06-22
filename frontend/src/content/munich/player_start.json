@@ -1,0 +1,54 @@
+{
+  "player_id": "local_player",
+  "cohort_id": null,
+  "content_version": "mvp-0.1",
+  "name": "Lena",
+  "age": 16,
+  "city": "munich",
+  "date": {
+    "year": 1,
+    "month": 9,
+    "day": 1,
+    "weekday": "monday"
+  },
+  "time_block": "morning",
+  "location_id": "host_home",
+  "wallet": {
+    "cash_eur": 500,
+    "monthly_support_eur": 650
+  },
+  "status": {
+    "energy": 80,
+    "mood": 75,
+    "stress": 20,
+    "health": 90
+  },
+  "skills": {
+    "german": {
+      "cefr": "A0",
+      "xp": 0
+    },
+    "english": {
+      "cefr": "B1",
+      "xp": 0
+    },
+    "math": {
+      "level": "igcse_bridge",
+      "xp": 0
+    },
+    "life": {
+      "xp": 0
+    }
+  },
+  "parent_trust": {
+    "level": 2,
+    "score": 60
+  },
+  "flags": {},
+  "active_task_ids": [
+    "task_day01_get_to_school"
+  ],
+  "completed_task_ids": [],
+  "transactions": [],
+  "action_log": []
+}
