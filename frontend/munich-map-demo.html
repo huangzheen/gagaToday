@@ -233,9 +233,7 @@ function drawRealPois(feats,z){
   }
 }
 
-function drawLabels(feats,z){var L=getLctx();for(var i=0;i<feats.length;i++){var f=feats[i],p=f.properties;if(!p.name)continue;var show=false;if(p.railway==='station'&&z>=14)show=true;if(p.tourism==='attraction'&&z>=15)show=true;if(p.highway==='primary'&&z>=15)show=true;if(p.amenity==='school'&&z>=15)show=true;if(p.shop&&z>=17)show=true;if(!show)continue;var s;if(f.geometry.type==='Point')s=toScr(f.geometry.coordinates[0],f.geometry.coordinates[1],lw,lh);else{var coords=f.geometry.coordinates;if(!coords||!coords[0]||!coords[0][0])continue;s=toScr(coords[0][0],coords[0][1],lw,lh)}L.font='5px "Courier New",monospace';L.fillStyle=PAL.lbD;L.fillText(p.name,pxs(s.x)+4,pxs(s.y)+2)}}
 
-/* ═══════════ 主渲染管线 ═══════════ */
 function renderMap(){
   if(lw<=0||lh<=0){resizeAll();if(lw<=0||lh<=0)return;}
   lctx.clearRect(0,0,lw,lh);
@@ -266,7 +264,8 @@ function renderGamePois(){
     var g=document.createElementNS('http://www.w3.org/2000/svg','g');
     g.setAttribute('data-id',p.id);g.setAttribute('transform','translate('+x+','+y+')');
     g.setAttribute('opacity',op);g.style.pointerEvents=p.unlocked?'auto':'none';g.style.cursor=p.unlocked?'pointer':'default';g.classList.add('poi-g');
-    g.innerHTML='<path d="M0,-32 C-17,-32 -28,-17 -28,-2 C-28,15 0,38 0,38 C0,38 28,15 28,-2 C28,-17 17,-32 0,-32Z" fill="#000" opacity="0.2" transform="translate(2,3)"/><path d="M0,-32 C-17,-32 -28,-17 -28,-2 C-28,15 0,38 0,38 C0,38 28,15 28,-2 C28,-17 17,-32 0,-32Z" fill="'+clr+'" stroke="'+(p.unlocked?'06142a':'4a4a4a')+'" stroke-width="3"/><circle cx="0" cy="-6" r="13" fill="#f7eed9" stroke="#06142a" stroke-width="2"/><text x="0" y="-1" text-anchor="middle" dominant-baseline="middle" font-size="15">'+p.icon+'</text><rect x="-62" y="40" width="124" height="20" rx="2" fill="#07152b" stroke="#e8b85c" stroke-width="2"/><text x="0" y="54" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff" stroke="#06142a" stroke-width="2" paint-order="stroke" font-family="Courier New,monospace">'+p.name+'</text>';
+    var pulseId = 'pulse-'+p.id;
+    g.innerHTML='<circle cx="0" cy="-10" r="8" fill="none" stroke="'+clr+'" stroke-width="2" opacity="0.6"><animate id="'+pulseId+'" attributeName="r" values="8;28" dur="1.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.6;0" dur="1.5s" repeatCount="indefinite"/></circle><path d="M0,-50 C-27,-50 -44,-26 -44,-3 C-44,22 0,56 0,56 C0,56 44,22 44,-3 C44,-26 27,-50 0,-50Z" fill="#000" opacity="0.2" transform="translate(3,5)"/><path d="M0,-50 C-27,-50 -44,-26 -44,-3 C-44,22 0,56 0,56 C0,56 44,22 44,-3 C44,-26 27,-50 0,-50Z" fill="'+clr+'" stroke="#06142a" stroke-width="4"/><circle cx="0" cy="-10" r="20" fill="#f7eed9" stroke="#06142a" stroke-width="3"/><text x="0" y="-3" text-anchor="middle" dominant-baseline="middle" font-size="24">'+p.icon+'</text><rect x="-76" y="60" width="152" height="30" rx="3" fill="#07152b" stroke="#e8b85c" stroke-width="3"/><text x="0" y="80" text-anchor="middle" font-size="15" font-weight="bold" fill="#fff" stroke="#06142a" stroke-width="3" paint-order="stroke" font-family="Courier New,monospace">'+p.name+'</text>';
     if(p.unlocked){
       g.addEventListener('click',function(e){e.stopPropagation();selP(p)});
       g.addEventListener('mouseenter',function(e){stt(e,p)});
