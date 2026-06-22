@@ -399,6 +399,48 @@ POI 必须是真实地点。**禁止虚构坐标**（除非明确标 `fictionali
 9. `loc_munich_deutsches_museum` — Deutsches Museum；
 10. `loc_munich_cafe_or_mensa` — 咖啡馆或食堂。
 
+---
+
+## OSM 数据管线(2026-06-22 新增)
+
+### 当前管线
+
+游戏地图底图不再从手写 JSON 驱动,而是从 **OpenStreetMap Overpass API** 直接拉取原始 GeoJSON:
+
+```
+Overpass API (6 步分步查询)
+  ↓ osm_to_geojson.py
+assets/munich_map/munich.geojson (42,878 FeatureCollection)
+  ↓ HTTP fetch
+munich-map-demo.html (Canvas 像素渲染器)
+```
+
+### 脚本
+
+`scripts/map/osm_to_geojson.py` — 6 层查询,每层间延迟 10 秒避免限流:
+
+| 层 | Overpass query | 输出 features |
+|---|---|---|
+| 1 | `way["highway"]` | 17,178 (motorway/primary/.../footway) |
+| 2 | `way["building"]` | 14,597 (Polygon 轮廓) |
+| 3 | `way["waterway"]` + `natural=water` | 86 (river/canal/stream/water) |
+| 4 | `leisure=park` + `landuse=grass/forest` | 1,183 |
+| 5 | `railway=rail/subway/tram` + `station` | 6,715 (Point + LineString) |
+| 6 | `amenity/shop/tourism` | 2,427 (Point) |
+| **总计** | | **42,878** |
+
+### 数据刷新命令
+
+```bash
+python3 scripts/map/osm_to_geojson.py
+# → assets/munich_map/munich.geojson (12 MB, 不入 git)
+```
+
+### 与手写 Draft 的关系
+
+- **底图 POI**:来自 OSM GeoJSON 自动渲染(不经过人工 draft review)
+- **游戏 POI**:仍在 `gamePois[]` 或 `locations.json` 中手写,需要走 draft → review 流程
+
 每个地点都应至少有：
 
 - 1 个 main interaction point（对话 / 任务触发）；

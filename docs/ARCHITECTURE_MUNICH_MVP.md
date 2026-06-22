@@ -269,19 +269,22 @@ index.html → main.js
 
 ## 5. 关键设计决策
 
-### 5.1 为什么 Vue + Phaser 分工
+### 5.1 为什么 Vue + Canvas + SVG 分工
 
-| 关注点 | Vue | Phaser |
-|---|---|---|
-| 状态栏 | ✓ | |
-| 对话框 UI | ✓ | |
-| 手机/邮件/日历 UI | ✓ | |
-| 地图渲染 | | ✓ |
-| 场景点交互 | | ✓ |
-| 角色立绘动画 | | ✓ |
-| 像素艺术场景 | | ✓ |
+| 关注点 | Vue | Canvas | SVG |
+|---|---|---|---|
+| 状态栏 / 任务面板 | ✓ | | |
+| 对话框 UI / 详情面板 | ✓ | | |
+| 地图底图渲染(道路/建筑/水/公园/地铁) | | ✓ | |
+| 游戏 POI 标记(大头针) | | | ✓ |
+| 路线动画(红色虚线) | | | ✓ |
+| Tooltip | ✓ | | |
+| 全屏布局 Grid | ✓ | | |
 
-**原则**:Phaser 只渲染地图和场景;Vue 管所有菜单、对话框、UI。
+**原则**:
+- **Canvas**(pixel rendering) → 渲染 OSM 地图底图:道路/建筑/水系/公园/地铁/真实 POI,使用 pixelSnap + 16-bit 色板
+- **SVG**(overlay) → 叠加可交互的游戏 POI 大头针 + 路线动画,独立于 Canvas 层
+- **Vue**(DOM) → 所有 UI 面板:顶栏/左侧任务/右侧详情/底部操控
 
 ### 5.2 为什么 Core 独立
 
@@ -297,12 +300,21 @@ index.html → main.js
 
 **编译期防护**:Drafts 目录结构与人手 / Agent 工作目录分离,前端代码 import 路径不允许穿越。
 
-### 5.4 为什么柏林图占位可用
+### 5.4 为什么地图改用 OSM 真实数据
 
-当前 BootScene 加载柏林图作为慕尼黑场景占位:
-- 优点:骨架可立即可跑,无需等美术
-- 缺点:视觉上不真实
-- 缓解:MVP Phase 1 验证玩法,视觉问题 Phase 2 集中修
+当前地图系统(`munich-map-demo.html`)已从 Phaser 手绘场景图升级为 **OSM GeoJSON 数据驱动 Canvas 像素渲染**:
+
+| 对比 | 旧版(Phaser) | 新版(Canvas+SVG) |
+|---|---|---|
+| 数据来源 | 手绘占位图 | OpenStreetMap Overpass API |
+| 地图要素 | 5 个固定场景图片 | 42,878 GeoJSON features |
+| 道路 | 无 | 17,178 条(primary/tertiary/residential...) |
+| 建筑 | 无 | 14,597 栋(Polygon 轮廓) |
+| 水系 | 无 | 86 条(Isar/溪流/湖) |
+| 公园 | 无 | 1,183 块(英国花园等) |
+| 地铁/铁路 | 无 | 6,715 条(station/rail/subway/tram) |
+| 真实 POI | 无 | 2,427 个(餐厅/咖啡馆/超市/博物馆…) |
+| 渲染方式 | Phaser 图片 | Canvas 像素绘制 + pixelSnap |
 
 ---
 
@@ -353,8 +365,111 @@ open http://127.0.0.1:5173/
 
 ---
 
-## 9. 变更日志
+## 9. 地图渲染管线(2026-06-22 新增)
+
+### 9.1 数据来源
+
+```
+OpenStreetMap (Overpass API)
+  ↓ osm_to_geojson.py (6 层分步查询)
+assets/munich_map/munich.geojson (42,878 features, 12 MB)
+  ↓ HTTP fetch (或 munich_fallback.geojson 3,000 featured)
+mapGeoJSON (内存中的 FeatureCollection)
+```
+
+**GeoJSON 结构**完全兼容 OSM 标准,后续只需重新运行脚本即可拉取最新数据。
+
+### 9.2 渲染层级
+
+```
+L1: 羊皮纸底色 (#efe2c2)
+L2: 水系 (Polygon, #5aa5c6 / 描边 #2d6f94)
+L3: 公园/绿地 (Polygon, #8fb96c / 描边 #547d40)
+L4: 地铁/铁路 (LineString, U3 橙/U6 蓝, dash)
+L5: 道路 (按 highway 类型: primary 7px → footway 2.5px)
+L6: 真实 POI (z16+, 按类型分色小点)
+L7: 建筑 (z15+, Polygon, 统一 #b96f4d / 描边 #523225)
+──────────── Canvas ↑  SVG ↓ ────────────
+L8: 游戏 POI (大头针, z16+, 脉动光环, 可点击)
+L9: 路线动画 (红色虚线, stroke-dasharray)
+L10: UI 面板 (Vue DOM 层: 顶栏/左面板/右面板/底栏)
+```
+
+### 9.3 Web Mercator 投影
+
+```js
+function lngLatToWorld(lng, lat, zoom) {
+  const scale = 256 * Math.pow(2, zoom);
+  const x = (lng + 180) / 360 * scale;
+  const sinLat = Math.sin(lat * Math.PI / 180);
+  const y = (0.5 - Math.log((1 + sinLat) / (1 - sinLat)) / (4 * Math.PI)) * scale;
+  return { x, y };
+}
+```
+
+所有坐标通过 `pixelSnap` 取整,Canvas `imageSmoothingEnabled = false`。
+
+### 9.4 Zoom 分级
+
+| Zoom | 显示内容 |
+|------|---------|
+| 11 | 主干道 + 公园 + 河流 + 地铁线 |
+| 12 | 次级道路 |
+| 13 | 三级道路 + 地铁站 |
+| 14 | 详细道路 + 标注 |
+| 15 | 建筑轮廓 + 住宅道路 |
+| 16 | 步行道 + 真实 POI 小点 + 游戏 POI 标记 |
+| 17 | 最高细节 |
+
+### 9.5 操作方式
+
+| 操作 | 触发 | 说明 |
+|------|------|------|
+| 平移 | 鼠标拖拽 / ←↑↓→ 方向键 | 步长 20px |
+| 缩放 | 鼠标滚轮 / `-` `=` 键 / `+` `−` 按钮 | 范围 11-17 |
+| 点击 POI | 点击大头针标记 | 右侧弹出详情面板 |
+| 显示路线 | 详情面板 → "显示路线" | 红色虚线动画 |
+| 重置视角 | "🎯 重置" 按钮 | 回到 Marienplatz zoom 15 |
+
+### 9.6 16-bit RPG 色板
+
+| 要素 | 颜色 |
+|------|------|
+| 背景 | `#efe2c2` (羊皮纸) |
+| 水面 | `#5aa5c6` / 描边 `#2d6f94` |
+| 公园 | `#8fb96c` / 描边 `#547d40` |
+| 主路 | `#d89a45` / 描边 `#76512b` |
+| 住宅路 | `#f4e7c3` / 描边 `#bba574` |
+| 建筑 | `#b96f4d` / 描边 `#523225` |
+| UI 面板 | `#07152b` (深蓝) / `#e8b85c` (金色) |
+| 游戏 POI | 按类型: 蓝(home) / 绿(school) / 橙(shop) / 红(landmark) / 紫(museum) |
+
+### 9.7 文件位置
+
+| 文件 | 作用 |
+|------|------|
+| `frontend/munich-map-demo.html` | 单文件 Demo: HTML + CSS + JS (异步加载 GeoJSON) |
+| `scripts/map/osm_to_geojson.py` | OSM 数据拉取脚本 (6 层 Overpass query) |
+| `assets/munich_map/munich.geojson` | 完整 GeoJSON (42,878 features, 12 MB, 不入 git) |
+| `assets/munich_map/munich_fallback.geojson` | 精简版 fallback (3,000 features, ~1 MB, 入 git) |
+| `copilot-instructions.md` | 项目工作规则(语言/Git/Docker/限制) |
+
+### 9.8 与 Phaser 老系统的关系
+
+Phaser 场景(`BootScene.js` / `CityScene.js` / `HomeScene.js`)在 `src/` 中保留,供 Vue 主应用 (`App.vue`) 使用。
+
+新地图 Demo (`munich-map-demo.html`) 是完全独立的单文件,不依赖 Phaser/Vue/Pinia,纯 HTML+CSS+JS 即可运行:
+
+```bash
+cd frontend && python3 -m http.server 8081
+# 打开 http://127.0.0.1:8081/munich-map-demo.html
+```
+
+---
+
+## 10. 变更日志
 
 | 日期 | 版本 | 变更 |
 |---|---|---|
+| 2026-06-22 | v0.1.1 | 新增 §9: OSM GeoJSON Canvas+SVG 地图渲染管线 |
 | 2026-06-22 | v0.1.0 | 新建 — 基于实际跑通的 Vue/Phaser/Core 三层架构 |

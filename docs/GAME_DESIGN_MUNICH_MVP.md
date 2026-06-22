@@ -61,19 +61,38 @@ parent_trust: { level: 2, score: 60 }
 
 ---
 
-## 2. 慕尼黑 5 个 POI
+## 2. 慕尼黑游戏 POI(10 个)
+
+### 2.1 Phaser 主线 POI(5 个, `locations.json`)
 
 `frontend/src/content/munich/locations.json`
 
-| ID | 德语名 | 中文 | 类型 | 难度 | EN% | NPC | 坐标(x,y) | MVP 角色 |
-|---|---|---|---|---|---|---|---|---|
-| `host_home` | Gastfamilie | 寄宿家庭 | home | A1 | 100 | Frau Schneider | 0.16, 0.68 | 每日起点终点 |
-| `school` | Internationale Schule | 国际学校 | school | A1 | 100 | Herr Weber | 0.36, 0.34 | 学习核心 |
-| `bakery` | Bäckerei am Platz | 广场面包店 | bakery | A1 | 40 | Anna | 0.55, 0.56 | 第一次买面包 |
-| `supermarket` | Supermarkt | 超市 | grocery | A1 | 30 | Kassierer | 0.72, 0.72 | 预算与购物 |
-| `library` | Stadtbibliothek | 市立图书馆 | library | A1 | 60 | Frau Keller | 0.70, 0.28 | 学习与关系 |
+| ID | 德语名 | 中文 | 类型 | NPC | MVP 角色 |
+|---|---|---|---|---|---|
+| `host_home` | Gastfamilie | 寄宿家庭 | home | Frau Schneider | 每日起点终点 |
+| `school` | Internationale Schule | 国际学校 | school | Herr Weber | 学习核心 |
+| `bakery` | Bäckerei am Platz | 面包店 | bakery | Anna | 第一次买面包 |
+| `supermarket` | Supermarkt | 超市 | grocery | Kassierer | 预算与购物 |
+| `library` | Stadtbibliothek | 市立图书馆 | library | Frau Keller | 学习与关系 |
 
-**MVP Phase 1 启用**:全部 5 个 POI 都参与 Day 1 闭环。
+### 2.2 地图 Demo POI(10 个, `gamePois[]`)
+
+`frontend/munich-map-demo.html` 内置 `gamePois` 数组,使用真实经纬度:
+
+| ID | 中文 | 德语 | 类型 | lat/lng | 已解锁 | 步行 | 费用 |
+|---|---|---|---|---|---|---|---|
+| `home` | 学生公寓 | Studentenwohnheim | home | 48.156, 11.575 | ✓ | 0 min | — |
+| `school` | 语言学校 | Sprachschule | school | 48.148, 11.565 | ✓ | 18 min | €0 |
+| `bakery` | 面包店 | Bäckerei | shop | 48.145, 11.572 | ✓ | 12 min | €1.20~3.50 |
+| `marien` | 玛利亚广场 | Marienplatz | landmark | 48.1374, 11.5755 | ✓ | 30 min | €0 |
+| `museum` | 德意志博物馆 | Deutsches Museum | museum | 48.1299, 11.583 | ✓ | 45 min | €7.00 |
+| `hb` | 中央车站 | Hauptbahnhof | station | 48.140, 11.560 | ✓ | 35 min | €3.50+ |
+| `super` | 超市 | Supermarkt | shop | 48.152, 11.568 | ✓ | 8 min | €5~€15 |
+| `eg` | 英国花园 | Englischer Garten | park | 48.165, 11.595 | ✓ | 25 min | €0 |
+| `libr` | 图书馆 | Stadtbibliothek | library | 48.146, 11.562 | ✓ | 22 min | €0 |
+| `arena` | 安联球场 | Allianz Arena | stadium | 48.2188, 11.6247 | ✗ | — | €40+ |
+
+**显示规则**:仅 zoom ≥ 16 时显示。每个 POI 按类型分色(蓝/绿/橙/红/紫),带脉动光环动画。
 
 ---
 
@@ -195,23 +214,53 @@ drafts/
 
 ---
 
-## 8. 当前骨架已能跑通的验证
+## 8. 地图交互系统(新增)
+
+### 8.1 地图 Demo
+
+独立单文件 `frontend/munich-map-demo.html`,不依赖 Vue/Phaser:
 
 ```bash
-cd frontend && npm run dev
-# vite 已在 127.0.0.1:5173 监听
-curl -I http://127.0.0.1:5173/                       # HTTP 200
-curl http://127.0.0.1:5173/src/main.js                # 编译输出
-curl http://127.0.0.1:5173/src/App.vue               # 编译输出
-curl http://127.0.0.1:5173/src/phaser/BootScene.js   # 编译输出
-curl http://127.0.0.1:5173/src/content/munich/locations.json  # 5 POI 数据
+cd frontend && python3 -m http.server 8081
+# 打开 http://127.0.0.1:8081/munich-map-demo.html
 ```
 
-打开浏览器访问 http://127.0.0.1:5173/ 可见:
-- 顶部 StatusBar(玩家状态)
-- 中部 Phaser CityScene 慕尼黑地图(5 POI + 连线)
-- 底部 DialogueBox(对话组件)
-- Footer 标 v0.1.0 · Skeleton
+### 8.2 操作
+
+| 操作 | 方式 |
+|------|------|
+| 平移 | 鼠标拖拽 / ←↑↓→ 方向键 |
+| 缩放 | 鼠标滚轮 / `-` `=` 键 / `+` `−` 按钮 |
+| 点击 POI | 点击大头针 → 右侧面板弹详情 |
+| 显示路线 | 详情面板 "显示路线" → 红色虚线动画 |
+| 重置 | "🎯 重置" → 回到 Marienplatz zoom 15 |
+
+### 8.3 数据
+
+| 层 | 来源 | 数量 |
+|---|---|---|
+| OSM 道路 | Overpass API → GeoJSON | 17,178 |
+| OSM 建筑 | Overpass API → GeoJSON | 14,597 |
+| OSM 水系/公园/地铁/POI | Overpass API → GeoJSON | 11,103 |
+| **总计** | | **42,878 features** |
+| 游戏 POI | `gamePois[]` 硬编码 | 10 |
+
+数据刷新:
+```bash
+python3 scripts/map/osm_to_geojson.py
+```
+
+### 8.4 已能跑通验证
+
+```bash
+# Vue 主应用
+cd frontend && npm run dev
+# 访问 http://127.0.0.1:5173/ → Phaser Vue 主应用
+
+# 地图 Demo
+cd frontend && python3 -m http.server 8081
+# 访问 http://127.0.0.1:8081/munich-map-demo.html → OSM 真实地图
+```
 
 ---
 
@@ -223,10 +272,11 @@ curl http://127.0.0.1:5173/src/content/munich/locations.json  # 5 POI 数据
 - Track 系统 + 跨城旅行 + €900 月账
 - 1860 个成就 + ~250 L/XP 路径
 
-这些是**长期目标**,不是 MVP 范围。MVP 的第一版只做:
-- 慕尼黑 5 POI
+这些是**长期目标**,不是 MVP 范围。MVP 的第一版做:
+- 慕尼黑 10 个游戏 POI (真实经纬度)
+- OSM 42,878 features 真实地图数据
 - 单一日内闭环
-- 8 个核心模块 + Vue/Phaser 渲染
+- 8 个核心模块 + Vue/Phaser 渲染 + Canvas/SVG 地图系统
 
 **Phase 1 完成后**,根据玩家反馈决定:
 - (A) 慕尼黑扩 30 天(MVP Phase 4)
