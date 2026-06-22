@@ -257,6 +257,7 @@ function updateSvg(){svg.setAttribute('width',cw);svg.setAttribute('height',ch);
 function renderGamePois(){
   pg.innerHTML='';
   var z=vp.zoom;
+  if(z<16)return;
   var cW=lngLatToWorld(vp.centerLng,vp.centerLat,z);
   for(var i=0;i<gamePois.length;i++){
     var p=gamePois[i],pw=lngLatToWorld(p.lng,p.lat,z);
@@ -267,7 +268,7 @@ function renderGamePois(){
     var g=document.createElementNS('http://www.w3.org/2000/svg','g');
     g.setAttribute('data-id',p.id);g.setAttribute('transform','translate('+x+','+y+')');
     g.setAttribute('opacity',op);g.style.pointerEvents=p.unlocked?'auto':'none';g.style.cursor=p.unlocked?'pointer':'default';g.classList.add('poi-g');
-    g.innerHTML='<circle cx="0" cy="-10" r="8" fill="none" stroke="'+clr+'" stroke-width="2" opacity="0.6"><animate attributeName="r" values="8;28" dur="1.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.6;0" dur="1.5s" repeatCount="indefinite"/></circle><path d="M0,-50 C-27,-50 -44,-26 -44,-3 C-44,22 0,56 0,56 C0,56 44,22 44,-3 C44,-26 27,-50 0,-50Z" fill="#000" opacity="0.2" transform="translate(3,5)"/><path d="M0,-50 C-27,-50 -44,-26 -44,-3 C-44,22 0,56 0,56 C0,56 44,22 44,-3 C44,-26 27,-50 0,-50Z" fill="'+clr+'" stroke="#06142a" stroke-width="4"/><circle cx="0" cy="-10" r="20" fill="#f7eed9" stroke="#06142a" stroke-width="3"/><text x="0" y="-3" text-anchor="middle" dominant-baseline="middle" font-size="24">'+p.icon+'</text><rect x="-76" y="60" width="152" height="30" rx="3" fill="#07152b" stroke="#e8b85c" stroke-width="3"/><text x="0" y="80" text-anchor="middle" font-size="15" font-weight="bold" fill="#fff" stroke="#06142a" stroke-width="3" paint-order="stroke" font-family="Courier New,monospace">'+p.name+'</text>';
+    g.innerHTML='<circle cx="0" cy="-3" r="2.5" fill="none" stroke="'+clr+'" stroke-width="1" opacity="0.6"><animate attributeName="r" values="2.5;7" dur="1.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.6;0" dur="1.5s" repeatCount="indefinite"/></circle><path d="M0,-12.5 C-7,-12.5 -11,-6.5 -11,-0.75 C-11,5.5 0,14 0,14 C0,14 11,5.5 11,-0.75 C11,-6.5 7,-12.5 0,-12.5Z" fill="#000" opacity="0.2" transform="translate(1,2)"/><path d="M0,-12.5 C-7,-12.5 -11,-6.5 -11,-0.75 C-11,5.5 0,14 0,14 C0,14 11,5.5 11,-0.75 C11,-6.5 7,-12.5 0,-12.5Z" fill="'+clr+'" stroke="#06142a" stroke-width="1.5"/><circle cx="0" cy="-3" r="5" fill="#f7eed9" stroke="#06142a" stroke-width="1.5"/><text x="0" y="-1" text-anchor="middle" dominant-baseline="middle" font-size="7">'+p.icon+'</text><rect x="-38" y="16" width="76" height="14" rx="2" fill="#07152b" stroke="#e8b85c" stroke-width="1.5"/><text x="0" y="25" text-anchor="middle" font-size="7" font-weight="bold" fill="#fff" stroke="#06142a" stroke-width="1.5" paint-order="stroke" font-family="Courier New,monospace">'+p.name+'</text>';
     if(p.unlocked){
       g.addEventListener('click',function(e){e.stopPropagation();selP(p)});
       g.addEventListener('mouseenter',function(e){stt(e,p)});
