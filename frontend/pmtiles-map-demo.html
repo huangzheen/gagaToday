@@ -48,7 +48,9 @@ const ST = {
   primary:{w:4,C:PAL.rp,O:PAL.rpO,minZ:7},
   secondary:{w:3,C:PAL.rs,O:PAL.rsO,minZ:10},
   tertiary:{w:2.5,C:PAL.rs,O:PAL.rsO,minZ:12},
-  residential:{w:2,C:'#f4e7c3',O:'#bba574',minZ:14},
+  residential:{w:2,C:'#d6c090',O:'#9a7a50',minZ:13},
+  service:{w:1.5,C:'#eee0c0',O:'#b0a080',minZ:14},
+  path:{w:1,C:'#eee0c0',O:'#b0a080',minZ:15,dash:1},
   footway:{w:1.5,C:'#f4e7c3',O:'#bba574',minZ:15,dash:1}
 };
 
@@ -82,7 +84,7 @@ async function loadVisibleTiles(){
       const result=await pmtiles.getZxy(t.z,t.x,t.y);
       if(!result||!result.data||!result.data.byteLength)return null;
       const tile=new VectorTile(new PbfReader(result.data));
-      return{tile:tile};
+      return{tile:tile, x:t.x, y:t.y, z:t.z};
     }catch(e){return null}
   }));
   return results.filter(r=>r!==null);
@@ -90,22 +92,26 @@ async function loadVisibleTiles(){
 
 function renderFeats(feats){
   ctx.clearRect(0,0,cw,ch);ctx.fillStyle=PAL.bg;ctx.fillRect(0,0,cw,ch);
-  for(const f of feats){const p=f.properties;if(p.water||p.waterway||p.natural==='water'||p.natural==='bay'){if(f.geometry.type==='Polygon')drawPoly(f.geometry.coordinates,PAL.water,PAL.waterE,1.5);if(f.geometry.type==='MultiPolygon')for(const c of f.geometry.coordinates)drawPoly(c,PAL.water,PAL.waterE,1.5)}}
-  for(const f of feats){const p=f.properties;if(p.leisure==='park'||p.landuse==='forest'||p.landuse==='grass'||p.natural==='wood'){if(f.geometry.type==='Polygon')drawPoly(f.geometry.coordinates,PAL.park,PAL.parkE,1);if(f.geometry.type==='MultiPolygon')for(const c of f.geometry.coordinates)drawPoly(c,PAL.park,PAL.parkE,1)}}
-  for(const pass of[true,false]){for(const f of feats){const p=f.properties;if(!p.highway)continue;const s=ST[p.highway]||ST.residential;if(vp.zoom<s.minZ)continue;if(f.geometry.type==='LineString')drawLine(f.geometry.coordinates,pass?s.O:s.C,pass?s.w+2:s.w);if(f.geometry.type==='MultiLineString')for(const cs of f.geometry.coordinates)drawLine(cs,pass?s.O:s.C,pass?s.w+2:s.w)}}
-  for(const f of feats){const p=f.properties;if(p.building){if(f.geometry.type==='Polygon')drawPoly(f.geometry.coordinates,PAL.b1,PAL.bE,0.8);if(f.geometry.type==='MultiPolygon')for(const c of f.geometry.coordinates)drawPoly(c,PAL.b1,PAL.bE,0.8)}}
+  // Water: layer 'water' with class 'river','lake','ocean','canal'
+  for(const f of feats){const p=f.properties;const c=(p.class||'').toLowerCase();if(c==='river'||c==='lake'||c==='ocean'||c==='canal'||c==='stream'||c==='drain'){if(f.geometry.type==='Polygon')drawPoly(f.geometry.coordinates,PAL.water,PAL.waterE,1.5);if(f.geometry.type==='MultiPolygon')for(const cc of f.geometry.coordinates)drawPoly(cc,PAL.water,PAL.waterE,1.5)}}
+  // Parks: layer 'landuse' or 'landcover' with class 'park','forest','grass','wood','meadow'
+  for(const f of feats){const p=f.properties;const c=(p.class||'').toLowerCase();if(c==='park'||c==='forest'||c==='grass'||c==='wood'||c==='meadow'||c==='orchard'||c==='vineyard'){if(f.geometry.type==='Polygon')drawPoly(f.geometry.coordinates,PAL.park,PAL.parkE,1);if(f.geometry.type==='MultiPolygon')for(const cc of f.geometry.coordinates)drawPoly(cc,PAL.park,PAL.parkE,1)}}
+  // Roads: layer 'transportation' with class 'motorway','primary','secondary','tertiary','residential','path'
+  for(const pass of[true,false]){for(const f of feats){const p=f.properties;const c=(p.class||p.highway||'').toLowerCase();const roadMap={motorway:ST.motorway,primary:ST.primary,secondary:ST.secondary,tertiary:ST.tertiary,residential:ST.residential,footway:ST.footway,path:ST.footway,track:ST.residential,service:ST.residential};const s=roadMap[c]||(c?ST.residential:null);if(!s||vp.zoom<s.minZ)continue;if(f.geometry.type==='LineString')drawLine(f.geometry.coordinates,pass?s.O:s.C,pass?s.w+2:s.w);if(f.geometry.type==='MultiLineString')for(const cs of f.geometry.coordinates)drawLine(cs,pass?s.O:s.C,pass?s.w+2:s.w)}}
+  // Buildings: layer 'building'
+  for(const f of feats){const p=f.properties;if(p.render_height||p.render_min_height){if(f.geometry.type==='Polygon')drawPoly(f.geometry.coordinates,PAL.b1,PAL.bE,0.8);if(f.geometry.type==='MultiPolygon')for(const c of f.geometry.coordinates)drawPoly(c,PAL.b1,PAL.bE,0.8)}}
 }
 
 async function render(){
   document.getElementById('zv').textContent=vp.zoom;
   const tiles=await loadVisibleTiles();
   const allFeats=[],seen=new Set();
-  for(const {tile} of tiles){
-    for(const name of Object.keys(tile.layers)){
-      const layer=tile.layers[name];
+  for(const t of tiles){
+    for(const name of Object.keys(t.tile.layers)){
+      const layer=t.tile.layers[name];
       for(let i=0;i<layer.length;i++){
         try{
-          const feat=layer.feature(i).toGeoJSON(0);
+          const feat=layer.feature(i).toGeoJSON(t.x,t.y,t.z);
           const key=feat.properties&&feat.properties.osm_id||feat.id;
           if(key){if(seen.has(key))continue;seen.add(key)}
           allFeats.push(feat);
@@ -114,7 +120,7 @@ async function render(){
     }
   }
   document.getElementById('st').textContent=allFeats.length+' features, '+tiles.length+' tiles';
-  renderFeats(allFeats);
+renderFeats(allFeats);
 }
 
 let dragging=false,ds=null,dsW=null;
