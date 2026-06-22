@@ -27,8 +27,10 @@ body{background:radial-gradient(circle at 50% 12%,#183b67,#06101f 58%,#030812);f
 .mapf canvas{image-rendering:auto;filter:saturate(.88) contrast(1.18) sepia(.08)}
 .mapf::after{content:'';position:absolute;inset:0;pointer-events:none;background:none;opacity:0;z-index:5}
 .mapf::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 50% 48%,transparent 0 62%,rgba(0,0,0,.12) 100%);opacity:.45;z-index:5}
-.map-svg{z-index:6!important;pointer-events:none}
-.poi-g{pointer-events:auto}
+.map-svg{z-index:6!important}
+.map-svg #rg{pointer-events:none}
+.map-svg #pg{pointer-events:auto}
+.poi-g{pointer-events:auto;cursor:pointer}
 .right{grid-column:3;grid-row:2;padding:14px;display:flex;flex-direction:column;gap:12px;overflow-y:auto;background:linear-gradient(180deg,#123663,#07162c)}
 .detail-empty{color:#4a6a8a;font-size:9px;text-align:center;padding-top:30px}
 .dh h2{font-size:14px;color:var(--gold2);margin-bottom:1px}
