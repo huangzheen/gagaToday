@@ -261,8 +261,8 @@ function renderGamePois(){
   var cW=lngLatToWorld(vp.centerLng,vp.centerLat,z);
   for(var i=0;i<gamePois.length;i++){
     var p=gamePois[i],pw=lngLatToWorld(p.lng,p.lat,z);
-    var x=pxi((pw.x-cW.x+vp.worldX)+cw/2);
-    var y=pxi((pw.y-cW.y+vp.worldY)+ch/2);
+    var x=pxi((pw.x-cW.x+vp.worldX)+(dc.width||cw)/2);
+    var y=pxi((pw.y-cW.y+vp.worldY)+(dc.height||ch)/2);
     var clr={home:'#2d6fb3',school:'#3f7f56',shop:'#c98238',landmark:'#d85f45',museum:'#7d5fb2',stadium:'#8b8b8b',station:'#1e6eb8',park:'#70a95e',library:'#7d5fb2'}[p.t];
     var op=p.unlocked?1:0.5;
     var g=document.createElementNS('http://www.w3.org/2000/svg','g');
@@ -277,6 +277,8 @@ function renderGamePois(){
     pg.appendChild(g);
   }
 }
+
+var selPoi=null;
 
 function selP(poi){
   selPoi=poi;
