@@ -9,9 +9,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "vue": "^3.4.0",
+    "@mapbox/vector-tile": "^3.0.0",
+    "pbf": "^5.1.0",
+    "phaser": "^3.80.0",
     "pinia": "^2.1.0",
-    "phaser": "^3.80.0"
+    "pmtiles": "^4.4.1",
+    "vue": "^3.4.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.0",

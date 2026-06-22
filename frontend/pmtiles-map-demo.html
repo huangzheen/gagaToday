@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=1280,initial-scale=1.0"/>
+<title>gagaToday — PMTiles Germany Map</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a1428;font-family:'Courier New',monospace;color:#fff;overflow:hidden;width:100vw;height:100vh}
+#mapf{position:fixed;inset:0}
+#mapf canvas{position:absolute;inset:0;width:100%;height:100%;image-rendering:pixelated}
+#loading{position:fixed;inset:0;z-index:999;background:#050b16;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:monospace;color:#f4d35e}
+#loading .sub{color:#6a8aaa;font-size:11px}
+#info{position:fixed;top:12px;left:12px;z-index:100;background:rgba(7,21,43,.92);border:2px solid #e8b85c;padding:8px 14px;font-size:10px;color:#f4d35e;box-shadow:4px 4px 0 #000}
+#info .s{color:#6a8aaa;font-size:9px}
+</style>
+</head>
+<body>
+<div id="loading"><div>🗺️ 加载德国 PMTiles 地图...</div><div class="sub">Bayern · 547 MB · HTTP Range Tiles</div></div>
+<div id="info">Bayern <span class="s">·</span> Zoom <span id="zv">0</span> <span class="s">·</span> <span id="st">init</span></div>
+<div id="mapf"><canvas id="mc"></canvas></div>
+
+<script type="importmap">
+{
+  "imports": {
+    "pmtiles": "/node_modules/pmtiles/dist/esm/index.js",
+    "@mapbox/vector-tile": "/node_modules/@mapbox/vector-tile/index.js",
+    "@mapbox/point-geometry": "/node_modules/@mapbox/point-geometry/index.js",
+    "pbf": "/node_modules/pbf/index.js",
+    "fflate": "/node_modules/fflate/esm/browser.js"
+  }
+}
+</script>
+
+<script type="module">
+import { PMTiles } from 'pmtiles';
+import { VectorTile } from '@mapbox/vector-tile';
+import { PbfReader } from 'pbf';
+
+const PAL = {
+  bg:'#efe2c2',water:'#5aa5c6',waterE:'#2d6f94',
+  park:'#8fb96c',parkE:'#547d40',
+  rp:'#d89a45',rpO:'#76512b',rs:'#e9cc7b',rsO:'#9a8051',
+  b1:'#b96f4d',bE:'#523225'
+};
+const ST = {
+  motorway:{w:5,C:PAL.rp,O:PAL.rpO,minZ:5},
+  primary:{w:4,C:PAL.rp,O:PAL.rpO,minZ:7},
+  secondary:{w:3,C:PAL.rs,O:PAL.rsO,minZ:10},
+  tertiary:{w:2.5,C:PAL.rs,O:PAL.rsO,minZ:12},
+  residential:{w:2,C:'#f4e7c3',O:'#bba574',minZ:14},
+  footway:{w:1.5,C:'#f4e7c3',O:'#bba574',minZ:15,dash:1}
+};
+
+const canvas=document.getElementById('mc'),ctx=canvas.getContext('2d');
+let cw,ch;
+function resize(){cw=canvas.width=window.innerWidth;ch=canvas.height=window.innerHeight;ctx.imageSmoothingEnabled=false}
+window.addEventListener('resize',resize);resize();
+const vp={centerLat:48.145,centerLng:11.575,zoom:10,worldX:0,worldY:0};
+let pmtiles=null;
+
+function wm(lng,lat,z){const s=256*Math.pow(2,z);return{x:(lng+180)/360*s,y:(.5-Math.log((1+Math.sin(lat*Math.PI/180))/(1-Math.sin(lat*Math.PI/180)))/(4*Math.PI))*s}}
+function toScr(lng,lat){const c=wm(vp.centerLng,vp.centerLat,vp.zoom),p=wm(lng,lat,vp.zoom);return{x:(p.x-c.x+vp.worldX)+cw/2,y:(p.y-c.y+vp.worldY)+ch/2}}
+function pxi(v){return Math.round(v)}
+function tileXY(lat,lng,z){const n=1<<z;return{x:~~((lng+180)/360*n),y:~~((1-Math.log(Math.tan(lat*Math.PI/180)+1/Math.cos(lat*Math.PI/180))/Math.PI)/2*n)}}
+
+function drawPoly(coords,fill,str,lw){if(!coords||!coords[0]||coords[0].length<3)return;const r=coords[0];ctx.beginPath();let p=toScr(r[0][0],r[0][1]);ctx.moveTo(pxi(p.x),pxi(p.y));for(let i=1;i<r.length;i++){p=toScr(r[i][0],r[i][1]);ctx.lineTo(pxi(p.x),pxi(p.y))}ctx.closePath();if(fill){ctx.fillStyle=fill;ctx.fill()}if(str){ctx.strokeStyle=str;ctx.lineWidth=lw||1;ctx.stroke()}}
+function drawLine(cs,color,w,dash){if(!cs||cs.length<2)return;ctx.beginPath();let p=toScr(cs[0][0],cs[0][1]);ctx.moveTo(pxi(p.x),pxi(p.y));for(let i=1;i<cs.length;i++){p=toScr(cs[i][0],cs[i][1]);ctx.lineTo(pxi(p.x),pxi(p.y))}ctx.strokeStyle=color;ctx.lineWidth=w;ctx.lineCap='round';ctx.lineJoin='round';if(dash)ctx.setLineDash([4,3]);ctx.stroke();ctx.setLineDash([])}
+
+async function loadVisibleTiles(){
+  if(!pmtiles)return[];
+  let tileZ=Math.max(5,Math.min(15,vp.zoom));
+  const c=tileXY(vp.centerLat,vp.centerLng,tileZ);
+  const tiles=[],range=Math.ceil(Math.max(cw,ch)/256/2)+1;
+  for(let dx=-range;dx<=range;dx++)for(let dy=-range;dy<=range;dy++){
+    const tx=c.x+dx,ty=c.y+dy,n=1<<tileZ;
+    if(tx<0||tx>=n||ty<0||ty>=n)continue;
+    tiles.push({z:tileZ,x:tx,y:ty});
+  }
+  const results=await Promise.all(tiles.map(async t=>{
+    try{
+      const result=await pmtiles.getZxy(t.z,t.x,t.y);
+      if(!result||!result.data||!result.data.byteLength)return null;
+      const tile=new VectorTile(new PbfReader(result.data));
+      return{tile:tile};
+    }catch(e){return null}
+  }));
+  return results.filter(r=>r!==null);
+}
+
+function renderFeats(feats){
+  ctx.clearRect(0,0,cw,ch);ctx.fillStyle=PAL.bg;ctx.fillRect(0,0,cw,ch);
+  for(const f of feats){const p=f.properties;if(p.water||p.waterway||p.natural==='water'||p.natural==='bay'){if(f.geometry.type==='Polygon')drawPoly(f.geometry.coordinates,PAL.water,PAL.waterE,1.5);if(f.geometry.type==='MultiPolygon')for(const c of f.geometry.coordinates)drawPoly(c,PAL.water,PAL.waterE,1.5)}}
+  for(const f of feats){const p=f.properties;if(p.leisure==='park'||p.landuse==='forest'||p.landuse==='grass'||p.natural==='wood'){if(f.geometry.type==='Polygon')drawPoly(f.geometry.coordinates,PAL.park,PAL.parkE,1);if(f.geometry.type==='MultiPolygon')for(const c of f.geometry.coordinates)drawPoly(c,PAL.park,PAL.parkE,1)}}
+  for(const pass of[true,false]){for(const f of feats){const p=f.properties;if(!p.highway)continue;const s=ST[p.highway]||ST.residential;if(vp.zoom<s.minZ)continue;if(f.geometry.type==='LineString')drawLine(f.geometry.coordinates,pass?s.O:s.C,pass?s.w+2:s.w);if(f.geometry.type==='MultiLineString')for(const cs of f.geometry.coordinates)drawLine(cs,pass?s.O:s.C,pass?s.w+2:s.w)}}
+  for(const f of feats){const p=f.properties;if(p.building){if(f.geometry.type==='Polygon')drawPoly(f.geometry.coordinates,PAL.b1,PAL.bE,0.8);if(f.geometry.type==='MultiPolygon')for(const c of f.geometry.coordinates)drawPoly(c,PAL.b1,PAL.bE,0.8)}}
+}
+
+async function render(){
+  document.getElementById('zv').textContent=vp.zoom;
+  const tiles=await loadVisibleTiles();
+  const allFeats=[],seen=new Set();
+  for(const {tile} of tiles){
+    for(const name of Object.keys(tile.layers)){
+      const layer=tile.layers[name];
+      for(let i=0;i<layer.length;i++){
+        try{
+          const feat=layer.feature(i).toGeoJSON(0);
+          const key=feat.properties&&feat.properties.osm_id||feat.id;
+          if(key){if(seen.has(key))continue;seen.add(key)}
+          allFeats.push(feat);
+        }catch(e){}
+      }
+    }
+  }
+  document.getElementById('st').textContent=allFeats.length+' features, '+tiles.length+' tiles';
+  renderFeats(allFeats);
+}
+
+let dragging=false,ds=null,dsW=null;
+document.getElementById('mapf').addEventListener('mousedown',e=>{dragging=true;ds={x:e.clientX,y:e.clientY};dsW={x:vp.worldX,y:vp.worldY}});
+window.addEventListener('mouseup',()=>{dragging=false});
+window.addEventListener('mousemove',e=>{if(!dragging)return;vp.worldX=dsW.x+(e.clientX-ds.x);vp.worldY=dsW.y+(e.clientY-ds.y);render()});
+document.getElementById('mapf').addEventListener('wheel',e=>{e.preventDefault();const o=vp.zoom;vp.zoom=Math.max(5,Math.min(15,vp.zoom+(e.deltaY>0?-1:1)));if(vp.zoom!==o){vp.worldX=0;vp.worldY=0;render()}});
+window.addEventListener('keydown',e=>{const sp=15;if(e.key==='ArrowLeft'){vp.worldX-=sp;render()}else if(e.key==='ArrowRight'){vp.worldX+=sp;render()}else if(e.key==='ArrowUp'){vp.worldY-=sp;render()}else if(e.key==='ArrowDown'){vp.worldY+=sp;render()}else if(e.key==='-'||e.key==='_'){vp.zoom=Math.max(5,vp.zoom-1);vp.worldX=0;vp.worldY=0;render()}else if(e.key==='='||e.key==='+'){vp.zoom=Math.min(15,vp.zoom+1);vp.worldX=0;vp.worldY=0;render()}});
+
+async function init(){
+  try{
+    pmtiles=new PMTiles('/public/assets/munich_map/pmtiles/bayern.pmtiles');
+    const h=await pmtiles.getHeader();
+    const sub=document.getElementById('loading').querySelector('.sub');
+    sub.textContent='Bayern · zoom '+h.minZoom+'-'+h.maxZoom+' · '+(h.fileSize/1024/1024).toFixed(0)+' MB · HTTP Range';
+    document.getElementById('st').textContent='ready';
+  }catch(e){
+    document.getElementById('loading').querySelector('.sub').textContent='Error: '+e.message;
+    console.error(e);
+    return;
+  }
+  document.getElementById('loading').style.display='none';
+  render();
+}
+init();
+</script>
+</body>
+</html>
