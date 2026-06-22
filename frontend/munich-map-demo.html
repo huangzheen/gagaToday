@@ -3,663 +3,741 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=1280,initial-scale=1.0"/>
-<title>gagaToday — München Exploration Map</title>
+<title>gagaToday — München Real Data Pixel Map</title>
 <style>
-/* ============================================================
-   16-BIT RPG 城市探索地图 UI — 深蓝+金+羊皮纸
-   ============================================================ */
-:root {
-  --navy: #07152b; --navy2: #0d2344; --navy3: #14305c;
-  --gold: #e8b85c; --gold-light: #ffcf72;
-  --paper: #f1dfbd; --paper2: #e8d4a8;
-  --ink: #1c2540; --river: #82b7d9; --park: #a9c88b;
-  --road: #c9b488; --road-center: #f6ead0;
-  --red: #d85f45;
-}
+/* ═══════════════════════════════════════════
+   16-BIT RPG UI — 深蓝金 + 羊皮纸底
+   ═══════════════════════════════════════════ */
+:root{--navy:#07152b;--navy2:#0d2344;--navy3:#14305c;--gold:#e8b85c;--gold2:#ffcf72;--paper:#f1dfbd}
 *{margin:0;padding:0;box-sizing:border-box}
-body{
-  margin:0;
-  background:radial-gradient(circle at 50% 10%,#17345c,#050b16);
-  font-family:'Courier New','Noto Sans SC',monospace;
-  color:#fff;
-  min-height:100vh;
-  display:flex;justify-content:center;align-items:center;
-  image-rendering:pixelated;
-}
-.game-shell{
-  width:1280px;height:800px;
-  display:grid;
-  grid-template-columns:200px 1fr 280px;
-  grid-template-rows:64px 1fr 64px;
-  gap:10px;padding:10px;
-}
-.pixel-panel{
-  background:linear-gradient(180deg,var(--navy3),var(--navy));
-  border:3px solid var(--gold);
-  box-shadow:6px 6px 0 rgba(0,0,0,.7);
-  position:relative;
-}
-.pixel-panel::after{
-  content:'';position:absolute;inset:1px;
-  border:1px solid rgba(232,184,92,.2);pointer-events:none;
-}
-/* 顶部栏 */
-.top-bar{
-  grid-column:1/-1;grid-row:1;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 20px;
-}
-.top-title{
-  font-size:18px;font-weight:bold;color:var(--gold-light);
-  letter-spacing:3px;text-shadow:2px 2px 0 #000;
-}
-.top-subtitle{font-size:10px;color:#6a8aaa;letter-spacing:2px}
-.top-stats{display:flex;gap:20px;font-size:11px}
-.stat-item{display:flex;align-items:center;gap:6px;color:var(--gold-light)}
-.stat-item span{color:#8aaac8;font-size:10px}
-/* 左侧面板 */
-.side-panel{
-  grid-column:1;grid-row:2;
-  padding:14px 12px;display:flex;flex-direction:column;gap:14px;overflow-y:auto;
-}
-.panel-section h3{
-  font-size:10px;color:var(--gold);letter-spacing:2px;
-  margin-bottom:8px;padding-bottom:4px;border-bottom:2px solid var(--navy2);
-}
-.panel-section p{font-size:9px;color:#8aaac8;line-height:1.6}
-.quest-list{list-style:none;font-size:9px}
-.quest-list li{
-  padding:5px 0;color:#aab8cf;display:flex;align-items:center;gap:6px;
-}
-.quest-list li::before{content:'⬡';color:var(--gold);font-size:10px}
-.quest-list li.done{color:#5a7a5a}
-.quest-list li.done::before{content:'✦';color:#5a9a5a}
-/* 地图框 */
-.map-frame{
-  grid-column:2;grid-row:2;
-  position:relative;background:var(--paper);
-  border:4px solid #c38a4f;
-  box-shadow:10px 10px 0 rgba(0,0,0,.7);
-  overflow:hidden;
-}
-.map-frame svg{display:block;width:100%;height:100%}
-/* 右侧面板 */
-.detail-panel{
-  grid-column:3;grid-row:2;
-  padding:14px 12px;display:flex;flex-direction:column;gap:12px;overflow-y:auto;
-}
-.detail-header h2{font-size:16px;color:var(--gold-light);margin-bottom:2px}
-.detail-header .de-name{font-size:10px;color:#6a8aaa;font-style:italic}
-.detail-desc{font-size:10px;color:#aab8bf;line-height:1.6}
-.detail-actions{display:flex;flex-wrap:wrap;gap:6px}
-.action-chip{
-  background:var(--navy2);border:2px solid #3a5a7a;
-  color:var(--gold-light);font-size:9px;padding:4px 10px;
-  cursor:pointer;font-family:inherit;
-}
-.action-chip:hover{border-color:var(--gold)}
-.detail-stats{
-  font-size:9px;color:#8aaac8;display:flex;flex-direction:column;gap:4px;
-  padding:8px;background:rgba(0,0,0,.3);border:1px solid var(--navy2);
-}
-.detail-stats b{color:var(--gold-light)}
-.detail-empty{color:#4a6a8a;font-size:10px;text-align:center;padding-top:40px}
-/* 底部栏 */
-.bottom-bar{
-  grid-column:1/-1;grid-row:3;
-  display:flex;align-items:center;justify-content:center;
-  gap:20px;font-size:9px;color:#6a8aaa;
-}
-.bottom-bar kbd{
-  background:var(--navy2);border:1px solid #3a5a7a;
-  padding:2px 7px;color:var(--gold-light);font-size:8px;border-radius:2px;
-}
-.bottom-bar button{
-  background:linear-gradient(180deg,#214d83,#0c274d);
-  color:#fff;border:3px solid #06142a;
-  box-shadow:3px 3px 0 #000;
-  font-family:inherit;font-size:10px;font-weight:bold;
-  padding:6px 14px;cursor:pointer;
-}
+body{background:radial-gradient(circle at 50% 10%,#17345c,#050b16);font-family:'Courier New',monospace;color:#fff;min-height:100vh;display:flex;justify-content:center;align-items:center}
+.game-shell{width:1280px;height:800px;display:grid;grid-template-columns:200px 1fr 280px;grid-template-rows:56px 1fr 48px;gap:8px;padding:8px}
+/* 面板 */
+.px-panel{background:linear-gradient(180deg,var(--navy3),var(--navy));border:3px solid var(--gold);box-shadow:5px 5px 0 rgba(0,0,0,.7);position:relative}
+.px-panel::after{content:'';position:absolute;inset:1px;border:1px solid rgba(232,184,92,.18);pointer-events:none}
+/* 顶栏 */
+.top-bar{grid-column:1/-1;grid-row:1;display:flex;align-items:center;justify-content:space-between;padding:0 16px}
+.top-title{font-size:16px;font-weight:bold;color:var(--gold2);letter-spacing:3px;text-shadow:2px 2px 0 #000}
+.top-sub{font-size:9px;color:#6a8aaa;letter-spacing:2px}
+.top-stats{display:flex;gap:16px;font-size:10px}
+.top-stats s{color:#8aaac8;font-size:9px}
+.top-stats b{color:var(--gold2)}
+/* 左面板 */
+.left-panel{grid-column:1;grid-row:2;padding:10px;display:flex;flex-direction:column;gap:10px;overflow-y:auto}
+.sec h3{font-size:9px;color:var(--gold);letter-spacing:2px;margin-bottom:6px;padding-bottom:3px;border-bottom:2px solid var(--navy2)}
+.sec p,.sec li{font-size:8px;color:#8aaac8;line-height:1.5}
+.qlist{list-style:none}.qlist li{padding:3px 0;display:flex;align-items:center;gap:5px}
+.qlist li::before{content:'⬡';color:var(--gold);font-size:9px}
+.qlist li.done{color:#5a7a5a}.qlist li.done::before{content:'✦';color:#5a9a5a}
+/* 地图 */
+.map-frame{grid-column:2;grid-row:2;position:relative;background:var(--paper);border:4px solid #c38a4f;box-shadow:9px 9px 0 rgba(0,0,0,.7);overflow:hidden}
+.map-frame canvas{display:block;position:absolute;inset:0;width:100%;height:100%}
+.map-svg{position:absolute;inset:0;pointer-events:none;z-index:2}
+.poi-hit{position:absolute;cursor:pointer;pointer-events:auto}
+/* 右面板 */
+.right-panel{grid-column:3;grid-row:2;padding:10px;display:flex;flex-direction:column;gap:8px;overflow-y:auto}
+.detail-empty{color:#4a6a8a;font-size:9px;text-align:center;padding-top:30px}
+.detail-h h2{font-size:14px;color:var(--gold2);margin-bottom:1px}
+.detail-h .de{font-size:9px;color:#6a8aaa;font-style:italic}
+.detail-desc{font-size:9px;color:#aab8bf;line-height:1.5}
+.detail-acts{display:flex;flex-wrap:wrap;gap:4px}
+.act{background:var(--navy2);border:2px solid #3a5a7a;color:var(--gold2);font-size:8px;padding:3px 8px;cursor:pointer;font-family:inherit}
+.act:hover{border-color:var(--gold)}
+.detail-meta{font-size:8px;color:#8aaac8;display:flex;flex-direction:column;gap:3px;padding:6px;background:rgba(0,0,0,.3);border:1px solid var(--navy2)}
+.detail-meta b{color:var(--gold2)}
+.poi-btn{flex:1;background:linear-gradient(180deg,#214d83,#0c274d);color:#fff;border:3px solid #06142a;box-shadow:3px 3px 0 #000;font-family:inherit;font-size:9px;font-weight:bold;padding:5px 10px;cursor:pointer;margin-top:4px}
+.poi-btn:hover{filter:brightness(1.15);transform:translateY(-1px)}
+/* 底栏 */
+.bottom-bar{grid-column:1/-1;grid-row:3;display:flex;align-items:center;justify-content:center;gap:16px;font-size:9px;color:#6a8aaa}
+.bottom-bar kbd{background:var(--navy2);border:1px solid #3a5a7a;padding:2px 6px;color:var(--gold2);font-size:7px;border-radius:2px}
+.bottom-bar button{background:linear-gradient(180deg,#214d83,#0c274d);color:#fff;border:3px solid #06142a;box-shadow:3px 3px 0 #000;font-family:inherit;font-size:9px;font-weight:bold;padding:4px 10px;cursor:pointer}
 .bottom-bar button:hover{filter:brightness(1.15);transform:translateY(-1px)}
 /* Tooltip */
-.map-tooltip{
-  position:absolute;pointer-events:none;
-  background:var(--navy);border:2px solid var(--gold);
-  padding:4px 10px;font-size:10px;color:var(--gold-light);
-  z-index:20;box-shadow:3px 3px 0 #000;
-  opacity:0;transition:opacity .15s;
-}
-.map-tooltip.visible{opacity:1}
-/* POI */
-.poi-group{cursor:pointer}
-.poi-group:hover .poi-pin{filter:brightness(1.15)}
-.poi-group.locked{opacity:.45;cursor:not-allowed}
-/* 路线 */
-.route-line{
-  fill:none;stroke:var(--red);stroke-width:6;
-  stroke-linecap:round;stroke-linejoin:round;
-  stroke-dasharray:10 9;
-  filter:drop-shadow(0 0 6px rgba(255,207,114,.7));
-  animation:routeDash 1.2s linear infinite;
-}
-@keyframes routeDash{to{stroke-dashoffset:-38}}
-/* 选中脉冲 */
-@keyframes poiPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
-.poi-selected .poi-pin{animation:poiPulse .8s ease-in-out infinite}
+.ttip{position:absolute;pointer-events:none;background:var(--navy);border:2px solid var(--gold);padding:3px 8px;font-size:9px;color:var(--gold2);z-index:30;box-shadow:3px 3px 0 #000;opacity:0;transition:opacity .12s;white-space:nowrap}
+.ttip.on{opacity:1}
+/* Route SVG */
+.route-line{fill:none;stroke:#d85f45;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:10 9;filter:drop-shadow(0 0 5px rgba(255,207,114,.7));animation:dash 1.2s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-38}}
 </style>
 </head>
 <body>
 
 <div class="game-shell">
-  <!-- 顶部栏 -->
-  <div class="top-bar pixel-panel">
+  <!-- ═══════ 顶栏 ═══════ -->
+  <div class="top-bar px-panel">
     <div>
       <div class="top-title">MÜNCHEN · DAY 1</div>
-      <div class="top-subtitle">Altstadt — 老城探索地图</div>
+      <div class="top-sub">Real Data Map · Web Mercator · Zoom <span id="zoomLabel">14</span></div>
     </div>
     <div class="top-stats">
-      <div class="stat-item">❤️ <span>体力</span> 85/100</div>
-      <div class="stat-item">⭐ <span>德语</span> A1.2</div>
-      <div class="stat-item">💰 <span>欧元</span> 24.50</div>
-      <div class="stat-item">🕐 <span>时间</span> 08:15</div>
+      <span>❤️ <s>体力</s> <b>85</b></span>
+      <span>⭐ <s>德语</s> <b>A1.2</b></span>
+      <span>💰 <s>欧元</s> <b>24.50</b></span>
+      <span>🕐 <s>时间</s> <b>08:15</b></span>
     </div>
   </div>
 
-  <!-- 左侧面板 -->
-  <div class="side-panel pixel-panel">
-    <div class="panel-section">
-      <h3>📋 今日任务</h3>
-      <ul class="quest-list">
-        <li>买早餐 Brötchen</li>
-        <li>去学校报到</li>
-        <li>自我介绍练习</li>
-        <li class="done">与房东打招呼</li>
-      </ul>
-    </div>
-    <div class="panel-section">
-      <h3>🗺️ 探索进度</h3>
-      <p>已探索 2 / 10 地点</p>
-    </div>
-    <div class="panel-section">
-      <h3>📍 当前位置</h3>
-      <p style="color:var(--gold-light)">学生公寓 · Schwabing</p>
-    </div>
-    <div class="panel-section">
-      <h3>💡 提示</h3>
-      <p>点击地图上金色标记的地点以查看详情。点击"显示路线"查看从家到该地的路径。</p>
-    </div>
+  <!-- ═══════ 左面板 ═══════ -->
+  <div class="left-panel px-panel">
+    <div class="sec"><h3>📋 今日任务</h3><ul class="qlist"><li>买早餐 Brötchen</li><li>去学校报到</li><li>自我介绍练习</li><li class="done">与房东打招呼</li></ul></div>
+    <div class="sec"><h3>🗺️ 探索</h3><p>已探索 <span id="exploredCount">2</span> / <span id="totalPois">6</span></p></div>
+    <div class="sec"><h3>📍 位置</h3><p style="color:var(--gold2)">学生公寓 · Schwabing</p></div>
+    <div class="sec"><h3>🔍 Zoom</h3><p id="zoomDesc">14 — 次级道路 + 主要POI</p></div>
   </div>
 
-  <!-- 地图 -->
+  <!-- ═══════ 地图 ═══════ -->
   <div class="map-frame" id="mapFrame">
-    <svg id="gameMap" viewBox="0 0 1200 720" xmlns="http://www.w3.org/2000/svg">
-      <!-- L1: 羊皮纸底色 -->
-      <rect x="0" y="0" width="1200" height="720" fill="#f1dfbd"/>
-      <rect x="0" y="0" width="1200" height="720" fill="#f5e8ca" opacity=".3"/>
-
-      <!-- L2: 区域色块 -->
-      <g id="districtLayer"></g>
-      <!-- L3: 河流 -->
-      <g id="riverLayer"></g>
-      <!-- L4: 公园 -->
-      <g id="parkLayer"></g>
-      <!-- L5: 主干道 -->
-      <g id="roadLayer"></g>
-      <!-- L6: 地铁线 -->
-      <g id="subwayLayer"></g>
-      <!-- L7: 路线动画 -->
-      <g id="routeLayer"></g>
-      <!-- L8: POI -->
-      <g id="poiLayer"></g>
-
-      <!-- 点缀 -->
-      <g transform="translate(1150,50)">
-        <polygon points="0,-18 -6,6 0,-2 6,6" fill="#c9956b" opacity=".7"/>
-        <text x="0" y="18" text-anchor="middle" font-size="8" fill="#8a6a3a" font-family="Courier New,monospace">N</text>
-      </g>
-      <g transform="translate(30,700)">
-        <line x1="0" y1="0" x2="80" y2="0" stroke="#5a4a3a" stroke-width="2"/>
-        <line x1="0" y1="-4" x2="0" y2="4" stroke="#5a4a3a" stroke-width="1"/>
-        <line x1="80" y1="-4" x2="80" y2="4" stroke="#5a4a3a" stroke-width="1"/>
-        <text x="40" y="12" text-anchor="middle" font-size="7" fill="#8a6a3a" font-family="Courier New,monospace">~1 km</text>
-      </g>
+    <canvas id="mapCanvas"></canvas>
+    <svg id="mapSvg" class="map-svg" xmlns="http://www.w3.org/2000/svg">
+      <g id="routeGroup"></g>
+      <g id="poiGroup"></g>
     </svg>
-    <div class="map-tooltip" id="mapTooltip"></div>
+    <div class="ttip" id="tooltip"></div>
   </div>
 
-  <!-- 右侧详情面板 -->
-  <div class="detail-panel pixel-panel" id="detailPanel">
-    <div class="detail-empty">
-      <p style="font-size:28px;margin-bottom:10px">⭐</p>
-      <p>点击地图上的<br>地点标记查看详情</p>
-    </div>
+  <!-- ═══════ 右面板 ═══════ -->
+  <div class="right-panel px-panel" id="detailPanel">
+    <div class="detail-empty"><p style="font-size:24px;margin-bottom:8px">⭐</p><p>点击 POI 查看详情</p></div>
   </div>
 
-  <!-- 底部栏 -->
-  <div class="bottom-bar pixel-panel">
-    <span><kbd>🖱️ 点击</kbd> 探索地点</span>
-    <span><kbd>🖱️ 滚轮</kbd> 缩放地图</span>
+  <!-- ═══════ 底栏 ═══════ -->
+  <div class="bottom-bar px-panel">
+    <span><kbd>🖱️ 拖拽</kbd> 平移</span>
+    <span><kbd>🖱️ 滚轮</kbd> 缩放</span>
+    <span>Zoom: <span id="zoomVal">14</span></span>
     <button id="btnReset">🎯 重置视角</button>
     <button id="btnClearRoute">✕ 清除路线</button>
+    <button id="btnZoomIn">+</button>
+    <button id="btnZoomOut">−</button>
   </div>
 </div>
 
 <script>
-// ═══════════════════════════════════════════
-// 地图配置
-// ═══════════════════════════════════════════
-const mapConfig = {
-  id:'munich',name:'München',
-  width:1200,height:720,
-  bounds:{north:48.20,south:48.08,west:11.45,east:11.68}
+// ╔══════════════════════════════════════════════════════════════╗
+// ║   gagaToday — 真实 GeoJSON 数据驱动的像素 RPG 地图渲染器    ║
+// ╚══════════════════════════════════════════════════════════════╝
+
+// ─────────────────────────────────────────────
+// 1. 示例 GeoJSON (兼容真实 OSM 导出结构)
+// ─────────────────────────────────────────────
+const sampleGeoJSON = {
+  type: "FeatureCollection",
+  features: [
+    // ═══ 道路 — highway ═══
+    { type:"Feature", properties:{ highway:"primary",    name:"Leopoldstraße / Ludwigstraße" }, geometry:{ type:"LineString", coordinates:[[11.5750,48.1650],[11.5750,48.1550],[11.5755,48.1480],[11.5760,48.1420],[11.5755,48.1370]] }},
+    { type:"Feature", properties:{ highway:"primary",    name:"Schleißheimer Straße" },       geometry:{ type:"LineString", coordinates:[[11.5640,48.1650],[11.5645,48.1550],[11.5650,48.1480],[11.5655,48.1400]] }},
+    { type:"Feature", properties:{ highway:"secondary",  name:"Brienner Straße" },            geometry:{ type:"LineString", coordinates:[[11.5580,48.1420],[11.5650,48.1420],[11.5720,48.1420],[11.5780,48.1420]] }},
+    { type:"Feature", properties:{ highway:"secondary",  name:"Maximilianstraße" },           geometry:{ type:"LineString", coordinates:[[11.5780,48.1375],[11.5850,48.1370],[11.5900,48.1365],[11.5940,48.1360]] }},
+    { type:"Feature", properties:{ highway:"secondary",  name:"Prinzregentenstraße" },        geometry:{ type:"LineString", coordinates:[[11.5850,48.1420],[11.5950,48.1410],[11.6050,48.1400],[11.6150,48.1390]] }},
+    { type:"Feature", properties:{ highway:"secondary",  name:"Sonnenstraße" },               geometry:{ type:"LineString", coordinates:[[11.5650,48.1420],[11.5650,48.1370],[11.5650,48.1330],[11.5650,48.1280]] }},
+    { type:"Feature", properties:{ highway:"secondary",  name:"Karlstraße" },                 geometry:{ type:"LineString", coordinates:[[11.5600,48.1430],[11.5650,48.1425],[11.5700,48.1420]] }},
+    { type:"Feature", properties:{ highway:"tertiary",   name:"Theatinerstraße" },            geometry:{ type:"LineString", coordinates:[[11.5780,48.1480],[11.5770,48.1440],[11.5765,48.1400],[11.5760,48.1375]] }},
+    { type:"Feature", properties:{ highway:"tertiary",   name:"Amalienstraße" },              geometry:{ type:"LineString", coordinates:[[11.5780,48.1480],[11.5775,48.1460],[11.5770,48.1430]] }},
+    { type:"Feature", properties:{ highway:"tertiary",   name:"Kaufingerstraße" },            geometry:{ type:"LineString", coordinates:[[11.5650,48.1370],[11.5700,48.1370],[11.5740,48.1372],[11.5755,48.1374]] }},
+    { type:"Feature", properties:{ highway:"tertiary",   name:"Neuhauser Straße" },           geometry:{ type:"LineString", coordinates:[[11.5580,48.1380],[11.5620,48.1375],[11.5650,48.1370]] }},
+    { type:"Feature", properties:{ highway:"tertiary",   name:"Tal" },                        geometry:{ type:"LineString", coordinates:[[11.5755,48.1350],[11.5800,48.1350],[11.5850,48.1350],[11.5900,48.1340]] }},
+    { type:"Feature", properties:{ highway:"tertiary",   name:"Sendlinger Straße" },          geometry:{ type:"LineString", coordinates:[[11.5730,48.1360],[11.5725,48.1320],[11.5720,48.1280],[11.5715,48.1250]] }},
+    { type:"Feature", properties:{ highway:"tertiary",   name:"Barer Straße" },               geometry:{ type:"LineString", coordinates:[[11.5690,48.1500],[11.5690,48.1460],[11.5695,48.1420],[11.5700,48.1380]] }},
+    { type:"Feature", properties:{ highway:"tertiary",   name:"Isartorstraße" },              geometry:{ type:"LineString", coordinates:[[11.5760,48.1350],[11.5800,48.1340],[11.5850,48.1335],[11.5900,48.1330]] }},
+    { type:"Feature", properties:{ highway:"residential",name:"Türkenstraße" },               geometry:{ type:"LineString", coordinates:[[11.5770,48.1500],[11.5770,48.1480],[11.5775,48.1450],[11.5780,48.1420]] }},
+    { type:"Feature", properties:{ highway:"residential",name:"Schellingstraße" },            geometry:{ type:"LineString", coordinates:[[11.5650,48.1480],[11.5720,48.1480],[11.5780,48.1480]] }},
+    { type:"Feature", properties:{ highway:"residential",name:"Georgenstraße" },              geometry:{ type:"LineString", coordinates:[[11.5670,48.1460],[11.5730,48.1460],[11.5780,48.1460]] }},
+    { type:"Feature", properties:{ highway:"residential",name:"Adalbertstraße" },             geometry:{ type:"LineString", coordinates:[[11.5730,48.1500],[11.5730,48.1480],[11.5735,48.1450]] }},
+    { type:"Feature", properties:{ highway:"residential",name:"Akademiestraße" },             geometry:{ type:"LineString", coordinates:[[11.5750,48.1480],[11.5790,48.1480],[11.5820,48.1475]] }},
+    { type:"Feature", properties:{ highway:"residential",name:"Herzogstraße" },               geometry:{ type:"LineString", coordinates:[[11.5660,48.1520],[11.5660,48.1480],[11.5665,48.1450]] }},
+    { type:"Feature", properties:{ highway:"residential",name:"Fürstenstraße" },              geometry:{ type:"LineString", coordinates:[[11.5820,48.1480],[11.5790,48.1450],[11.5760,48.1420]] }},
+    { type:"Feature", properties:{ highway:"footway",    name:"Fußgängerzone Marienplatz" },  geometry:{ type:"LineString", coordinates:[[11.5740,48.1370],[11.5755,48.1374],[11.5765,48.1378]] }},
+    { type:"Feature", properties:{ highway:"footway",    name:"Viktualienmarkt Gasse" },      geometry:{ type:"LineString", coordinates:[[11.5755,48.1355],[11.5760,48.1352],[11.5765,48.1350]] }},
+    { type:"Feature", properties:{ highway:"cycleway",   name:"Isar-Radweg" },                geometry:{ type:"LineString", coordinates:[[11.5900,48.1600],[11.5910,48.1500],[11.5905,48.1400],[11.5900,48.1300]] }},
+
+    // ═══ 建筑 — building ═══
+    // Marienplatz 周边
+    { type:"Feature", properties:{ building:"yes", name:"Neues Rathaus" },        geometry:{ type:"Polygon", coordinates:[[[11.5745,48.1370],[11.5758,48.1370],[11.5758,48.1378],[11.5745,48.1378],[11.5745,48.1370]]] }},
+    { type:"Feature", properties:{ building:"yes", name:"Altes Rathaus" },        geometry:{ type:"Polygon", coordinates:[[[11.5760,48.1370],[11.5770,48.1370],[11.5770,48.1376],[11.5760,48.1376],[11.5760,48.1370]]] }},
+    { type:"Feature", properties:{ building:"yes", name:"Frauenkirche" },         geometry:{ type:"Polygon", coordinates:[[[11.5730,48.1382],[11.5740,48.1382],[11.5740,48.1390],[11.5730,48.1390],[11.5730,48.1382]]] }},
+    { type:"Feature", properties:{ building:"yes", name:"Hofbräuhaus" },          geometry:{ type:"Polygon", coordinates:[[[11.5785,48.1370],[11.5795,48.1370],[11.5795,48.1378],[11.5785,48.1378],[11.5785,48.1370]]] }},
+    { type:"Feature", properties:{ building:"yes", name:"Residenz" },             geometry:{ type:"Polygon", coordinates:[[[11.5770,48.1400],[11.5795,48.1400],[11.5795,48.1415],[11.5770,48.1415],[11.5770,48.1400]]] }},
+    { type:"Feature", properties:{ building:"yes", name:"St. Peter" },            geometry:{ type:"Polygon", coordinates:[[[11.5750,48.1360],[11.5760,48.1360],[11.5760,48.1368],[11.5750,48.1368],[11.5750,48.1360]]] }},
+    // Kaufingerstraße 沿线
+    { type:"Feature", properties:{ building:"yes" }, geometry:{ type:"Polygon", coordinates:[[[11.5670,48.1370],[11.5680,48.1370],[11.5680,48.1378],[11.5670,48.1378],[11.5670,48.1370]]] }},
+    { type:"Feature", properties:{ building:"yes" }, geometry:{ type:"Polygon", coordinates:[[[11.5685,48.1370],[11.5695,48.1370],[11.5695,48.1378],[11.5685,48.1378],[11.5685,48.1370]]] }},
+    { type:"Feature", properties:{ building:"yes" }, geometry:{ type:"Polygon", coordinates:[[[11.5700,48.1372],[11.5710,48.1372],[11.5710,48.1380],[11.5700,48.1380],[11.5700,48.1372]]] }},
+    { type:"Feature", properties:{ building:"yes" }, geometry:{ type:"Polygon", coordinates:[[[11.5715,48.1372],[11.5725,48.1372],[11.5725,48.1380],[11.5715,48.1380],[11.5715,48.1372]]] }},
+    // Sendlinger Straße 沿线
+    { type:"Feature", properties:{ building:"yes" }, geometry:{ type:"Polygon", coordinates:[[[11.5728,48.1350],[11.5738,48.1350],[11.5738,48.1358],[11.5728,48.1358],[11.5728,48.1350]]] }},
+    { type:"Feature", properties:{ building:"yes" }, geometry:{ type:"Polygon", coordinates:[[[11.5725,48.1340],[11.5735,48.1340],[11.5735,48.1348],[11.5725,48.1348],[11.5725,48.1340]]] }},
+    { type:"Feature", properties:{ building:"yes" }, geometry:{ type:"Polygon", coordinates:[[[11.5722,48.1330],[11.5735,48.1330],[11.5735,48.1338],[11.5722,48.1338],[11.5722,48.1330]]] }},
+    { type:"Feature", properties:{ building:"yes" }, geometry:{ type:"Polygon", coordinates:[[[11.5720,48.1320],[11.5735,48.1320],[11.5735,48.1328],[11.5720,48.1328],[11.5720,48.1320]]] }},
+    // Schwabing (大学区)
+    { type:"Feature", properties:{ building:"yes", name:"LMU Hauptgebäude" },    geometry:{ type:"Polygon", coordinates:[[[11.5710,48.1490],[11.5735,48.1490],[11.5735,48.1505],[11.5710,48.1505],[11.5710,48.1490]]] }},
+    { type:"Feature", properties:{ building:"yes" }, geometry:{ type:"Polygon", coordinates:[[[11.5680,48.1490],[11.5695,48.1490],[11.5695,48.1500],[11.5680,48.1500],[11.5680,48.1490]]] }},
+    { type:"Feature", properties:{ building:"yes" }, geometry:{ type:"Polygon", coordinates:[[[11.5740,48.1490],[11.5755,48.1490],[11.5755,48.1500],[11.5740,48.1500],[11.5740,48.1490]]] }},
+    { type:"Feature", properties:{ building:"yes" }, geometry:{ type:"Polygon", coordinates:[[[11.5760,48.1490],[11.5775,48.1490],[11.5775,48.1500],[11.5760,48.1500],[11.5760,48.1490]]] }},
+    { type:"Feature", properties:{ building:"yes" }, geometry:{ type:"Polygon", coordinates:[[[11.5660,48.1505],[11.5675,48.1505],[11.5675,48.1515],[11.5660,48.1515],[11.5660,48.1505]]] }},
+    { type:"Feature", properties:{ building:"yes" }, geometry:{ type:"Polygon", coordinates:[[[11.5680,48.1510],[11.5700,48.1510],[11.5700,48.1520],[11.5680,48.1520],[11.5680,48.1510]]] }},
+    { type:"Feature", properties:{ building:"yes" }, geometry:{ type:"Polygon", coordinates:[[[11.5710,48.1510],[11.5735,48.1510],[11.5735,48.1520],[11.5710,48.1520],[11.5710,48.1510]]] }},
+    { type:"Feature", properties:{ building:"yes" }, geometry:{ type:"Polygon", coordinates:[[[11.5740,48.1510],[11.5760,48.1510],[11.5760,48.1520],[11.5740,48.1520],[11.5740,48.1510]]] }},
+    { type:"Feature", properties:{ building:"yes" }, geometry:{ type:"Polygon", coordinates:[[[11.5745,48.1530],[11.5765,48.1530],[11.5765,48.1540],[11.5745,48.1540],[11.5745,48.1530]]] }},
+    { type:"Feature", properties:{ building:"yes" }, geometry:{ type:"Polygon", coordinates:[[[11.5760,48.1540],[11.5780,48.1540],[11.5780,48.1550],[11.5760,48.1550],[11.5760,48.1540]]] }},
+    // Maxvorstadt
+    { type:"Feature", properties:{ building:"yes" }, geometry:{ type:"Polygon", coordinates:[[[11.5660,48.1440],[11.5675,48.1440],[11.5675,48.1450],[11.5660,48.1450],[11.5660,48.1440]]] }},
+    { type:"Feature", properties:{ building:"yes" }, geometry:{ type:"Polygon", coordinates:[[[11.5680,48.1440],[11.5700,48.1440],[11.5700,48.1450],[11.5680,48.1450],[11.5680,48.1440]]] }},
+    { type:"Feature", properties:{ building:"yes" }, geometry:{ type:"Polygon", coordinates:[[[11.5660,48.1455],[11.5675,48.1455],[11.5675,48.1465],[11.5660,48.1465],[11.5660,48.1455]]] }},
+    { type:"Feature", properties:{ building:"yes" }, geometry:{ type:"Polygon", coordinates:[[[11.5680,48.1455],[11.5700,48.1455],[11.5700,48.1465],[11.5680,48.1465],[11.5680,48.1455]]] }},
+    // Haidhausen
+    { type:"Feature", properties:{ building:"yes" }, geometry:{ type:"Polygon", coordinates:[[[11.5880,48.1370],[11.5895,48.1370],[11.5895,48.1380],[11.5880,48.1380],[11.5880,48.1370]]] }},
+    { type:"Feature", properties:{ building:"yes" }, geometry:{ type:"Polygon", coordinates:[[[11.5900,48.1370],[11.5915,48.1370],[11.5915,48.1380],[11.5900,48.1380],[11.5900,48.1370]]] }},
+    { type:"Feature", properties:{ building:"yes" }, geometry:{ type:"Polygon", coordinates:[[[11.5880,48.1350],[11.5895,48.1350],[11.5895,48.1360],[11.5880,48.1360],[11.5880,48.1350]]] }},
+    { type:"Feature", properties:{ building:"yes" }, geometry:{ type:"Polygon", coordinates:[[[11.5900,48.1350],[11.5915,48.1350],[11.5915,48.1360],[11.5900,48.1360],[11.5900,48.1350]]] }},
+
+    // ═══ 水系 — water / waterway ═══
+    { type:"Feature", properties:{ waterway:"river", name:"Isar" }, geometry:{ type:"Polygon", coordinates:[[[11.5880,48.1700],[11.5920,48.1700],[11.5915,48.1600],[11.5925,48.1500],[11.5915,48.1400],[11.5920,48.1300],[11.5910,48.1200],[11.5880,48.1200],[11.5875,48.1300],[11.5880,48.1400],[11.5875,48.1500],[11.5880,48.1600],[11.5880,48.1700]]] }},
+    { type:"Feature", properties:{ natural:"water", name:"Kleinhesseloher See" }, geometry:{ type:"Polygon", coordinates:[[[11.6000,48.1600],[11.6030,48.1600],[11.6030,48.1620],[11.6000,48.1620],[11.6000,48.1600]]] }},
+
+    // ═══ 绿地 — park ═══
+    { type:"Feature", properties:{ leisure:"park", name:"Englischer Garten" }, geometry:{ type:"Polygon", coordinates:[[[11.5920,48.1700],[11.6250,48.1700],[11.6250,48.1400],[11.6100,48.1400],[11.6000,48.1480],[11.5920,48.1550],[11.5920,48.1700]]] }},
+    { type:"Feature", properties:{ leisure:"park", name:"Hofgarten" },         geometry:{ type:"Polygon", coordinates:[[[11.5780,48.1415],[11.5800,48.1415],[11.5800,48.1425],[11.5780,48.1425],[11.5780,48.1415]]] }},
+    { type:"Feature", properties:{ leisure:"park", name:"Alter Bot. Garten" }, geometry:{ type:"Polygon", coordinates:[[[11.5620,48.1405],[11.5645,48.1405],[11.5645,48.1425],[11.5620,48.1425],[11.5620,48.1405]]] }},
+
+    // ═══ 铁路 / 地铁 — railway ═══
+    { type:"Feature", properties:{ railway:"subway", name:"U3" }, geometry:{ type:"LineString", coordinates:[[11.5750,48.1680],[11.5750,48.1580],[11.5755,48.1500],[11.5760,48.1420],[11.5755,48.1370],[11.5750,48.1300]] }},
+    { type:"Feature", properties:{ railway:"subway", name:"U6" }, geometry:{ type:"LineString", coordinates:[[11.5760,48.1680],[11.5760,48.1580],[11.5780,48.1500],[11.5765,48.1420],[11.5765,48.1370],[11.5760,48.1300]] }},
+    { type:"Feature", properties:{ railway:"station", name:"Universität" },     geometry:{ type:"Point", coordinates:[11.5755,48.1500] }},
+    { type:"Feature", properties:{ railway:"station", name:"Marienplatz" },     geometry:{ type:"Point", coordinates:[11.5755,48.1374] }},
+    { type:"Feature", properties:{ railway:"station", name:"Münchner Freiheit" },geometry:{ type:"Point", coordinates:[11.5750,48.1600] }},
+
+    // ═══ 真实 POI — amenity/shop/tourism ═══
+    { type:"Feature", properties:{ amenity:"restaurant", name:"Restaurant 181" },      geometry:{ type:"Point", coordinates:[11.5750,48.1400] }},
+    { type:"Feature", properties:{ tourism:"museum", name:"Deutsches Museum" },        geometry:{ type:"Point", coordinates:[11.5835,48.1300] }},
+    { type:"Feature", properties:{ amenity:"cafe", name:"Café Frischhut" },            geometry:{ type:"Point", coordinates:[11.5765,48.1355] }},
+    { type:"Feature", properties:{ shop:"bakery", name:"Bäckerei" },                   geometry:{ type:"Point", coordinates:[11.5710,48.1455] }},
+    { type:"Feature", properties:{ shop:"supermarket", name:"REWE" },                  geometry:{ type:"Point", coordinates:[11.5690,48.1505] }},
+    { type:"Feature", properties:{ tourism:"attraction", name:"Viktualienmarkt" },     geometry:{ type:"Point", coordinates:[11.5760,48.1350] }},
+    { type:"Feature", properties:{ amenity:"school", name:"Sprachschule" },            geometry:{ type:"Point", coordinates:[11.5670,48.1490] }},
+  ]
 };
 
-// ═══════════════════════════════════════════
-// POI 数据（增删改只改这里）
-// ═══════════════════════════════════════════
-const pois = [
-  {
-    id:'home',name:'学生公寓',name_de:'Studentenwohnheim',
-    type:'home',lat:48.156,lng:11.575,unlocked:true,icon:'home',
-    description:'你的住处，可以休息、做饭、写作业。位于 Schwabing 区。',
-    actions:['休息','做饭','查看邮件'],
-    walk_minutes:0,cost:'-',
-    ubahn:'U3/U6 Münchner Freiheit'
-  },
-  {
-    id:'school',name:'语言学校',name_de:'Sprachschule',
-    type:'school',lat:48.148,lng:11.565,unlocked:true,icon:'school',
-    description:'每天上课、考试、社交的核心地点。Herr Weber 会在这里等你。',
-    actions:['上课','查看课表','找老师'],
-    walk_minutes:18,cost:'€0',
-    ubahn:'U3 Universität'
-  },
-  {
-    id:'bakery',name:'面包店',name_de:'Bäckerei',
-    type:'shop',lat:48.145,lng:11.572,unlocked:true,icon:'bread',
-    description:'可以买到新鲜 Brötchen 和 Brezel，顺便练习德语点餐。',
-    actions:['点餐','打卡','与店长对话'],
-    walk_minutes:12,cost:'€1.20~€3.50',
-    ubahn:'步行可达'
-  },
-  {
-    id:'marienplatz',name:'玛利亚广场',name_de:'Marienplatz',
-    type:'landmark',lat:48.1374,lng:11.5755,unlocked:true,icon:'pin',
-    description:'慕尼黑核心地标和换乘点。市政厅、圣母教堂步行可达。',
-    actions:['打卡','换乘','探索周边'],
-    walk_minutes:30,cost:'€0',
-    ubahn:'U3/U6 Marienplatz'
-  },
-  {
-    id:'deutsches_museum',name:'德意志博物馆',name_de:'Deutsches Museum',
-    type:'museum',lat:48.1299,lng:11.583,unlocked:true,icon:'museum',
-    description:'世界最大科学技术博物馆，可获得知识卡和兴趣打卡。',
-    actions:['买票','参观','知识问答'],
-    walk_minutes:45,cost:'€7.00',
-    ubahn:'S-Bahn Isartor'
-  },
-  {
-    id:'allianz_arena',name:'安联球场',name_de:'Allianz Arena',
-    type:'stadium',lat:48.2188,lng:11.6247,unlocked:false,icon:'football',
-    description:'FC Bayern 主场，后续章节解锁。体育文化沉浸体验。',
-    actions:['看球','买票','好友邀请'],
-    walk_minutes:'--',cost:'€40+',
-    ubahn:'U6 Fröttmaning'
-  },
-  {
-    id:'englischer_garten',name:'英国花园',name_de:'Englischer Garten',
-    type:'park',lat:48.164,lng:11.592,unlocked:true,icon:'park',
-    description:'欧洲最大城市公园之一，可散步、野餐、看冲浪者。',
-    actions:['散步','野餐','看冲浪'],
-    walk_minutes:25,cost:'€0',
-    ubahn:'U3/U6 Universität'
-  },
-  {
-    id:'hauptbahnhof',name:'中央车站',name_de:'Hauptbahnhof',
-    type:'station',lat:48.140,lng:11.560,unlocked:true,icon:'train',
-    description:'慕尼黑最大火车站，所有 U-Bahn/S-Bahn 换乘枢纽。',
-    actions:['购票','乘车','存包'],
-    walk_minutes:35,cost:'€3.50+',
-    ubahn:'U1/U2/U4/U5/S-Bahn'
-  },
-  {
-    id:'supermarket',name:'超市',name_de:'Supermarkt',
-    type:'shop',lat:48.152,lng:11.568,unlocked:true,icon:'shop',
-    description:'REWE 超市，买晚餐食材和生活用品。支持德语商品标签识别。',
-    actions:['购物','查看标签','结账对话'],
-    walk_minutes:8,cost:'€5~€15',
-    ubahn:'步行'
-  },
-  {
-    id:'viktualienmarkt',name:'谷物市场',name_de:'Viktualienmarkt',
-    type:'landmark',lat:48.1352,lng:11.5765,unlocked:true,icon:'pin',
-    description:'慕尼黑最著名露天市场，新鲜食材和德国小吃聚集地。',
-    actions:['逛市场','试吃','德语价格练习'],
-    walk_minutes:32,cost:'€2~€10',
-    ubahn:'U3/U6 Marienplatz'
-  }
+// ─────────────────────────────────────────────
+// 2. 游戏 POI
+// ─────────────────────────────────────────────
+const gamePois = [
+  { id:"home",    name:"学生公寓",     name_de:"Studentenwohnheim", type:"home",    lat:48.156,lng:11.575, icon:"🏠",   unlocked:true,  walk:0,  cost:"—",       ubahn:"U3/U6 Münchner Freiheit", desc:"你的住处，可以休息、做饭、写作业。位于 Schwabing 区。",         actions:["休息","做饭","查看邮件"] },
+  { id:"school",  name:"语言学校",     name_de:"Sprachschule",     type:"school",  lat:48.148,lng:11.565, icon:"🎓",   unlocked:true,  walk:18, cost:"€0",       ubahn:"U3 Universität",         desc:"每天上课、考试、社交的核心地点。Herr Weber 会在这里等你。",         actions:["上课","查看课表","找老师"] },
+  { id:"bakery",  name:"面包店",       name_de:"Bäckerei",         type:"shop",    lat:48.145,lng:11.572, icon:"🥨",   unlocked:true,  walk:12, cost:"€1.20~3.50",ubahn:"步行",                    desc:"可以买到新鲜 Brötchen 和 Brezel，顺便练习德语点餐。",              actions:["点餐","打卡","与店长对话"] },
+  { id:"marien",  name:"玛利亚广场",   name_de:"Marienplatz",      type:"landmark",lat:48.1374,lng:11.5755,icon:"📍",  unlocked:true,  walk:30, cost:"€0",      ubahn:"U3/U6 Marienplatz",      desc:"慕尼黑核心地标和换乘点。市政厅、圣母教堂步行可达。",               actions:["打卡","换乘","探索周边"] },
+  { id:"museum",  name:"德意志博物馆", name_de:"Deutsches Museum", type:"museum",  lat:48.1299,lng:11.583, icon:"🏛️",  unlocked:true,  walk:45, cost:"€7.00",   ubahn:"S-Bahn Isartor",         desc:"世界最大科学技术博物馆，可获得知识卡和兴趣打卡。",                 actions:["买票","参观","知识问答"] },
+  { id:"arena",   name:"安联球场",     name_de:"Allianz Arena",    type:"stadium", lat:48.2188,lng:11.6247,icon:"⚽",   unlocked:false, walk:"--",cost:"€40+",    ubahn:"U6 Fröttmaning",         desc:"FC Bayern 主场，后续章节解锁。体育文化沉浸体验。",                 actions:["看球","买票","好友邀请"] },
 ];
 
-// ═══════════════════════════════════════════
-// 工具函数
-// ═══════════════════════════════════════════
-function latLngToPoint(lat,lng,cfg){
-  const {north,south,west,east}=cfg.bounds;
+// ─────────────────────────────────────────────
+// 3. Web Mercator 投影
+// ─────────────────────────────────────────────
+function lngLatToWorld(lng, lat, zoom) {
+  const scale = 256 * Math.pow(2, zoom);
+  const x = (lng + 180) / 360 * scale;
+  const sinLat = Math.sin(lat * Math.PI / 180);
+  const y = (0.5 - Math.log((1 + sinLat) / (1 - sinLat)) / (4 * Math.PI)) * scale;
+  return { x, y };
+}
+
+// ─────────────────────────────────────────────
+// 4. 视口状态
+// ─────────────────────────────────────────────
+const canvas = document.getElementById('mapCanvas');
+const ctx = canvas.getContext('2d');
+
+function resizeCanvas() {
+  const frame = document.getElementById('mapFrame');
+  const w = frame.clientWidth;
+  const h = frame.clientHeight;
+  const dpr = 1; // pixel art: no DPR scaling
+  canvas.width = w;
+  canvas.height = h;
+  canvas.style.width = w + 'px';
+  canvas.style.height = h + 'px';
+  return { w, h };
+}
+
+let { w: cw, h: ch } = resizeCanvas();
+
+const viewport = {
+  centerLat: 48.145,
+  centerLng: 11.575,
+  zoom: 14,
+  worldX: 0,
+  worldY: 0,
+};
+
+let centerWorld = lngLatToWorld(viewport.centerLng, viewport.centerLat, viewport.zoom);
+
+function lngLatToScreen(lng, lat) {
+  const pt = lngLatToWorld(lng, lat, viewport.zoom);
   return {
-    x:((lng-west)/(east-west))*cfg.width,
-    y:((north-lat)/(north-south))*cfg.height
+    x: (pt.x - centerWorld.x + viewport.worldX) + cw / 2,
+    y: (pt.y - centerWorld.y + viewport.worldY) + ch / 2
   };
 }
-function poiColor(type,unlocked){
-  if(!unlocked)return'#8b8b8b';
-  return{
-    home:'#2d6fb3',school:'#3f7f56',shop:'#c98238',
-    landmark:'#d85f45',museum:'#7d5fb2',stadium:'#d85f45',
-    park:'#70a95e',station:'#1e6eb8'
-  }[type]||'#2d6fb3';
-}
-function poiEmoji(icon){
-  return{
-    home:'🏠',school:'🎓',bread:'🥨',museum:'🏛️',
-    football:'⚽',pin:'📍',park:'🌳',train:'🚇',shop:'🛒'
-  }[icon]||'📍';
+
+function pixelSnap(v) { return Math.round(v); }
+
+function updateCenterWorld() {
+  centerWorld = lngLatToWorld(viewport.centerLng, viewport.centerLat, viewport.zoom);
 }
 
-const svg=document.getElementById('gameMap');
-function $q(s){return svg.querySelector(s)}
-function elNS(tag){return document.createElementNS('http://www.w3.org/2000/svg',tag)}
+// ─────────────────────────────────────────────
+// 5. Zoom 分级过滤
+// ─────────────────────────────────────────────
+function shouldRender(feature, zoom) {
+  const p = feature.properties;
+  if (p.highway) {
+    const h = p.highway;
+    if (h === 'motorway' || h === 'primary')   return zoom >= 10;
+    if (h === 'secondary' || h === 'trunk')     return zoom >= 12;
+    if (h === 'tertiary')                       return zoom >= 13;
+    if (h === 'residential')                    return zoom >= 15;
+    if (h === 'footway' || h === 'cycleway')    return zoom >= 16;
+    return zoom >= 14;
+  }
+  if (p.building)      return zoom >= 15;
+  if (p.waterway || p.natural === 'water') return true;
+  if (p.leisure === 'park' || p.landuse === 'grass' || p.landuse === 'forest' || p.natural === 'wood') return true;
+  if (p.railway === 'subway' || p.railway === 'rail') return zoom >= 11;
+  if (p.railway === 'station') return zoom >= 13;
+  if (p.amenity || p.tourism || p.shop) return zoom >= 15;
+  return true;
+}
 
-// ═══════════════════════════════════════════
-// L2: 区域色块
-// ═══════════════════════════════════════════
-function renderDistricts(){
-  const L=$q('#districtLayer');
-  [
-    ['Schwabing',    'M0,0 L400,0 L420,300 L380,400 L300,420 L0,380 Z','#fcf3e0'],
-    ['Maxvorstadt',  'M400,0 L700,0 L750,280 L680,380 L420,300 Z','#fbf0da'],
-    ['Altstadt',     'M380,300 L680,380 L700,550 L350,500 Z','#fdf5e6'],
-    ['Haidhausen',   'M700,0 L1200,0 L1200,420 L1100,400 L750,280 Z','#faf4e4'],
-    ['Au',           'M700,380 L1200,420 L1200,720 L680,700 L700,550 Z','#fcf6e8'],
-    ['Sendling',     'M0,380 L380,380 L350,500 L0,500 Z','#fef8ee'],
-    ['Isarvorstadt', 'M350,500 L700,550 L680,700 L0,720 L0,500 Z','#fbf2e2']
-  ].forEach(([name,d,fill])=>{
-    const p=elNS('path');
-    p.setAttribute('d',d);p.setAttribute('fill',fill);
-    p.setAttribute('stroke','#d4c4a0');p.setAttribute('stroke-width','1.5');
-    p.setAttribute('stroke-dasharray','4 6');
-    L.appendChild(p);
+// ─────────────────────────────────────────────
+// 6. 道路样式
+// ─────────────────────────────────────────────
+const roadStyles = {
+  motorway:    { w:8,  c:'#d98b35', o:'#6b3d1f', minZ:10 },
+  primary:     { w:7,  c:'#e7b25d', o:'#7b5728', minZ:10 },
+  secondary:   { w:5,  c:'#efd28a', o:'#9b8654', minZ:12 },
+  tertiary:    { w:4,  c:'#f2dfad', o:'#b4a279', minZ:13 },
+  residential: { w:3,  c:'#f7ecd2', o:'#c7b791', minZ:15 },
+  footway:     { w:2,  c:'#eadfc5', o:'#c7b791', minZ:16, dash:true },
+  cycleway:    { w:2,  c:'#c8e0c0', o:'#8aaa7a', minZ:16, dash:true },
+};
 
-    // 区名
-    const bbox=document.createElementNS('http://www.w3.org/2000/svg','text');
-    const pathData=d.match(/[\d.]+/g).map(Number);
-    let cx=0,cy=0;
-    for(let i=0;i<pathData.length-1;i+=2){cx+=pathData[i];cy+=pathData[i+1]}
-    cx/=pathData.length/2;cy/=pathData.length/2;
-    bbox.setAttribute('x',cx);bbox.setAttribute('y',cy);
-    bbox.setAttribute('text-anchor','middle');bbox.setAttribute('dominant-baseline','middle');
-    bbox.setAttribute('font-size','8');bbox.setAttribute('fill','#b8a888');
-    bbox.setAttribute('font-family','Courier New,monospace');
-    bbox.setAttribute('font-style','italic');
-    bbox.textContent=name.replace('(off-map)','');
-    L.appendChild(bbox);
+const buildingColors = ['#c99568','#b97555','#d6b07a','#a96b4a','#cc9f72','#bf8058','#d4a878','#b87050','#ce9868'];
+
+function drawRoad(ctx, feat, zoom) {
+  if (!feat.geometry || feat.geometry.type !== 'LineString') return;
+  const hw = feat.properties.highway;
+  const style = roadStyles[hw] || roadStyles['residential'];
+  if (zoom < style.minZ) return;
+
+  const coords = feat.geometry.coordinates;
+  if (coords.length < 2) return;
+
+  ctx.beginPath();
+  const p0 = lngLatToScreen(coords[0][0], coords[0][1]);
+  ctx.moveTo(pixelSnap(p0.x), pixelSnap(p0.y));
+  for (let i = 1; i < coords.length; i++) {
+    const p = lngLatToScreen(coords[i][0], coords[i][1]);
+    ctx.lineTo(pixelSnap(p.x), pixelSnap(p.y));
+  }
+
+  // outline
+  ctx.strokeStyle = style.o;
+  ctx.lineWidth = style.w + 2;
+  ctx.lineCap = 'round';
+  ctx.lineJoin = 'round';
+  if (style.dash) ctx.setLineDash([4, 3]);
+  ctx.stroke();
+
+  // center
+  ctx.strokeStyle = style.c;
+  ctx.lineWidth = style.w;
+  ctx.setLineDash([]);
+  ctx.stroke();
+}
+
+// ─────────────────────────────────────────────
+// 7. 绘制函数
+// ─────────────────────────────────────────────
+function drawBackground(ctx) {
+  ctx.fillStyle = '#f1dfbd';
+  ctx.fillRect(0, 0, cw, ch);
+  // 轻微纹理
+  ctx.fillStyle = 'rgba(245,232,202,0.4)';
+  ctx.fillRect(0, 0, cw, ch);
+}
+
+function drawPolygon(ctx, coords, fill, stroke, lw) {
+  if (!coords || !coords[0] || coords[0].length < 3) return;
+  const ring = coords[0];
+  ctx.beginPath();
+  const p0 = lngLatToScreen(ring[0][0], ring[0][1]);
+  ctx.moveTo(pixelSnap(p0.x), pixelSnap(p0.y));
+  for (let i = 1; i < ring.length; i++) {
+    const p = lngLatToScreen(ring[i][0], ring[i][1]);
+    ctx.lineTo(pixelSnap(p.x), pixelSnap(p.y));
+  }
+  ctx.closePath();
+  if (fill) { ctx.fillStyle = fill; ctx.fill(); }
+  if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = lw || 2; ctx.stroke(); }
+}
+
+function drawWater(ctx, geojson, zoom) {
+  const waterFeats = geojson.features.filter(f =>
+    f.properties.waterway === 'river' || f.properties.natural === 'water'
+  );
+  for (const feat of waterFeats) {
+    if (feat.geometry.type === 'Polygon' || feat.geometry.type === 'MultiPolygon') {
+      drawPolygon(ctx, feat.geometry.coordinates, '#78b6d8', '#3f7ea3', 2.5);
+    }
+  }
+}
+
+function drawParks(ctx, geojson, zoom) {
+  const parks = geojson.features.filter(f => {
+    const p = f.properties;
+    return p.leisure === 'park' || p.landuse === 'grass' || p.landuse === 'forest' || p.natural === 'wood';
   });
+  for (const feat of parks) {
+    if (feat.geometry.type === 'Polygon') {
+      drawPolygon(ctx, feat.geometry.coordinates, '#a9c88b', '#6c965d', 2);
+    }
+  }
 }
 
-// ═══════════════════════════════════════════
-// L3: 河流
-// ═══════════════════════════════════════════
-function renderRiver(){
-  const L=$q('#riverLayer');
-  const body=elNS('path');
-  body.setAttribute('d','M840,-20 C780,100 810,200 760,300 C700,420 740,520 690,600 C670,640 690,680 660,760');
-  body.setAttribute('fill','none');body.setAttribute('stroke','#82b7d9');
-  body.setAttribute('stroke-width','52');body.setAttribute('stroke-linecap','round');
-  body.setAttribute('opacity','.85');
-  L.appendChild(body);
-
-  const edge=elNS('path');
-  edge.setAttribute('d','M840,-20 C780,100 810,200 760,300 C700,420 740,520 690,600 C670,640 690,680 660,760');
-  edge.setAttribute('fill','none');edge.setAttribute('stroke','#477fa7');
-  edge.setAttribute('stroke-width','4');edge.setAttribute('stroke-linecap','round');
-  L.appendChild(edge);
-
-  const lbl=elNS('text');
-  lbl.setAttribute('x','720');lbl.setAttribute('y','460');
-  lbl.setAttribute('font-family','Courier New,monospace');
-  lbl.setAttribute('font-size','11');lbl.setAttribute('fill','#477fa7');
-  lbl.setAttribute('font-style','italic');
-  lbl.setAttribute('transform','rotate(-15,720,460)');
-  lbl.textContent='Isar';
-  L.appendChild(lbl);
+function drawRailways(ctx, geojson, zoom) {
+  const subways = geojson.features.filter(f => f.properties.railway === 'subway' || f.properties.railway === 'rail');
+  for (const feat of subways) {
+    if (!shouldRender(feat, zoom)) continue;
+    if (feat.geometry.type === 'LineString') {
+      const coords = feat.geometry.coordinates;
+      ctx.beginPath();
+      const p0 = lngLatToScreen(coords[0][0], coords[0][1]);
+      ctx.moveTo(pixelSnap(p0.x), pixelSnap(p0.y));
+      for (let i = 1; i < coords.length; i++) {
+        const p = lngLatToScreen(coords[i][0], coords[i][1]);
+        ctx.lineTo(pixelSnap(p.x), pixelSnap(p.y));
+      }
+      const color = feat.properties.name === 'U3' ? '#e2a43d' : '#1e6eb8';
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 4;
+      ctx.lineCap = 'round';
+      ctx.setLineDash([6, 4]);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    }
+  }
+  // 车站
+  if (zoom >= 13) {
+    const stations = geojson.features.filter(f => f.properties.railway === 'station');
+    for (const feat of stations) {
+      const s = lngLatToScreen(feat.geometry.coordinates[0], feat.geometry.coordinates[1]);
+      ctx.fillStyle = '#07152b';
+      ctx.fillRect(pixelSnap(s.x) - 5, pixelSnap(s.y) - 5, 10, 10);
+      ctx.fillStyle = '#e8b85c';
+      ctx.fillRect(pixelSnap(s.x) - 3, pixelSnap(s.y) - 3, 6, 6);
+    }
+  }
 }
 
-// ═══════════════════════════════════════════
-// L4: 公园
-// ═══════════════════════════════════════════
-function renderParks(){
-  const L=$q('#parkLayer');
-  [
-    {d:'M690,70 C830,20 1050,60 1140,130 L1130,280 C1000,230 870,280 740,220 C710,200 700,140 690,70Z',label:'Englischer Garten'},
-    {d:'M510,160 C530,150 560,150 580,160 C600,175 590,195 570,200 C545,205 525,195 510,175Z',label:'Hofgarten'},
-    {d:'M430,230 C460,220 490,230 500,260 C490,280 450,285 425,270Z',label:'Bot. Garten'},
-    {d:'M80,520 C170,470 280,490 320,560 C250,630 120,640 60,580Z',label:'Olympiapark ↓'}
-  ].forEach(p=>{
-    const pa=elNS('path');
-    pa.setAttribute('d',p.d);pa.setAttribute('fill','#a9c88b');
-    pa.setAttribute('stroke','#6c965d');pa.setAttribute('stroke-width','3');
-    L.appendChild(pa);
-    const pathData=p.d.match(/[\d.]+/g).map(Number);
-    let cx=0,cy=0;
-    for(let i=0;i<pathData.length-1;i+=2){cx+=pathData[i];cy+=pathData[i+1]}
-    cx/=pathData.length/2;cy/=pathData.length/2;
-    const t=elNS('text');
-    t.setAttribute('x',cx);t.setAttribute('y',cy);
-    t.setAttribute('text-anchor','middle');t.setAttribute('font-size','7');
-    t.setAttribute('fill','#4a6a3a');t.setAttribute('font-family','Courier New,monospace');
-    t.setAttribute('font-style','italic');
-    t.textContent=p.label;
-    L.appendChild(t);
+function drawRoads(ctx, geojson, zoom) {
+  const roadFeats = geojson.features.filter(f => f.properties.highway);
+  // 按宽度排序：粗路先画
+  const ordered = [...roadFeats].sort((a, b) => {
+    const sa = roadStyles[a.properties.highway] || { w: 2 };
+    const sb = roadStyles[b.properties.highway] || { w: 2 };
+    return sb.w - sa.w;
   });
+  for (const feat of ordered) {
+    if (!shouldRender(feat, zoom)) continue;
+    drawRoad(ctx, feat, zoom);
+  }
 }
 
-// ═══════════════════════════════════════════
-// L5: 主干道
-// ═══════════════════════════════════════════
-function renderRoads(){
-  const L=$q('#roadLayer');
-  [
-    'M80,160 C240,140 420,150 560,200 C720,250 850,220 1120,210',
-    'M80,310 C260,280 440,300 560,350 C720,400 850,360 1120,340',
-    'M100,580 C260,510 440,490 580,520 C750,550 900,490 1120,470',
-    'M240,50 C250,220 260,380 280,660',
-    'M520,80 C500,220 520,350 510,660',
-    'M940,90 C900,250 920,400 880,670',
-    'M700,250 C650,280 620,380 600,500 C580,580 610,640 620,680',
-    'M180,400 C350,410 520,420 680,500'
-  ].forEach(d=>{
-    const base=elNS('path');
-    base.setAttribute('d',d);base.setAttribute('fill','none');
-    base.setAttribute('stroke','#c9b488');base.setAttribute('stroke-width','14');
-    base.setAttribute('stroke-linecap','round');
-    L.appendChild(base);
-    const center=elNS('path');
-    center.setAttribute('d',d);center.setAttribute('fill','none');
-    center.setAttribute('stroke','#f6ead0');center.setAttribute('stroke-width','4');
-    center.setAttribute('stroke-linecap','round');
-    L.appendChild(center);
-  });
+function getBuildingColor(feat, idx) {
+  // 根据位置 hash 选色
+  const c = feat.geometry.coordinates[0][0];
+  const h = (c[0] * 1000 + c[1] * 1000) % buildingColors.length;
+  return buildingColors[Math.abs(Math.floor(h))];
 }
 
-// ═══════════════════════════════════════════
-// L6: 地铁线
-// ═══════════════════════════════════════════
-function renderSubwayLines(){
-  const L=$q('#subwayLayer');
-  [
-    {id:'U3',color:'#e2a43d',d:'M80,130 C260,190 430,250 580,340 C730,430 900,500 1120,560'},
-    {id:'U6',color:'#1e6eb8',d:'M100,620 C260,530 420,430 560,340 C700,250 860,220 1120,180'}
-  ].forEach(l=>{
-    const pa=elNS('path');
-    pa.setAttribute('d',l.d);pa.setAttribute('fill','none');
-    pa.setAttribute('stroke',l.color);pa.setAttribute('stroke-width','8');
-    pa.setAttribute('stroke-linecap','round');pa.setAttribute('opacity','.8');
-    L.appendChild(pa);
-    const t=elNS('text');
-    t.setAttribute('x','70');t.setAttribute('y',l.id==='U3'?'125':'615');
-    t.setAttribute('font-family','Courier New,monospace');
-    t.setAttribute('font-size','13');t.setAttribute('font-weight','bold');
-    t.setAttribute('fill',l.color);t.setAttribute('stroke','#06142a');
-    t.setAttribute('stroke-width','3');t.setAttribute('paint-order','stroke');
-    t.textContent=l.id;
-    L.appendChild(t);
-  });
+function drawBuildings(ctx, geojson, zoom) {
+  if (zoom < 15) return;
+  const blds = geojson.features.filter(f => f.properties.building);
+  let i = 0;
+  for (const feat of blds) {
+    if (!shouldRender(feat, zoom)) continue;
+    if (feat.geometry.type === 'Polygon') {
+      drawPolygon(ctx, feat.geometry.coordinates, getBuildingColor(feat, i), '#6e4632', 1.5);
+      i++;
+    }
+  }
 }
 
-// ═══════════════════════════════════════════
-// L7+L8: POI
-// ═══════════════════════════════════════════
-function renderPois(){
-  const L=$q('#poiLayer');L.innerHTML='';
-  pois.forEach(poi=>{
-    const {x,y}=latLngToPoint(poi.lat,poi.lng,mapConfig);
-    const color=poiColor(poi.type,poi.unlocked);
+function drawRealPois(ctx, geojson, zoom) {
+  if (zoom < 15) return;
+  const rpois = geojson.features.filter(f =>
+    f.properties.amenity || f.properties.tourism || f.properties.shop
+  );
+  for (const feat of rpois) {
+    if (feat.geometry.type !== 'Point') continue;
+    const s = lngLatToScreen(feat.geometry.coordinates[0], feat.geometry.coordinates[1]);
+    const x = pixelSnap(s.x), y = pixelSnap(s.y);
+    // 小圆点
+    ctx.fillStyle = '#d85f45';
+    ctx.beginPath();
+    ctx.arc(x, y, 3, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = '#8b3020';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+    // 小标签
+    const name = feat.properties.name;
+    if (name) {
+      ctx.font = '8px "Courier New", monospace';
+      ctx.fillStyle = '#07152b';
+      ctx.fillText(name, x + 6, y + 3);
+    }
+  }
+}
 
-    const g=elNS('g');
-    g.classList.add('poi-group');
-    if(!poi.unlocked)g.classList.add('locked');
-    g.dataset.id=poi.id;
-    g.setAttribute('transform',`translate(${x},${y})`);
-    g.style.cursor=poi.unlocked?'pointer':'not-allowed';
+function drawMapLayers() {
+  ctx.clearRect(0, 0, cw, ch);
+  ctx.imageSmoothingEnabled = false;
 
-    g.innerHTML=`
-      <g class="poi-pin">
-        <path d="M0,-34 C-18,-34 -30,-18 -30,-3 C-30,16 0,40 0,40 C0,40 30,16 30,-3 C30,-18 18,-34 0,-34Z"
-          fill="#000" opacity=".25" transform="translate(2,3)"/>
-        <path d="M0,-34 C-18,-34 -30,-18 -30,-3 C-30,16 0,40 0,40 C0,40 30,16 30,-3 C30,-18 18,-34 0,-34Z"
-          fill="${color}" stroke="#06142a" stroke-width="4"/>
-        <circle cx="0" cy="-7" r="14" fill="#f7eed9" stroke="#06142a" stroke-width="3"/>
-        <text x="0" y="-1" text-anchor="middle" dominant-baseline="middle"
-          font-size="15">${poiEmoji(poi.icon)}</text>
-      </g>
-      <rect x="-62" y="40" width="124" height="22" rx="3"
-        fill="#07152b" stroke="#e8b85c" stroke-width="2"/>
-      <text x="0" y="55" text-anchor="middle" font-size="12"
-        font-weight="bold" fill="#fff" stroke="#06142a" stroke-width="3"
-        paint-order="stroke" font-family="Courier New,monospace">${poi.name}</text>
+  const z = viewport.zoom;
+  drawBackground(ctx);
+  drawWater(ctx, sampleGeoJSON, z);
+  drawParks(ctx, sampleGeoJSON, z);
+  drawRailways(ctx, sampleGeoJSON, z);
+  drawRoads(ctx, sampleGeoJSON, z);
+  drawRealPois(ctx, sampleGeoJSON, z);
+  drawBuildings(ctx, sampleGeoJSON, z);
+
+  // 像素网格 overlay (subtle)
+  if (z >= 14) {
+    ctx.fillStyle = 'rgba(0,0,0,0.03)';
+    for (let x = 0; x < cw; x += 2) {
+      ctx.fillRect(x, 0, 1, ch);
+    }
+    for (let y = 0; y < ch; y += 2) {
+      ctx.fillRect(0, y, cw, 1);
+    }
+  }
+}
+
+// ─────────────────────────────────────────────
+// 8. SVG 游戏 POI + 路线
+// ─────────────────────────────────────────────
+const svg = document.getElementById('mapSvg');
+const routeGroup = document.getElementById('routeGroup');
+const poiGroup = document.getElementById('poiGroup');
+
+function updateSvgSize() {
+  svg.setAttribute('width', cw);
+  svg.setAttribute('height', ch);
+  svg.setAttribute('viewBox', `0 0 ${cw} ${ch}`);
+}
+
+function renderGamePois() {
+  poiGroup.innerHTML = '';
+  for (const poi of gamePois) {
+    const s = lngLatToScreen(poi.lat, poi.lng);
+    const x = pixelSnap(s.x), y = pixelSnap(s.y);
+    const color = poi.unlocked ? {
+      home:'#2d6fb3',school:'#3f7f56',shop:'#c98238',landmark:'#d85f45',museum:'#7d5fb2',stadium:'#8b8b8b'
+    }[poi.type] : '#8b8b8b';
+    const opacity = poi.unlocked ? 1 : 0.5;
+    const emoji = poi.icon;
+
+    const g = document.createElementNS('http://www.w3.org/2000/svg','g');
+    g.classList.add('poi-marker');
+    g.setAttribute('data-id', poi.id);
+    g.setAttribute('transform', `translate(${x},${y})`);
+    g.setAttribute('opacity', opacity);
+    g.style.pointerEvents = poi.unlocked ? 'auto' : 'none';
+    g.style.cursor = poi.unlocked ? 'pointer' : 'default';
+
+    g.innerHTML = `
+      <path d="M0,-28 C-15,-28 -26,-15 -26,-2 C-26,13 0,34 0,34 C0,34 26,13 26,-2 C26,-15 15,-28 0,-28Z"
+        fill="#000" opacity="0.2" transform="translate(2,3)"/>
+      <path d="M0,-28 C-15,-28 -26,-15 -26,-2 C-26,13 0,34 0,34 C0,34 26,13 26,-2 C26,-15 15,-28 0,-28Z"
+        fill="${color}" stroke="#06142a" stroke-width="3"/>
+      <circle cx="0" cy="-5" r="12" fill="#f7eed9" stroke="#06142a" stroke-width="2"/>
+      <text x="0" y="0" text-anchor="middle" dominant-baseline="middle" font-size="14">${emoji}</text>
+      <rect x="-58" y="35" width="116" height="20" rx="2" fill="#07152b" stroke="#e8b85c" stroke-width="2"/>
+      <text x="0" y="49" text-anchor="middle" font-size="10" font-weight="bold" fill="#fff"
+        stroke="#06142a" stroke-width="2" paint-order="stroke" font-family="Courier New,monospace">${poi.name}</text>
     `;
 
-    if(poi.unlocked){
-      g.addEventListener('click',e=>{e.stopPropagation();selectPoi(poi)});
-      g.addEventListener('mouseenter',e=>showTooltip(e,poi));
-      g.addEventListener('mouseleave',hideTooltip);
+    if (poi.unlocked) {
+      g.addEventListener('click', (e) => { e.stopPropagation(); selectPoi(poi); });
+      g.addEventListener('mouseenter', (e) => showTooltip(e, poi));
+      g.addEventListener('mouseleave', hideTooltip);
     }
-    L.appendChild(g);
+    poiGroup.appendChild(g);
+  }
+}
+
+function drawRouteOverlay(fromPoiId, toPoiId) {
+  routeGroup.innerHTML = '';
+  const from = gamePois.find(p => p.id === fromPoiId);
+  const to = gamePois.find(p => p.id === toPoiId);
+  if (!from || !to) return;
+
+  const p1 = lngLatToScreen(from.lat, from.lng);
+  const p2 = lngLatToScreen(to.lat, to.lng);
+  const mx = (p1.x + p2.x) / 2 + 30;
+  const my = (p1.y + p2.y) / 2 - 40;
+
+  const route = document.createElementNS('http://www.w3.org/2000/svg','path');
+  route.setAttribute('d', `M${p1.x},${p1.y} Q${mx},${my} ${p2.x},${p2.y}`);
+  route.classList.add('route-line');
+  routeGroup.appendChild(route);
+
+  // 端点
+  [p1, p2].forEach((p, i) => {
+    const dot = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    dot.setAttribute('cx', p.x); dot.setAttribute('cy', p.y);
+    dot.setAttribute('r', '7'); dot.setAttribute('fill', i === 0 ? '#3f7f56' : '#d85f45');
+    dot.setAttribute('stroke', '#06142a'); dot.setAttribute('stroke-width', '2');
+    routeGroup.appendChild(dot);
   });
 }
 
-// ═══════════════════════════════════════════
-// 右侧面板
-// ═══════════════════════════════════════════
-let selectedPoi=null;
-function selectPoi(poi){
-  selectedPoi=poi;
-  document.querySelectorAll('.poi-group').forEach(g=>g.classList.remove('poi-selected'));
-  const g=document.querySelector(`.poi-group[data-id="${poi.id}"]`);
-  if(g)g.classList.add('poi-selected');
+// ─────────────────────────────────────────────
+// 9. 交互
+// ─────────────────────────────────────────────
+let selectedPoi = null;
 
-  const panel=document.getElementById('detailPanel');
-  const color=poiColor(poi.type,poi.unlocked);
-  const lockClass=poi.unlocked?'':'style="opacity:.5;pointer-events:none"';
-  panel.innerHTML=`
-    <div class="detail-header">
-      <h2><span style="color:${color};font-size:20px">${poiEmoji(poi.icon)}</span> ${poi.name}</h2>
-      <div class="de-name">${poi.name_de}</div>
-    </div>
-    <div class="detail-desc">${poi.description}</div>
-    <div class="detail-actions">
-      ${poi.actions.map(a=>`<button class="action-chip" ${lockClass} onclick="doAction('${poi.id}','${a}')">${a}</button>`).join('')}
-    </div>
-    <div class="detail-stats">
-      <div>🚶 步行：<b>${poi.walk_minutes} min</b></div>
+function selectPoi(poi) {
+  selectedPoi = poi;
+  // 高亮
+  document.querySelectorAll('.poi-marker').forEach(g => {
+    g.querySelector('path:nth-child(2)').setAttribute('stroke', '#06142a');
+    g.querySelector('path:nth-child(2)').setAttribute('stroke-width', '3');
+  });
+  const g = document.querySelector(`.poi-marker[data-id="${poi.id}"]`);
+  if (g) {
+    g.querySelector('path:nth-child(2)').setAttribute('stroke', '#ffcf72');
+    g.querySelector('path:nth-child(2)').setAttribute('stroke-width', '4');
+  }
+
+  // 详情面板
+  const panel = document.getElementById('detailPanel');
+  const color = {home:'#2d6fb3',school:'#3f7f56',shop:'#c98238',landmark:'#d85f45',museum:'#7d5fb2',stadium:'#8b8b8b'}[poi.type];
+  panel.innerHTML = `
+    <div class="detail-h"><h2><span style="color:${color}">${poi.icon}</span> ${poi.name}</h2><div class="de">${poi.name_de}</div></div>
+    <div class="detail-desc">${poi.desc}</div>
+    <div class="detail-acts">${poi.actions.map(a => `<button class="act" onclick="doAction('${poi.id}','${a}')">${a}</button>`).join('')}</div>
+    <div class="detail-meta">
+      <div>🚶 步行: <b>${poi.walk} min</b></div>
       <div>🚇 ${poi.ubahn}</div>
-      <div>💰 预计花费：<b>${poi.cost}</b></div>
+      <div>💰 花费: <b>${poi.cost}</b></div>
     </div>
-    <button onclick="showRouteTo('${poi.id}')" style="margin-top:4px">↗ 显示路线</button>
+    <button class="poi-btn" onclick="showRouteTo('${poi.id}')">↗ 显示路线</button>
+    <button class="poi-btn" onclick="enterLocation('${poi.id}')">▶ 进入地点</button>
   `;
 }
-function doAction(poiId,action){
-  alert(`🎮 动作: ${action}\n📍 地点: ${poiId}\n(后续接入游戏逻辑)`);
-}
 
-// ═══════════════════════════════════════════
-// 路线动画
-// ═══════════════════════════════════════════
-function showRouteTo(poiId){
-  const L=$q('#routeLayer');L.innerHTML='';
-  const home=pois.find(p=>p.id==='home');
-  const target=pois.find(p=>p.id===poiId);
-  if(!home||!target)return;
+function showRouteTo(poiId) { drawRouteOverlay('home', poiId); }
+function enterLocation(id) { console.log('Enter:', id); }
+function doAction(id, act) { console.log('Action:', act, 'at', id); }
 
-  const p1=latLngToPoint(home.lat,home.lng,mapConfig);
-  const p2=latLngToPoint(target.lat,target.lng,mapConfig);
-  const mx=(p1.x+p2.x)/2+(Math.random()-.5)*80;
-  const my=(p1.y+p2.y)/2-50;
-
-  const route=elNS('path');
-  route.setAttribute('d',`M${p1.x},${p1.y} Q${mx},${my} ${p2.x},${p2.y}`);
-  route.setAttribute('class','route-line');
-  L.appendChild(route);
-
-  [p1,p2].forEach((p,i)=>{
-    const dot=elNS('circle');
-    dot.setAttribute('cx',p.x);dot.setAttribute('cy',p.y);dot.setAttribute('r','8');
-    dot.setAttribute('fill',i===0?'#3f7f56':'#d85f45');
-    dot.setAttribute('stroke','#06142a');dot.setAttribute('stroke-width','3');
-    L.appendChild(dot);
-  });
-}
-
-// ═══════════════════════════════════════════
 // Tooltip
-// ═══════════════════════════════════════════
-function showTooltip(e,poi){
-  const tt=document.getElementById('mapTooltip');
-  const frame=document.getElementById('mapFrame');
-  const r=frame.getBoundingClientRect();
-  tt.textContent=`${poi.name} · ${poi.name_de}`;
-  tt.style.left=(e.clientX-r.left+20)+'px';
-  tt.style.top=(e.clientY-r.top-30)+'px';
-  tt.classList.add('visible');
+function showTooltip(e, poi) {
+  const tt = document.getElementById('tooltip');
+  tt.textContent = `${poi.name} · ${poi.name_de}`;
+  const frame = document.getElementById('mapFrame');
+  const r = frame.getBoundingClientRect();
+  tt.style.left = (e.clientX - r.left + 15) + 'px';
+  tt.style.top = (e.clientY - r.top - 25) + 'px';
+  tt.classList.add('on');
 }
-function hideTooltip(){document.getElementById('mapTooltip').classList.remove('visible')}
+function hideTooltip() { document.getElementById('tooltip').classList.remove('on'); }
 
-// ═══════════════════════════════════════════
-// 缩放
-// ═══════════════════════════════════════════
-let zoom=1;
-document.getElementById('mapFrame').addEventListener('wheel',e=>{
+// Pan
+let dragging = false, dragStart = null, dragStartWorld = null;
+const mapFrame = document.getElementById('mapFrame');
+
+mapFrame.addEventListener('mousedown', (e) => {
+  if (e.target.closest('.poi-marker')) return; // 不拦截 POI 点击
+  dragging = true;
+  dragStart = { x: e.clientX, y: e.clientY };
+  dragStartWorld = { x: viewport.worldX, y: viewport.worldY };
+});
+window.addEventListener('mouseup', () => { dragging = false; });
+window.addEventListener('mousemove', (e) => {
+  if (!dragging) return;
+  const dx = e.clientX - dragStart.x;
+  const dy = e.clientY - dragStart.y;
+  viewport.worldX = dragStartWorld.x + dx;
+  viewport.worldY = dragStartWorld.y + dy;
+  fullRedraw();
+});
+
+// Zoom
+mapFrame.addEventListener('wheel', (e) => {
   e.preventDefault();
-  zoom=Math.max(.6,Math.min(2.5,zoom+(e.deltaY>0?-.1:.1)));
-  const w=1200/zoom,h=720/zoom;
-  svg.setAttribute('viewBox',`${600-w/2} ${360-h/2} ${w} ${h}`);
-});
-document.getElementById('btnReset').addEventListener('click',()=>{
-  zoom=1;svg.setAttribute('viewBox','0 0 1200 720');hideTooltip();
-});
-document.getElementById('btnClearRoute').addEventListener('click',()=>{
-  $q('#routeLayer').innerHTML='';
+  const oldZoom = viewport.zoom;
+  const delta = e.deltaY > 0 ? -1 : 1;
+  viewport.zoom = Math.max(11, Math.min(17, viewport.zoom + delta));
+  if (viewport.zoom !== oldZoom) {
+    updateCenterWorld();
+    viewport.worldX = 0;
+    viewport.worldY = 0;
+    fullRedraw();
+  }
 });
 
-// ═══════════════════════════════════════════
-// 启动
-// ═══════════════════════════════════════════
-renderDistricts();
-renderRiver();
-renderParks();
-renderRoads();
-renderSubwayLines();
-renderPois();
+function fullRedraw() {
+  updateSvgSize();
+  updateCenterWorld();
+  drawMapLayers();
+  renderGamePois();
+  if (selectedPoi) drawRouteOverlay('home', selectedPoi.id);
+  // 更新 UI
+  document.getElementById('zoomVal').textContent = viewport.zoom;
+  document.getElementById('zoomLabel').textContent = viewport.zoom;
+  const descs = {11:'主路+公园+河流',12:'次级道路',13:'三级道路+地铁站',14:'详细道路+POI',15:'建筑轮廓+住宅路',16:'步行道+真实POI',17:'最高细节'};
+  document.getElementById('zoomDesc').textContent = viewport.zoom + ' — ' + (descs[viewport.zoom]||'');
+}
+
+// 按钮
+document.getElementById('btnReset').addEventListener('click', () => {
+  viewport.centerLat = 48.145; viewport.centerLng = 11.575;
+  viewport.zoom = 14; viewport.worldX = 0; viewport.worldY = 0;
+  selectedPoi = null;
+  document.getElementById('detailPanel').innerHTML = '<div class="detail-empty"><p style="font-size:24px;margin-bottom:8px">⭐</p><p>点击 POI 查看详情</p></div>';
+  updateCenterWorld();
+  fullRedraw();
+});
+document.getElementById('btnClearRoute').addEventListener('click', () => { routeGroup.innerHTML = ''; });
+document.getElementById('btnZoomIn').addEventListener('click', () => {
+  viewport.zoom = Math.min(17, viewport.zoom + 1);
+  updateCenterWorld(); viewport.worldX = 0; viewport.worldY = 0;
+  fullRedraw();
+});
+document.getElementById('btnZoomOut').addEventListener('click', () => {
+  viewport.zoom = Math.max(11, viewport.zoom - 1);
+  updateCenterWorld(); viewport.worldX = 0; viewport.worldY = 0;
+  fullRedraw();
+});
+
+// 窗口 resize
+window.addEventListener('resize', () => {
+  const s = resizeCanvas();
+  cw = s.w; ch = s.h;
+  updateCenterWorld();
+  fullRedraw();
+});
+
+// ─────────────────────────────────────────────
+// 10. 启动
+// ─────────────────────────────────────────────
+updateCenterWorld();
+updateSvgSize();
+drawMapLayers();
+renderGamePois();
+document.getElementById('zoomVal').textContent = viewport.zoom;
 </script>
 </body>
 </html>
