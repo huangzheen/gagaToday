@@ -1,345 +1,665 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>München 16-bit Pixel Map Demo</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      background: #0a1428;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      font-family: 'Courier New', monospace;
-    }
-    #game-container {
-      position: relative;
-      border: 2px solid #c9956b;
-      border-radius: 2px;
-      box-shadow: 0 0 40px rgba(201, 149, 107, 0.15);
-    }
-    #loading {
-      position: absolute; inset: 0;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      color: #f4d35e; font-size: 18px; gap: 16px;
-      background: #0a1428; z-index: 10;
-      transition: opacity 0.4s ease;
-    }
-    #loading .bar {
-      width: 280px; height: 4px;
-      background: #1a2a4a; border-radius: 2px; overflow: hidden;
-    }
-    #loading .bar-fill {
-      width: 0%; height: 100%;
-      background: #c9956b;
-      transition: width 0.3s;
-    }
-    .page-wrap {
-      display: flex; flex-direction: column; align-items: center; gap: 16px;
-    }
-    .map-header {
-      color: #f4d35e; font-size: 13px;
-      text-align: center; letter-spacing: 3px;
-    }
-    .map-header span {
-      color: #6a8aaa; font-size: 10px; letter-spacing: 1px;
-    }
-    .controls {
-      display: flex; align-items: center; gap: 16px;
-      padding: 8px 20px;
-      background: rgba(10, 20, 40, 0.9);
-      border: 1px solid #2a4a6a;
-      border-radius: 2px;
-    }
-    .controls kbd {
-      background: #1a2a4a; padding: 2px 7px; border-radius: 2px;
-      border: 1px solid #3a5a7a; color: #f4d35e; font-size: 10px;
-    }
-    .controls span {
-      color: #6a8aaa; font-size: 10px;
-    }
-    .controls a {
-      color: #c9956b; text-decoration: none; font-size: 10px;
-      padding: 4px 10px; border: 1px solid #3a5a7a;
-      border-radius: 2px; cursor: pointer;
-    }
-    .controls a:hover {
-      background: #1a2a4a; color: #f4d35e;
-    }
-  </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=1280,initial-scale=1.0"/>
+<title>gagaToday — München Exploration Map</title>
+<style>
+/* ============================================================
+   16-BIT RPG 城市探索地图 UI — 深蓝+金+羊皮纸
+   ============================================================ */
+:root {
+  --navy: #07152b; --navy2: #0d2344; --navy3: #14305c;
+  --gold: #e8b85c; --gold-light: #ffcf72;
+  --paper: #f1dfbd; --paper2: #e8d4a8;
+  --ink: #1c2540; --river: #82b7d9; --park: #a9c88b;
+  --road: #c9b488; --road-center: #f6ead0;
+  --red: #d85f45;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  margin:0;
+  background:radial-gradient(circle at 50% 10%,#17345c,#050b16);
+  font-family:'Courier New','Noto Sans SC',monospace;
+  color:#fff;
+  min-height:100vh;
+  display:flex;justify-content:center;align-items:center;
+  image-rendering:pixelated;
+}
+.game-shell{
+  width:1280px;height:800px;
+  display:grid;
+  grid-template-columns:200px 1fr 280px;
+  grid-template-rows:64px 1fr 64px;
+  gap:10px;padding:10px;
+}
+.pixel-panel{
+  background:linear-gradient(180deg,var(--navy3),var(--navy));
+  border:3px solid var(--gold);
+  box-shadow:6px 6px 0 rgba(0,0,0,.7);
+  position:relative;
+}
+.pixel-panel::after{
+  content:'';position:absolute;inset:1px;
+  border:1px solid rgba(232,184,92,.2);pointer-events:none;
+}
+/* 顶部栏 */
+.top-bar{
+  grid-column:1/-1;grid-row:1;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 20px;
+}
+.top-title{
+  font-size:18px;font-weight:bold;color:var(--gold-light);
+  letter-spacing:3px;text-shadow:2px 2px 0 #000;
+}
+.top-subtitle{font-size:10px;color:#6a8aaa;letter-spacing:2px}
+.top-stats{display:flex;gap:20px;font-size:11px}
+.stat-item{display:flex;align-items:center;gap:6px;color:var(--gold-light)}
+.stat-item span{color:#8aaac8;font-size:10px}
+/* 左侧面板 */
+.side-panel{
+  grid-column:1;grid-row:2;
+  padding:14px 12px;display:flex;flex-direction:column;gap:14px;overflow-y:auto;
+}
+.panel-section h3{
+  font-size:10px;color:var(--gold);letter-spacing:2px;
+  margin-bottom:8px;padding-bottom:4px;border-bottom:2px solid var(--navy2);
+}
+.panel-section p{font-size:9px;color:#8aaac8;line-height:1.6}
+.quest-list{list-style:none;font-size:9px}
+.quest-list li{
+  padding:5px 0;color:#aab8cf;display:flex;align-items:center;gap:6px;
+}
+.quest-list li::before{content:'⬡';color:var(--gold);font-size:10px}
+.quest-list li.done{color:#5a7a5a}
+.quest-list li.done::before{content:'✦';color:#5a9a5a}
+/* 地图框 */
+.map-frame{
+  grid-column:2;grid-row:2;
+  position:relative;background:var(--paper);
+  border:4px solid #c38a4f;
+  box-shadow:10px 10px 0 rgba(0,0,0,.7);
+  overflow:hidden;
+}
+.map-frame svg{display:block;width:100%;height:100%}
+/* 右侧面板 */
+.detail-panel{
+  grid-column:3;grid-row:2;
+  padding:14px 12px;display:flex;flex-direction:column;gap:12px;overflow-y:auto;
+}
+.detail-header h2{font-size:16px;color:var(--gold-light);margin-bottom:2px}
+.detail-header .de-name{font-size:10px;color:#6a8aaa;font-style:italic}
+.detail-desc{font-size:10px;color:#aab8bf;line-height:1.6}
+.detail-actions{display:flex;flex-wrap:wrap;gap:6px}
+.action-chip{
+  background:var(--navy2);border:2px solid #3a5a7a;
+  color:var(--gold-light);font-size:9px;padding:4px 10px;
+  cursor:pointer;font-family:inherit;
+}
+.action-chip:hover{border-color:var(--gold)}
+.detail-stats{
+  font-size:9px;color:#8aaac8;display:flex;flex-direction:column;gap:4px;
+  padding:8px;background:rgba(0,0,0,.3);border:1px solid var(--navy2);
+}
+.detail-stats b{color:var(--gold-light)}
+.detail-empty{color:#4a6a8a;font-size:10px;text-align:center;padding-top:40px}
+/* 底部栏 */
+.bottom-bar{
+  grid-column:1/-1;grid-row:3;
+  display:flex;align-items:center;justify-content:center;
+  gap:20px;font-size:9px;color:#6a8aaa;
+}
+.bottom-bar kbd{
+  background:var(--navy2);border:1px solid #3a5a7a;
+  padding:2px 7px;color:var(--gold-light);font-size:8px;border-radius:2px;
+}
+.bottom-bar button{
+  background:linear-gradient(180deg,#214d83,#0c274d);
+  color:#fff;border:3px solid #06142a;
+  box-shadow:3px 3px 0 #000;
+  font-family:inherit;font-size:10px;font-weight:bold;
+  padding:6px 14px;cursor:pointer;
+}
+.bottom-bar button:hover{filter:brightness(1.15);transform:translateY(-1px)}
+/* Tooltip */
+.map-tooltip{
+  position:absolute;pointer-events:none;
+  background:var(--navy);border:2px solid var(--gold);
+  padding:4px 10px;font-size:10px;color:var(--gold-light);
+  z-index:20;box-shadow:3px 3px 0 #000;
+  opacity:0;transition:opacity .15s;
+}
+.map-tooltip.visible{opacity:1}
+/* POI */
+.poi-group{cursor:pointer}
+.poi-group:hover .poi-pin{filter:brightness(1.15)}
+.poi-group.locked{opacity:.45;cursor:not-allowed}
+/* 路线 */
+.route-line{
+  fill:none;stroke:var(--red);stroke-width:6;
+  stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:10 9;
+  filter:drop-shadow(0 0 6px rgba(255,207,114,.7));
+  animation:routeDash 1.2s linear infinite;
+}
+@keyframes routeDash{to{stroke-dashoffset:-38}}
+/* 选中脉冲 */
+@keyframes poiPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+.poi-selected .poi-pin{animation:poiPulse .8s ease-in-out infinite}
+</style>
 </head>
 <body>
 
-<div class="page-wrap">
-  <div class="map-header">
-    MÜNCHEN · ALTSTADT<br>
-    <span>10 Sehenswürdigkeiten · 16-bit Pixel Map</span>
-  </div>
-
-  <div id="game-container">
-    <div id="loading">
-      <span>🗺️ 加载 Altstadt 像素地图…</span>
-      <div class="bar"><div class="bar-fill" id="load-bar"></div></div>
+<div class="game-shell">
+  <!-- 顶部栏 -->
+  <div class="top-bar pixel-panel">
+    <div>
+      <div class="top-title">MÜNCHEN · DAY 1</div>
+      <div class="top-subtitle">Altstadt — 老城探索地图</div>
+    </div>
+    <div class="top-stats">
+      <div class="stat-item">❤️ <span>体力</span> 85/100</div>
+      <div class="stat-item">⭐ <span>德语</span> A1.2</div>
+      <div class="stat-item">💰 <span>欧元</span> 24.50</div>
+      <div class="stat-item">🕐 <span>时间</span> 08:15</div>
     </div>
   </div>
 
-  <div class="controls">
-    <span><kbd>W A S D</kbd> / 方向键</span>
-    <span>🖱️ 拖拽 · 滚轮缩放</span>
-    <span>⭐ 点击标记查看详情</span>
-    <a id="btn-reset">🎯 Marienplatz</a>
+  <!-- 左侧面板 -->
+  <div class="side-panel pixel-panel">
+    <div class="panel-section">
+      <h3>📋 今日任务</h3>
+      <ul class="quest-list">
+        <li>买早餐 Brötchen</li>
+        <li>去学校报到</li>
+        <li>自我介绍练习</li>
+        <li class="done">与房东打招呼</li>
+      </ul>
+    </div>
+    <div class="panel-section">
+      <h3>🗺️ 探索进度</h3>
+      <p>已探索 2 / 10 地点</p>
+    </div>
+    <div class="panel-section">
+      <h3>📍 当前位置</h3>
+      <p style="color:var(--gold-light)">学生公寓 · Schwabing</p>
+    </div>
+    <div class="panel-section">
+      <h3>💡 提示</h3>
+      <p>点击地图上金色标记的地点以查看详情。点击"显示路线"查看从家到该地的路径。</p>
+    </div>
+  </div>
+
+  <!-- 地图 -->
+  <div class="map-frame" id="mapFrame">
+    <svg id="gameMap" viewBox="0 0 1200 720" xmlns="http://www.w3.org/2000/svg">
+      <!-- L1: 羊皮纸底色 -->
+      <rect x="0" y="0" width="1200" height="720" fill="#f1dfbd"/>
+      <rect x="0" y="0" width="1200" height="720" fill="#f5e8ca" opacity=".3"/>
+
+      <!-- L2: 区域色块 -->
+      <g id="districtLayer"></g>
+      <!-- L3: 河流 -->
+      <g id="riverLayer"></g>
+      <!-- L4: 公园 -->
+      <g id="parkLayer"></g>
+      <!-- L5: 主干道 -->
+      <g id="roadLayer"></g>
+      <!-- L6: 地铁线 -->
+      <g id="subwayLayer"></g>
+      <!-- L7: 路线动画 -->
+      <g id="routeLayer"></g>
+      <!-- L8: POI -->
+      <g id="poiLayer"></g>
+
+      <!-- 点缀 -->
+      <g transform="translate(1150,50)">
+        <polygon points="0,-18 -6,6 0,-2 6,6" fill="#c9956b" opacity=".7"/>
+        <text x="0" y="18" text-anchor="middle" font-size="8" fill="#8a6a3a" font-family="Courier New,monospace">N</text>
+      </g>
+      <g transform="translate(30,700)">
+        <line x1="0" y1="0" x2="80" y2="0" stroke="#5a4a3a" stroke-width="2"/>
+        <line x1="0" y1="-4" x2="0" y2="4" stroke="#5a4a3a" stroke-width="1"/>
+        <line x1="80" y1="-4" x2="80" y2="4" stroke="#5a4a3a" stroke-width="1"/>
+        <text x="40" y="12" text-anchor="middle" font-size="7" fill="#8a6a3a" font-family="Courier New,monospace">~1 km</text>
+      </g>
+    </svg>
+    <div class="map-tooltip" id="mapTooltip"></div>
+  </div>
+
+  <!-- 右侧详情面板 -->
+  <div class="detail-panel pixel-panel" id="detailPanel">
+    <div class="detail-empty">
+      <p style="font-size:28px;margin-bottom:10px">⭐</p>
+      <p>点击地图上的<br>地点标记查看详情</p>
+    </div>
+  </div>
+
+  <!-- 底部栏 -->
+  <div class="bottom-bar pixel-panel">
+    <span><kbd>🖱️ 点击</kbd> 探索地点</span>
+    <span><kbd>🖱️ 滚轮</kbd> 缩放地图</span>
+    <button id="btnReset">🎯 重置视角</button>
+    <button id="btnClearRoute">✕ 清除路线</button>
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js"></script>
 <script>
-const base = '/public/assets/munich_map';
+// ═══════════════════════════════════════════
+// 地图配置
+// ═══════════════════════════════════════════
+const mapConfig = {
+  id:'munich',name:'München',
+  width:1200,height:720,
+  bounds:{north:48.20,south:48.08,west:11.45,east:11.68}
+};
 
-async function loadJSON(url) {
-  const res = await fetch(url);
-  if (!res.ok) throw new Error('Failed: ' + url);
-  return res.json();
+// ═══════════════════════════════════════════
+// POI 数据（增删改只改这里）
+// ═══════════════════════════════════════════
+const pois = [
+  {
+    id:'home',name:'学生公寓',name_de:'Studentenwohnheim',
+    type:'home',lat:48.156,lng:11.575,unlocked:true,icon:'home',
+    description:'你的住处，可以休息、做饭、写作业。位于 Schwabing 区。',
+    actions:['休息','做饭','查看邮件'],
+    walk_minutes:0,cost:'-',
+    ubahn:'U3/U6 Münchner Freiheit'
+  },
+  {
+    id:'school',name:'语言学校',name_de:'Sprachschule',
+    type:'school',lat:48.148,lng:11.565,unlocked:true,icon:'school',
+    description:'每天上课、考试、社交的核心地点。Herr Weber 会在这里等你。',
+    actions:['上课','查看课表','找老师'],
+    walk_minutes:18,cost:'€0',
+    ubahn:'U3 Universität'
+  },
+  {
+    id:'bakery',name:'面包店',name_de:'Bäckerei',
+    type:'shop',lat:48.145,lng:11.572,unlocked:true,icon:'bread',
+    description:'可以买到新鲜 Brötchen 和 Brezel，顺便练习德语点餐。',
+    actions:['点餐','打卡','与店长对话'],
+    walk_minutes:12,cost:'€1.20~€3.50',
+    ubahn:'步行可达'
+  },
+  {
+    id:'marienplatz',name:'玛利亚广场',name_de:'Marienplatz',
+    type:'landmark',lat:48.1374,lng:11.5755,unlocked:true,icon:'pin',
+    description:'慕尼黑核心地标和换乘点。市政厅、圣母教堂步行可达。',
+    actions:['打卡','换乘','探索周边'],
+    walk_minutes:30,cost:'€0',
+    ubahn:'U3/U6 Marienplatz'
+  },
+  {
+    id:'deutsches_museum',name:'德意志博物馆',name_de:'Deutsches Museum',
+    type:'museum',lat:48.1299,lng:11.583,unlocked:true,icon:'museum',
+    description:'世界最大科学技术博物馆，可获得知识卡和兴趣打卡。',
+    actions:['买票','参观','知识问答'],
+    walk_minutes:45,cost:'€7.00',
+    ubahn:'S-Bahn Isartor'
+  },
+  {
+    id:'allianz_arena',name:'安联球场',name_de:'Allianz Arena',
+    type:'stadium',lat:48.2188,lng:11.6247,unlocked:false,icon:'football',
+    description:'FC Bayern 主场，后续章节解锁。体育文化沉浸体验。',
+    actions:['看球','买票','好友邀请'],
+    walk_minutes:'--',cost:'€40+',
+    ubahn:'U6 Fröttmaning'
+  },
+  {
+    id:'englischer_garten',name:'英国花园',name_de:'Englischer Garten',
+    type:'park',lat:48.164,lng:11.592,unlocked:true,icon:'park',
+    description:'欧洲最大城市公园之一，可散步、野餐、看冲浪者。',
+    actions:['散步','野餐','看冲浪'],
+    walk_minutes:25,cost:'€0',
+    ubahn:'U3/U6 Universität'
+  },
+  {
+    id:'hauptbahnhof',name:'中央车站',name_de:'Hauptbahnhof',
+    type:'station',lat:48.140,lng:11.560,unlocked:true,icon:'train',
+    description:'慕尼黑最大火车站，所有 U-Bahn/S-Bahn 换乘枢纽。',
+    actions:['购票','乘车','存包'],
+    walk_minutes:35,cost:'€3.50+',
+    ubahn:'U1/U2/U4/U5/S-Bahn'
+  },
+  {
+    id:'supermarket',name:'超市',name_de:'Supermarkt',
+    type:'shop',lat:48.152,lng:11.568,unlocked:true,icon:'shop',
+    description:'REWE 超市，买晚餐食材和生活用品。支持德语商品标签识别。',
+    actions:['购物','查看标签','结账对话'],
+    walk_minutes:8,cost:'€5~€15',
+    ubahn:'步行'
+  },
+  {
+    id:'viktualienmarkt',name:'谷物市场',name_de:'Viktualienmarkt',
+    type:'landmark',lat:48.1352,lng:11.5765,unlocked:true,icon:'pin',
+    description:'慕尼黑最著名露天市场，新鲜食材和德国小吃聚集地。',
+    actions:['逛市场','试吃','德语价格练习'],
+    walk_minutes:32,cost:'€2~€10',
+    ubahn:'U3/U6 Marienplatz'
+  }
+];
+
+// ═══════════════════════════════════════════
+// 工具函数
+// ═══════════════════════════════════════════
+function latLngToPoint(lat,lng,cfg){
+  const {north,south,west,east}=cfg.bounds;
+  return {
+    x:((lng-west)/(east-west))*cfg.width,
+    y:((north-lat)/(north-south))*cfg.height
+  };
+}
+function poiColor(type,unlocked){
+  if(!unlocked)return'#8b8b8b';
+  return{
+    home:'#2d6fb3',school:'#3f7f56',shop:'#c98238',
+    landmark:'#d85f45',museum:'#7d5fb2',stadium:'#d85f45',
+    park:'#70a95e',station:'#1e6eb8'
+  }[type]||'#2d6fb3';
+}
+function poiEmoji(icon){
+  return{
+    home:'🏠',school:'🎓',bread:'🥨',museum:'🏛️',
+    football:'⚽',pin:'📍',park:'🌳',train:'🚇',shop:'🛒'
+  }[icon]||'📍';
 }
 
-// ── Phaser Scene ──
-class MunichMapScene extends Phaser.Scene {
-  constructor() {
-    super({ key: 'MunichMapScene' });
-  }
+const svg=document.getElementById('gameMap');
+function $q(s){return svg.querySelector(s)}
+function elNS(tag){return document.createElementNS('http://www.w3.org/2000/svg',tag)}
 
-  preload() {
-    this.load.image('munich_tileset', base + '/tileset.png');
-  }
+// ═══════════════════════════════════════════
+// L2: 区域色块
+// ═══════════════════════════════════════════
+function renderDistricts(){
+  const L=$q('#districtLayer');
+  [
+    ['Schwabing',    'M0,0 L400,0 L420,300 L380,400 L300,420 L0,380 Z','#fcf3e0'],
+    ['Maxvorstadt',  'M400,0 L700,0 L750,280 L680,380 L420,300 Z','#fbf0da'],
+    ['Altstadt',     'M380,300 L680,380 L700,550 L350,500 Z','#fdf5e6'],
+    ['Haidhausen',   'M700,0 L1200,0 L1200,420 L1100,400 L750,280 Z','#faf4e4'],
+    ['Au',           'M700,380 L1200,420 L1200,720 L680,700 L700,550 Z','#fcf6e8'],
+    ['Sendling',     'M0,380 L380,380 L350,500 L0,500 Z','#fef8ee'],
+    ['Isarvorstadt', 'M350,500 L700,550 L680,700 L0,720 L0,500 Z','#fbf2e2']
+  ].forEach(([name,d,fill])=>{
+    const p=elNS('path');
+    p.setAttribute('d',d);p.setAttribute('fill',fill);
+    p.setAttribute('stroke','#d4c4a0');p.setAttribute('stroke-width','1.5');
+    p.setAttribute('stroke-dasharray','4 6');
+    L.appendChild(p);
 
-  create() {
-    const tm = this.cache.json.get('tilemap');
-    const { cols, rows, tileWidth, tileHeight } = tm;
-    const layerData = tm.layers[0].data;
-    const pois = this.cache.json.get('pois');
-
-    this.tileW = tileWidth;
-    this.tileH = tileHeight;
-
-    const mapW = cols * tileWidth;
-    const mapH = rows * tileHeight;
-
-    // 列主序 → 行主序
-    const rowData = [];
-    for (let r = 0; r < rows; r++) {
-      rowData[r] = [];
-      for (let c = 0; c < cols; c++) {
-        rowData[r][c] = layerData[c][r];
-      }
-    }
-
-    const map = this.make.tilemap({ data: rowData, tileWidth, tileHeight });
-    const ts = map.addTilesetImage('munich_tileset', 'munich_tileset', tileWidth, tileHeight, 0, 0);
-    this.layer = map.createLayer(0, ts, 0, 0);
-
-    // 羊皮纸底色
-    this.cameras.main.setBackgroundColor('#f0deb8');
-
-    // 相机
-    this.cameras.main.setBounds(0, 0, mapW, mapH);
-    this.cameras.main.setZoom(2);
-
-    const marien = pois.find(p => p.name === 'Marienplatz');
-    if (marien) {
-      this.cameras.main.centerOn(
-        marien.col * tileWidth + tileWidth / 2,
-        marien.row * tileHeight + tileHeight / 2,
-      );
-    }
-
-    // POI 标记
-    pois.forEach(poi => this.createQuestMarker(poi));
-
-    // 按键
-    this.cursors = this.input.keyboard.createCursorKeys();
-    this.wasd = {
-      W: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W),
-      A: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A),
-      S: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S),
-      D: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D),
-    };
-
-    // 拖拽
-    this.input.on('pointermove', (p) => {
-      if (p.isDown) {
-        this.cameras.main.scrollX -= p.velocity.x * 0.3;
-        this.cameras.main.scrollY -= p.velocity.y * 0.3;
-      }
-    });
-
-    // 滚轮
-    this.input.on('wheel', (p, g, dx, dy) => {
-      const z = Phaser.Math.Clamp(this.cameras.main.zoom - dy * 0.003, 1, 4);
-      this.cameras.main.setZoom(z);
-    });
-  }
-
-  createQuestMarker(poi) {
-    const cx = poi.col * this.tileW + this.tileW / 2;
-    const cy = poi.row * this.tileH + this.tileH / 2;
-
-    // RPG 感叹号
-    const ex = this.add.text(cx, cy - 14, '!', {
-      fontFamily: 'Arial Black, Impact, sans-serif',
-      fontSize: '18px', fontStyle: 'bold', color: '#f4d35e',
-      stroke: '#000', strokeThickness: 3,
-    }).setOrigin(0.5).setDepth(10);
-    this.tweens.add({
-      targets: ex, y: cy - 20,
-      duration: 900, yoyo: true, repeat: -1, ease: 'Sine.easeInOut',
-    });
-
-    // 光圈
-    const ring = this.add.circle(cx, cy, 8, 0xf4d35e, 0.2).setDepth(9);
-    this.tweens.add({
-      targets: ring, scale: { from: 0.8, to: 1.8 },
-      alpha: { from: 0.2, to: 0 },
-      duration: 1500, repeat: -1, ease: 'Sine.easeInOut',
-    });
-
-    // 标签 (hover)
-    const label = this.add.text(cx, cy - 24, poi.name, {
-      fontFamily: '"Courier New", monospace', fontSize: '10px',
-      color: '#0a1428', backgroundColor: 'rgba(244,211,94,0.75)',
-      padding: { x: 5, y: 2 },
-    }).setOrigin(0.5, 1).setDepth(10).setAlpha(0);
-
-    // 菱形
-    const diamond = this.add.polygon(cx, cy - 6,
-      [0, -6, 6, 0, 0, 6, -6, 0], 0xc9956b, 1
-    ).setDepth(9).setStrokeStyle(1, 0x8a6a3a, 1);
-
-    // 热区
-    const hit = this.add.rectangle(cx, cy, 40, 40, 0x000000, 0).setDepth(11);
-    hit.setInteractive({ useHandCursor: true });
-    hit.on('pointerover', () => {
-      label.setAlpha(1);
-      diamond.setFillStyle(0xf4d35e, 1);
-      ex.setColor('#fff');
-    });
-    hit.on('pointerout', () => {
-      label.setAlpha(0);
-      diamond.setFillStyle(0xc9956b, 1);
-      ex.setColor('#f4d35e');
-    });
-    hit.on('pointerdown', () => this.showInfo(poi));
-  }
-
-  showInfo(poi) {
-    if (this.box) { this.box.destroy(); this.box = null; }
-    const cam = this.cameras.main;
-    const cx = poi.col * this.tileW + this.tileW / 2;
-    const cy = poi.row * this.tileH + this.tileH / 2;
-    const sx = cx - cam.scrollX;
-    const sy = cy - cam.scrollY - 32;
-
-    this.box = this.add.container(0, 0).setScrollFactor(0).setDepth(300);
-    const bg = this.add.rectangle(0, 0, 220, 60, 0x0a1428, 0.94);
-    bg.setStrokeStyle(2, 0xc9956b, 0.9);
-    this.box.add(bg);
-
-    this.box.add(this.add.text(0, -16, poi.name, {
-      fontFamily: '"Courier New", monospace', fontSize: '13px',
-      fontStyle: 'bold', color: '#f4d35e',
-    }).setOrigin(0.5));
-
-    this.box.add(this.add.text(0, 6, poi.desc, {
-      fontFamily: '"Courier New", monospace', fontSize: '10px', color: '#aab8bf',
-    }).setOrigin(0.5));
-
-    this.box.add(this.add.text(0, 22, 'Altstadt · 慕尼黑', {
-      fontFamily: '"Courier New", monospace', fontSize: '8px', color: '#4a6a8a',
-    }).setOrigin(0.5));
-
-    this.box.setPosition(sx, sy);
-
-    this.time.delayedCall(4000, () => {
-      if (this.box) {
-        this.tweens.add({ targets: this.box, alpha: 0, duration: 300,
-          onComplete: () => { if (this.box) { this.box.destroy(); this.box = null; } }
-        });
-      }
-    });
-  }
-
-  update() {
-    const speed = 5;
-    let dx = 0, dy = 0;
-    if (this.cursors.left.isDown || this.wasd.A.isDown) dx -= speed;
-    if (this.cursors.right.isDown || this.wasd.D.isDown) dx += speed;
-    if (this.cursors.up.isDown || this.wasd.W.isDown) dy -= speed;
-    if (this.cursors.down.isDown || this.wasd.S.isDown) dy += speed;
-    if (dx || dy) {
-      this.cameras.main.scrollX += dx;
-      this.cameras.main.scrollY += dy;
-    }
-  }
-
-  resetToMarien() {
-    const pois = this.cache.json.get('pois');
-    const m = pois.find(p => p.name === 'Marienplatz');
-    if (m) {
-      this.cameras.main.setZoom(2);
-      this.cameras.main.centerOn(
-        m.col * this.tileW + this.tileW / 2,
-        m.row * this.tileH + this.tileH / 2,
-      );
-    }
-  }
-}
-
-// ── 启动 ──
-let game;
-
-async function init() {
-  const bar = document.getElementById('load-bar');
-  bar.style.width = '10%';
-  const tilemap = await loadJSON(base + '/tilemap.json');
-  bar.style.width = '50%';
-  const pois = await loadJSON(base + '/pois.json');
-  bar.style.width = '80%';
-
-  game = new Phaser.Game({
-    type: Phaser.AUTO,
-    parent: 'game-container',
-    width: 960,
-    height: 640,
-    backgroundColor: '#f0deb8',
-    pixelArt: true,
-    roundPixels: true,
-    scale: { mode: Phaser.Scale.FIT, autoCenter: Phaser.Scale.CENTER_BOTH },
-    scene: [MunichMapScene],
-    callbacks: {
-      postBoot: (g) => {
-        g.cache.json.add('tilemap', tilemap);
-        g.cache.json.add('pois', pois);
-      },
-    },
+    // 区名
+    const bbox=document.createElementNS('http://www.w3.org/2000/svg','text');
+    const pathData=d.match(/[\d.]+/g).map(Number);
+    let cx=0,cy=0;
+    for(let i=0;i<pathData.length-1;i+=2){cx+=pathData[i];cy+=pathData[i+1]}
+    cx/=pathData.length/2;cy/=pathData.length/2;
+    bbox.setAttribute('x',cx);bbox.setAttribute('y',cy);
+    bbox.setAttribute('text-anchor','middle');bbox.setAttribute('dominant-baseline','middle');
+    bbox.setAttribute('font-size','8');bbox.setAttribute('fill','#b8a888');
+    bbox.setAttribute('font-family','Courier New,monospace');
+    bbox.setAttribute('font-style','italic');
+    bbox.textContent=name.replace('(off-map)','');
+    L.appendChild(bbox);
   });
-
-  bar.style.width = '100%';
-  setTimeout(() => {
-    const el = document.getElementById('loading');
-    el.style.opacity = '0';
-    setTimeout(() => el.style.display = 'none', 400);
-  }, 300);
 }
 
-document.getElementById('btn-reset').addEventListener('click', () => {
-  if (game) {
-    const sc = game.scene.getScene('MunichMapScene');
-    if (sc && sc.resetToMarien) sc.resetToMarien();
-  }
+// ═══════════════════════════════════════════
+// L3: 河流
+// ═══════════════════════════════════════════
+function renderRiver(){
+  const L=$q('#riverLayer');
+  const body=elNS('path');
+  body.setAttribute('d','M840,-20 C780,100 810,200 760,300 C700,420 740,520 690,600 C670,640 690,680 660,760');
+  body.setAttribute('fill','none');body.setAttribute('stroke','#82b7d9');
+  body.setAttribute('stroke-width','52');body.setAttribute('stroke-linecap','round');
+  body.setAttribute('opacity','.85');
+  L.appendChild(body);
+
+  const edge=elNS('path');
+  edge.setAttribute('d','M840,-20 C780,100 810,200 760,300 C700,420 740,520 690,600 C670,640 690,680 660,760');
+  edge.setAttribute('fill','none');edge.setAttribute('stroke','#477fa7');
+  edge.setAttribute('stroke-width','4');edge.setAttribute('stroke-linecap','round');
+  L.appendChild(edge);
+
+  const lbl=elNS('text');
+  lbl.setAttribute('x','720');lbl.setAttribute('y','460');
+  lbl.setAttribute('font-family','Courier New,monospace');
+  lbl.setAttribute('font-size','11');lbl.setAttribute('fill','#477fa7');
+  lbl.setAttribute('font-style','italic');
+  lbl.setAttribute('transform','rotate(-15,720,460)');
+  lbl.textContent='Isar';
+  L.appendChild(lbl);
+}
+
+// ═══════════════════════════════════════════
+// L4: 公园
+// ═══════════════════════════════════════════
+function renderParks(){
+  const L=$q('#parkLayer');
+  [
+    {d:'M690,70 C830,20 1050,60 1140,130 L1130,280 C1000,230 870,280 740,220 C710,200 700,140 690,70Z',label:'Englischer Garten'},
+    {d:'M510,160 C530,150 560,150 580,160 C600,175 590,195 570,200 C545,205 525,195 510,175Z',label:'Hofgarten'},
+    {d:'M430,230 C460,220 490,230 500,260 C490,280 450,285 425,270Z',label:'Bot. Garten'},
+    {d:'M80,520 C170,470 280,490 320,560 C250,630 120,640 60,580Z',label:'Olympiapark ↓'}
+  ].forEach(p=>{
+    const pa=elNS('path');
+    pa.setAttribute('d',p.d);pa.setAttribute('fill','#a9c88b');
+    pa.setAttribute('stroke','#6c965d');pa.setAttribute('stroke-width','3');
+    L.appendChild(pa);
+    const pathData=p.d.match(/[\d.]+/g).map(Number);
+    let cx=0,cy=0;
+    for(let i=0;i<pathData.length-1;i+=2){cx+=pathData[i];cy+=pathData[i+1]}
+    cx/=pathData.length/2;cy/=pathData.length/2;
+    const t=elNS('text');
+    t.setAttribute('x',cx);t.setAttribute('y',cy);
+    t.setAttribute('text-anchor','middle');t.setAttribute('font-size','7');
+    t.setAttribute('fill','#4a6a3a');t.setAttribute('font-family','Courier New,monospace');
+    t.setAttribute('font-style','italic');
+    t.textContent=p.label;
+    L.appendChild(t);
+  });
+}
+
+// ═══════════════════════════════════════════
+// L5: 主干道
+// ═══════════════════════════════════════════
+function renderRoads(){
+  const L=$q('#roadLayer');
+  [
+    'M80,160 C240,140 420,150 560,200 C720,250 850,220 1120,210',
+    'M80,310 C260,280 440,300 560,350 C720,400 850,360 1120,340',
+    'M100,580 C260,510 440,490 580,520 C750,550 900,490 1120,470',
+    'M240,50 C250,220 260,380 280,660',
+    'M520,80 C500,220 520,350 510,660',
+    'M940,90 C900,250 920,400 880,670',
+    'M700,250 C650,280 620,380 600,500 C580,580 610,640 620,680',
+    'M180,400 C350,410 520,420 680,500'
+  ].forEach(d=>{
+    const base=elNS('path');
+    base.setAttribute('d',d);base.setAttribute('fill','none');
+    base.setAttribute('stroke','#c9b488');base.setAttribute('stroke-width','14');
+    base.setAttribute('stroke-linecap','round');
+    L.appendChild(base);
+    const center=elNS('path');
+    center.setAttribute('d',d);center.setAttribute('fill','none');
+    center.setAttribute('stroke','#f6ead0');center.setAttribute('stroke-width','4');
+    center.setAttribute('stroke-linecap','round');
+    L.appendChild(center);
+  });
+}
+
+// ═══════════════════════════════════════════
+// L6: 地铁线
+// ═══════════════════════════════════════════
+function renderSubwayLines(){
+  const L=$q('#subwayLayer');
+  [
+    {id:'U3',color:'#e2a43d',d:'M80,130 C260,190 430,250 580,340 C730,430 900,500 1120,560'},
+    {id:'U6',color:'#1e6eb8',d:'M100,620 C260,530 420,430 560,340 C700,250 860,220 1120,180'}
+  ].forEach(l=>{
+    const pa=elNS('path');
+    pa.setAttribute('d',l.d);pa.setAttribute('fill','none');
+    pa.setAttribute('stroke',l.color);pa.setAttribute('stroke-width','8');
+    pa.setAttribute('stroke-linecap','round');pa.setAttribute('opacity','.8');
+    L.appendChild(pa);
+    const t=elNS('text');
+    t.setAttribute('x','70');t.setAttribute('y',l.id==='U3'?'125':'615');
+    t.setAttribute('font-family','Courier New,monospace');
+    t.setAttribute('font-size','13');t.setAttribute('font-weight','bold');
+    t.setAttribute('fill',l.color);t.setAttribute('stroke','#06142a');
+    t.setAttribute('stroke-width','3');t.setAttribute('paint-order','stroke');
+    t.textContent=l.id;
+    L.appendChild(t);
+  });
+}
+
+// ═══════════════════════════════════════════
+// L7+L8: POI
+// ═══════════════════════════════════════════
+function renderPois(){
+  const L=$q('#poiLayer');L.innerHTML='';
+  pois.forEach(poi=>{
+    const {x,y}=latLngToPoint(poi.lat,poi.lng,mapConfig);
+    const color=poiColor(poi.type,poi.unlocked);
+
+    const g=elNS('g');
+    g.classList.add('poi-group');
+    if(!poi.unlocked)g.classList.add('locked');
+    g.dataset.id=poi.id;
+    g.setAttribute('transform',`translate(${x},${y})`);
+    g.style.cursor=poi.unlocked?'pointer':'not-allowed';
+
+    g.innerHTML=`
+      <g class="poi-pin">
+        <path d="M0,-34 C-18,-34 -30,-18 -30,-3 C-30,16 0,40 0,40 C0,40 30,16 30,-3 C30,-18 18,-34 0,-34Z"
+          fill="#000" opacity=".25" transform="translate(2,3)"/>
+        <path d="M0,-34 C-18,-34 -30,-18 -30,-3 C-30,16 0,40 0,40 C0,40 30,16 30,-3 C30,-18 18,-34 0,-34Z"
+          fill="${color}" stroke="#06142a" stroke-width="4"/>
+        <circle cx="0" cy="-7" r="14" fill="#f7eed9" stroke="#06142a" stroke-width="3"/>
+        <text x="0" y="-1" text-anchor="middle" dominant-baseline="middle"
+          font-size="15">${poiEmoji(poi.icon)}</text>
+      </g>
+      <rect x="-62" y="40" width="124" height="22" rx="3"
+        fill="#07152b" stroke="#e8b85c" stroke-width="2"/>
+      <text x="0" y="55" text-anchor="middle" font-size="12"
+        font-weight="bold" fill="#fff" stroke="#06142a" stroke-width="3"
+        paint-order="stroke" font-family="Courier New,monospace">${poi.name}</text>
+    `;
+
+    if(poi.unlocked){
+      g.addEventListener('click',e=>{e.stopPropagation();selectPoi(poi)});
+      g.addEventListener('mouseenter',e=>showTooltip(e,poi));
+      g.addEventListener('mouseleave',hideTooltip);
+    }
+    L.appendChild(g);
+  });
+}
+
+// ═══════════════════════════════════════════
+// 右侧面板
+// ═══════════════════════════════════════════
+let selectedPoi=null;
+function selectPoi(poi){
+  selectedPoi=poi;
+  document.querySelectorAll('.poi-group').forEach(g=>g.classList.remove('poi-selected'));
+  const g=document.querySelector(`.poi-group[data-id="${poi.id}"]`);
+  if(g)g.classList.add('poi-selected');
+
+  const panel=document.getElementById('detailPanel');
+  const color=poiColor(poi.type,poi.unlocked);
+  const lockClass=poi.unlocked?'':'style="opacity:.5;pointer-events:none"';
+  panel.innerHTML=`
+    <div class="detail-header">
+      <h2><span style="color:${color};font-size:20px">${poiEmoji(poi.icon)}</span> ${poi.name}</h2>
+      <div class="de-name">${poi.name_de}</div>
+    </div>
+    <div class="detail-desc">${poi.description}</div>
+    <div class="detail-actions">
+      ${poi.actions.map(a=>`<button class="action-chip" ${lockClass} onclick="doAction('${poi.id}','${a}')">${a}</button>`).join('')}
+    </div>
+    <div class="detail-stats">
+      <div>🚶 步行：<b>${poi.walk_minutes} min</b></div>
+      <div>🚇 ${poi.ubahn}</div>
+      <div>💰 预计花费：<b>${poi.cost}</b></div>
+    </div>
+    <button onclick="showRouteTo('${poi.id}')" style="margin-top:4px">↗ 显示路线</button>
+  `;
+}
+function doAction(poiId,action){
+  alert(`🎮 动作: ${action}\n📍 地点: ${poiId}\n(后续接入游戏逻辑)`);
+}
+
+// ═══════════════════════════════════════════
+// 路线动画
+// ═══════════════════════════════════════════
+function showRouteTo(poiId){
+  const L=$q('#routeLayer');L.innerHTML='';
+  const home=pois.find(p=>p.id==='home');
+  const target=pois.find(p=>p.id===poiId);
+  if(!home||!target)return;
+
+  const p1=latLngToPoint(home.lat,home.lng,mapConfig);
+  const p2=latLngToPoint(target.lat,target.lng,mapConfig);
+  const mx=(p1.x+p2.x)/2+(Math.random()-.5)*80;
+  const my=(p1.y+p2.y)/2-50;
+
+  const route=elNS('path');
+  route.setAttribute('d',`M${p1.x},${p1.y} Q${mx},${my} ${p2.x},${p2.y}`);
+  route.setAttribute('class','route-line');
+  L.appendChild(route);
+
+  [p1,p2].forEach((p,i)=>{
+    const dot=elNS('circle');
+    dot.setAttribute('cx',p.x);dot.setAttribute('cy',p.y);dot.setAttribute('r','8');
+    dot.setAttribute('fill',i===0?'#3f7f56':'#d85f45');
+    dot.setAttribute('stroke','#06142a');dot.setAttribute('stroke-width','3');
+    L.appendChild(dot);
+  });
+}
+
+// ═══════════════════════════════════════════
+// Tooltip
+// ═══════════════════════════════════════════
+function showTooltip(e,poi){
+  const tt=document.getElementById('mapTooltip');
+  const frame=document.getElementById('mapFrame');
+  const r=frame.getBoundingClientRect();
+  tt.textContent=`${poi.name} · ${poi.name_de}`;
+  tt.style.left=(e.clientX-r.left+20)+'px';
+  tt.style.top=(e.clientY-r.top-30)+'px';
+  tt.classList.add('visible');
+}
+function hideTooltip(){document.getElementById('mapTooltip').classList.remove('visible')}
+
+// ═══════════════════════════════════════════
+// 缩放
+// ═══════════════════════════════════════════
+let zoom=1;
+document.getElementById('mapFrame').addEventListener('wheel',e=>{
+  e.preventDefault();
+  zoom=Math.max(.6,Math.min(2.5,zoom+(e.deltaY>0?-.1:.1)));
+  const w=1200/zoom,h=720/zoom;
+  svg.setAttribute('viewBox',`${600-w/2} ${360-h/2} ${w} ${h}`);
+});
+document.getElementById('btnReset').addEventListener('click',()=>{
+  zoom=1;svg.setAttribute('viewBox','0 0 1200 720');hideTooltip();
+});
+document.getElementById('btnClearRoute').addEventListener('click',()=>{
+  $q('#routeLayer').innerHTML='';
 });
 
-init();
+// ═══════════════════════════════════════════
+// 启动
+// ═══════════════════════════════════════════
+renderDistricts();
+renderRiver();
+renderParks();
+renderRoads();
+renderSubwayLines();
+renderPois();
 </script>
 </body>
 </html>
