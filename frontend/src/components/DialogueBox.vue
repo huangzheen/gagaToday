@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue';
+import { computed, ref, watch, onMounted, onUnmounted } from 'vue';
 import { useGameStore } from '@/stores/game';
 
 const store = useGameStore();
@@ -9,7 +9,38 @@ const currentTurn = computed(() => {
   return store.currentNpc.turns[store.dialogueState.turnIndex];
 });
 
-const npcPortrait = computed(() => store.currentNpc?.npc_portrait);
+const npcName = computed(() => store.currentNpc?.npc_name_de || '...');
+const npcRole = computed(() => store.currentNpc?.npc_role || '');
+
+const activeLanguage = computed(() => store.dialogueState.useEnglish ? 'en' : 'de');
+const mainText = computed(() => {
+  if (!currentTurn.value) return '';
+  return activeLanguage.value === 'en' ? currentTurn.value.en : currentTurn.value.de;
+});
+const zhHint = computed(() => currentTurn.value?.zh || '');
+
+const hasOptions = computed(() => Array.isArray(currentTurn.value?.options_de) && currentTurn.value.options_de.length > 0);
+const isLastTurn = computed(() => {
+  if (!store.currentNpc) return true;
+  return store.dialogueState.turnIndex >= store.currentNpc.turns.length - 1;
+});
+
+// 闪烁"继续"指示器 ▼
+const showCursor = ref(true);
+let cursorInterval = null;
+onMounted(() => {
+  cursorInterval = setInterval(() => { showCursor.value = !showCursor.value; }, 500);
+});
+onUnmounted(() => {
+  if (cursorInterval) clearInterval(cursorInterval);
+});
+
+function handleNext() {
+  if (!hasOptions.value) {
+    // 无选项时点击直接 nextTurn(最后一轮会自动关闭)
+    store.nextTurn();
+  }
+}
 
 function handleOption(optionText, optionIndex) {
   store.selectOption(optionIndex);
@@ -24,101 +55,70 @@ function handleBackToHome() {
   store.returnToHome();
 }
 
-const isAtHome = computed(() => store.currentScene === 'host_home');
-
-function handleToggleLanguage() {
+function handleToggleLang() {
   store.toggleLanguage();
 }
 
-function handleMicRecord() {
-  // 演示:录音按钮(后续接 Fun-ASR + Qwen2-Audio)
-  alert('🎤 录音功能(Phase 0 步骤 2-5 完成后接入)\n\n当前对话:\n' +
-        (store.dialogueState.useEnglish ? currentTurn.value?.en : currentTurn.value?.de));
-}
+const isAtHome = computed(() => store.currentScene === 'host_home');
+const isOpen = computed(() => store.dialogueState.open && !!store.currentNpc);
 </script>
 
 <template>
   <Transition name="dialogue">
-    <div v-if="store.dialogueState.open && store.currentNpc" class="dialogue-overlay">
-      <div class="dialogue-container pixel-border">
-        <!-- 左侧: NPC 立绘 + 信息 -->
-        <div class="npc-panel">
-          <div class="portrait-frame">
-            <img v-if="npcPortrait" :src="npcPortrait" :alt="store.currentNpc.npc_name_de" class="portrait" />
-          </div>
-          <div class="npc-info">
-            <div class="npc-name-de">{{ store.currentNpc.npc_name_de }}</div>
-            <div class="npc-name-zh">{{ store.currentNpc.npc_name_zh }}</div>
-            <div class="npc-role">{{ store.currentNpc.npc_role }}</div>
-          </div>
+    <div v-if="isOpen" class="dialogue-root">
+      <!-- 左上角名字标签(RPG Maker 风格) -->
+      <div class="name-tag pixel-panel-name">
+        <span class="name-text">{{ npcName }}</span>
+        <span v-if="npcRole" class="name-role">{{ npcRole }}</span>
+      </div>
+
+      <!-- 主体对话条 -->
+      <div class="dialogue-box pixel-panel-box" @click="handleNext">
+        <!-- 顶部小工具栏(语言切换) -->
+        <div class="toolbar" @click.stop>
+          <button
+            class="lang-btn"
+            :class="{ active: !store.dialogueState.useEnglish }"
+            @click="handleToggleLang"
+          >🇩🇪 DE</button>
+          <button
+            class="lang-btn"
+            :class="{ active: store.dialogueState.useEnglish }"
+            @click="handleToggleLang"
+          >🇬🇧 EN</button>
+          <span class="toolbar-hint">
+            {{ store.dialogueState.useEnglish ? 'English mode' : 'Deutsch mode' }}
+          </span>
+          <button v-if="isAtHome" class="back-btn" @click.stop="handleBackToHome">← Nach Hause</button>
+          <button v-else class="back-btn" @click.stop="handleBackToCity">← Karte</button>
         </div>
 
-        <!-- 右侧: 对话内容 -->
-        <div class="dialogue-content">
-          <!-- 语言切换栏 -->
-          <div class="lang-toggle-bar">
-            <button
-              :class="['lang-btn', { active: !store.dialogueState.useEnglish }]"
-              @click="store.dialogueState.useEnglish && handleToggleLanguage()"
-            >
-              🇩🇪 Deutsch
-            </button>
-            <button
-              :class="['lang-btn', { active: store.dialogueState.useEnglish }]"
-              @click="!store.dialogueState.useEnglish && handleToggleLanguage()"
-            >
-              🇬🇧 English
-            </button>
-            <span class="lang-hint">
-              {{ store.dialogueState.useEnglish ? '已切换到英文 (德语 XP -50%)' : '德语模式 (建议)' }}
-            </span>
-          </div>
+        <!-- 主对话内容 -->
+        <div class="main-text">
+          {{ mainText }}
+        </div>
 
-          <!-- 当前台词 -->
-          <div v-if="currentTurn" class="turn">
-            <div v-if="!store.dialogueState.useEnglish" class="lang-section de">
-              <div class="lang-label">🇩🇪 Deutsch</div>
-              <div class="text de">{{ currentTurn.de }}</div>
-            </div>
-            <div v-else class="lang-section en">
-              <div class="lang-label">🇬🇧 English</div>
-              <div class="text en">{{ currentTurn.en }}</div>
-            </div>
+        <!-- 中文提示 -->
+        <div v-if="zhHint" class="zh-hint">💡 {{ zhHint }}</div>
 
-            <div class="translation">
-              <span class="zh-label">中文提示:</span>
-              {{ currentTurn.zh }}
-            </div>
-          </div>
-
-          <!-- 选项 -->
-          <div v-if="currentTurn?.options_de" class="options">
-            <div class="options-label">▼ 回复选项 (德语尝试):</div>
+        <!-- 选项(可选) -->
+        <div v-if="hasOptions" class="options" @click.stop>
+          <div class="options-label">▼ 回复选项:</div>
+          <div class="options-list">
             <button
               v-for="(opt, idx) in currentTurn.options_de"
               :key="idx"
               class="option-btn"
               @click="handleOption(opt, idx)"
             >
-              <span class="option-text">{{ opt }}</span>
-              <button class="mic-mini" @click.stop="handleMicRecord" title="用麦克风说出这句话">
-                🎤
-              </button>
+              {{ opt }}
             </button>
           </div>
+        </div>
 
-          <!-- 底部操作 -->
-          <div class="actions">
-            <button v-if="isAtHome" class="action-btn back" @click="handleBackToHome">
-              ← 回家
-            </button>
-            <button v-else class="action-btn back" @click="handleBackToCity">
-              ← 返回城市地图
-            </button>
-            <button class="action-btn mic" @click="handleMicRecord">
-              🎤 长按录音 (Phase 0 接入)
-            </button>
-          </div>
+        <!-- 继续指示(右下角闪烁) -->
+        <div v-if="!hasOptions" class="continue-indicator" :class="{ visible: showCursor }">
+          ▼
         </div>
       </div>
     </div>
@@ -126,238 +126,203 @@ function handleMicRecord() {
 </template>
 
 <style scoped>
-.dialogue-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.7);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 100;
+.dialogue-root {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  pointer-events: none;
 }
 
-.dialogue-container {
-  display: grid;
-  grid-template-columns: 320px 1fr;
-  width: min(95vw, 1100px);
-  height: min(85vh, 600px);
-  background: #2d261d;
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.npc-panel {
-  background: linear-gradient(180deg, #3a2f23 0%, #2d261d 100%);
-  padding: 16px;
+/* 名字标签 - 浮在对话条上方 */
+.name-tag {
+  position: absolute;
+  left: 24px;
+  top: -32px;
+  padding: 6px 14px 6px 12px;
+  background: #1a2a5a;
+  border: 3px solid #fff;
+  box-shadow:
+    inset 0 0 0 1px #1a2a5a,
+    0 0 0 1px #0a1428;
+  pointer-events: auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  border-right: 2px solid #4a3a2a;
-}
-
-.portrait-frame {
-  width: 240px;
-  height: 320px;
-  background: #1a1410;
-  border: 3px solid #c9956b;
-  border-radius: 4px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.portrait {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  gap: 0;
+  font-family: 'Courier New', monospace;
   image-rendering: pixelated;
 }
 
-.npc-info {
-  text-align: center;
-}
-
-.npc-name-de {
-  font-family: 'Courier New', monospace;
-  color: #f4d35e;
-  font-size: 18px;
+.name-text {
+  color: #fff;
+  font-size: 16px;
   font-weight: bold;
-  margin-bottom: 2px;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 0 #000;
 }
 
-.npc-name-zh {
-  color: #c9956b;
-  font-size: 13px;
-  margin-bottom: 4px;
-}
-
-.npc-role {
-  color: #8a7a60;
-  font-size: 11px;
+.name-role {
+  color: #b8c8e8;
+  font-size: 10px;
   font-style: italic;
+  letter-spacing: 0.5px;
 }
 
-.dialogue-content {
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  overflow-y: auto;
+/* 主对话条 */
+.dialogue-box {
+  position: relative;
+  margin: 0 16px 16px 16px;
+  padding: 12px 16px 14px 16px;
+  min-height: 140px;
+  background: #1a2a5a;
+  border: 4px solid #fff;
+  box-shadow:
+    inset 0 0 0 2px #1a2a5a,
+    0 0 0 2px #0a1428,
+    0 -4px 0 rgba(10, 20, 40, 0.4);
+  pointer-events: auto;
+  cursor: pointer;
+  font-family: 'Courier New', monospace;
+  color: #fff;
+  image-rendering: pixelated;
 }
 
-.lang-toggle-bar {
+/* 工具栏 */
+.toolbar {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px;
-  background: #1a1410;
-  border: 1px solid #4a3a2a;
-  border-radius: 3px;
+  gap: 6px;
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.3);
 }
 
 .lang-btn {
-  padding: 6px 12px;
-  background: #2d261d;
-  border: 1px solid #4a3a2a;
-  border-radius: 3px;
-  color: #8a7a60;
-  font-size: 13px;
+  padding: 2px 8px;
+  background: rgba(10, 20, 40, 0.6);
+  border: 1px solid #4a6a9a;
+  color: #b8c8e8;
   font-family: 'Courier New', monospace;
-  transition: all 0.2s;
+  font-size: 10px;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  border-radius: 0;
 }
 
 .lang-btn.active {
-  background: #4a3a2a;
-  border-color: #c9956b;
-  color: #f4d35e;
-  font-weight: bold;
+  background: #4a6a9a;
+  color: #fff;
+  border-color: #fff;
 }
 
-.lang-hint {
+.toolbar-hint {
+  color: #8a9aba;
+  font-size: 10px;
+  font-style: italic;
   margin-left: auto;
-  font-size: 11px;
-  color: #8a7a60;
+  margin-right: 8px;
+}
+
+.back-btn {
+  padding: 2px 8px;
+  background: rgba(244, 211, 94, 0.15);
+  border: 1px solid #c9956b;
+  color: #f4d35e;
+  font-family: 'Courier New', monospace;
+  font-size: 10px;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+}
+
+.back-btn:hover {
+  background: rgba(244, 211, 94, 0.3);
+}
+
+/* 主对话文字 */
+.main-text {
+  color: #fff;
+  font-size: 18px;
+  line-height: 1.4;
+  letter-spacing: 0.5px;
+  padding: 4px 0;
+  text-shadow: 1px 1px 0 #000;
+}
+
+/* 中文提示 */
+.zh-hint {
+  margin-top: 6px;
+  padding: 4px 8px;
+  background: rgba(10, 20, 40, 0.5);
+  border-left: 2px solid #c9956b;
+  color: #b8c8e8;
+  font-size: 12px;
   font-style: italic;
 }
 
-.turn {
-  background: #1a1410;
-  border: 2px solid #4a3a2a;
-  border-radius: 4px;
-  padding: 16px;
-}
-
-.lang-section {
-  margin-bottom: 12px;
-}
-
-.lang-label {
-  font-size: 11px;
-  color: #8a7a60;
-  margin-bottom: 6px;
-  font-family: 'Courier New', monospace;
-}
-
-.text.de {
-  font-size: 20px;
-  color: #e8d5b0;
-  font-weight: bold;
-  line-height: 1.4;
-  font-family: 'Courier New', monospace;
-}
-
-.text.en {
-  font-size: 18px;
-  color: #c9956b;
-  line-height: 1.4;
-}
-
-.translation {
-  margin-top: 8px;
-  padding-top: 8px;
-  border-top: 1px dashed #4a3a2a;
-  color: #8a7a60;
-  font-size: 13px;
-}
-
-.zh-label {
-  color: #f4d35e;
-  font-weight: bold;
-}
-
+/* 选项 */
 .options {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.3);
 }
 
 .options-label {
   color: #f4d35e;
-  font-size: 12px;
-  font-family: 'Courier New', monospace;
-  margin-bottom: 4px;
+  font-size: 11px;
+  margin-bottom: 6px;
+  letter-spacing: 1px;
+}
+
+.options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .option-btn {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 14px;
-  background: #2d261d;
-  border: 2px solid #4a3a2a;
-  border-radius: 3px;
-  color: #e8d5b0;
-  font-size: 14px;
+  padding: 6px 10px;
+  background: rgba(10, 20, 40, 0.5);
+  border: 2px solid #4a6a9a;
+  color: #fff;
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
   text-align: left;
-  transition: all 0.15s;
+  cursor: pointer;
+  transition: all 0.1s;
+  letter-spacing: 0.5px;
 }
 
 .option-btn:hover {
-  background: #3a2f23;
-  border-color: #c9956b;
-  transform: translateX(4px);
+  background: #2a4a8a;
+  border-color: #fff;
+  transform: translateX(2px);
 }
 
-.mic-mini {
-  padding: 4px 8px;
-  background: #1a1410;
-  border-radius: 50%;
-  font-size: 14px;
+/* 继续指示(右下角闪烁 ▼) */
+.continue-indicator {
+  position: absolute;
+  right: 16px;
+  bottom: 10px;
+  color: #f4d35e;
+  font-size: 16px;
+  font-weight: bold;
+  text-shadow: 1px 1px 0 #000;
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
 }
 
-.actions {
-  display: flex;
-  gap: 8px;
-  margin-top: auto;
-  padding-top: 8px;
+.continue-indicator.visible {
+  opacity: 1;
 }
-
-.action-btn {
-  padding: 10px 16px;
-  background: #2d261d;
-  border: 2px solid #4a3a2a;
-  border-radius: 3px;
-  color: #e8d5b0;
-  font-family: 'Courier New', monospace;
-  font-size: 13px;
-  transition: all 0.15s;
-}
-
-.action-btn:hover {
-  background: #3a2f23;
-  border-color: #c9956b;
-}
-
-.action-btn.back { color: #8a7a60; }
-.action-btn.mic { color: #d94545; }
 
 /* Transition */
 .dialogue-enter-active, .dialogue-leave-active {
-  transition: opacity 0.2s;
+  transition: opacity 0.2s, transform 0.2s;
 }
 .dialogue-enter-from, .dialogue-leave-to {
   opacity: 0;
+  transform: translateY(8px);
 }
 </style>

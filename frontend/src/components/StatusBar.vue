@@ -6,13 +6,13 @@ const store = useGameStore();
 
 const dateLabel = computed(() => {
   const months = ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'];
-  return `Y${store.stats.date.year} · ${months[store.stats.date.month - 1]} ${store.stats.date.day}`;
+  return `${months[store.stats.date.month - 1]} ${store.stats.date.day}`;
 });
 
 const moodIcon = computed(() => {
-  if (store.stats.mood >= 70) return ':)';
-  if (store.stats.mood >= 40) return ':|';
-  return ':(';
+  if (store.stats.mood >= 70) return '😊';
+  if (store.stats.mood >= 40) return '😐';
+  return '😟';
 });
 
 const energyColor = computed(() => {
@@ -21,31 +21,32 @@ const energyColor = computed(() => {
   return '#d94545';
 });
 
-const canAdvance = computed(() => {
-  return store.nextTimeBlock !== null && !store.dialogueState.open;
+const moneyColor = computed(() => {
+  if (store.stats.money >= 300) return '#f4d35e';
+  if (store.stats.money >= 100) return '#e8a83a';
+  return '#d94545';
 });
-
-const isNight = computed(() => store.currentTimeBlock === 'night');
-
-function handleAdvance() {
-  if (isNight.value) {
-    store.endDay();
-  } else {
-    store.advanceTime();
-  }
-}
 </script>
 
 <template>
-  <header class="status-bar pixel-border">
-    <!-- 主角名 + 日期 -->
-    <div class="cell left">
-      <div class="name">{{ store.stats.name }}, {{ store.stats.age }}</div>
-      <div class="date">{{ dateLabel }}</div>
+  <div class="status-card pixel-panel">
+    <!-- 角色 + 日期 + 时段 -->
+    <div class="row top">
+      <div class="char">
+        <span class="avatar">👧</span>
+        <div class="char-info">
+          <div class="name">{{ store.stats.name }} · {{ store.stats.age }}</div>
+          <div class="date">{{ dateLabel }}</div>
+        </div>
+      </div>
+      <div class="time">
+        <div class="time-label">UHR</div>
+        <div class="time-value">{{ store.currentTimeLabel }}</div>
+      </div>
     </div>
 
-    <!-- 心情 + 体力 -->
-    <div class="cell">
+    <!-- 体力 + 心情 -->
+    <div class="row stats">
       <div class="stat">
         <span class="icon">{{ moodIcon }}</span>
         <div class="bar">
@@ -54,7 +55,7 @@ function handleAdvance() {
         <span class="value">{{ store.stats.mood }}</span>
       </div>
       <div class="stat">
-        <span class="icon">EN</span>
+        <span class="icon">⚡</span>
         <div class="bar">
           <div class="fill" :style="{ width: store.stats.energy + '%', background: energyColor }"></div>
         </div>
@@ -62,107 +63,134 @@ function handleAdvance() {
       </div>
     </div>
 
-    <!-- 资金 -->
-    <div class="cell money">
-      <span class="icon">€</span>
-      <span class="value">{{ store.stats.money }}</span>
-    </div>
-
-    <!-- 语言能力 -->
-    <div class="cell languages">
-      <div class="lang de">
-        <span class="flag">DE</span>
-        <span class="level">{{ store.stats.language.german }}</span>
+    <!-- 资金 + 语言 -->
+    <div class="row bottom">
+      <div class="money">
+        <span class="money-icon">€</span>
+        <span class="money-value" :style="{ color: moneyColor }">{{ store.stats.money.toFixed(0) }}</span>
       </div>
-      <div class="lang en">
-        <span class="flag">EN</span>
-        <span class="level">{{ store.stats.language.english }}</span>
+      <div class="langs">
+        <span class="lang de">
+          <span class="flag">🇩🇪</span>
+          <span class="level">{{ store.stats.language.german }}</span>
+        </span>
+        <span class="lang en">
+          <span class="flag">🇬🇧</span>
+          <span class="level">{{ store.stats.language.english }}</span>
+        </span>
       </div>
-    </div>
-
-    <!-- 当前位置 -->
-    <div class="cell right">
-      <div class="loc-icon">LOC</div>
-      <div class="loc-text">{{ store.stats.location.toUpperCase() }}</div>
-    </div>
-
-    <!-- 时间块 + 推进按钮 -->
-    <div class="time-strip">
-      <div class="time-info">
-        <span class="time-label">UHRZEIT</span>
-        <span class="time-value">{{ store.currentTimeLabel }}</span>
-      </div>
-      <button
-        class="advance-btn"
-        :class="{ night: isNight }"
-        :disabled="!canAdvance"
-        @click="handleAdvance"
-        :title="isNight ? '结束今天,睡觉结算' : `推进到下一时段: ${store.nextTimeBlock}`"
-      >
-        {{ isNight ? '💤 Schlafen · 睡觉' : `▶ ${store.nextTimeBlock || '—'}` }}
-      </button>
     </div>
 
     <!-- 当前任务 -->
-    <div class="task-strip">
-      <span class="task-label">AKTIV</span>
-      <span class="task-title">{{ store.activeTasks[0]?.title_zh || '自由探索' }}</span>
+    <div v-if="store.activeTasks.length" class="row task">
+      <span class="task-label">▸ {{ store.activeTasks[0].title_zh }}</span>
       <span v-if="store.activeTasks.length > 1" class="task-more">+{{ store.activeTasks.length - 1 }}</span>
     </div>
-  </header>
+  </div>
 </template>
 
 <style scoped>
-.status-bar {
-  display: grid;
-  grid-template-columns: 1fr 1.2fr 0.6fr 0.8fr 0.7fr;
-  grid-template-rows: auto auto auto;
-  gap: 8px 12px;
-  align-items: center;
-  padding: 8px 16px;
-  background: linear-gradient(180deg, #3a2f23 0%, #2d261d 100%);
+.status-card {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 10;
+  width: 280px;
+  padding: 8px 10px;
+  background: rgba(15, 22, 42, 0.92);
+  border: 3px solid #fff;
+  box-shadow:
+    inset 0 0 0 1px #1a2a5a,
+    0 0 0 1px #1a2a5a,
+    0 2px 8px rgba(0, 0, 0, 0.4);
   font-family: 'Courier New', monospace;
-  min-height: 96px;
-  position: relative;
-}
-
-.cell {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   gap: 4px;
+  border-radius: 0;
+  image-rendering: pixelated;
 }
 
-.cell.left { align-items: flex-start; }
-.cell.right { align-items: flex-end; text-align: right; }
-
-.name {
-  color: #f4d35e;
-  font-size: 16px;
-  font-weight: bold;
-  text-shadow: 1px 1px 0 #000;
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
 }
 
-.date {
-  color: #8a7a60;
-  font-size: 11px;
+.top {
+  border-bottom: 1px dashed #4a6a9a;
+  padding-bottom: 4px;
 }
 
-.stat {
+.char {
   display: flex;
   align-items: center;
   gap: 6px;
 }
 
-.stat .icon { font-size: 14px; }
+.avatar {
+  font-size: 22px;
+  filter: drop-shadow(0 1px 0 #000);
+}
+
+.char-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.name {
+  color: #f4d35e;
+  font-size: 12px;
+  font-weight: bold;
+  text-shadow: 1px 1px 0 #000;
+}
+
+.date {
+  color: #8a9aba;
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+.time {
+  text-align: right;
+}
+
+.time-label {
+  color: #6a7a9a;
+  font-size: 9px;
+  letter-spacing: 1px;
+}
+
+.time-value {
+  color: #c9956b;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+.stats {
+  padding: 2px 0;
+}
+
+.stat {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+}
+
+.stat .icon {
+  font-size: 12px;
+}
 
 .bar {
-  width: 80px;
-  height: 8px;
-  background: #1a1410;
-  border: 1px solid #4a3a2a;
-  border-radius: 2px;
-  overflow: hidden;
+  flex: 1;
+  height: 6px;
+  background: #0a1428;
+  border: 1px solid #2a3a5a;
+  border-radius: 0;
 }
 
 .bar .fill {
@@ -172,149 +200,76 @@ function handleAdvance() {
 }
 
 .value {
-  font-size: 11px;
   color: #c9956b;
-  min-width: 24px;
+  font-size: 10px;
+  font-weight: bold;
+  min-width: 18px;
+  text-align: right;
+}
+
+.bottom {
+  border-top: 1px dashed #4a6a9a;
+  padding-top: 4px;
 }
 
 .money {
-  flex-direction: row;
+  display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 4px;
+}
+
+.money-icon {
+  color: #f4d35e;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.money-value {
+  font-size: 14px;
+  font-weight: bold;
+  text-shadow: 1px 1px 0 #000;
+}
+
+.langs {
+  display: flex;
   gap: 6px;
-}
-
-.money .icon {
-  font-size: 20px;
-  color: #f4d35e;
-  font-weight: bold;
-}
-
-.money .value {
-  font-size: 18px;
-  color: #f4d35e;
-  font-weight: bold;
-}
-
-.languages {
-  flex-direction: row;
-  gap: 12px;
-  align-items: center;
 }
 
 .lang {
   display: flex;
   align-items: center;
-  gap: 4px;
-  padding: 4px 8px;
-  background: #1a1410;
-  border: 1px solid #4a3a2a;
-  border-radius: 3px;
+  gap: 3px;
+  padding: 2px 6px;
+  background: #0a1428;
+  border: 1px solid #2a3a5a;
+  border-radius: 0;
 }
 
-.lang.de { border-color: #5a7a8a; }
+.lang.de { border-color: #4a6a8a; }
 .lang.en { border-color: #8a5a5a; }
 
-.flag { font-size: 14px; }
+.flag { font-size: 11px; }
 
 .level {
-  font-size: 11px;
   color: #c9956b;
-  font-weight: bold;
-}
-
-.loc-icon { font-size: 16px; }
-.loc-text {
-  font-size: 13px;
-  color: #f4d35e;
-  font-weight: bold;
-  letter-spacing: 2px;
-}
-
-/* 时间块 strip */
-.time-strip {
-  grid-column: 1 / -1;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 6px 0;
-  border-top: 1px solid #4a3a2a;
-}
-
-.time-info {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.time-label {
-  color: #8a7a60;
   font-size: 10px;
-  letter-spacing: 1px;
-}
-
-.time-value {
-  color: #e8d5b0;
-  font-size: 13px;
   font-weight: bold;
 }
 
-.advance-btn {
-  padding: 6px 14px;
-  background: #5a4a3a;
-  border: 2px solid #c9956b;
-  border-radius: 3px;
-  color: #f4d35e;
-  font-family: 'Courier New', monospace;
-  font-size: 12px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.15s;
-}
-
-.advance-btn:hover:not(:disabled) {
-  background: #6a5a4a;
-  border-color: #f4d35e;
-  transform: translateX(2px);
-}
-
-.advance-btn:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
-
-.advance-btn.night {
-  background: #2a2a4a;
-  border-color: #7a7aaa;
-  color: #b8b8d8;
-}
-
-.advance-btn.night:hover:not(:disabled) {
-  background: #3a3a5a;
-  border-color: #d8d8f8;
-}
-
-/* 任务 strip */
-.task-strip {
-  grid-column: 1 / -1;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  min-height: 20px;
+.task {
+  border-top: 1px dashed #4a6a9a;
   padding-top: 4px;
-  border-top: 1px solid #4a3a2a;
+  background: rgba(244, 211, 94, 0.08);
+  margin: 2px -10px -8px -10px;
+  padding: 4px 10px;
 }
 
 .task-label {
-  color: #8a7a60;
+  color: #f4d35e;
   font-size: 10px;
-  letter-spacing: 1px;
-}
-
-.task-title {
-  color: #e8d5b0;
-  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  flex: 1;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -323,9 +278,9 @@ function handleAdvance() {
 .task-more {
   background: #c9956b;
   color: #1a1410;
-  font-size: 10px;
+  font-size: 9px;
   font-weight: bold;
-  padding: 1px 6px;
-  border-radius: 8px;
+  padding: 0 5px;
+  border-radius: 6px;
 }
 </style>
