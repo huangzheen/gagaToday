@@ -103,7 +103,7 @@ const lctx = lc.getContext('2d');
 lctx.imageSmoothingEnabled = false;
 dctx.imageSmoothingEnabled = false;
 
-function resizeAll(){var f=document.getElementById('mf'),w=f.clientWidth,h=f.clientHeight;dc.width=w;dc.height=h;cw=w;ch=h;lw=Math.floor(w/PXSC);lh=Math.floor(h/PXSC);lc.width=lw;lc.height=lh}
+function resizeAll(){var f=document.getElementById('mf'),w=f.clientWidth,h=f.clientHeight;if(w<=0||h<=0){w=800;h=600}dc.width=w;dc.height=h;cw=w;ch=h;lw=Math.floor(w/PXSC);lh=Math.floor(h/PXSC);lc.width=lw;lc.height=lh}
 resizeAll();
 
 var vp={centerLat:48.145,centerLng:11.575,zoom:14,worldX:0,worldY:0};
@@ -118,9 +118,9 @@ function toScr(lng,lat,sw,sh){if(!cWr.x)updateCW();var p=lngLatToWorld(lng,lat,v
 function sr(f,z){var p=f.properties;if(p.highway){var h=p.highway;if(h==='motorway'||h==='primary')return z>=10;if(h==='secondary')return z>=12;if(h==='tertiary')return z>=13;if(h==='residential')return z>=15;if(h==='footway'||h==='cycleway')return z>=16;return z>=14}if(p.building)return z>=15;if(p.waterway||p.natural==='water')return true;if(p.leisure==='park'||(p.landuse&&/grass|forest|meadow/.test(p.landuse))||p.natural==='wood')return true;if(p.railway==='subway'||p.railway==='rail'||p.railway==='tram')return z>=11;if(p.railway==='station')return z>=13;if(p.amenity||p.tourism||p.shop)return z>=16;return true}
 
 /* ═══════════ 绘制到 Low Context ═══════════ */
-function L(){return lctx}
+function getLctx(){return lctx}
 
-function drawRoads(feats,z){var L=L();var roads=feats.filter(function(f){return f.properties.highway&&sr(f,z)});for(var i=0;i<roads.length;i++){var f=roads[i],hw=f.properties.highway,st=ST[hw]||ST.residential;if(z<st.minZ)continue;var coords=f.geometry.coordinates;if(!coords||coords.length<2)continue;L.beginPath();var p0=toScr(coords[0][0],coords[0][1],lw,lh);L.moveTo(pxs(p0.x),pxs(p0.y));for(var j=1;j<coords.length;j++){var p=toScr(coords[j][0],coords[j][1],lw,lh);L.lineTo(pxs(p.x),pxs(p.y))}L.strokeStyle=st.O;L.lineWidth=st.w+1.5;L.lineCap='round';L.lineJoin='round';if(st.dash)L.setLineDash([3,2]);L.stroke();L.strokeStyle=st.C;L.lineWidth=st.w;L.setLineDash([]);L.stroke()}}
+function drawRoads(feats,z){var L=getLctx();var roads=feats.filter(function(f){return f.properties.highway&&sr(f,z)});for(var i=0;i<roads.length;i++){var f=roads[i],hw=f.properties.highway,st=ST[hw]||ST.residential;if(z<st.minZ)continue;var coords=f.geometry.coordinates;if(!coords||coords.length<2)continue;L.beginPath();var p0=toScr(coords[0][0],coords[0][1],lw,lh);L.moveTo(pxs(p0.x),pxs(p0.y));for(var j=1;j<coords.length;j++){var p=toScr(coords[j][0],coords[j][1],lw,lh);L.lineTo(pxs(p.x),pxs(p.y))}L.strokeStyle=st.O;L.lineWidth=st.w+1.5;L.lineCap='round';L.lineJoin='round';if(st.dash)L.setLineDash([3,2]);L.stroke();L.strokeStyle=st.C;L.lineWidth=st.w;L.setLineDash([]);L.stroke()}}
 var ST = {
   motorway:{w:5,C:'#d98b35',O:'#6b3d1f',minZ:10},primary:{w:5,C:PAL.rp,O:PAL.rpO,minZ:10},
   secondary:{w:4,C:PAL.rs,O:PAL.rsO,minZ:12},tertiary:{w:3,C:PAL.rs,O:PAL.rsO,minZ:13},
@@ -128,24 +128,24 @@ var ST = {
   cycleway:{w:1.5,C:'#c8e0c0',O:'#8aaa7a',minZ:16,dash:1}
 };
 
-function drawPoly(coords,fill,stroke,lw){var L=L();if(!coords||!coords[0]||coords[0].length<3)return;var ring=coords[0];L.beginPath();var p0=toScr(ring[0][0],ring[0][1],lw,lh);L.moveTo(pxs(p0.x),pxs(p0.y));for(var i=1;i<ring.length;i++){var p=toScr(ring[i][0],ring[i][1],lw,lh);L.lineTo(pxs(p.x),pxs(p.y))}L.closePath();if(fill){L.fillStyle=fill;L.fill()}if(stroke){L.strokeStyle=stroke;L.lineWidth=lw||1.5;L.stroke()}}
+function drawPoly(coords,fill,stroke,lw){var L=lctx;if(!coords||!coords[0]||coords[0].length<3)return;var ring=coords[0];L.beginPath();var p0=toScr(ring[0][0],ring[0][1],lw,lh);L.moveTo(pxs(p0.x),pxs(p0.y));for(var i=1;i<ring.length;i++){var p=toScr(ring[i][0],ring[i][1],lw,lh);L.lineTo(pxs(p.x),pxs(p.y))}L.closePath();if(fill){L.fillStyle=fill;L.fill()}if(stroke){L.strokeStyle=stroke;L.lineWidth=lw||1.5;L.stroke()}}
 
-function polyArea(coords){if(!coords||!coords[0])return 0;var ring=coords[0],a=0;for(var i=0;i<ring.length;i++){var p1=toScr(ring[i][0],ring[i][1],lw,lh),p2=toScr(ring[(i+1)%ring.length][0],ring[(i+1)%ring.length][1],lw,lh);a+=(p1.x*p2.y-p2.x*p1.y)}return Math.abs(a/2)}
+function polyArea(coords){if(!coords||!coords[0])return 0;var ring=coords[0],a=0;for(var i=0;i<ring.length;i++){var p1=toScr(ring[i][0],ring[i][1],lw,lh),p2=toScr(ring[(i+1)%ring.length][0],ring[(i+1)%ring.length][1],lw,lh);a+=p1.x*p2.y-p2.x*p1.y}return Math.abs(a/2)}
 
-function drawWater(feats,z){var L=L();var wf=feats.filter(function(f){return f.properties.waterway==='river'||f.properties.natural==='water'});for(var i=0;i<wf.length;i++){var f=wf[i];if(f.geometry.type==='Polygon')drawPoly(f.geometry.coordinates,PAL.water,PAL.waterE,1.5)}}
-function drawParks(feats,z){var L=L();var pf=feats.filter(function(f){var p=f.properties;return p.leisure==='park'||/grass|forest|meadow/.test(p.landuse||'')||p.natural==='wood'});for(var i=0;i<pf.length;i++){var f=pf[i];if(f.geometry.type==='Polygon')drawPoly(f.geometry.coordinates,PAL.park,PAL.parkE,1)}}
-function drawRailways(feats,z){var L=L();var rf=feats.filter(function(f){return f.properties.railway==='subway'||f.properties.railway==='rail'||f.properties.railway==='tram'});for(var i=0;i<rf.length;i++){var f=rf[i];if(!sr(f,z)||f.geometry.type!=='LineString')continue;var coords=f.geometry.coordinates;L.beginPath();var p0=toScr(coords[0][0],coords[0][1],lw,lh);L.moveTo(pxs(p0.x),pxs(p0.y));for(var j=1;j<coords.length;j++){var p=toScr(coords[j][0],coords[j][1],lw,lh);L.lineTo(pxs(p.x),pxs(p.y))}var clr=PAL.rail;if(f.properties.railway==='subway'){var nm=f.properties.name||'';clr=nm.indexOf('U3')>=0||nm.indexOf('U5')>=0||nm.indexOf('U7')>=0?PAL.subO:nm.indexOf('U4')>=0||nm.indexOf('U6')>=0||nm.indexOf('U8')>=0?PAL.subB:PAL.rail}if(f.properties.railway==='tram')clr=PAL.tram;L.strokeStyle=clr;L.lineWidth=2.5;L.lineCap='round';L.setLineDash([5,3]);L.stroke();L.setLineDash([])}if(z>=13){var st=feats.filter(function(f){return f.properties.railway==='station'});for(var i=0;i<st.length;i++){var f=st[i];if(f.geometry.type!=='Point')continue;var s=toScr(f.geometry.coordinates[0],f.geometry.coordinates[1],lw,lh);L.fillStyle=PAL.navy;L.fillRect(pxs(s.x)-3,pxs(s.y)-3,6,6);L.fillStyle=PAL.gold;L.fillRect(pxs(s.x)-2,pxs(s.y)-2,4,4)}}}
+function drawWater(feats,z){var L=getLctx();var wf=feats.filter(function(f){return f.properties.waterway==='river'||f.properties.natural==='water'});for(var i=0;i<wf.length;i++){var f=wf[i];if(f.geometry.type==='Polygon')drawPoly(f.geometry.coordinates,PAL.water,PAL.waterE,1.5)}}
+function drawParks(feats,z){var L=getLctx();var pf=feats.filter(function(f){var p=f.properties;return p.leisure==='park'||/grass|forest|meadow/.test(p.landuse||'')||p.natural==='wood'});for(var i=0;i<pf.length;i++){var f=pf[i];if(f.geometry.type==='Polygon')drawPoly(f.geometry.coordinates,PAL.park,PAL.parkE,1)}}
+function drawRailways(feats,z){var L=getLctx();var rf=feats.filter(function(f){return f.properties.railway==='subway'||f.properties.railway==='rail'||f.properties.railway==='tram'});for(var i=0;i<rf.length;i++){var f=rf[i];if(!sr(f,z)||f.geometry.type!=='LineString')continue;var coords=f.geometry.coordinates;L.beginPath();var p0=toScr(coords[0][0],coords[0][1],lw,lh);L.moveTo(pxs(p0.x),pxs(p0.y));for(var j=1;j<coords.length;j++){var p=toScr(coords[j][0],coords[j][1],lw,lh);L.lineTo(pxs(p.x),pxs(p.y))}var clr=PAL.rail;if(f.properties.railway==='subway'){var nm=f.properties.name||'';clr=nm.indexOf('U3')>=0||nm.indexOf('U5')>=0||nm.indexOf('U7')>=0?PAL.subO:nm.indexOf('U4')>=0||nm.indexOf('U6')>=0||nm.indexOf('U8')>=0?PAL.subB:PAL.rail}if(f.properties.railway==='tram')clr=PAL.tram;L.strokeStyle=clr;L.lineWidth=2.5;L.lineCap='round';L.setLineDash([5,3]);L.stroke();L.setLineDash([])}if(z>=13){var st=feats.filter(function(f){return f.properties.railway==='station'});for(var i=0;i<st.length;i++){var f=st[i];if(f.geometry.type!=='Point')continue;var s=toScr(f.geometry.coordinates[0],f.geometry.coordinates[1],lw,lh);L.fillStyle=PAL.navy;L.fillRect(pxs(s.x)-3,pxs(s.y)-3,6,6);L.fillStyle=PAL.gold;L.fillRect(pxs(s.x)-2,pxs(s.y)-2,4,4)}}}
 
-function drawBuildings(feats,z){var L=L();if(z<15)return;var bf=feats.filter(function(f){return f.properties.building});for(var i=0;i<bf.length;i++){var f=bf[i];if(!sr(f,z)||f.geometry.type!=='Polygon')continue;var a=polyArea(f.geometry.coordinates);if(z<15&&a<250)continue;if(z<16&&a<80)continue;if(a<18)continue;var c=f.geometry.coordinates[0][0];var idx=Math.abs(Math.floor(c[0]*1e5+c[1]*1e5))%BLD.length;drawPoly(f.geometry.coordinates,BLD[idx],PAL.bE,1)}}
+function drawBuildings(feats,z){var L=getLctx();if(z<15)return;var bf=feats.filter(function(f){return f.properties.building});for(var i=0;i<bf.length;i++){var f=bf[i];if(!sr(f,z)||f.geometry.type!=='Polygon')continue;var a=polyArea(f.geometry.coordinates);if(z<15&&a<250)continue;if(z<16&&a<80)continue;if(a<18)continue;var c=f.geometry.coordinates[0][0];var idx=Math.abs(Math.floor(c[0]*1e5+c[1]*1e5))%BLD.length;drawPoly(f.geometry.coordinates,BLD[idx],PAL.bE,1)}}
 
-function drawRealPois(feats,z){var L=L();if(z<16)return;var pf=feats.filter(function(f){return f.properties.amenity||f.properties.tourism||f.properties.shop});for(var i=0;i<pf.length;i++){var f=pf[i];if(f.geometry.type!=='Point')continue;var s=toScr(f.geometry.coordinates[0],f.geometry.coordinates[1],lw,lh),x=pxs(s.x),y=pxs(s.y);L.fillStyle=PAL.b3;L.fillRect(x-1,y-1,2,2)}}
+function drawRealPois(feats,z){var L=getLctx();if(z<16)return;var pf=feats.filter(function(f){return f.properties.amenity||f.properties.tourism||f.properties.shop});for(var i=0;i<pf.length;i++){var f=pf[i];if(f.geometry.type!=='Point')continue;var s=toScr(f.geometry.coordinates[0],f.geometry.coordinates[1],lw,lh),x=pxs(s.x),y=pxs(s.y);L.fillStyle=PAL.b3;L.fillRect(x-1,y-1,2,2)}}
 
-function drawLabels(feats,z){var L=L();for(var i=0;i<feats.length;i++){var f=feats[i],p=f.properties;if(!p.name)continue;var show=false;if(p.railway==='station'&&z>=14)show=true;if(p.tourism==='attraction'&&z>=15)show=true;if(p.highway==='primary'&&z>=15)show=true;if(p.amenity==='school'&&z>=15)show=true;if(p.shop&&z>=17)show=true;if(!show)continue;var s;if(f.geometry.type==='Point')s=toScr(f.geometry.coordinates[0],f.geometry.coordinates[1],lw,lh);else{var coords=f.geometry.coordinates;if(!coords||!coords[0]||!coords[0][0])continue;s=toScr(coords[0][0],coords[0][1],lw,lh)}L.font='5px "Courier New",monospace';L.fillStyle=PAL.lbD;L.fillText(p.name,pxs(s.x)+4,pxs(s.y)+2)}}
+function drawLabels(feats,z){var L=getLctx();for(var i=0;i<feats.length;i++){var f=feats[i],p=f.properties;if(!p.name)continue;var show=false;if(p.railway==='station'&&z>=14)show=true;if(p.tourism==='attraction'&&z>=15)show=true;if(p.highway==='primary'&&z>=15)show=true;if(p.amenity==='school'&&z>=15)show=true;if(p.shop&&z>=17)show=true;if(!show)continue;var s;if(f.geometry.type==='Point')s=toScr(f.geometry.coordinates[0],f.geometry.coordinates[1],lw,lh);else{var coords=f.geometry.coordinates;if(!coords||!coords[0]||!coords[0][0])continue;s=toScr(coords[0][0],coords[0][1],lw,lh)}L.font='5px "Courier New",monospace';L.fillStyle=PAL.lbD;L.fillText(p.name,pxs(s.x)+4,pxs(s.y)+2)}}
 
 /* ═══════════ 主渲染管线 ═══════════ */
 function renderMap(){
+  if(lw<=0||lh<=0){resizeAll();if(lw<=0||lh<=0)return;}
   lctx.clearRect(0,0,lw,lh);
-  // bg
   lctx.fillStyle=PAL.bg;lctx.fillRect(0,0,lw,lh);
   lctx.fillStyle='rgba(232,217,184,0.3)';lctx.fillRect(0,0,lw,lh);
 
@@ -176,7 +176,7 @@ function renderGamePois(){
     var g=document.createElementNS('http://www.w3.org/2000/svg','g');
     g.setAttribute('data-id',p.id);g.setAttribute('transform','translate('+x+','+y+')');
     g.setAttribute('opacity',op);g.style.pointerEvents=p.unlocked?'auto':'none';g.style.cursor=p.unlocked?'pointer':'default';g.classList.add('poi-g');
-    g.innerHTML='<path d="M0,-32 C-17,-32 -28,-17 -28,-2 C-28,15 0,38 0,38 C0,38 28,15 28,-2 C28,-17 17,-32 0,-32Z" fill="#000" opacity="0.2" transform="translate(2,3)"/><path d="M0,-32 C-17,-32 -28,-17 -28,-2 C-28,15 0,38 0,38 C0,38 28,15 28,-2 C28,-17 17,-32 0,-32Z" fill="'+clr+'" stroke="#'+p.unlocked?'06142a':'4a4a4a'+'" stroke-width="3"/><circle cx="0" cy="-6" r="13" fill="#f7eed9" stroke="#06142a" stroke-width="2"/><text x="0" y="-1" text-anchor="middle" dominant-baseline="middle" font-size="15">'+p.icon+'</text><rect x="-62" y="40" width="124" height="20" rx="2" fill="#07152b" stroke="#e8b85c" stroke-width="2"/><text x="0" y="54" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff" stroke="#06142a" stroke-width="2" paint-order="stroke" font-family="Courier New,monospace">'+p.name+'</text>';
+    g.innerHTML='<path d="M0,-32 C-17,-32 -28,-17 -28,-2 C-28,15 0,38 0,38 C0,38 28,15 28,-2 C28,-17 17,-32 0,-32Z" fill="#000" opacity="0.2" transform="translate(2,3)"/><path d="M0,-32 C-17,-32 -28,-17 -28,-2 C-28,15 0,38 0,38 C0,38 28,15 28,-2 C28,-17 17,-32 0,-32Z" fill="'+clr+'" stroke="'+(p.unlocked?'06142a':'4a4a4a')+'" stroke-width="3"/><circle cx="0" cy="-6" r="13" fill="#f7eed9" stroke="#06142a" stroke-width="2"/><text x="0" y="-1" text-anchor="middle" dominant-baseline="middle" font-size="15">'+p.icon+'</text><rect x="-62" y="40" width="124" height="20" rx="2" fill="#07152b" stroke="#e8b85c" stroke-width="2"/><text x="0" y="54" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff" stroke="#06142a" stroke-width="2" paint-order="stroke" font-family="Courier New,monospace">'+p.name+'</text>';
     if(p.unlocked){
       g.addEventListener('click',function(e){e.stopPropagation();selP(p)});
       g.addEventListener('mouseenter',function(e){stt(e,p)});
@@ -196,7 +196,7 @@ function selP(poi){
   if(g){g.querySelector('path:nth-child(2)').setAttribute('stroke','#ffcf72');g.querySelector('path:nth-child(2)').setAttribute('stroke-width','4')}
   var clr={home:'#2d6fb3',school:'#3f7f56',shop:'#c98238',landmark:'#d85f45',museum:'#7d5fb2',stadium:'#8b8b8b',station:'#1e6eb8',park:'#70a95e',library:'#7d5fb2'}[poi.t];
   var lk=poi.unlocked?'':'style="opacity:.5;pointer-events:none"';
-  document.getElementById('dp').innerHTML='<div class="dh"><h2><span style="color:'+clr+'">'+poi.icon+'</span> '+poi.name+'</h2><div class="de">'+poi.de+'</div></div><div class="dd">'+poi.d+'</div><div class="da">'+poi.acts.map(function(a){return '<button class="act" '+lk+' onclick="da(''+poi.id+'',''+a+'')">'+a+'</button>'}).join('')+'</div><div class="dm"><div>🚶 步行: <b>'+poi.walk+' min</b></div><div>🚇 '+poi.ubahn+'</div><div>💰 花费: <b>'+poi.cost+'</b></div></div><button class="pbtn" onclick="srt(''+poi.id+'')">↗ 显示路线</button>';
+  document.getElementById('dp').innerHTML='<div class="dh"><h2><span style="color:'+clr+'">'+poi.icon+'</span> '+poi.name+'</h2><div class="de">'+poi.de+'</div></div><div class="dd">'+poi.d+'</div><div class="da">'+poi.acts.map(function(a){return '<button class="act" '+lk+' onclick="da(\da(\x27'+poi.id+'\x27,\x27'+a+'\x27)#39;'+poi.id+'\da(\x27'+poi.id+'\x27,\x27'+a+'\x27)#39;,\da(\x27'+poi.id+'\x27,\x27'+a+'\x27)#39;'+a+'\da(\x27'+poi.id+'\x27,\x27'+a+'\x27)#39;)">'+a+'</button>'}).join('')+'</div><div class="dm"><div>🚶 步行: <b>'+poi.walk+' min</b></div><div>🚇 '+poi.ubahn+'</div><div>💰 花费: <b>'+poi.cost+'</b></div></div><button class="pbtn" onclick="srt(\srt(\x27'+poi.id+'\x27)#39;'+poi.id+'\srt(\x27'+poi.id+'\x27)#39;)">↗ 显示路线</button>';
 }
 
 function srt(pid){rg.innerHTML='';var from=gamePois.find(function(p){return p.id==='home'}),to=gamePois.find(function(p){return p.id===pid});if(!from||!to)return;var p1=toScr(from.lat,from.lng,cw,ch),p2=toScr(to.lat,to.lng,cw,ch),mx=(p1.x+p2.x)/2+50,my=(p1.y+p2.y)/2-50;var route=document.createElementNS('http://www.w3.org/2000/svg','path');route.setAttribute('d','M'+pxs(p1.x)+','+pxs(p1.y)+' Q'+pxs(mx)+','+pxs(my)+' '+pxs(p2.x)+','+pxs(p2.y));route.classList.add('route-line');rg.appendChild(route);[p1,p2].forEach(function(p,i){var d=document.createElementNS('http://www.w3.org/2000/svg','circle');d.setAttribute('cx',pxs(p.x));d.setAttribute('cy',pxs(p.y));d.setAttribute('r','6');d.setAttribute('fill',i===0?'#3f7f56':'#d85f45');d.setAttribute('stroke','#06142a');d.setAttribute('stroke-width','2');rg.appendChild(d)})}
@@ -223,15 +223,26 @@ window.addEventListener('resize',function(){resizeAll();updateCW();all()});
 
 /* ═══════════ 加载 ═══════════ */
 async function load(){
-  var urls=['/public/assets/munich_map/munich.geojson','/public/assets/munich_map/munich_fallback.geojson'];
-  for(var i=0;i<urls.length;i++){
-    try{var r=await fetch(urls[i]);if(r.ok){mapGJ=await r.json();console.log('Loaded',urls[i],mapGJ.features.length);break}}catch(e){}
+  try {
+    var urls=['/public/assets/munich_map/munich.geojson','/public/assets/munich_map/munich_fallback.geojson'];
+    for(var i=0;i<urls.length;i++){
+      try{var r=await fetch(urls[i]);if(r.ok){mapGJ=await r.json();console.log('Loaded',urls[i],mapGJ.features.length);break}}catch(e){console.warn('Fetch fail:',urls[i],e)}
+    }
+  } finally {
+    document.getElementById('loading-overlay').remove();
   }
-  document.getElementById('loading-overlay').remove();
-  updateCW();updateSvg();renderMap();renderGamePois();
-  document.getElementById('zv').textContent=vp.zoom;
-  document.getElementById('fc').textContent=mapGJ.features.length.toLocaleString();
-  document.getElementById('di').textContent='低分辨率渲染(1/3) · 42,878 features';
+  try {
+    resizeAll();
+    updateCW();updateSvg();
+    if(lw>0&&lh>0)renderMap();
+    renderGamePois();
+    document.getElementById('zv').textContent=vp.zoom;
+    document.getElementById('fc').textContent=mapGJ.features.length.toLocaleString();
+    document.getElementById('di').textContent='低分辨率渲染(1/3) · Z'+vp.zoom;
+  } catch(e) {
+    console.error('Render error:',e);
+    document.getElementById('di').textContent='渲染出错-请刷新';
+  }
 }
 load();
 </script>
