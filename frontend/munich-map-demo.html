@@ -60,7 +60,7 @@ body{background:radial-gradient(circle at 50% 12%,#183b67,#06101f 58%,#030812);f
 <div class="left panel"><div class="sec"><h3>📋 今日任务</h3><ul class="qlist"><li>买早餐 Brötchen</li><li>去学校报到</li><li>自我介绍练习</li><li class="done">与房东打招呼</li></ul></div><div class="sec"><h3>🗺️ 探索</h3><p>已探索 2 / 10</p></div><div class="sec"><h3>📍 位置</h3><p style="color:var(--gold2)">学生公寓 · Schwabing</p></div><div class="sec"><h3>🔍 状态</h3><p id="di">加载中...</p></div></div>
 <div class="mapf" id="mf"><canvas id="mc"></canvas><svg id="ms" class="map-svg" xmlns="http://www.w3.org/2000/svg"><g id="rg"></g><g id="pg"></g></svg><div class="ttip" id="tt"></div></div>
 <div class="right panel" id="dp"><div class="detail-empty"><p style="font-size:24px;margin-bottom:8px">⭐</p><p>点击 POI 查看详情</p></div></div>
-<div class="bot panel"><span><kbd>🖱️ 拖拽</kbd> 平移</span><span><kbd>🖱️ 滚轮</kbd> 缩放</span><span>Zoom: <span id="zv">14</span></span><button id="br">🎯 重置</button><button id="bc">✕ 路线</button><button id="b+">+</button><button id="b-">−</button><button id="bg">🎮 Game POI</button></div>
+<div class="bot panel"><span><kbd>🖱️ 拖拽</kbd> 平移</span><span><kbd>🖱️ 滚轮</kbd> 缩放</span><span><kbd>←↑↓→</kbd> 移动</span><span><kbd>- =</kbd> 缩放</span><span>Zoom: <span id="zv">15</span></span><button id="br">🎯 重置</button><button id="bc">✕ 路线</button><button id="b+">+</button><button id="b-">−</button></div>
 </div>
 <script>
 // ╔══════════════════════════════════════════════════╗
@@ -114,7 +114,7 @@ dctx.imageSmoothingEnabled = false;
 function resizeAll(){var f=document.getElementById('mf'),w=f.clientWidth,h=f.clientHeight;if(w<=0||h<=0){w=800;h=600}dc.width=w;dc.height=h;cw=w;ch=h;lw=Math.floor(w/PXSC);lh=Math.floor(h/PXSC);lc.width=lw;lc.height=lh}
 resizeAll();
 
-var vp={centerLat:48.145,centerLng:11.575,zoom:14,worldX:0,worldY:0};
+var vp={centerLat:48.1374,centerLng:11.5755,zoom:15,worldX:0,worldY:0};
 var cWr={};
 
 function updateCW(){cWr=lngLatToWorld(vp.centerLng,vp.centerLat,vp.zoom)}
@@ -351,13 +351,23 @@ window.addEventListener('mouseup',function(){dragging=false});
 window.addEventListener('mousemove',function(e){if(!dragging)return;vp.worldX=dsW.x+(e.clientX-ds.x)/PXSC;vp.worldY=dsW.y+(e.clientY-ds.y)/PXSC;all()});
 document.getElementById('mf').addEventListener('wheel',function(e){e.preventDefault();var old=vp.zoom;vp.zoom=Math.max(11,Math.min(17,vp.zoom+(e.deltaY>0?-1:1)));if(vp.zoom!==old){updateCW();vp.worldX=0;vp.worldY=0;all()}});
 
+// 键盘控制：方向键移动，- 缩小，= 放大
+window.addEventListener('keydown',function(e){
+  var spd=20;
+  if(e.key==='ArrowLeft'){vp.worldX-=spd;all();}
+  else if(e.key==='ArrowRight'){vp.worldX+=spd;all();}
+  else if(e.key==='ArrowUp'){vp.worldY-=spd;all();}
+  else if(e.key==='ArrowDown'){vp.worldY+=spd;all();}
+  else if(e.key==='-'||e.key==='_'){vp.zoom=Math.max(11,vp.zoom-1);updateCW();vp.worldX=0;vp.worldY=0;all();}
+  else if(e.key==='='||e.key==='+'){vp.zoom=Math.min(17,vp.zoom+1);updateCW();vp.worldX=0;vp.worldY=0;all();}
+});
+
 function all(){updateSvg();updateCW();renderMap();renderGamePois();if(selPoi)srt(selPoi.id);var z=vp.zoom;document.getElementById('zv').textContent=z;document.getElementById('zl').textContent=z;var ds=['','11 主干','12 次级','13 三级+地铁站','14 详细+POI','15 建筑+住宅','16 步行+真实POI','17 最高细节'];document.getElementById('di').textContent='真实OSM数据 · RPG色板渲染 · '+(ds[z]||'');document.getElementById('fc').textContent=mapGJ.features.length.toLocaleString()}
 
-document.getElementById('br').addEventListener('click',function(){vp.centerLat=48.145;vp.centerLng=11.575;vp.zoom=14;vp.worldX=0;vp.worldY=0;selPoi=null;document.getElementById('dp').innerHTML='<div class="detail-empty"><p style="font-size:24px;margin-bottom:8px">⭐</p><p>点击 POI 查看详情</p></div>';updateCW();all()});
+document.getElementById('br').addEventListener('click',function(){vp.centerLat=48.1374;vp.centerLng=11.5755;vp.zoom=15;vp.worldX=0;vp.worldY=0;selPoi=null;document.getElementById('dp').innerHTML='<div class="detail-empty"><p style="font-size:24px;margin-bottom:8px">⭐</p><p>点击 POI 查看详情</p></div>';updateCW();all()});
 document.getElementById('bc').addEventListener('click',function(){rg.innerHTML=''});
 document.getElementById('b+').addEventListener('click',function(){vp.zoom=Math.min(17,vp.zoom+1);updateCW();vp.worldX=0;vp.worldY=0;all()});
 document.getElementById('b-').addEventListener('click',function(){vp.zoom=Math.max(11,vp.zoom-1);updateCW();vp.worldX=0;vp.worldY=0;all()});
-document.getElementById('bg').addEventListener('click',function(){vp.zoom=15;updateCW();vp.worldX=0;vp.worldY=0;var m=gamePois.find(function(p){return p.id==='marien'});if(m)selP(m);all()});
 window.addEventListener('resize',function(){resizeAll();updateCW();all()});
 
 /* ═══════════ 加载 ═══════════ */
