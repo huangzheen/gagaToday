@@ -16,8 +16,8 @@ body{background:#0a1428;font-family:'Courier New',monospace;color:#fff;overflow:
 </style>
 </head>
 <body>
-<div id="loading"><div>🗺️ 加载德国 PMTiles 地图...</div><div class="sub">Bayern · 547 MB · HTTP Range Tiles</div></div>
-<div id="info">Bayern <span class="s">·</span> Zoom <span id="zv">0</span> <span class="s">·</span> <span id="st">init</span></div>
+<div id="loading"><div>🗺️ 加载德国 PMTiles 地图...</div><div class="sub">Deutschland · ~3 GB · HTTP Range Tiles</div></div>
+<div id="info">Deutschland <span class="s">·</span> Zoom <span id="zv">0</span> <span class="s">·</span> <span id="st">init</span></div>
 <div id="mapf"><canvas id="mc"></canvas></div>
 
 <script type="importmap">
@@ -132,10 +132,10 @@ window.addEventListener('keydown',e=>{const sp=15;if(e.key==='ArrowLeft'){vp.wor
 
 async function init(){
   try{
-    pmtiles=new PMTiles('/public/assets/munich_map/pmtiles/bayern.pmtiles');
+    pmtiles=new PMTiles('/public/assets/munich_map/pmtiles/germany.pmtiles');
     const h=await pmtiles.getHeader();
     const sub=document.getElementById('loading').querySelector('.sub');
-    sub.textContent='Bayern · zoom '+h.minZoom+'-'+h.maxZoom+' · '+(h.fileSize/1024/1024).toFixed(0)+' MB · HTTP Range';
+    sub.textContent='Deutschland · zoom '+h.minZoom+'-'+h.maxZoom+' · '+(h.fileSize/1024/1024).toFixed(0)+' MB · HTTP Range';
     document.getElementById('st').textContent='ready';
   }catch(e){
     document.getElementById('loading').querySelector('.sub').textContent='Error: '+e.message;
