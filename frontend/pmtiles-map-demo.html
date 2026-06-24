@@ -87,7 +87,7 @@ const canvas=document.getElementById('mc'),ctx=canvas.getContext('2d');
 let cw,ch;
 function resize(){var f=document.getElementById('mf');if(!f)return;cw=canvas.width=f.clientWidth;ch=canvas.height=f.clientHeight;ctx.imageSmoothingEnabled=false}
 window.addEventListener('resize',resize);setTimeout(resize,100);resize();
-const vp={centerLat:48.145,centerLng:11.575,zoom:10,worldX:0,worldY:0};
+const vp={centerLat:48.1374,centerLng:11.5755,zoom:10,worldX:0,worldY:0};
 let pmtiles=null;
 
 function wm(lng,lat,z){const s=256*Math.pow(2,z);return{x:(lng+180)/360*s,y:(.5-Math.log((1+Math.sin(lat*Math.PI/180))/(1-Math.sin(lat*Math.PI/180)))/(4*Math.PI))*s}}
@@ -100,7 +100,7 @@ function drawLine(cs,color,w,dash){if(!cs||cs.length<2)return;ctx.beginPath();le
 
 async function loadVisibleTiles(){
   if(!pmtiles)return[];
-  let tileZ=Math.max(5,Math.min(15,vp.zoom));
+  let tileZ=Math.max(5,Math.min(14,vp.zoom));
   const c=tileXY(vp.centerLat,vp.centerLng,tileZ);
   const tiles=[],range=Math.ceil(Math.max(cw,ch)/256/2)+1;
   for(let dx=-range;dx<=range;dx++)for(let dy=-range;dy<=range;dy++){
@@ -156,12 +156,12 @@ let dragging=false,ds=null,dsW=null;
 document.getElementById('mf').addEventListener('mousedown',e=>{dragging=true;ds={x:e.clientX,y:e.clientY};dsW={x:vp.worldX,y:vp.worldY}});
 window.addEventListener('mouseup',()=>{dragging=false});
 window.addEventListener('mousemove',e=>{if(!dragging)return;vp.worldX=dsW.x+(e.clientX-ds.x);vp.worldY=dsW.y+(e.clientY-ds.y);render()});
-document.getElementById('mf').addEventListener('wheel',e=>{e.preventDefault();const o=vp.zoom;vp.zoom=Math.max(5,Math.min(15,vp.zoom+(e.deltaY>0?-1:1)));if(vp.zoom!==o){vp.worldX=0;vp.worldY=0;render()}});
-window.addEventListener('keydown',e=>{const sp=15;if(e.key==='ArrowLeft'){vp.worldX-=sp;render()}else if(e.key==='ArrowRight'){vp.worldX+=sp;render()}else if(e.key==='ArrowUp'){vp.worldY-=sp;render()}else if(e.key==='ArrowDown'){vp.worldY+=sp;render()}else if(e.key==='-'||e.key==='_'){vp.zoom=Math.max(5,vp.zoom-1);vp.worldX=0;vp.worldY=0;render()}else if(e.key==='='||e.key==='+'){vp.zoom=Math.min(15,vp.zoom+1);vp.worldX=0;vp.worldY=0;render()}});
+document.getElementById('mf').addEventListener('wheel',e=>{e.preventDefault();const o=vp.zoom;vp.zoom=Math.max(5,Math.min(14,vp.zoom+(e.deltaY>0?-1:1)));if(vp.zoom!==o){vp.worldX=0;vp.worldY=0;render()}});
+window.addEventListener('keydown',e=>{const sp=15;if(e.key==='ArrowLeft'){vp.worldX-=sp;render()}else if(e.key==='ArrowRight'){vp.worldX+=sp;render()}else if(e.key==='ArrowUp'){vp.worldY-=sp;render()}else if(e.key==='ArrowDown'){vp.worldY+=sp;render()}else if(e.key==='-'||e.key==='_'){vp.zoom=Math.max(5,vp.zoom-1);vp.worldX=0;vp.worldY=0;render()}else if(e.key==='='||e.key==='+'){vp.zoom=Math.min(14,vp.zoom+1);vp.worldX=0;vp.worldY=0;render()}});
 
 async function init(){
-  document.getElementById('br').addEventListener('click',function(){vp.centerLat=48.145;vp.centerLng=11.575;vp.zoom=10;vp.worldX=0;vp.worldY=0;render()});
-  document.getElementById('b+').addEventListener('click',function(){vp.zoom=Math.min(15,vp.zoom+1);vp.worldX=0;vp.worldY=0;render()});
+  document.getElementById('br').addEventListener('click',function(){vp.centerLat=48.1374;vp.centerLng=11.5755;vp.zoom=10;vp.worldX=0;vp.worldY=0;render()});
+  document.getElementById('b+').addEventListener('click',function(){vp.zoom=Math.min(14,vp.zoom+1);vp.worldX=0;vp.worldY=0;render()});
   document.getElementById('b-').addEventListener('click',function(){vp.zoom=Math.max(5,vp.zoom-1);vp.worldX=0;vp.worldY=0;render()});
   try{
     pmtiles=new PMTiles('/public/assets/munich_map/pmtiles/germany.pmtiles');
