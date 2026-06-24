@@ -8,7 +8,7 @@
 :root{--navy:#07152b;--navy2:#0d2344;--navy3:#14305c;--gold:#e8b85c;--gold2:#ffcf72}
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:radial-gradient(circle at 50% 12%,#183b67,#06101f 58%,#030812);font-family:'Courier New',monospace;color:#fff;width:100vw;height:100vh;overflow:hidden;display:block}
-.shell{width:100vw;height:100vh;display:grid;grid-template-columns:240px minmax(0,1fr) 340px;grid-template-rows:74px minmax(0,1fr) 66px;gap:10px;padding:12px}
+.shell{width:100vw;height:100vh;display:grid;grid-template-columns:240px minmax(0,1fr) 340px;grid-template-rows:74px minmax(0,1fr);gap:10px;padding:12px}
 .panel{background:linear-gradient(180deg,#173b6e 0%,#0a2141 42%,#061326 100%);border:3px solid var(--gold);box-shadow:6px 6px 0 rgba(0,0,0,.75),inset 0 0 0 2px rgba(255,255,255,.045);position:relative}
 .panel::after{content:'';position:absolute;inset:1px;border:1px solid rgba(232,184,92,.15);pointer-events:none}
 .top{grid-column:1/-1;grid-row:1;display:flex;align-items:center;justify-content:space-between;padding:0 22px;background:linear-gradient(180deg,#173d72,#07152b 82%)}
@@ -25,6 +25,7 @@ body{background:radial-gradient(circle at 50% 12%,#183b67,#06101f 58%,#030812);f
 .mapf{grid-column:2;grid-row:2;position:relative;background:#efe2c2;border:4px solid #d59a56;box-shadow:10px 10px 0 rgba(0,0,0,.72),0 0 0 3px #06142a inset;overflow:hidden}
 .mapf canvas{position:absolute;inset:0;width:100%;height:100%;image-rendering:pixelated;image-rendering:crisp-edges}
 .mapf::after{content:'';position:absolute;inset:0;pointer-events:none;background:none;opacity:0;z-index:5}
+.ttip{position:absolute;pointer-events:none;background:var(--navy);border:2px solid var(--gold);padding:3px 8px;font-size:9px;color:var(--gold2);z-index:30;box-shadow:3px 3px 0 #000;opacity:0;transition:opacity .12s;white-space:nowrap}.ttip.on{opacity:1}
 .mapf::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 50% 48%,transparent 0 62%,rgba(0,0,0,.12) 100%);opacity:.45;z-index:5}
 .right{grid-column:3;grid-row:2;padding:14px;display:flex;flex-direction:column;gap:12px;overflow-y:auto;background:linear-gradient(180deg,#123663,#07162c)}
 .detail-empty{color:#4a6a8a;font-size:9px;text-align:center;padding-top:30px}
@@ -32,20 +33,25 @@ body{background:radial-gradient(circle at 50% 12%,#183b67,#06101f 58%,#030812);f
 .dh .de{font-size:9px;color:#6a8aaa;font-style:italic}
 .dd{font-size:9px;color:#aab8bf;line-height:1.5}
 .dm{font-size:8px;color:#8aaac8;display:flex;flex-direction:column;gap:3px;padding:6px;background:rgba(0,0,0,.3);border:1px solid var(--navy2)}.dm b{color:var(--gold2)}
-.bot{grid-column:1/-1;grid-row:3;display:flex;align-items:center;justify-content:center;gap:18px;font-size:10px;color:#8db2d5;background:linear-gradient(180deg,#173b6e,#07152b)}
-.bot kbd{background:var(--navy2);border:1px solid #3a5a7a;padding:2px 6px;color:var(--gold2);font-size:7px;border-radius:2px}
-.bot button{background:linear-gradient(180deg,#214d83,#0c274d);color:#fff;border:3px solid #06142a;box-shadow:3px 3px 0 #000;font-family:inherit;font-size:9px;font-weight:bold;padding:4px 10px;cursor:pointer}.bot button:hover{filter:brightness(1.15);transform:translateY(-1px)}
+.route-line{fill:none;stroke:#d85f45;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:8 7;filter:drop-shadow(0 0 4px rgba(255,207,114,.7));animation:dash 1.2s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-30}}
+.da{display:flex;flex-wrap:wrap;gap:4px}.act{background:var(--navy2);border:2px solid #3a5a7a;color:var(--gold2);font-size:8px;padding:3px 8px;cursor:pointer;font-family:inherit}.act:hover{border-color:var(--gold)}
+.pbtn{flex:1;background:linear-gradient(180deg,#214d83,#0c274d);color:#fff;border:3px solid #06142a;box-shadow:3px 3px 0 #000;font-family:inherit;font-size:9px;font-weight:bold;padding:5px 10px;cursor:pointer;margin-top:4px}.pbtn:hover{filter:brightness(1.15);transform:translateY(-1px)}
+
+
+.bot button:hover{filter:brightness(1.15);transform:translateY(-1px)}
 #loading-overlay{position:fixed;inset:0;background:#050b16;z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:#f4d35e;font-family:monospace}.load-sub{color:#6a8aaa;font-size:11px}
 </style>
 </head>
 <body>
 <div id="loading-overlay"><div>🗺️ 加载德国 PMTiles 地图...</div><div class="load-sub">Deutschland · 9.2 GB · HTTP Range Tiles</div></div>
 <div class="shell">
-<div class="top panel"><div><div class="ttl">DEUTSCHLAND</div><div class="tsub">PMTiles · Zoom <span id="zl">0</span> · <span id="fc">0</span> features</div></div><div class="tst"><span>❤️ <s>体力</s> <b>85</b></span><span>⭐ <s>德语</s> <b>A1.2</b></span><span>💰 <s>欧元</s> <b>24.50</b></span><span>🕐 <s>时间</s> <b>08:15</b></span></div></div>
+<div class="top panel"><div><div class="ttl">DEUTSCHLAND</div><div class="tsub">PMTiles · Zoom <span id="zl">0</span> · <span id="fc">0</span> features</div></div><div class="tst"><span>❤️ <s>体力</s> <b>85</b></span><span>⭐ <s>德语</s> <b>A1.2</b></span><span>💰 <s>欧元</s> <b>24.50</b></span><span>🕐 <s>时间</s> <b>08:15</b></span> · Zoom <span id="zv">14</span> <button id="br" style="background:linear-gradient(180deg,#214d83,#0c274d);color:#fff;border:2px solid #06142a;font-family:inherit;font-size:9px;padding:2px 8px;cursor:pointer">🎯</button> <button id="b+" style="background:linear-gradient(180deg,#214d83,#0c274d);color:#fff;border:2px solid #06142a;font-family:inherit;font-size:9px;padding:2px 6px;cursor:pointer">+</button> <button id="b-" style="background:linear-gradient(180deg,#214d83,#0c274d);color:#fff;border:2px solid #06142a;font-family:inherit;font-size:9px;padding:2px 6px;cursor:pointer">−</button></div></div>
 <div class="left panel"><div class="sec"><h3>📋 今日任务</h3><ul class="qlist"><li>买早餐 Brötchen</li><li>去学校报到</li><li>自我介绍练习</li><li class="done">与房东打招呼</li></ul></div><div class="sec"><h3>🗺️ 状态</h3><p id="di">加载中...</p></div><div class="sec"><h3>📍 位置</h3><p style="color:var(--gold2)">慕尼黑 · Deutschland</p></div><div class="sec"><h3>💡 操作</h3><p>拖拽 / 方向键移动<br/>滚轮 / - = 缩放<br/>点击 POI 查看详情</p></div></div>
-<div class="mapf" id="mf"><canvas id="mc"></canvas></div>
+<div class="mapf" id="mf">
+<div class="ttip" id="tt"></div><canvas id="mc"></canvas><svg id="ms" style="position:absolute;inset:0;width:100%;height:100%;z-index:6;pointer-events:none" xmlns="http://www.w3.org/2000/svg"><g id="pg" style="pointer-events:auto"></g><g id="rg"></g></svg></div>
 <div class="right panel" id="dp"><div class="detail-empty"><p style="font-size:24px;margin-bottom:8px">⭐</p><p>已加载 tiles 后<br/>此处显示地图信息</p></div></div>
-<div class="bot panel"><span><kbd>🖱️ 拖拽</kbd> 平移</span><span><kbd>🖱️ 滚轮</kbd> 缩放</span><span><kbd>←↑↓→</kbd> 移动</span><span><kbd>- =</kbd> 缩放</span><span>Zoom: <span id="zv">10</span></span><button id="br">🎯 重置</button><button id="b+">+</button><button id="b-">-</button></div>
+
 </div>
 
 <script type="importmap">
@@ -105,6 +111,19 @@ function resize(){var f=document.getElementById('mf');if(!f)return;cw=canvas.wid
 window.addEventListener('resize',resize);setTimeout(resize,100);resize();
 const vp={centerLat:48.1374,centerLng:11.5755,zoom:14,worldX:0,worldY:0};
 let pmtiles=null;
+
+const gamePois = [
+  {id:'home',name:'学生公寓',de:'Studentenwohnheim',t:'home',lat:48.156,lng:11.575,icon:'\U0001f3e0',unlocked:true,walk:0,cost:'—',ubahn:'U3/U6 M\u00FCnchner Freiheit',d:'住处。休息、做饭、写作业。',acts:['休息','做饭','查看邮件']},
+  {id:'school',name:'语言学校',de:'Sprachschule',t:'school',lat:48.148,lng:11.565,icon:'\U0001f393',unlocked:true,walk:18,cost:'\u20AC0',ubahn:'U3 Universit\u00E4t',d:'每天上课、考试、社交。Herr Weber 在这里等你。',acts:['上课','查看课表','找老师']},
+  {id:'bakery',name:'面包店',de:'B\u00E4ckerei',t:'shop',lat:48.145,lng:11.572,icon:'\U0001f968',unlocked:true,walk:12,cost:'\u20AC1.20~3.50',ubahn:'步行',d:'新鲜 Br\u00F6tchen 和 Brezel，练德语点餐。',acts:['点餐','打卡','与店长对话']},
+  {id:'marien',name:'玛利亚广场',de:'Marienplatz',t:'landmark',lat:48.1374,lng:11.5755,icon:'\U0001f4cd',unlocked:true,walk:30,cost:'\u20AC0',ubahn:'U3/U6 Marienplatz',d:'慕尼黑核心地标和换乘点。',acts:['打卡','换乘','探索周边']},
+  {id:'museum',name:'德意志博物馆',de:'Deutsches Museum',t:'museum',lat:48.1299,lng:11.583,icon:'\U0001f3db',unlocked:true,walk:45,cost:'\u20AC7.00',ubahn:'S-Bahn Isartor',d:'世界最大科学技术博物馆。知识卡+兴趣打卡。',acts:['买票','参观','知识问答']},
+  {id:'arena',name:'安联球场',de:'Allianz Arena',t:'stadium',lat:48.2188,lng:11.6247,icon:'\u26bd',unlocked:false,walk:'--',cost:'\u20AC40+',ubahn:'U6 Fr\u00F6ttmaning',d:'FC Bayern 主场，后续章节解锁。',acts:['看球','买票','好友邀请']},
+  {id:'eg',name:'英国花园',de:'Englischer Garten',t:'park',lat:48.165,lng:11.595,icon:'\U0001f333',unlocked:true,walk:25,cost:'\u20AC0',ubahn:'U3/U6 Universit\u00E4t',d:'欧洲最大城市公园之一。散步、野餐、看冲浪者。',acts:['散步','野餐','看冲浪']},
+  {id:'hb',name:'中央车站',de:'Hauptbahnhof',t:'station',lat:48.140,lng:11.560,icon:'\U0001f687',unlocked:true,walk:35,cost:'\u20AC3.50+',ubahn:'U1/U2/U4/U5/S-Bahn',d:'慕尼黑最大火车站，所有线路换乘枢纽。',acts:['购票','乘车','存包']},
+  {id:'super',name:'超市',de:'Supermarkt',t:'shop',lat:48.152,lng:11.568,icon:'\U0001f6d2',unlocked:true,walk:8,cost:'\u20AC5~15',ubahn:'步行',d:'REWE 超市，买晚餐食材和生活用品。',acts:['购物','查看标签','结账对话']},
+  {id:'libr',name:'图书馆',de:'Stadtbibliothek',t:'library',lat:48.146,lng:11.562,icon:'\U0001f4da',unlocked:true,walk:22,cost:'\u20AC0',ubahn:'U3/U6附近',d:'安静自习，借德语教材。自习+45min。',acts:['自习','借书','查资料']}
+];
 
 function wm(lng,lat,z){const s=256*Math.pow(2,z);return{x:(lng+180)/360*s,y:(.5-Math.log((1+Math.sin(lat*Math.PI/180))/(1-Math.sin(lat*Math.PI/180)))/(4*Math.PI))*s}}
 function toScr(lng,lat){const c=wm(vp.centerLng,vp.centerLat,vp.zoom),p=wm(lng,lat,vp.zoom);return{x:(p.x-c.x+vp.worldX)+cw/2,y:(p.y-c.y+vp.worldY)+ch/2}}
@@ -210,8 +229,52 @@ async function render(){
     }
   }
   document.getElementById('di').textContent=allFeats.length.toLocaleString()+' features \u00B7 '+tiles.length+' tiles';document.getElementById('fc').textContent=allFeats.length.toLocaleString();document.getElementById('zl').textContent=vp.zoom;document.getElementById('zv').textContent=vp.zoom;
-renderFeats(allFeats);
+renderFeats(allFeats);renderGamePois();
 }
+
+var svg=document.getElementById('ms'),pg=document.getElementById('pg'),selPoi=null;
+function updateSvg(){var z=vp.zoom;if(z<14){pg.innerHTML='';return}renderGamePois()}
+
+function renderGamePois(){
+  pg.innerHTML='';
+  var cW=wm(vp.centerLng,vp.centerLat,vp.zoom);
+  for(var i=0;i<gamePois.length;i++){
+    var p=gamePois[i],pw=wm(p.lng,p.lat,vp.zoom);
+    var x=pxi((pw.x-cW.x+vp.worldX)+cw/2),y=pxi((pw.y-cW.y+vp.worldY)+ch/2);
+    var clr={home:'#2d6fb3',school:'#3f7f56',shop:'#c98238',landmark:'#d85f45',museum:'#7d5fb2',stadium:'#8b8b8b',station:'#1e6eb8',park:'#70a95e',library:'#7d5fb2'}[p.t];
+    var op=p.unlocked?1:0.5;
+    var g=document.createElementNS('http://www.w3.org/2000/svg','g');
+    g.setAttribute('data-id',p.id);g.setAttribute('transform','translate('+x+','+y+')');
+    g.setAttribute('opacity',op);g.style.cursor=p.unlocked?'pointer':'default';g.classList.add('poi-g');
+    g.innerHTML='<circle cx="0" cy="-3" r="6" fill="none" stroke="'+clr+'" stroke-width="1.5" opacity="0.5"><animate attributeName="r" values="6;14" dur="1.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.5;0" dur="1.5s" repeatCount="indefinite"/></circle><path d="M0,-12.5 C-7,-12.5 -11,-6.5 -11,-0.75 C-11,5.5 0,14 0,14 C0,14 11,5.5 11,-0.75 C11,-6.5 7,-12.5 0,-12.5Z" fill="'+clr+'" stroke="#06142a" stroke-width="1.5"/><circle cx="0" cy="-3" r="5" fill="#f7eed9" stroke="#06142a" stroke-width="1.5"/><text x="0" y="-1" text-anchor="middle" dominant-baseline="middle" font-size="7">'+p.icon+'</text><rect x="-38" y="16" width="76" height="14" rx="2" fill="#07152b" stroke="#e8b85c" stroke-width="1.5"/><text x="0" y="25" text-anchor="middle" font-size="7" font-weight="bold" fill="#fff" stroke="#06142a" stroke-width="1.5" paint-order="stroke" font-family="Courier New,monospace">'+p.name+'</text>';
+    if(p.unlocked){
+      g.addEventListener('click',function(e){e.stopPropagation();selP(p)});
+      g.addEventListener('mouseenter',function(e){stt(e,p)});
+      g.addEventListener('mouseleave',htt);
+    }
+    pg.appendChild(g);
+  }
+  svg.onclick=function(e){if(e.target===svg||e.target.id==='ms'){selPoi=null;document.getElementById('dp').innerHTML='<div class="detail-empty"><p style="font-size:24px;margin-bottom:8px">⭐</p><p>点击 POI 查看详情</p></div>';var gs=document.querySelectorAll('.poi-g');for(var i=0;i<gs.length;i++){var g=gs[i];if(g.querySelector('path:nth-child(2)')){g.querySelector('path:nth-child(2)').setAttribute('stroke','#06142a');g.querySelector('path:nth-child(2)').setAttribute('stroke-width','1.5')}}}}
+svg.setAttribute('width',cw);svg.setAttribute('height',ch);svg.setAttribute('viewBox','0 0 '+cw+' '+ch);
+}
+
+function selP(poi){
+  selPoi=poi;
+  var gs=document.querySelectorAll('.poi-g');
+  for(var i=0;i<gs.length;i++){var g=gs[i];g.querySelector('path:nth-child(2)').setAttribute('stroke','#06142a');g.querySelector('path:nth-child(2)').setAttribute('stroke-width','1.5')}
+  var g=document.querySelector('.poi-g[data-id="'+poi.id+'"]');
+  if(g){g.querySelector('path:nth-child(2)').setAttribute('stroke','#ffcf72');g.querySelector('path:nth-child(2)').setAttribute('stroke-width','3')}
+  var clr={home:'#2d6fb3',school:'#3f7f56',shop:'#c98238',landmark:'#d85f45',museum:'#7d5fb2',stadium:'#8b8b8b',station:'#1e6eb8',park:'#70a95e',library:'#7d5fb2'}[poi.t]||'#d85f45';
+  var actions=poi.acts.map(function(a){return '<button class="act" onclick="da(\\\''+poi.id+'\\\',\\\''+a+'\\\')">'+a+'</button>'}).join('');
+  document.getElementById('dp').innerHTML='<div class="dh"><h2><span style="color:'+clr+'">'+poi.icon+'</span> '+poi.name+'</h2><div class="de">'+poi.de+'</div></div><div class="dd">'+poi.d+'</div><div class="da">'+actions+'</div><div class="dm"><div>\U0001f6b6 步行: <b>'+poi.walk+' min</b></div><div>\U0001f687 '+poi.ubahn+'</div><div>\U0001f4b0 花费: <b>'+poi.cost+'</b></div></div><button class="pbtn" onclick="srt(\\\''+poi.id+'\\\')">\u2197 显示路线</button>';
+}
+
+window.srt=function srt(pid){var from=gamePois.find(function(p){return p.id==='home'}),to=gamePois.find(function(p){return p.id===pid});if(!from||!to)return;var cW=wm(vp.centerLng,vp.centerLat,vp.zoom),p1w=wm(from.lng,from.lat,vp.zoom),p2w=wm(to.lng,to.lat,vp.zoom),p1={x:p1w.x-cW.x+vp.worldX+cw/2,y:p1w.y-cW.y+vp.worldY+ch/2},p2={x:p2w.x-cW.x+vp.worldX+cw/2,y:p2w.y-cW.y+vp.worldY+ch/2};svg.setAttribute('width',cw);svg.setAttribute('height',ch);svg.setAttribute('viewBox','0 0 '+cw+' '+ch);var rg=document.getElementById('rg');rg.innerHTML='<path d="M'+pxi(p1.x)+','+pxi(p1.y)+' Q'+pxi((p1.x+p2.x)/2+30)+','+pxi((p1.y+p2.y)/2-40)+' '+pxi(p2.x)+','+pxi(p2.y)+'" class="route-line"/><circle cx="'+pxi(p1.x)+'" cy="'+pxi(p1.y)+'" r="6" fill="#3f7f56" stroke="#06142a" stroke-width="2"/><circle cx="'+pxi(p2.x)+'" cy="'+pxi(p2.y)+'" r="6" fill="#d85f45" stroke="#06142a" stroke-width="2"/>';}
+
+window.da=function(id,act){console.log(act,'@',id);var p=gamePois.find(function(p2){return p2.id===id});if(p){document.getElementById('di').textContent='已选择：'+p.name+' · '+act}}
+
+window.stt=function stt(e,poi){var tt=document.getElementById('tt');if(!tt)return;var f=document.getElementById('mf'),r=f.getBoundingClientRect();tt.textContent=poi.name+' · '+poi.de;tt.style.left=(e.clientX-r.left+15)+'px';tt.style.top=(e.clientY-r.top-25)+'px';tt.classList.add('on')}
+window.htt=function htt(){var tt=document.getElementById('tt');if(tt)tt.classList.remove('on')}
 
 let dragging=false,ds=null,dsW=null;
 document.getElementById('mf').addEventListener('mousedown',e=>{dragging=true;ds={x:e.clientX,y:e.clientY};dsW={x:vp.worldX,y:vp.worldY}});
