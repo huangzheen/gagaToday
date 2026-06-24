@@ -1,23 +1,14 @@
 {
   "name": "german-learning-rpg",
-  "version": "0.1.0",
+  "version": "3.0.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite --host 127.0.0.1 --port 5173",
-    "build": "vite build",
-    "preview": "vite preview"
+    "start": "node server.cjs"
   },
   "dependencies": {
     "@mapbox/vector-tile": "^3.0.0",
     "pbf": "^5.1.0",
-    "phaser": "^3.80.0",
-    "pinia": "^2.1.0",
-    "pmtiles": "^4.4.1",
-    "vue": "^3.4.0"
-  },
-  "devDependencies": {
-    "@vitejs/plugin-vue": "^5.0.0",
-    "vite": "^5.2.0"
+    "pmtiles": "^4.4.1"
   }
 }

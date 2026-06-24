@@ -66,3 +66,6 @@ scripts/map/pmtiles/*.jar
 frontend/poi-generator/
 backend/
 .vite/
+
+# 旧 Vue 项目 (已废弃)
+frontend/src/
