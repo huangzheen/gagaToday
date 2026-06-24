@@ -3,22 +3,50 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=1280,initial-scale=1.0"/>
-<title>gagaToday — PMTiles Germany Map</title>
+<title>gagaToday — Deutschland PMTiles Map</title>
 <style>
+:root{--navy:#07152b;--navy2:#0d2344;--navy3:#14305c;--gold:#e8b85c;--gold2:#ffcf72}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#0a1428;font-family:'Courier New',monospace;color:#fff;overflow:hidden;width:100vw;height:100vh}
-#mapf{position:fixed;inset:0}
-#mapf canvas{position:absolute;inset:0;width:100%;height:100%;image-rendering:pixelated}
-#loading{position:fixed;inset:0;z-index:999;background:#050b16;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:monospace;color:#f4d35e}
-#loading .sub{color:#6a8aaa;font-size:11px}
-#info{position:fixed;top:12px;left:12px;z-index:100;background:rgba(7,21,43,.92);border:2px solid #e8b85c;padding:8px 14px;font-size:10px;color:#f4d35e;box-shadow:4px 4px 0 #000}
-#info .s{color:#6a8aaa;font-size:9px}
+body{background:radial-gradient(circle at 50% 12%,#183b67,#06101f 58%,#030812);font-family:'Courier New',monospace;color:#fff;width:100vw;height:100vh;overflow:hidden;display:block}
+.shell{width:100vw;height:100vh;display:grid;grid-template-columns:240px minmax(0,1fr) 340px;grid-template-rows:74px minmax(0,1fr) 66px;gap:10px;padding:12px}
+.panel{background:linear-gradient(180deg,#173b6e 0%,#0a2141 42%,#061326 100%);border:3px solid var(--gold);box-shadow:6px 6px 0 rgba(0,0,0,.75),inset 0 0 0 2px rgba(255,255,255,.045);position:relative}
+.panel::after{content:'';position:absolute;inset:1px;border:1px solid rgba(232,184,92,.15);pointer-events:none}
+.top{grid-column:1/-1;grid-row:1;display:flex;align-items:center;justify-content:space-between;padding:0 22px;background:linear-gradient(180deg,#173d72,#07152b 82%)}
+.ttl{font-size:20px;font-weight:bold;color:var(--gold2);letter-spacing:4px;text-shadow:3px 3px 0 #000}
+.tsub{font-size:10px;color:#7ea0c4;letter-spacing:2px;margin-top:4px}
+.tst{display:flex;gap:16px;font-size:10px}
+.tst s{color:#8aaac8;font-size:9px}.tst b{color:var(--gold2)}
+.left{grid-column:1;grid-row:2;padding:14px;display:flex;flex-direction:column;gap:14px;overflow-y:auto;background:linear-gradient(180deg,#123663,#07162c)}
+.sec h3{font-size:9px;color:var(--gold);letter-spacing:2px;margin-bottom:4px;padding-bottom:2px;border-bottom:1px solid var(--navy2)}
+.sec p,.sec li{font-size:8px;color:#8aaac8;line-height:1.4}
+.qlist{list-style:none}.qlist li{padding:2px 0;display:flex;align-items:center;gap:4px}
+.qlist li::before{content:'⬡';color:var(--gold);font-size:8px}
+.qlist li.done{color:#5a7a5a}
+.mapf{grid-column:2;grid-row:2;position:relative;background:#efe2c2;border:4px solid #d59a56;box-shadow:10px 10px 0 rgba(0,0,0,.72),0 0 0 3px #06142a inset;overflow:hidden}
+.mapf canvas{position:absolute;inset:0;width:100%;height:100%;image-rendering:pixelated;image-rendering:crisp-edges}
+.mapf::after{content:'';position:absolute;inset:0;pointer-events:none;background:none;opacity:0;z-index:5}
+.mapf::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 50% 48%,transparent 0 62%,rgba(0,0,0,.12) 100%);opacity:.45;z-index:5}
+.right{grid-column:3;grid-row:2;padding:14px;display:flex;flex-direction:column;gap:12px;overflow-y:auto;background:linear-gradient(180deg,#123663,#07162c)}
+.detail-empty{color:#4a6a8a;font-size:9px;text-align:center;padding-top:30px}
+.dh h2{font-size:14px;color:var(--gold2);margin-bottom:1px}
+.dh .de{font-size:9px;color:#6a8aaa;font-style:italic}
+.dd{font-size:9px;color:#aab8bf;line-height:1.5}
+.dm{font-size:8px;color:#8aaac8;display:flex;flex-direction:column;gap:3px;padding:6px;background:rgba(0,0,0,.3);border:1px solid var(--navy2)}.dm b{color:var(--gold2)}
+.bot{grid-column:1/-1;grid-row:3;display:flex;align-items:center;justify-content:center;gap:18px;font-size:10px;color:#8db2d5;background:linear-gradient(180deg,#173b6e,#07152b)}
+.bot kbd{background:var(--navy2);border:1px solid #3a5a7a;padding:2px 6px;color:var(--gold2);font-size:7px;border-radius:2px}
+.bot button{background:linear-gradient(180deg,#214d83,#0c274d);color:#fff;border:3px solid #06142a;box-shadow:3px 3px 0 #000;font-family:inherit;font-size:9px;font-weight:bold;padding:4px 10px;cursor:pointer}.bot button:hover{filter:brightness(1.15);transform:translateY(-1px)}
+#loading-overlay{position:fixed;inset:0;background:#050b16;z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:#f4d35e;font-family:monospace}.load-sub{color:#6a8aaa;font-size:11px}
 </style>
 </head>
 <body>
-<div id="loading"><div>🗺️ 加载德国 PMTiles 地图...</div><div class="sub">Deutschland · ~3 GB · HTTP Range Tiles</div></div>
-<div id="info">Deutschland <span class="s">·</span> Zoom <span id="zv">0</span> <span class="s">·</span> <span id="st">init</span></div>
-<div id="mapf"><canvas id="mc"></canvas></div>
+<div id="loading-overlay"><div>🗺️ 加载德国 PMTiles 地图...</div><div class="load-sub">Deutschland · ~3 GB · HTTP Range Tiles</div></div>
+<div class="shell">
+<div class="top panel"><div><div class="ttl">DEUTSCHLAND</div><div class="tsub">PMTiles · Zoom <span id="zl">0</span> · <span id="fc">0</span> features</div></div><div class="tst"><span>❤️ <s>体力</s> <b>85</b></span><span>⭐ <s>德语</s> <b>A1.2</b></span><span>💰 <s>欧元</s> <b>24.50</b></span><span>🕐 <s>时间</s> <b>08:15</b></span></div></div>
+<div class="left panel"><div class="sec"><h3>📋 今日任务</h3><ul class="qlist"><li>买早餐 Brötchen</li><li>去学校报到</li><li>自我介绍练习</li><li class="done">与房东打招呼</li></ul></div><div class="sec"><h3>🗺️ 状态</h3><p id="di">加载中...</p></div><div class="sec"><h3>📍 位置</h3><p style="color:var(--gold2)">慕尼黑 · Deutschland</p></div><div class="sec"><h3>💡 操作</h3><p>拖拽 / 方向键移动<br/>滚轮 / - = 缩放<br/>点击 POI 查看详情</p></div></div>
+<div class="mapf" id="mf"><canvas id="mc"></canvas></div>
+<div class="right panel" id="dp"><div class="detail-empty"><p style="font-size:24px;margin-bottom:8px">⭐</p><p>已加载 tiles 后<br/>此处显示地图信息</p></div></div>
+<div class="bot panel"><span><kbd>🖱️ 拖拽</kbd> 平移</span><span><kbd>🖱️ 滚轮</kbd> 缩放</span><span><kbd>←↑↓→</kbd> 移动</span><span><kbd>- =</kbd> 缩放</span><span>Zoom: <span id="zv">10</span></span><button id="br">🎯 重置</button><button id="b+">+</button><button id="b-">-</button></div>
+</div>
 
 <script type="importmap">
 {
@@ -33,6 +61,7 @@ body{background:#0a1428;font-family:'Courier New',monospace;color:#fff;overflow:
 </script>
 
 <script type="module">
+
 import { PMTiles } from 'pmtiles';
 import { VectorTile } from '@mapbox/vector-tile';
 import { PbfReader } from 'pbf';
@@ -56,8 +85,8 @@ const ST = {
 
 const canvas=document.getElementById('mc'),ctx=canvas.getContext('2d');
 let cw,ch;
-function resize(){cw=canvas.width=window.innerWidth;ch=canvas.height=window.innerHeight;ctx.imageSmoothingEnabled=false}
-window.addEventListener('resize',resize);resize();
+function resize(){var f=document.getElementById('mf');if(!f)return;cw=canvas.width=f.clientWidth;ch=canvas.height=f.clientHeight;ctx.imageSmoothingEnabled=false}
+window.addEventListener('resize',resize);setTimeout(resize,100);resize();
 const vp={centerLat:48.145,centerLng:11.575,zoom:10,worldX:0,worldY:0};
 let pmtiles=null;
 
@@ -103,7 +132,7 @@ function renderFeats(feats){
 }
 
 async function render(){
-  document.getElementById('zv').textContent=vp.zoom;
+  
   const tiles=await loadVisibleTiles();
   const allFeats=[],seen=new Set();
   for(const t of tiles){
@@ -119,33 +148,36 @@ async function render(){
       }
     }
   }
-  document.getElementById('st').textContent=allFeats.length+' features, '+tiles.length+' tiles';
+  document.getElementById('di').textContent=allFeats.length.toLocaleString()+' features \u00B7 '+tiles.length+' tiles';document.getElementById('fc').textContent=allFeats.length.toLocaleString();document.getElementById('zl').textContent=vp.zoom;document.getElementById('zv').textContent=vp.zoom;
 renderFeats(allFeats);
 }
 
 let dragging=false,ds=null,dsW=null;
-document.getElementById('mapf').addEventListener('mousedown',e=>{dragging=true;ds={x:e.clientX,y:e.clientY};dsW={x:vp.worldX,y:vp.worldY}});
+document.getElementById('mf').addEventListener('mousedown',e=>{dragging=true;ds={x:e.clientX,y:e.clientY};dsW={x:vp.worldX,y:vp.worldY}});
 window.addEventListener('mouseup',()=>{dragging=false});
 window.addEventListener('mousemove',e=>{if(!dragging)return;vp.worldX=dsW.x+(e.clientX-ds.x);vp.worldY=dsW.y+(e.clientY-ds.y);render()});
-document.getElementById('mapf').addEventListener('wheel',e=>{e.preventDefault();const o=vp.zoom;vp.zoom=Math.max(5,Math.min(15,vp.zoom+(e.deltaY>0?-1:1)));if(vp.zoom!==o){vp.worldX=0;vp.worldY=0;render()}});
+document.getElementById('mf').addEventListener('wheel',e=>{e.preventDefault();const o=vp.zoom;vp.zoom=Math.max(5,Math.min(15,vp.zoom+(e.deltaY>0?-1:1)));if(vp.zoom!==o){vp.worldX=0;vp.worldY=0;render()}});
 window.addEventListener('keydown',e=>{const sp=15;if(e.key==='ArrowLeft'){vp.worldX-=sp;render()}else if(e.key==='ArrowRight'){vp.worldX+=sp;render()}else if(e.key==='ArrowUp'){vp.worldY-=sp;render()}else if(e.key==='ArrowDown'){vp.worldY+=sp;render()}else if(e.key==='-'||e.key==='_'){vp.zoom=Math.max(5,vp.zoom-1);vp.worldX=0;vp.worldY=0;render()}else if(e.key==='='||e.key==='+'){vp.zoom=Math.min(15,vp.zoom+1);vp.worldX=0;vp.worldY=0;render()}});
 
 async function init(){
+  document.getElementById('br').addEventListener('click',function(){vp.centerLat=48.145;vp.centerLng=11.575;vp.zoom=10;vp.worldX=0;vp.worldY=0;render()});
+  document.getElementById('b+').addEventListener('click',function(){vp.zoom=Math.min(15,vp.zoom+1);vp.worldX=0;vp.worldY=0;render()});
+  document.getElementById('b-').addEventListener('click',function(){vp.zoom=Math.max(5,vp.zoom-1);vp.worldX=0;vp.worldY=0;render()});
   try{
     pmtiles=new PMTiles('/public/assets/munich_map/pmtiles/germany.pmtiles');
     const h=await pmtiles.getHeader();
-    const sub=document.getElementById('loading').querySelector('.sub');
-    sub.textContent='Deutschland · zoom '+h.minZoom+'-'+h.maxZoom+' · '+(h.fileSize/1024/1024).toFixed(0)+' MB · HTTP Range';
-    document.getElementById('st').textContent='ready';
+    document.getElementById('loading-overlay').querySelector('.load-sub').textContent='Deutschland · zoom '+h.minZoom+'-'+h.maxZoom+' · '+(h.fileSize/1024/1024).toFixed(0)+' MB · HTTP Range';
+    document.getElementById('di').textContent='header OK · zoom '+h.minZoom;
   }catch(e){
-    document.getElementById('loading').querySelector('.sub').textContent='Error: '+e.message;
+    document.getElementById('loading-overlay').querySelector('.load-sub').textContent='Error: '+e.message;
     console.error(e);
     return;
   }
-  document.getElementById('loading').style.display='none';
+  document.getElementById('loading-overlay').style.display='none';
   render();
 }
 init();
+
 </script>
 </body>
 </html>
