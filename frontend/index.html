@@ -198,7 +198,7 @@ function renderFeats(feats){
   ctx.globalAlpha = 1;
   // Roads: 自适应宽度 + 透明度
   for(const pass of[true,false]){for(const f of feats){const p=f.properties;const c=(p.class||p.highway||'').toLowerCase();const roadMap={motorway:ST.motorway,primary:ST.primary,secondary:ST.secondary,tertiary:ST.tertiary,residential:ST.residential,footway:ST.footway,path:ST.footway,track:ST.residential,service:ST.residential};const s=roadMap[c]||(c?ST.residential:null);if(!s||vp.zoom<s.minZ)continue;var w=roadW(s.w,s.minZ);var a=roadA(s.minZ);ctx.globalAlpha=a;if(f.geometry.type==='LineString')drawLine(f.geometry.coordinates,pass?s.O:s.C,pass?w+1.5:w);if(f.geometry.type==='MultiLineString')for(const cs of f.geometry.coordinates)drawLine(cs,pass?s.O:s.C,pass?w+1.5:w);ctx.globalAlpha=1}}
-  // Buildings: layer 'building' — 用 OSM colour 填充，无颜色则默认 PAL.b1
+  // Buildings: 有 OSM colour 的建筑按原色渲染，无则统一 PAL.b1
   for(const f of feats){const p=f.properties;if(p.render_height||p.render_min_height){var fc=p.colour||PAL.b1;if(f.geometry.type==='Polygon')drawPolyFill(f.geometry.coordinates,fc);if(f.geometry.type==='MultiPolygon')for(const c of f.geometry.coordinates)drawPolyFill(c,fc)}}
   ctx.globalAlpha=.72;
   for(const f of feats){const p=f.properties;if(p.render_height||p.render_min_height){if(f.geometry.type==='Polygon')drawPoly(f.geometry.coordinates,null,PAL.bE,0.55);if(f.geometry.type==='MultiPolygon')for(const c of f.geometry.coordinates)drawPoly(c,null,PAL.bE,0.55)}}
