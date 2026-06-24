@@ -116,32 +116,17 @@ function drawPoly(coords,fill,str,lw){
   const r=coords[0];
   ctx.beginPath();
   let p=toScr(r[0][0],r[0][1]);
-  ctx.moveTo(pxi(p.x),pxi(p.y));
+  ctx.moveTo(p.x,p.y);
   for(let i=1;i<r.length;i++){
     p=toScr(r[i][0],r[i][1]);
-    ctx.lineTo(pxi(p.x),pxi(p.y));
+    ctx.lineTo(p.x,p.y);
   }
   ctx.closePath();
-  if(fill){ctx.fillStyle=fill;ctx.fill();}
-  if(str&&lw>0){ctx.strokeStyle=str;ctx.lineWidth=lw;ctx.stroke();}
+  if(fill){ctx.fillStyle=fill;ctx.fill();ctx.strokeStyle=fill;ctx.lineWidth=0.6;ctx.stroke();}
+  if(str&&!fill){ctx.strokeStyle=str;ctx.lineWidth=lw||1;ctx.stroke();}
 }
 
-function drawPolyFill(coords,fill){
-  if(!coords||!coords[0]||coords[0].length<3)return;
-  const r=coords[0];
-  ctx.beginPath();
-  let p=toScr(r[0][0],r[0][1]);
-  ctx.moveTo(pxi(p.x),pxi(p.y));
-  for(let i=1;i<r.length;i++){
-    p=toScr(r[i][0],r[i][1]);
-    ctx.lineTo(pxi(p.x),pxi(p.y));
-  }
-  ctx.closePath();
-  ctx.fillStyle=fill;
-  ctx.fill();
-}
-
-function drawLine(cs,color,w,dash){if(!cs||cs.length<2)return;ctx.beginPath();let p=toScr(cs[0][0],cs[0][1]);ctx.moveTo(pxi(p.x),pxi(p.y));for(let i=1;i<cs.length;i++){p=toScr(cs[i][0],cs[i][1]);ctx.lineTo(pxi(p.x),pxi(p.y))}ctx.strokeStyle=color;ctx.lineWidth=w;ctx.lineCap='round';ctx.lineJoin='round';if(dash)ctx.setLineDash([4,3]);ctx.stroke();ctx.setLineDash([])}
+function drawLine(cs,color,w,dash){if(!cs||cs.length<2)return;ctx.beginPath();let p=toScr(cs[0][0],cs[0][1]);ctx.moveTo(p.x,p.y);for(let i=1;i<cs.length;i++){p=toScr(cs[i][0],cs[i][1]);ctx.lineTo(p.x,p.y)}ctx.strokeStyle=color;ctx.lineWidth=w;ctx.lineCap='round';ctx.lineJoin='round';if(dash)ctx.setLineDash([4,3]);ctx.stroke();ctx.setLineDash([])}
 
 async function loadVisibleTiles(){
   if(!pmtiles)return[];
