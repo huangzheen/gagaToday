@@ -126,6 +126,8 @@ function drawPoly(coords,fill,str,lw){
   if(str&&!fill){ctx.strokeStyle=str;ctx.lineWidth=lw||1;ctx.stroke();}
 }
 
+function drawPolyFill(coords,fill){drawPoly(coords,fill,null,0)}
+
 function drawLine(cs,color,w,dash){if(!cs||cs.length<2)return;ctx.beginPath();let p=toScr(cs[0][0],cs[0][1]);ctx.moveTo(p.x,p.y);for(let i=1;i<cs.length;i++){p=toScr(cs[i][0],cs[i][1]);ctx.lineTo(p.x,p.y)}ctx.strokeStyle=color;ctx.lineWidth=w;ctx.lineCap='round';ctx.lineJoin='round';if(dash)ctx.setLineDash([4,3]);ctx.stroke();ctx.setLineDash([])}
 
 async function loadVisibleTiles(){
@@ -155,16 +157,16 @@ function renderFeats(feats){
   // Water: 低 zoom 淡色透明,减少"补丁"感
   var wa = vp.zoom < 10 ? 0.4 + 0.6 * (vp.zoom - 5) / 5 : 1;
   ctx.globalAlpha = wa;
-  for(const f of feats){const p=f.properties;const c=(p.class||'').toLowerCase();if(c==='river'||c==='lake'||c==='ocean'||c==='canal'||c==='stream'||c==='drain'){if(f.geometry.type==='Polygon')drawPolyFill(f.geometry.coordinates,PAL.water);if(f.geometry.type==='MultiPolygon')for(const cc of f.geometry.coordinates)drawPolyFill(cc,PAL.water)}}
+  for(const f of feats){const p=f.properties;const c=(p.class||'').toLowerCase();if(c==='river'||c==='lake'||c==='ocean'||c==='canal'||c==='stream'||c==='drain'){if(f.geometry.type==='Polygon')drawPoly(f.geometry.coordinates,PAL.water);if(f.geometry.type==='MultiPolygon')for(const cc of f.geometry.coordinates)drawPoly(cc,PAL.water)}}
   ctx.globalAlpha = 1;
   // Parks: 同上,低 zoom 淡色
   ctx.globalAlpha = wa;
-  for(const f of feats){const p=f.properties;const c=(p.class||'').toLowerCase();if(c==='park'||c==='forest'||c==='grass'||c==='wood'||c==='meadow'||c==='orchard'||c==='vineyard'){if(f.geometry.type==='Polygon')drawPolyFill(f.geometry.coordinates,PAL.park);if(f.geometry.type==='MultiPolygon')for(const cc of f.geometry.coordinates)drawPolyFill(cc,PAL.park)}}
+  for(const f of feats){const p=f.properties;const c=(p.class||'').toLowerCase();if(c==='park'||c==='forest'||c==='grass'||c==='wood'||c==='meadow'||c==='orchard'||c==='vineyard'){if(f.geometry.type==='Polygon')drawPoly(f.geometry.coordinates,PAL.park);if(f.geometry.type==='MultiPolygon')for(const cc of f.geometry.coordinates)drawPoly(cc,PAL.park)}}
   ctx.globalAlpha = 1;
   // Roads: 自适应宽度 + 透明度
   for(const pass of[true,false]){for(const f of feats){const p=f.properties;const c=(p.class||p.highway||'').toLowerCase();const roadMap={motorway:ST.motorway,primary:ST.primary,secondary:ST.secondary,tertiary:ST.tertiary,residential:ST.residential,footway:ST.footway,path:ST.footway,track:ST.residential,service:ST.residential};const s=roadMap[c]||(c?ST.residential:null);if(!s||vp.zoom<s.minZ)continue;var w=roadW(s.w,s.minZ);var a=roadA(s.minZ);ctx.globalAlpha=a;if(f.geometry.type==='LineString')drawLine(f.geometry.coordinates,pass?s.O:s.C,pass?w+1.5:w);if(f.geometry.type==='MultiLineString')for(const cs of f.geometry.coordinates)drawLine(cs,pass?s.O:s.C,pass?w+1.5:w);ctx.globalAlpha=1}}
   // Buildings: layer 'building'
-  for(const f of feats){const p=f.properties;if(p.render_height||p.render_min_height){if(f.geometry.type==='Polygon')drawPolyFill(f.geometry.coordinates,PAL.b1);if(f.geometry.type==='MultiPolygon')for(const c of f.geometry.coordinates)drawPolyFill(c,PAL.b1)}}
+  for(const f of feats){const p=f.properties;if(p.render_height||p.render_min_height){if(f.geometry.type==='Polygon')drawPoly(f.geometry.coordinates,PAL.b1);if(f.geometry.type==='MultiPolygon')for(const c of f.geometry.coordinates)drawPoly(c,PAL.b1)}}
   ctx.globalAlpha=.72;
   for(const f of feats){const p=f.properties;if(p.render_height||p.render_min_height){if(f.geometry.type==='Polygon')drawPoly(f.geometry.coordinates,null,PAL.bE,0.55);if(f.geometry.type==='MultiPolygon')for(const c of f.geometry.coordinates)drawPoly(c,null,PAL.bE,0.55)}}
   ctx.globalAlpha=1;
