@@ -29,7 +29,7 @@ body {
   width: 100vw;
   height: 100vh;
   display: grid;
-  grid-template-columns: 1fr 460px;
+  grid-template-columns: minmax(0, 1fr) 130px;
   grid-template-rows: 56px minmax(0, 1fr) 38px;
   gap: 8px;
   padding: 10px;
@@ -98,9 +98,9 @@ body {
 
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-  gap: 6px;
-  padding: 8px;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 5px;
+  padding: 6px;
   overflow-y: auto;
   flex: 1;
 }
@@ -109,25 +109,30 @@ body {
 .poi-card {
   background: var(--navy2);
   border: 2px solid var(--border);
-  padding: 10px;
-  cursor: pointer;
+  padding: 7px 8px;
+  cursor: grab;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
   transition: all .12s;
   border-radius: 3px;
   position: relative;
+  user-select: none;
 }
-.poi-card:hover { border-color: var(--gold); transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,.3); }
+.poi-card:active { cursor: grabbing; }
+.poi-card:hover { border-color: var(--gold); }
 .poi-card.selected { border-color: var(--gold2); background: var(--navy3); }
-.poi-card-icon { font-size: 24px; }
-.poi-card-name { font-size: 11px; color: var(--gold2); font-weight: bold; }
-.poi-card-type { font-size: 8px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; }
-.poi-card-de { font-size: 8px; color: #4a6a8a; font-style: italic; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.poi-card-stats { display: flex; gap: 4px; margin-top: 2px; }
-.poi-card-stats .stat { font-size: 9px; }
-.poi-card-stats .stat.ok { filter: none; }
-.poi-card-stats .stat.missing { opacity: .25; }
+.poi-card.published { border-color: var(--success); }
+.poi-card.published::after {
+  content: '✅';
+  position: absolute;
+  top: 2px;
+  right: 4px;
+  font-size: 8px;
+}
+.poi-card-icon { font-size: 18px; line-height: 1; }
+.poi-card-name { font-size: 10px; color: var(--gold2); font-weight: bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.poi-card-de { font-size: 7px; color: #4a6a8a; font-style: italic; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 /* ── 新增卡片 ── */
 .add-card {
@@ -136,23 +141,80 @@ body {
   background: transparent;
   justify-content: center;
   align-items: center;
-  min-height: 100px;
-  opacity: .5;
+  min-height: 60px;
+  opacity: .4;
 }
 .add-card:hover { opacity: 1; border-color: var(--gold); }
-.add-icon { font-size: 20px; }
-.add-text { font-size: 9px; color: var(--text-dim); margin-top: 4px; }
+.add-icon { font-size: 16px; }
 
-/* ── 右侧编辑面板 ── */
-.editor-panel {
+/* ── 右侧发布栏 ── */
+.publish-bar {
   grid-column: 2;
   grid-row: 2;
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  transition: border-color .2s;
+}
+.publish-bar.drag-over { border-color: var(--success); background: rgba(90,154,90,.08); }
+.publish-header {
+  font-size: 8px;
+  color: var(--gold);
+  letter-spacing: 2px;
+  padding: 6px 8px 4px;
+  border-bottom: 1px solid var(--navy2);
+  flex-shrink: 0;
+  text-align: center;
+}
+.publish-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 4px;
+}
+.publish-item {
+  padding: 4px 6px;
+  font-size: 7px;
+  border-bottom: 1px solid var(--navy2);
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+.publish-item.is-new { animation: pubFadeIn .4s ease; }
+@keyframes pubFadeIn { from { background: var(--success); } }
+.pi-city { color: var(--gold); font-weight: bold; font-size: 7px; }
+.pi-type { color: var(--text-dim); font-size: 6px; text-transform: uppercase; min-width: 36px; }
+.pi-name { color: #aab8bf; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 1; }
+.publish-empty {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.drop-hint {
+  text-align: center;
+  color: #4a6a8a;
+  font-size: 8px;
+  line-height: 1.6;
 }
 
-.editor-header {
+/* ── 编辑弹窗 ── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(3,8,18,.85);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal-panel {
+  width: min(720px, 90vw);
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -160,23 +222,14 @@ body {
   border-bottom: 1px solid var(--navy3);
   flex-shrink: 0;
 }
-.editor-poi-name {
-  font-size: 12px;
+.modal-title {
+  font-size: 13px;
   color: var(--gold2);
   font-weight: bold;
 }
-.editor-actions { display: flex; gap: 4px; }
+.modal-actions { display: flex; gap: 4px; }
 
-.empty-editor {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.empty-hint {
-  text-align: center;
-  color: #4a6a8a;
-  font-size: 10px;
-}
+/* ── 旧编辑面板（已替换为弹窗 + 发布栏） ── */
 
 /* ── 主内容区 ── */
 
