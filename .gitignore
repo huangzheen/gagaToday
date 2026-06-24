@@ -48,7 +48,7 @@ scripts/curriculum/__pycache__/
 scripts/*.log
 art_generation.logassets/munich_map/munich.geojson
 scripts/map/pmtiles/data/
-scripts/map/pmtiles/bayern.pmtiles
+scripts/map/pmtiles/germany-zoom16.pmtiles
 assets/munich_map/pmtiles/
 frontend/node_modules/pmtiles
 frontend/node_modules/@mapbox
