@@ -164,17 +164,7 @@ async def api_save_package(req: SavePackageRequest):
             ct = ct_map.get(ct, ct)
             content_types.append(ct)
 
-            # 写入 db
-            add_content(
-                poi_id=poi_id,
-                city=city,
-                content_type=ct,
-                data=data,
-                export_batch=batch,
-                file_path=relative_path,
-            )
-
-            # 如果内容是 poi_info，同步基础信息到 pois 表
+            # 如果是 poi_info，先 upsert POI（外键约束要求 pois 表先有记录）
             if ct == "info" and isinstance(data, dict):
                 upsert_poi(
                     poi_id=poi_id,
@@ -193,6 +183,16 @@ async def api_save_package(req: SavePackageRequest):
                     unlocked=True,
                     is_published=True,
                 )
+
+            # 写入 db
+            add_content(
+                poi_id=poi_id,
+                city=city,
+                content_type=ct,
+                data=data,
+                export_batch=batch,
+                file_path=relative_path,
+            )
 
         # 3. 记录导出日志
         log_export(
