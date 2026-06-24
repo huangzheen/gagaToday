@@ -118,7 +118,8 @@ async function loadVisibleTiles(){
   if(!pmtiles)return[];
   let tileZ=Math.max(5,Math.min(15,vp.zoom));
   const c=tileXY(vp.centerLat,vp.centerLng,tileZ);
-  const tiles=[],range=Math.ceil(Math.max(cw,ch)/256/2)+1;
+  // 加载额外一圈瓦片(overlap=1)使跨瓦片 feature 自然衔接,消除拼接缝
+  const tiles=[],range=Math.ceil(Math.max(cw,ch)/256/2)+2;
   for(let dx=-range;dx<=range;dx++)for(let dy=-range;dy<=range;dy++){
     const tx=c.x+dx,ty=c.y+dy,n=1<<tileZ;
     if(tx<0||tx>=n||ty<0||ty>=n)continue;
@@ -160,17 +161,13 @@ function renderFeats(feats){
 async function render(){
   
   const tiles=await loadVisibleTiles();
-  const allFeats=[],seen=new Set();
+  const allFeats=[];
+  // 不去重:相邻 tile 的跨瓦片 feature 会各自渲染,重叠后自然隐藏接缝
   for(const t of tiles){
     for(const name of Object.keys(t.tile.layers)){
       const layer=t.tile.layers[name];
       for(let i=0;i<layer.length;i++){
-        try{
-          const feat=layer.feature(i).toGeoJSON(t.x,t.y,t.z);
-          const key=feat.properties&&feat.properties.osm_id||feat.id;
-          if(key){if(seen.has(key))continue;seen.add(key)}
-          allFeats.push(feat);
-        }catch(e){}
+        try{allFeats.push(layer.feature(i).toGeoJSON(t.x,t.y,t.z))}catch(e){}
       }
     }
   }
