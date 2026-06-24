@@ -1,0 +1,111 @@
+[
+  {
+    "id": "FK001",
+    "type": "exploration",
+    "title_zh": "穹顶之影",
+    "description_zh": "探索德累斯顿圣母教堂的建筑奇迹，了解其战后重建的历史。",
+    "steps": [
+      {
+        "step_id": 1,
+        "instruction_zh": "在教堂正门拍摄一张照片"
+      },
+      {
+        "step_id": 2,
+        "instruction_zh": "找到并记录教堂内部的八角形穹顶结构特点"
+      },
+      {
+        "step_id": 3,
+        "instruction_zh": "在游客中心查阅重建时间线并回答相关问题"
+      }
+    ],
+    "rewards": {
+      "coins": 50,
+      "items": [
+        "历史爱好者徽章"
+      ]
+    },
+    "review_status": "draft"
+  },
+  {
+    "id": "FK002",
+    "type": "dialogue",
+    "title_zh": "钟声的秘密",
+    "description_zh": "与当地居民交谈，聆听关于教堂钟声的民间传说。",
+    "steps": [
+      {
+        "step_id": 1,
+        "instruction_zh": "在教堂广场寻找一位穿蓝色外套的老者"
+      },
+      {
+        "step_id": 2,
+        "instruction_zh": "询问他关于‘和平钟’的故事"
+      },
+      {
+        "step_id": 3,
+        "instruction_zh": "将故事复述给教堂志愿者确认"
+      }
+    ],
+    "rewards": {
+      "coins": 40,
+      "items": [
+        "口述历史笔记"
+      ]
+    },
+    "review_status": "draft"
+  },
+  {
+    "id": "FK003",
+    "type": "cultural",
+    "title_zh": "巴洛克回响",
+    "description_zh": "深入了解圣母教堂在巴洛克艺术中的地位及其宗教意义。",
+    "steps": [
+      {
+        "step_id": 1,
+        "instruction_zh": "参观教堂内的管风琴并聆听一段演奏"
+      },
+      {
+        "step_id": 2,
+        "instruction_zh": "在导览手册中标注三个巴洛克装饰元素"
+      },
+      {
+        "step_id": 3,
+        "instruction_zh": "完成一份关于路德宗信仰与建筑关系的小测验"
+      }
+    ],
+    "rewards": {
+      "coins": 60,
+      "items": [
+        "巴洛克艺术图册"
+      ]
+    },
+    "review_status": "draft"
+  },
+  {
+    "id": "FK004",
+    "type": "treasure_hunt",
+    "title_zh": "石匠的印记",
+    "description_zh": "寻找隐藏在教堂内外的石匠标记，解开重建工程中的密码。",
+    "steps": [
+      {
+        "step_id": 1,
+        "instruction_zh": "在教堂东侧外墙寻找刻有“S+1994”的石块"
+      },
+      {
+        "step_id": 2,
+        "instruction_zh": "进入教堂地下室，找到编号为“B-7”的原始砖块"
+      },
+      {
+        "step_id": 3,
+        "instruction_zh": "将两个标记组合，在游客中心兑换线索"
+      }
+    ],
+    "rewards": {
+      "coins": 80,
+      "items": [
+        "重建密钥钥匙扣",
+        "稀有成就：石语者"
+      ]
+    },
+    "review_status": "draft"
+  }
+]

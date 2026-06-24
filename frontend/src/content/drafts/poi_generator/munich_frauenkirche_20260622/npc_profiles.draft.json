@@ -1,0 +1,32 @@
+[
+  {
+    "id": "npc_frauenkirche_01",
+    "name_de": "Herr Weber",
+    "name_zh": "韦伯先生",
+    "role": "Kirchenführer",
+    "age_band": "50-65",
+    "personality": "geduldig, wissbegierig, freundlich",
+    "background_zh": "韦伯先生是圣母教堂的资深讲解员，已在教堂工作超过二十年。他热爱德累斯顿的历史，尤其热衷于向国际游客介绍教堂在二战后的重建故事。",
+    "language_profile": {
+      "de": "native",
+      "en": "fluent",
+      "zh": "basic"
+    },
+    "review_status": "draft"
+  },
+  {
+    "id": "npc_frauenkirche_02",
+    "name_de": "Schwester Maria",
+    "name_zh": "玛丽亚修女",
+    "role": "Gemeindeschwester",
+    "age_band": "35-50",
+    "personality": "ruhig, mitfühlend, nachdenklich",
+    "background_zh": "玛丽亚修女在圣母教堂所属的教区服务已有十五年。她经常为来访者提供精神慰藉，并协助组织社区活动和慈善项目。",
+    "language_profile": {
+      "de": "native",
+      "en": "intermediate",
+      "zh": "none"
+    },
+    "review_status": "draft"
+  }
+]

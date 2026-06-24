@@ -1,0 +1,42 @@
+[
+  {
+    "id": "fk_location_01",
+    "name_zh": "抵达慕尼黑圣母教堂",
+    "type": "location",
+    "trigger": "用户进入 Frauenkirche 地理围栏区域",
+    "reward": 10,
+    "review_status": "draft"
+  },
+  {
+    "id": "fk_physical_02",
+    "name_zh": "攀登圣母教堂南塔",
+    "type": "physical",
+    "trigger": "用户记录攀登至少250级台阶（南塔）",
+    "reward": 20,
+    "review_status": "draft"
+  },
+  {
+    "id": "fk_photo_03",
+    "name_zh": "拍摄圣母教堂穹顶全景",
+    "type": "photo",
+    "trigger": "用户在教堂顶部或广场拍摄并上传一张包含双穹顶的照片",
+    "reward": 15,
+    "review_status": "draft"
+  },
+  {
+    "id": "fk_discover_04",
+    "name_zh": "发现教堂内的“魔鬼脚印”传说",
+    "type": "discover",
+    "trigger": "用户扫描教堂内指定二维码或回答相关问题",
+    "reward": 12,
+    "review_status": "draft"
+  },
+  {
+    "id": "fk_scheduled_05",
+    "name_zh": "参加圣母教堂周日弥撒",
+    "type": "scheduled",
+    "trigger": "用户在周日上午9:00-11:00期间签到于 Frauenkirche",
+    "reward": 25,
+    "review_status": "draft"
+  }
+]

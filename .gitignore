@@ -59,3 +59,10 @@ frontend/node_modules/geojson
 frontend/node_modules/protocol-buffers-schema
 frontend/node_modules/resolve-protobuf-schema
 scripts/map/pmtiles/planetiler.jar
+scripts/map/pmtiles/germany-hires.pmtiles
+scripts/map/pmtiles/germany.pmtiles
+scripts/map/pmtiles/bayern.pmtiles
+scripts/map/pmtiles/*.jar
+frontend/poi-generator/
+backend/
+.vite/

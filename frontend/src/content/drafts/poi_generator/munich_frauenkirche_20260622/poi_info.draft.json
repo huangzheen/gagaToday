@@ -1,0 +1,16 @@
+{
+  "id": "explore_munich_frauenkirche",
+  "name_de": "Frauenkirche",
+  "name_zh": "圣母教堂",
+  "name_en": "Frauenkirche",
+  "type": "church",
+  "city": "munich",
+  "coordinates": {
+    "lat": 48.1385,
+    "lng": 11.5737,
+    "source": "manual"
+  },
+  "visit_duration_minutes": 30,
+  "student_fit": "high",
+  "review_status": "draft"
+}

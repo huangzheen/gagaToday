@@ -1,0 +1,538 @@
+[
+  {
+    "id": "sv_frauenkirche_CAoSF0NJ",
+    "type": "streetview_panorama",
+    "name": "Frauenkirche Street View (2014-11)",
+    "lat": 48.138493,
+    "lng": 11.573668,
+    "grid_col": 34,
+    "grid_row": 28,
+    "date": "2014-11",
+    "copyright": "Mark Simons",
+    "pano_id": "CAoSF0NJSE0wb2dLRUlDQWdJRDQ4NktmbmdF",
+    "headings_captured": [
+      0,
+      90,
+      180,
+      270
+    ],
+    "image_count": 4,
+    "images": [
+      "/generated/sv_frauenkirche_CAoSF0NJ_h0.jpg",
+      "/generated/sv_frauenkirche_CAoSF0NJ_h90.jpg",
+      "/generated/sv_frauenkirche_CAoSF0NJ_h180.jpg",
+      "/generated/sv_frauenkirche_CAoSF0NJ_h270.jpg"
+    ],
+    "status": "downloaded"
+  },
+  {
+    "id": "sv_frauenkirche_F1cPR6--",
+    "type": "streetview_panorama",
+    "name": "Frauenkirche Street View (2022-09)",
+    "lat": 48.138824,
+    "lng": 11.573679,
+    "grid_col": 34,
+    "grid_row": 26,
+    "date": "2022-09",
+    "copyright": "Google",
+    "pano_id": "F1cPR6--rLvjJZEfF3zrFw",
+    "headings_captured": [
+      0,
+      90,
+      180,
+      270
+    ],
+    "image_count": 4,
+    "images": [
+      "/generated/sv_frauenkirche_F1cPR6--_h0.jpg",
+      "/generated/sv_frauenkirche_F1cPR6--_h90.jpg",
+      "/generated/sv_frauenkirche_F1cPR6--_h180.jpg",
+      "/generated/sv_frauenkirche_F1cPR6--_h270.jpg"
+    ],
+    "status": "downloaded"
+  },
+  {
+    "id": "sv_frauenkirche_CAoSHENJ",
+    "type": "streetview_panorama",
+    "name": "Frauenkirche Street View (2025-07)",
+    "lat": 48.138207,
+    "lng": 11.5737,
+    "grid_col": 34,
+    "grid_row": 30,
+    "date": "2025-07",
+    "copyright": "Johann Haag",
+    "pano_id": "CAoSHENJQUJJaEFkTjhIRExCa1dONkhad3RiSTIxUHY.",
+    "headings_captured": [
+      0,
+      90,
+      180,
+      270
+    ],
+    "image_count": 4,
+    "images": [
+      "/generated/sv_frauenkirche_CAoSHENJ_h0.jpg",
+      "/generated/sv_frauenkirche_CAoSHENJ_h90.jpg",
+      "/generated/sv_frauenkirche_CAoSHENJ_h180.jpg",
+      "/generated/sv_frauenkirche_CAoSHENJ_h270.jpg"
+    ],
+    "status": "downloaded"
+  },
+  {
+    "id": "sv_frauenkirche_CAoSF0NJ",
+    "type": "streetview_panorama",
+    "name": "Frauenkirche Street View (2013-05)",
+    "lat": 48.138586,
+    "lng": 11.573883,
+    "grid_col": 34,
+    "grid_row": 28,
+    "date": "2013-05",
+    "copyright": "Mark Bruce",
+    "pano_id": "CAoSF0NJSE0wb2dLRUlDQWdJQzZ0cENkekFF",
+    "headings_captured": [
+      0,
+      90,
+      180,
+      270
+    ],
+    "image_count": 4,
+    "images": [
+      "/generated/sv_frauenkirche_CAoSF0NJ_h0.jpg",
+      "/generated/sv_frauenkirche_CAoSF0NJ_h90.jpg",
+      "/generated/sv_frauenkirche_CAoSF0NJ_h180.jpg",
+      "/generated/sv_frauenkirche_CAoSF0NJ_h270.jpg"
+    ],
+    "status": "downloaded"
+  },
+  {
+    "id": "sv_frauenkirche_CAoSF0NJ",
+    "type": "streetview_panorama",
+    "name": "Frauenkirche Street View (2019-07)",
+    "lat": 48.138501,
+    "lng": 11.573337,
+    "grid_col": 33,
+    "grid_row": 28,
+    "date": "2019-07",
+    "copyright": "陳明宏",
+    "pano_id": "CAoSF0NJSE0wb2dLRUlDQWdJRC00N2JrX1FF",
+    "headings_captured": [
+      0,
+      90,
+      180,
+      270
+    ],
+    "image_count": 4,
+    "images": [
+      "/generated/sv_frauenkirche_CAoSF0NJ_h0.jpg",
+      "/generated/sv_frauenkirche_CAoSF0NJ_h90.jpg",
+      "/generated/sv_frauenkirche_CAoSF0NJ_h180.jpg",
+      "/generated/sv_frauenkirche_CAoSF0NJ_h270.jpg"
+    ],
+    "status": "downloaded"
+  },
+  {
+    "id": "sv_frauenkirche_0MmNT5uB",
+    "type": "streetview_panorama",
+    "name": "Frauenkirche Street View (2022-01)",
+    "lat": 48.139052,
+    "lng": 11.573646,
+    "grid_col": 34,
+    "grid_row": 25,
+    "date": "2022-01",
+    "copyright": "Google",
+    "pano_id": "0MmNT5uBLqTvrR4FoZyRng",
+    "headings_captured": [
+      0,
+      90,
+      180,
+      270
+    ],
+    "image_count": 4,
+    "images": [
+      "/generated/sv_frauenkirche_0MmNT5uB_h0.jpg",
+      "/generated/sv_frauenkirche_0MmNT5uB_h90.jpg",
+      "/generated/sv_frauenkirche_0MmNT5uB_h180.jpg",
+      "/generated/sv_frauenkirche_0MmNT5uB_h270.jpg"
+    ],
+    "status": "downloaded"
+  },
+  {
+    "id": "sv_frauenkirche_R2VkLPdi",
+    "type": "streetview_panorama",
+    "name": "Frauenkirche Street View (2022-09)",
+    "lat": 48.138017,
+    "lng": 11.573606,
+    "grid_col": 33,
+    "grid_row": 31,
+    "date": "2022-09",
+    "copyright": "Google",
+    "pano_id": "R2VkLPditBF7r4Lxjzn_vA",
+    "headings_captured": [
+      0,
+      90,
+      180,
+      270
+    ],
+    "image_count": 4,
+    "images": [
+      "/generated/sv_frauenkirche_R2VkLPdi_h0.jpg",
+      "/generated/sv_frauenkirche_R2VkLPdi_h90.jpg",
+      "/generated/sv_frauenkirche_R2VkLPdi_h180.jpg",
+      "/generated/sv_frauenkirche_R2VkLPdi_h270.jpg"
+    ],
+    "status": "downloaded"
+  },
+  {
+    "id": "sv_frauenkirche_CAoSFkNJ",
+    "type": "streetview_panorama",
+    "name": "Frauenkirche Street View (2014-11)",
+    "lat": 48.138545,
+    "lng": 11.574259,
+    "grid_col": 36,
+    "grid_row": 28,
+    "date": "2014-11",
+    "copyright": "Mark Simons",
+    "pano_id": "CAoSFkNJSE0wb2dLRUlDQWdJRDQ4OEt2Unc.",
+    "headings_captured": [
+      0,
+      90,
+      180,
+      270
+    ],
+    "image_count": 4,
+    "images": [
+      "/generated/sv_frauenkirche_CAoSFkNJ_h0.jpg",
+      "/generated/sv_frauenkirche_CAoSFkNJ_h90.jpg",
+      "/generated/sv_frauenkirche_CAoSFkNJ_h180.jpg",
+      "/generated/sv_frauenkirche_CAoSFkNJ_h270.jpg"
+    ],
+    "status": "downloaded"
+  },
+  {
+    "id": "sv_frauenkirche_CAoSFkNJ",
+    "type": "streetview_panorama",
+    "name": "Frauenkirche Street View (2018-09)",
+    "lat": 48.138552,
+    "lng": 11.573284,
+    "grid_col": 32,
+    "grid_row": 28,
+    "date": "2018-09",
+    "copyright": "Jason Pearce",
+    "pano_id": "CAoSFkNJSE0wb2dLRUlDQWdJRHFxOUgtQlE.",
+    "headings_captured": [
+      0,
+      90,
+      180,
+      270
+    ],
+    "image_count": 4,
+    "images": [
+      "/generated/sv_frauenkirche_CAoSFkNJ_h0.jpg",
+      "/generated/sv_frauenkirche_CAoSFkNJ_h90.jpg",
+      "/generated/sv_frauenkirche_CAoSFkNJ_h180.jpg",
+      "/generated/sv_frauenkirche_CAoSFkNJ_h270.jpg"
+    ],
+    "status": "downloaded"
+  },
+  {
+    "id": "sv_frauenkirche__bBNXyFs",
+    "type": "streetview_panorama",
+    "name": "Frauenkirche Street View (2022-09)",
+    "lat": 48.139067,
+    "lng": 11.573796,
+    "grid_col": 34,
+    "grid_row": 25,
+    "date": "2022-09",
+    "copyright": "Google",
+    "pano_id": "_bBNXyFseYJHjtFygyGfGA",
+    "headings_captured": [
+      0,
+      90,
+      180,
+      270
+    ],
+    "image_count": 4,
+    "images": [
+      "/generated/sv_frauenkirche__bBNXyFs_h0.jpg",
+      "/generated/sv_frauenkirche__bBNXyFs_h90.jpg",
+      "/generated/sv_frauenkirche__bBNXyFs_h180.jpg",
+      "/generated/sv_frauenkirche__bBNXyFs_h270.jpg"
+    ],
+    "status": "downloaded"
+  },
+  {
+    "id": "sv_frauenkirche_CAoSFkNJ",
+    "type": "streetview_panorama",
+    "name": "Frauenkirche Street View (2017-09)",
+    "lat": 48.137634,
+    "lng": 11.573708,
+    "grid_col": 34,
+    "grid_row": 34,
+    "date": "2017-09",
+    "copyright": "HELMUT REISENHOFER",
+    "pano_id": "CAoSFkNJSE0wb2dLRUlDQWdJREUtTWUyYUE.",
+    "headings_captured": [
+      0,
+      90,
+      180,
+      270
+    ],
+    "image_count": 4,
+    "images": [
+      "/generated/sv_frauenkirche_CAoSFkNJ_h0.jpg",
+      "/generated/sv_frauenkirche_CAoSFkNJ_h90.jpg",
+      "/generated/sv_frauenkirche_CAoSFkNJ_h180.jpg",
+      "/generated/sv_frauenkirche_CAoSFkNJ_h270.jpg"
+    ],
+    "status": "downloaded"
+  },
+  {
+    "id": "sv_frauenkirche_nawohpbX",
+    "type": "streetview_panorama",
+    "name": "Frauenkirche Street View (2022-09)",
+    "lat": 48.138481,
+    "lng": 11.574448,
+    "grid_col": 36,
+    "grid_row": 28,
+    "date": "2022-09",
+    "copyright": "Google",
+    "pano_id": "nawohpbXcxEYGmHPsOnYsg",
+    "headings_captured": [
+      0,
+      90,
+      180,
+      270
+    ],
+    "image_count": 4,
+    "images": [
+      "/generated/sv_frauenkirche_nawohpbX_h0.jpg",
+      "/generated/sv_frauenkirche_nawohpbX_h90.jpg",
+      "/generated/sv_frauenkirche_nawohpbX_h180.jpg",
+      "/generated/sv_frauenkirche_nawohpbX_h270.jpg"
+    ],
+    "status": "downloaded"
+  },
+  {
+    "id": "sv_frauenkirche_s9w5zYwk",
+    "type": "streetview_panorama",
+    "name": "Frauenkirche Street View (2022-09)",
+    "lat": 48.1385,
+    "lng": 11.572865,
+    "grid_col": 31,
+    "grid_row": 28,
+    "date": "2022-09",
+    "copyright": "Google",
+    "pano_id": "s9w5zYwkbu7Wr04iSPmtvQ",
+    "headings_captured": [
+      0,
+      90,
+      180,
+      270
+    ],
+    "image_count": 4,
+    "images": [
+      "/generated/sv_frauenkirche_s9w5zYwk_h0.jpg",
+      "/generated/sv_frauenkirche_s9w5zYwk_h90.jpg",
+      "/generated/sv_frauenkirche_s9w5zYwk_h180.jpg",
+      "/generated/sv_frauenkirche_s9w5zYwk_h270.jpg"
+    ],
+    "status": "downloaded"
+  },
+  {
+    "id": "sv_frauenkirche_CAoSF0NJ",
+    "type": "streetview_panorama",
+    "name": "Frauenkirche Street View (2020-07)",
+    "lat": 48.139562,
+    "lng": 11.573777,
+    "grid_col": 34,
+    "grid_row": 21,
+    "date": "2020-07",
+    "copyright": "360INT com",
+    "pano_id": "CAoSF0NJSE0wb2dLRUlDQWdJRHEyNENsbkFF",
+    "headings_captured": [
+      0,
+      90,
+      180,
+      270
+    ],
+    "image_count": 4,
+    "images": [
+      "/generated/sv_frauenkirche_CAoSF0NJ_h0.jpg",
+      "/generated/sv_frauenkirche_CAoSF0NJ_h90.jpg",
+      "/generated/sv_frauenkirche_CAoSF0NJ_h180.jpg",
+      "/generated/sv_frauenkirche_CAoSF0NJ_h270.jpg"
+    ],
+    "status": "downloaded"
+  },
+  {
+    "id": "sv_frauenkirche_CAoSHENJ",
+    "type": "streetview_panorama",
+    "name": "Frauenkirche Street View (2025-07)",
+    "lat": 48.137538,
+    "lng": 11.573679,
+    "grid_col": 34,
+    "grid_row": 34,
+    "date": "2025-07",
+    "copyright": "Johann Haag",
+    "pano_id": "CAoSHENJQUJJaEJ0ejRFMUtTd2JXRVNIRHF1ZDJNNTc.",
+    "headings_captured": [
+      0,
+      90,
+      180,
+      270
+    ],
+    "image_count": 4,
+    "images": [
+      "/generated/sv_frauenkirche_CAoSHENJ_h0.jpg",
+      "/generated/sv_frauenkirche_CAoSHENJ_h90.jpg",
+      "/generated/sv_frauenkirche_CAoSHENJ_h180.jpg",
+      "/generated/sv_frauenkirche_CAoSHENJ_h270.jpg"
+    ],
+    "status": "downloaded"
+  },
+  {
+    "id": "sv_frauenkirche_fX7KaMJx",
+    "type": "streetview_panorama",
+    "name": "Frauenkirche Street View (2022-09)",
+    "lat": 48.138444,
+    "lng": 11.574731,
+    "grid_col": 37,
+    "grid_row": 28,
+    "date": "2022-09",
+    "copyright": "Google",
+    "pano_id": "fX7KaMJx8uh63PLP1OGhNQ",
+    "headings_captured": [],
+    "image_count": 0,
+    "images": [],
+    "status": "discovered_only"
+  },
+  {
+    "id": "sv_frauenkirche_CAoSFkNJ",
+    "type": "streetview_panorama",
+    "name": "Frauenkirche Street View (2021-09)",
+    "lat": 48.138523,
+    "lng": 11.572757,
+    "grid_col": 31,
+    "grid_row": 28,
+    "date": "2021-09",
+    "copyright": "Mohamed Almehairi",
+    "pano_id": "CAoSFkNJSE0wb2dLRUlDQWdJQzZzdUg2Zmc.",
+    "headings_captured": [
+      0,
+      90,
+      180,
+      270
+    ],
+    "image_count": 4,
+    "images": [
+      "/generated/sv_frauenkirche_CAoSFkNJ_h0.jpg",
+      "/generated/sv_frauenkirche_CAoSFkNJ_h90.jpg",
+      "/generated/sv_frauenkirche_CAoSFkNJ_h180.jpg",
+      "/generated/sv_frauenkirche_CAoSFkNJ_h270.jpg"
+    ],
+    "status": "downloaded"
+  },
+  {
+    "id": "sv_frauenkirche_CAoSHENJ",
+    "type": "streetview_panorama",
+    "name": "Frauenkirche Street View (2026-03)",
+    "lat": 48.140053,
+    "lng": 11.573741,
+    "grid_col": 34,
+    "grid_row": 18,
+    "date": "2026-03",
+    "copyright": "Johann Haag",
+    "pano_id": "CAoSHENJQUJJaERkNDRpNjV4dEpmSmxlQUxtTnlPQ2Q.",
+    "headings_captured": [
+      0,
+      90,
+      180,
+      270
+    ],
+    "image_count": 4,
+    "images": [
+      "/generated/sv_frauenkirche_CAoSHENJ_h0.jpg",
+      "/generated/sv_frauenkirche_CAoSHENJ_h90.jpg",
+      "/generated/sv_frauenkirche_CAoSHENJ_h180.jpg",
+      "/generated/sv_frauenkirche_CAoSHENJ_h270.jpg"
+    ],
+    "status": "downloaded"
+  },
+  {
+    "id": "sv_frauenkirche_CAoSFkNJ",
+    "type": "streetview_panorama",
+    "name": "Frauenkirche Street View (2016-06)",
+    "lat": 48.136884,
+    "lng": 11.573692,
+    "grid_col": 34,
+    "grid_row": 38,
+    "date": "2016-06",
+    "copyright": "PANOFOTO",
+    "pano_id": "CAoSFkNJSE0wb2dLRUlDQWdJREU3Nm1mWnc.",
+    "headings_captured": [
+      0,
+      90,
+      180,
+      270
+    ],
+    "image_count": 4,
+    "images": [
+      "/generated/sv_frauenkirche_CAoSFkNJ_h0.jpg",
+      "/generated/sv_frauenkirche_CAoSFkNJ_h90.jpg",
+      "/generated/sv_frauenkirche_CAoSFkNJ_h180.jpg",
+      "/generated/sv_frauenkirche_CAoSFkNJ_h270.jpg"
+    ],
+    "status": "downloaded"
+  },
+  {
+    "id": "sv_frauenkirche_CAoSFkNJ",
+    "type": "streetview_panorama",
+    "name": "Frauenkirche Street View (2024-09)",
+    "lat": 48.138449,
+    "lng": 11.575171,
+    "grid_col": 38,
+    "grid_row": 28,
+    "date": "2024-09",
+    "copyright": "360 Swiss GmbH",
+    "pano_id": "CAoSFkNJSE0wb2dLRUlDQWdJREhoTGZqWlE.",
+    "headings_captured": [
+      0,
+      90,
+      180,
+      270
+    ],
+    "image_count": 4,
+    "images": [
+      "/generated/sv_frauenkirche_CAoSFkNJ_h0.jpg",
+      "/generated/sv_frauenkirche_CAoSFkNJ_h90.jpg",
+      "/generated/sv_frauenkirche_CAoSFkNJ_h180.jpg",
+      "/generated/sv_frauenkirche_CAoSFkNJ_h270.jpg"
+    ],
+    "status": "downloaded"
+  },
+  {
+    "id": "sv_frauenkirche_CAoSF0NJ",
+    "type": "streetview_panorama",
+    "name": "Frauenkirche Street View (2023-12)",
+    "lat": 48.138577,
+    "lng": 11.572164,
+    "grid_col": 29,
+    "grid_row": 28,
+    "date": "2023-12",
+    "copyright": "Local Business View GmbH",
+    "pano_id": "CAoSF0NJSE0wb2dLRUlDQWdJRFY5X1g1X0FF",
+    "headings_captured": [
+      0,
+      90,
+      180,
+      270
+    ],
+    "image_count": 4,
+    "images": [
+      "/generated/sv_frauenkirche_CAoSF0NJ_h0.jpg",
+      "/generated/sv_frauenkirche_CAoSF0NJ_h90.jpg",
+      "/generated/sv_frauenkirche_CAoSF0NJ_h180.jpg",
+      "/generated/sv_frauenkirche_CAoSF0NJ_h270.jpg"
+    ],
+    "status": "downloaded"
+  }
+]
