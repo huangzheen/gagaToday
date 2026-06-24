@@ -87,24 +87,11 @@ const PAL = {
 };
 
 /* ── POI 数据 ──
- * 默认硬编码数据，启动时尝试从后端 SQLite API 获取最新数据。
+ * POI 数据仅来自素材生成器导出的 SQLite API，初始化时为空数组。
+ * 启动后 loadPoisFromApi() 异步拉取，失败则地图无 POI。
  * 后端地址: http://127.0.0.1:8000/api/v2/pois?city=munich
  */
-let gamePois = [
-  {id:'home',name:'学生公寓',de:'Studentenwohnheim',t:'home',lat:48.156,lng:11.575,icon:'\u{1f3e0}',unlocked:true,walk:0,cost:'—',ubahn:'U3/U6 Münchner Freiheit',d:'住处。休息、做饭、写作业。',acts:['休息','做饭','查看邮件'],imgs:['/assets/scenes/munich/host_home.png']},
-  {id:'school',name:'语言学校',de:'Sprachschule',t:'school',lat:48.148,lng:11.565,icon:'\u{1f393}',unlocked:true,walk:18,cost:'€0',ubahn:'U3 Universität',d:'每天上课、考试、社交。Herr Weber 在这里等你。',acts:['上课','查看课表','找老师'],imgs:['/assets/scenes/munich/school.png']},
-  {id:'bakery',name:'面包店',de:'Bäckerei',t:'shop',lat:48.145,lng:11.572,icon:'\u{1f968}',unlocked:true,walk:12,cost:'€1.20~3.50',ubahn:'步行',d:'新鲜 Brötchen 和 Brezel，练德语点餐。',acts:['点餐','打卡','与店长对话'],imgs:['/assets/scenes/munich/bakery.png']},
-  {id:'marien',name:'玛利亚广场',de:'Marienplatz',t:'landmark',lat:48.1374,lng:11.5755,icon:'\u{1f4cd}',unlocked:true,walk:30,cost:'€0',ubahn:'U3/U6 Marienplatz',d:'慕尼黑核心地标和换乘点。',acts:['打卡','换乘','探索周边'],imgs:[]},
-  {id:'museum',name:'德意志博物馆',de:'Deutsches Museum',t:'museum',lat:48.1299,lng:11.583,icon:'\u{1f3db}',unlocked:true,walk:45,cost:'€7.00',ubahn:'S-Bahn Isartor',d:'世界最大科学技术博物馆。知识卡+兴趣打卡。',acts:['买票','参观','知识问答'],imgs:[]},
-  {id:'arena',name:'安联球场',de:'Allianz Arena',t:'stadium',lat:48.2188,lng:11.6247,icon:'\u26bd',unlocked:false,walk:'--',cost:'€40+',ubahn:'U6 Fröttmaning',d:'FC Bayern 主场，后续章节解锁。',acts:['看球','买票','好友邀请'],imgs:[]},
-  {id:'eg',name:'英国花园',de:'Englischer Garten',t:'park',lat:48.165,lng:11.595,icon:'\u{1f333}',unlocked:true,walk:25,cost:'€0',ubahn:'U3/U6 Universität',d:'欧洲最大城市公园之一。散步、野餐、看冲浪者。',acts:['散步','野餐','看冲浪'],imgs:[]},
-  {id:'hb',name:'中央车站',de:'Hauptbahnhof',t:'station',lat:48.140,lng:11.560,icon:'\u{1f687}',unlocked:true,walk:35,cost:'€3.50+',ubahn:'U1/U2/U4/U5/S-Bahn',d:'慕尼黑最大火车站，所有线路换乘枢纽。',acts:['购票','乘车','存包'],imgs:[]},
-  {id:'super',name:'超市',de:'Supermarkt',t:'shop',lat:48.152,lng:11.568,icon:'\u{1f6d2}',unlocked:true,walk:8,cost:'€5~15',ubahn:'步行',d:'REWE 超市，买晚餐食材和生活用品。',acts:['购物','查看标签','结账对话'],imgs:['/assets/scenes/munich/supermarket.png']},
-  {id:'libr',name:'图书馆',de:'Stadtbibliothek',t:'library',lat:48.146,lng:11.562,icon:'\u{1f4da}',unlocked:true,walk:22,cost:'€0',ubahn:'U3/U6附近',d:'安静自习，借德语教材。自习+45min。',acts:['自习','借书','查资料'],imgs:['/assets/scenes/munich/library.png']},
-  {id:'frauenkirche',name:'圣母教堂',de:'Frauenkirche',t:'church',lat:48.1385,lng:11.5737,icon:'\u26ea',unlocked:true,walk:35,cost:'€0',ubahn:'U3/U6 Marienplatz',d:'慕尼黑最著名的地标——圣母教堂。双塔俯瞰全城，游戏剧情起点。',acts:['参观','登塔','拍照打卡'],imgs:['/assets/scenes/munich/frauenkirche/exterior/exterior_spring.png','/assets/scenes/munich/frauenkirche/exterior/exterior_summer.png','/assets/scenes/munich/frauenkirche/exterior/exterior_autumn.png','/assets/scenes/munich/frauenkirche/exterior/exterior_winter.png','/assets/scenes/munich/frauenkirche/exterior/exterior_night.png','/assets/scenes/munich/frauenkirche/exterior/exterior_golden_hour.png','/assets/scenes/munich/frauenkirche/exterior/exterior_rainy.png','/assets/scenes/munich/frauenkirche/exterior/exterior_snowy.png']},
-  {id:'viktualienmarkt',name:'谷物市场',de:'Viktualienmarkt',t:'market',lat:48.1351,lng:11.5757,icon:'\u{1f4fa}',unlocked:true,walk:28,cost:'€3~10',ubahn:'U3/U6 Marienplatz',d:'慕尼黑最著名的露天市场，鲜花水果、香肠啤酒，练德语砍价。',acts:['逛市场','尝小吃','练砍价'],imgs:[]},
-  {id:'nymphenburg',name:'宁芬堡宫',de:'Schloss Nymphenburg',t:'castle',lat:48.1582,lng:11.5035,icon:'\u{1f3f0}',unlocked:true,walk:50,cost:'€12.00',ubahn:'Tram 17 Schloss Nymphenburg',d:'巴洛克宫殿与花园，夏季划船、冬季雪景。周末休闲好去处。',acts:['参观宫殿','逛花园','划船'],imgs:[]}
-];
+let gamePois = [];
 const ST = {
   motorway:{w:5,C:PAL.rp,O:PAL.rpO,minZ:5},
   primary:{w:4,C:PAL.rp,O:PAL.rpO,minZ:7},
@@ -306,45 +293,24 @@ document.getElementById('mf').addEventListener('wheel',e=>{e.preventDefault();co
 window.addEventListener('keydown',e=>{const sp=15;if(e.key==='ArrowLeft'){vp.worldX-=sp;render()}else if(e.key==='ArrowRight'){vp.worldX+=sp;render()}else if(e.key==='ArrowUp'){vp.worldY-=sp;render()}else if(e.key==='ArrowDown'){vp.worldY+=sp;render()}else if(e.key==='-'||e.key==='_'){vp.zoom=Math.max(5,vp.zoom-1);vp.worldX=0;vp.worldY=0;render()}else if(e.key==='='||e.key==='+'){vp.zoom=Math.min(16,vp.zoom+1);vp.worldX=0;vp.worldY=0;render()}});
 
 /* ── 从后端 SQLite API 加载 POI ──
- * 启动时异步拉取最新数据，成功则覆盖 gamePois（保留结构不变）。
- * 后端地址: http://127.0.0.1:8000/api/v2/pois?city=munich
- * 失败时静默降级为硬编码数据。
+ * 唯一数据来源。失败时 gamePois 保持为空，地图无 POI 显示。
  */
 async function loadPoisFromApi(){
   var apiUrl = 'http://127.0.0.1:8000/api/v2/pois?city=munich&published_only=true';
   try{
     var resp = await fetch(apiUrl, { signal: AbortSignal.timeout(3000) });
-    if(!resp.ok) return;
+    if(!resp.ok) throw new Error('HTTP '+resp.status);
     var json = await resp.json();
-    if(!json.success || !json.pois || !json.pois.length) return;
-    var apiPois = json.pois;
-    /* 合并场景图片 — API 返回的 imgs 可能有，没有则保留硬编码数据 */
-    var merged = [];
-    for(var i = 0; i < apiPois.length; i++){
-      var ap = apiPois[i], existing = null;
-      for(var j = 0; j < gamePois.length; j++){
-        if(gamePois[j].id === ap.id){ existing = gamePois[j]; break; }
-      }
-      if(ap.imgs && ap.imgs.length > 0){
-        /* API 有图片，直接用 */
-      } else if(existing && existing.imgs && existing.imgs.length > 0){
-        ap.imgs = existing.imgs;  /* 从硬编码继承 */
-      }
-      if(!ap.acts || !ap.acts.length){
-        ap.acts = existing ? existing.acts : [];
-      }
-      merged.push(ap);
-    }
-    gamePois = merged;
-    console.log('[poi-api] loaded '+merged.length+' POIs from SQLite');
-    /* 已选中 POI 重新渲染 */
+    if(!json.success || !json.pois) throw new Error('bad response');
+    gamePois = json.pois || [];
+    console.log('[poi-api] loaded '+gamePois.length+' POIs from SQLite');
     if(selPoi){
       var updated = gamePois.find(function(p){ return p.id === selPoi.id; });
       if(updated) selPoi = updated;
     }
   }catch(e){
-    /* 后端不可用，静默降级 */
-    console.log('[poi-api] fallback to hardcoded ('+(e.message||'unreachable')+')');
+    gamePois = [];
+    console.log('[poi-api] unavailable, no POIs shown ('+(e.message||'')+')');
   }
 }
 
