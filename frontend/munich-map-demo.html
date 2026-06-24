@@ -141,8 +141,8 @@ function drawRoads(feats,z){
     L.lineCap='round';L.lineJoin='round';
     if(st.dash&&!outline)L.setLineDash([5,4]);else L.setLineDash([]);
     L.strokeStyle=outline?st.O:st.C;
-    L.lineWidth=outline?st.w+4:st.w;
-    L.stroke();L.setLineDash([]);
+    var w=roadW(st.w,st.minZ);var a=roadA(st.minZ);L.globalAlpha=a;L.lineWidth=outline?w+3:w;
+    L.stroke();L.setLineDash([]);L.globalAlpha=1;
   }
   for(var i=roads.length-1;i>=0;i--)drawOne(roads[i],true);
   for(var k=roads.length-1;k>=0;k--)drawOne(roads[k],false);
@@ -153,6 +153,8 @@ var ST = {
   residential:{w:4,C:PAL.rr,O:PAL.rrO,minZ:15},footway:{w:2.5,C:PAL.fw,O:PAL.fwO,minZ:16,dash:1},
   cycleway:{w:2.5,C:'#c8dfbb',O:'#829b63',minZ:16,dash:1}
 };
+function roadW(b,m){var z=Math.max(m,Math.min(17,vp.zoom));return Math.max(1.5,b*Math.min(1,(z-m+2)/(15-m+2)))}
+function roadA(m){var z=vp.zoom;if(z>=m+3)return 1;if(z<=m)return.55;return.55+.45*(z-m)/3}
 
 function drawPoly(coords,fill,stroke,lineW){
   var L=lctx;if(!coords||!coords[0]||coords[0].length<3)return;var ring=coords[0];
@@ -248,7 +250,7 @@ function renderMap(){
   dctx.clearRect(0,0,cw,ch);
   dctx.imageSmoothingEnabled=false;
   dctx.drawImage(lc,0,0,cw,ch);
-}
+  var g=dctx.createRadialGradient(cw/2,ch/2,Math.min(cw,ch)*.3,cw/2,ch/2,Math.max(cw,ch)*.7);g.addColorStop(0,'rgba(0,0,0,0)');g.addColorStop(1,'rgba(0,0,0,.16)');dctx.fillStyle=g;dctx.fillRect(0,0,cw,ch);}
 
 /* ═══════════ SVG: 游戏POI + 路线 ═══════════ */
 var svg=document.getElementById('ms'),rg=document.getElementById('rg'),pg=document.getElementById('pg');

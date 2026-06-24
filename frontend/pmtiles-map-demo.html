@@ -83,6 +83,22 @@ const ST = {
   footway:{w:1.5,C:'#f4e7c3',O:'#bba574',minZ:15,dash:1}
 };
 
+/* zoom 自适应宽度: zoom 越低线越细,保持视觉一致性 */
+function roadW(baseW, minZ){
+  var z=Math.max(minZ, Math.min(15, vp.zoom));
+  // 基准 zoom 14, 低 zoom 等比缩小
+  var f = (z - minZ + 2) / (15 - minZ + 2);
+  return Math.max(1, baseW * Math.min(1, f));
+}
+
+/* zoom 自适应透明度: 低 zoom 淡色 */
+function roadA(minZ){
+  var z = vp.zoom;
+  if(z >= minZ + 3) return 1;
+  if(z <= minZ) return 0.55;
+  return 0.55 + 0.45 * (z - minZ) / 3;
+}
+
 const canvas=document.getElementById('mc'),ctx=canvas.getContext('2d');
 let cw,ch;
 function resize(){var f=document.getElementById('mf');if(!f)return;cw=canvas.width=f.clientWidth;ch=canvas.height=f.clientHeight;ctx.imageSmoothingEnabled=false}
@@ -121,14 +137,24 @@ async function loadVisibleTiles(){
 
 function renderFeats(feats){
   ctx.clearRect(0,0,cw,ch);ctx.fillStyle=PAL.bg;ctx.fillRect(0,0,cw,ch);
-  // Water: layer 'water' with class 'river','lake','ocean','canal'
-  for(const f of feats){const p=f.properties;const c=(p.class||'').toLowerCase();if(c==='river'||c==='lake'||c==='ocean'||c==='canal'||c==='stream'||c==='drain'){if(f.geometry.type==='Polygon')drawPoly(f.geometry.coordinates,PAL.water,PAL.waterE,1.5);if(f.geometry.type==='MultiPolygon')for(const cc of f.geometry.coordinates)drawPoly(cc,PAL.water,PAL.waterE,1.5)}}
-  // Parks: layer 'landuse' or 'landcover' with class 'park','forest','grass','wood','meadow'
+  // Water: 低 zoom 淡色透明,减少"补丁"感
+  var wa = vp.zoom < 10 ? 0.4 + 0.6 * (vp.zoom - 5) / 5 : 1;
+  ctx.globalAlpha = wa;
+  for(const f of feats){const p=f.properties;const c=(p.class||'').toLowerCase();if(c==='river'||c==='lake'||c==='ocean'||c==='canal'||c==='stream'||c==='drain'){if(f.geometry.type==='Polygon')drawPoly(f.geometry.coordinates,PAL.water,PAL.waterE,1);if(f.geometry.type==='MultiPolygon')for(const cc of f.geometry.coordinates)drawPoly(cc,PAL.water,PAL.waterE,1)}}
+  ctx.globalAlpha = 1;
+  // Parks: 同上,低 zoom 淡色
+  ctx.globalAlpha = wa;
   for(const f of feats){const p=f.properties;const c=(p.class||'').toLowerCase();if(c==='park'||c==='forest'||c==='grass'||c==='wood'||c==='meadow'||c==='orchard'||c==='vineyard'){if(f.geometry.type==='Polygon')drawPoly(f.geometry.coordinates,PAL.park,PAL.parkE,1);if(f.geometry.type==='MultiPolygon')for(const cc of f.geometry.coordinates)drawPoly(cc,PAL.park,PAL.parkE,1)}}
-  // Roads: layer 'transportation' with class 'motorway','primary','secondary','tertiary','residential','path'
-  for(const pass of[true,false]){for(const f of feats){const p=f.properties;const c=(p.class||p.highway||'').toLowerCase();const roadMap={motorway:ST.motorway,primary:ST.primary,secondary:ST.secondary,tertiary:ST.tertiary,residential:ST.residential,footway:ST.footway,path:ST.footway,track:ST.residential,service:ST.residential};const s=roadMap[c]||(c?ST.residential:null);if(!s||vp.zoom<s.minZ)continue;if(f.geometry.type==='LineString')drawLine(f.geometry.coordinates,pass?s.O:s.C,pass?s.w+2:s.w);if(f.geometry.type==='MultiLineString')for(const cs of f.geometry.coordinates)drawLine(cs,pass?s.O:s.C,pass?s.w+2:s.w)}}
+  ctx.globalAlpha = 1;
+  // Roads: 自适应宽度 + 透明度
+  for(const pass of[true,false]){for(const f of feats){const p=f.properties;const c=(p.class||p.highway||'').toLowerCase();const roadMap={motorway:ST.motorway,primary:ST.primary,secondary:ST.secondary,tertiary:ST.tertiary,residential:ST.residential,footway:ST.footway,path:ST.footway,track:ST.residential,service:ST.residential};const s=roadMap[c]||(c?ST.residential:null);if(!s||vp.zoom<s.minZ)continue;var w=roadW(s.w,s.minZ);var a=roadA(s.minZ);ctx.globalAlpha=a;if(f.geometry.type==='LineString')drawLine(f.geometry.coordinates,pass?s.O:s.C,pass?w+1.5:w);if(f.geometry.type==='MultiLineString')for(const cs of f.geometry.coordinates)drawLine(cs,pass?s.O:s.C,pass?w+1.5:w);ctx.globalAlpha=1}}
   // Buildings: layer 'building'
   for(const f of feats){const p=f.properties;if(p.render_height||p.render_min_height){if(f.geometry.type==='Polygon')drawPoly(f.geometry.coordinates,PAL.b1,PAL.bE,0.8);if(f.geometry.type==='MultiPolygon')for(const c of f.geometry.coordinates)drawPoly(c,PAL.b1,PAL.bE,0.8)}}
+  // 晕影: 边缘暗化,聚焦中心
+  var grd=ctx.createRadialGradient(cw/2,ch/2,Math.min(cw,ch)*0.3,cw/2,ch/2,Math.max(cw,ch)*0.75);
+  grd.addColorStop(0,'rgba(0,0,0,0)');
+  grd.addColorStop(1,'rgba(0,0,0,0.18)');
+  ctx.fillStyle=grd;ctx.fillRect(0,0,cw,ch);
 }
 
 async function render(){
