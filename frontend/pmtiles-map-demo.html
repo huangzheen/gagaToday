@@ -39,7 +39,7 @@ body{background:radial-gradient(circle at 50% 12%,#183b67,#06101f 58%,#030812);f
 </style>
 </head>
 <body>
-<div id="loading-overlay"><div>🗺️ 加载德国 PMTiles 地图...</div><div class="load-sub">Deutschland · ~3 GB · HTTP Range Tiles</div></div>
+<div id="loading-overlay"><div>🗺️ 加载德国 PMTiles 地图...</div><div class="load-sub">Deutschland · 5.4 GB · HTTP Range Tiles</div></div>
 <div class="shell">
 <div class="top panel"><div><div class="ttl">DEUTSCHLAND</div><div class="tsub">PMTiles · Zoom <span id="zl">0</span> · <span id="fc">0</span> features</div></div><div class="tst"><span>❤️ <s>体力</s> <b>85</b></span><span>⭐ <s>德语</s> <b>A1.2</b></span><span>💰 <s>欧元</s> <b>24.50</b></span><span>🕐 <s>时间</s> <b>08:15</b></span></div></div>
 <div class="left panel"><div class="sec"><h3>📋 今日任务</h3><ul class="qlist"><li>买早餐 Brötchen</li><li>去学校报到</li><li>自我介绍练习</li><li class="done">与房东打招呼</li></ul></div><div class="sec"><h3>🗺️ 状态</h3><p id="di">加载中...</p></div><div class="sec"><h3>📍 位置</h3><p style="color:var(--gold2)">慕尼黑 · Deutschland</p></div><div class="sec"><h3>💡 操作</h3><p>拖拽 / 方向键移动<br/>滚轮 / - = 缩放<br/>点击 POI 查看详情</p></div></div>
@@ -100,7 +100,7 @@ function drawLine(cs,color,w,dash){if(!cs||cs.length<2)return;ctx.beginPath();le
 
 async function loadVisibleTiles(){
   if(!pmtiles)return[];
-  let tileZ=Math.max(5,Math.min(14,vp.zoom));
+  let tileZ=Math.max(5,Math.min(15,vp.zoom));
   const c=tileXY(vp.centerLat,vp.centerLng,tileZ);
   const tiles=[],range=Math.ceil(Math.max(cw,ch)/256/2)+1;
   for(let dx=-range;dx<=range;dx++)for(let dy=-range;dy<=range;dy++){
@@ -156,15 +156,15 @@ let dragging=false,ds=null,dsW=null;
 document.getElementById('mf').addEventListener('mousedown',e=>{dragging=true;ds={x:e.clientX,y:e.clientY};dsW={x:vp.worldX,y:vp.worldY}});
 window.addEventListener('mouseup',()=>{dragging=false});
 window.addEventListener('mousemove',e=>{if(!dragging)return;vp.worldX=dsW.x+(e.clientX-ds.x);vp.worldY=dsW.y+(e.clientY-ds.y);render()});
-document.getElementById('mf').addEventListener('wheel',e=>{e.preventDefault();const o=vp.zoom;vp.zoom=Math.max(5,Math.min(14,vp.zoom+(e.deltaY>0?-1:1)));if(vp.zoom!==o){vp.worldX=0;vp.worldY=0;render()}});
-window.addEventListener('keydown',e=>{const sp=15;if(e.key==='ArrowLeft'){vp.worldX-=sp;render()}else if(e.key==='ArrowRight'){vp.worldX+=sp;render()}else if(e.key==='ArrowUp'){vp.worldY-=sp;render()}else if(e.key==='ArrowDown'){vp.worldY+=sp;render()}else if(e.key==='-'||e.key==='_'){vp.zoom=Math.max(5,vp.zoom-1);vp.worldX=0;vp.worldY=0;render()}else if(e.key==='='||e.key==='+'){vp.zoom=Math.min(14,vp.zoom+1);vp.worldX=0;vp.worldY=0;render()}});
+document.getElementById('mf').addEventListener('wheel',e=>{e.preventDefault();const o=vp.zoom;vp.zoom=Math.max(5,Math.min(15,vp.zoom+(e.deltaY>0?-1:1)));if(vp.zoom!==o){vp.worldX=0;vp.worldY=0;render()}});
+window.addEventListener('keydown',e=>{const sp=15;if(e.key==='ArrowLeft'){vp.worldX-=sp;render()}else if(e.key==='ArrowRight'){vp.worldX+=sp;render()}else if(e.key==='ArrowUp'){vp.worldY-=sp;render()}else if(e.key==='ArrowDown'){vp.worldY+=sp;render()}else if(e.key==='-'||e.key==='_'){vp.zoom=Math.max(5,vp.zoom-1);vp.worldX=0;vp.worldY=0;render()}else if(e.key==='='||e.key==='+'){vp.zoom=Math.min(15,vp.zoom+1);vp.worldX=0;vp.worldY=0;render()}});
 
 async function init(){
   document.getElementById('br').addEventListener('click',function(){vp.centerLat=48.1374;vp.centerLng=11.5755;vp.zoom=10;vp.worldX=0;vp.worldY=0;render()});
-  document.getElementById('b+').addEventListener('click',function(){vp.zoom=Math.min(14,vp.zoom+1);vp.worldX=0;vp.worldY=0;render()});
+  document.getElementById('b+').addEventListener('click',function(){vp.zoom=Math.min(15,vp.zoom+1);vp.worldX=0;vp.worldY=0;render()});
   document.getElementById('b-').addEventListener('click',function(){vp.zoom=Math.max(5,vp.zoom-1);vp.worldX=0;vp.worldY=0;render()});
   try{
-    pmtiles=new PMTiles('/public/assets/munich_map/pmtiles/germany.pmtiles');
+    pmtiles=new PMTiles('/public/assets/munich_map/pmtiles/germany-hires.pmtiles');
     const h=await pmtiles.getHeader();
     document.getElementById('loading-overlay').querySelector('.load-sub').textContent='Deutschland · zoom '+h.minZoom+'-'+h.maxZoom+' · '+(h.fileSize/1024/1024).toFixed(0)+' MB · HTTP Range';
     document.getElementById('di').textContent='header OK · zoom '+h.minZoom;
