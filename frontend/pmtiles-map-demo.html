@@ -151,28 +151,6 @@ function renderFeats(feats){
   for(const pass of[true,false]){for(const f of feats){const p=f.properties;const c=(p.class||p.highway||'').toLowerCase();const roadMap={motorway:ST.motorway,primary:ST.primary,secondary:ST.secondary,tertiary:ST.tertiary,residential:ST.residential,footway:ST.footway,path:ST.footway,track:ST.residential,service:ST.residential};const s=roadMap[c]||(c?ST.residential:null);if(!s||vp.zoom<s.minZ)continue;var w=roadW(s.w,s.minZ);var a=roadA(s.minZ);ctx.globalAlpha=a;if(f.geometry.type==='LineString')drawLine(f.geometry.coordinates,pass?s.O:s.C,pass?w+1.5:w);if(f.geometry.type==='MultiLineString')for(const cs of f.geometry.coordinates)drawLine(cs,pass?s.O:s.C,pass?w+1.5:w);ctx.globalAlpha=1}}
   // Buildings: layer 'building'
   for(const f of feats){const p=f.properties;if(p.render_height||p.render_min_height){if(f.geometry.type==='Polygon')drawPoly(f.geometry.coordinates,PAL.b1,PAL.bE,0.8);if(f.geometry.type==='MultiPolygon')for(const c of f.geometry.coordinates)drawPoly(c,PAL.b1,PAL.bE,0.8)}}
-  // 瓦片边界覆盖: 用背景色描边,填充 1px 白色分割线
-  ctx.strokeStyle='rgba(239,226,194,0.45)';ctx.lineWidth=1;
-  var tileZ=Math.max(5,Math.min(15,vp.zoom)),n=1<<tileZ;
-  var c=tileXY(vp.centerLat,vp.centerLng,tileZ);
-  var rng=Math.ceil(Math.max(cw,ch)/256/2)+1;
-  for(var dx=-rng;dx<=rng;dx++){
-    var tx=c.x+dx,lon=(tx/n)*360-180;
-    if(tx<0||tx>=n)continue;
-    var sx=wm(lon,48,vp.zoom);
-    var ctr=wm(vp.centerLng,vp.centerLat,vp.zoom);
-    var px=Math.round((sx.x-ctr.x+vp.worldX)+cw/2);
-    ctx.beginPath();ctx.moveTo(px,0);ctx.lineTo(px,ch);ctx.stroke();
-  }
-  for(var dy=-rng;dy<=rng;dy++){
-    var ty=c.y+dy;
-    if(ty<0||ty>=n)continue;
-    var lat=Math.atan(Math.sinh(Math.PI*(1-2*ty/n)))*180/Math.PI;
-    var sy=wm(11.5,lat,vp.zoom);
-    var ctr2=wm(vp.centerLng,vp.centerLat,vp.zoom);
-    var py=Math.round((sy.y-ctr2.y+vp.worldY)+ch/2);
-    ctx.beginPath();ctx.moveTo(0,py);ctx.lineTo(cw,py);ctx.stroke();
-  }
   // 晕影: 边缘暗化,聚焦中心
   var grd=ctx.createRadialGradient(cw/2,ch/2,Math.min(cw,ch)*0.3,cw/2,ch/2,Math.max(cw,ch)*0.75);
   grd.addColorStop(0,'rgba(0,0,0,0)');
