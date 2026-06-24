@@ -103,7 +103,7 @@ const canvas=document.getElementById('mc'),ctx=canvas.getContext('2d');
 let cw,ch;
 function resize(){var f=document.getElementById('mf');if(!f)return;cw=canvas.width=f.clientWidth;ch=canvas.height=f.clientHeight;ctx.imageSmoothingEnabled=false}
 window.addEventListener('resize',resize);setTimeout(resize,100);resize();
-const vp={centerLat:48.1374,centerLng:11.5755,zoom:10,worldX:0,worldY:0};
+const vp={centerLat:48.1374,centerLng:11.5755,zoom:14,worldX:0,worldY:0};
 let pmtiles=null;
 
 function wm(lng,lat,z){const s=256*Math.pow(2,z);return{x:(lng+180)/360*s,y:(.5-Math.log((1+Math.sin(lat*Math.PI/180))/(1-Math.sin(lat*Math.PI/180)))/(4*Math.PI))*s}}
