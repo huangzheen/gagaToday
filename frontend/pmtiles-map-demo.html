@@ -156,18 +156,27 @@ function renderFeats(feats){
   grd.addColorStop(0,'rgba(0,0,0,0)');
   grd.addColorStop(1,'rgba(0,0,0,0.18)');
   ctx.fillStyle=grd;ctx.fillRect(0,0,cw,ch);
+  // 极淡纸纹理: 掩盖残余瓦片接缝
+  ctx.fillStyle='rgba(210,195,165,0.06)';
+  for(var gx=0;gx<cw;gx+=12){ctx.fillRect(gx,0,1,ch)}
+  for(var gy=0;gy<ch;gy+=12){ctx.fillRect(0,gy,cw,1)}
 }
 
 async function render(){
   
   const tiles=await loadVisibleTiles();
-  const allFeats=[];
-  // 不去重:相邻 tile 的跨瓦片 feature 会各自渲染,重叠后自然隐藏接缝
+  const allFeats=[],seen=new Set();
+  // 去重(避免重叠渲染产生锯齿),但 range+2 确保瓦片边缘数据完整
   for(const t of tiles){
     for(const name of Object.keys(t.tile.layers)){
       const layer=t.tile.layers[name];
       for(let i=0;i<layer.length;i++){
-        try{allFeats.push(layer.feature(i).toGeoJSON(t.x,t.y,t.z))}catch(e){}
+        try{
+          var feat=layer.feature(i).toGeoJSON(t.x,t.y,t.z);
+          var key=feat.properties&&feat.properties.osm_id||feat.id;
+          if(key){if(seen.has(key))continue;seen.add(key)}
+          allFeats.push(feat);
+        }catch(e){}
       }
     }
   }
