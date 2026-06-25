@@ -1,6 +1,11 @@
 <template>
   <div>
-    <h3 style="color:var(--gold2);margin-bottom:10px">📍 打卡目标生成</h3>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+      <h3 style="color:var(--gold2)">📍 打卡目标生成</h3>
+      <button class="btn primary" @click="generateAll" :disabled="store.isGenerating" style="padding:5px 12px">
+        {{ store.isGenerating ? '⏳ 生成中…' : '🤖 一键生成全部打卡' }}
+      </button>
+    </div>
 
     <div class="card-grid">
       <div v-for="(item, i) in checkinItems" :key="i" class="card">

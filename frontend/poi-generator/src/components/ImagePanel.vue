@@ -1,6 +1,11 @@
 <template>
   <div>
-    <h3 style="color:var(--gold2);margin-bottom:10px">🖼️ 场景图片生成</h3>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+      <h3 style="color:var(--gold2)">🖼️ 场景图片生成</h3>
+      <button class="btn primary" @click="generateAllImages" :disabled="store.isGenerating" style="padding:5px 12px">
+        {{ store.isGenerating ? '⏳ 生成中…' : '🤖 一键生成所有图片' }}
+      </button>
+    </div>
     <p style="font-size:10px;color:var(--text-dim);margin-bottom:10px">
       16-bit 像素风格 · 分辨率 1280×720
     </p>
@@ -51,9 +56,7 @@
       </div>
     </div>
 
-    <div style="margin-top:12px">
-      <button class="btn primary" @click="generateAllImages">🤖 一键生成所有图片</button>
-    </div>
+    <!-- 一键生成按钮已移到顶部 -->
   </div>
 </template>
 

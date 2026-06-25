@@ -1,6 +1,11 @@
 <template>
   <div>
-    <h3 style="color:var(--gold2);margin-bottom:10px">👤 NPC 生成</h3>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+      <h3 style="color:var(--gold2)">👤 NPC 生成</h3>
+      <button class="btn primary" @click="generateAllNPC" :disabled="store.isGenerating" style="padding:5px 12px">
+        {{ store.isGenerating ? '⏳ 生成中…' : '🤖 一键生成全部 NPC' }}
+      </button>
+    </div>
 
     <div class="card-grid">
       <div v-for="npc in npcList" :key="npc.id" class="card">

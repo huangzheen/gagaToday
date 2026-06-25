@@ -1,6 +1,11 @@
 <template>
   <div>
-    <h3 style="color:var(--gold2);margin-bottom:10px">🎯 剧情/任务生成</h3>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+      <h3 style="color:var(--gold2)">🎯 剧情/任务生成</h3>
+      <button class="btn primary" @click="generateAll" :disabled="store.isGenerating" style="padding:5px 12px">
+        {{ store.isGenerating ? '⏳ 生成中…' : '🤖 一键生成全部任务' }}
+      </button>
+    </div>
 
     <div class="card-grid">
       <div v-for="(quest, i) in quests" :key="i" class="card">
