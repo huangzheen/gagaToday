@@ -1,52 +1,160 @@
-# GermanLearning
+# gagaToday — 德国留学模拟 RPG
 
-> 一款用游戏化 + AI 语音 + 地图 RPG 帮中国学生备考德福的应用
-> "走遍德国"——在沉浸式对话中解锁城市,学德语、了解德国
+> 基于真实 OpenStreetMap 数据的 16-bit 像素风德国城市 RPG
+> 从慕尼黑出发，用地图 + AI 对话体验德国留学日常
 
-## 项目愿景
+---
 
-玩家用德语"走遍德国"——通过完成各地的生活任务解锁城市地图,在沉浸式 AI 语音对话中备考德福(TestDaF),同时学习德国文化、饮食、工商业、旅游知识。
+## 当前状态 (2026-06-25)
 
-**三轨道学习体系**(2026-06-21 扩展):
-1. 🇩🇪 **德语** —— TestDaF TDN 4-5,主线
-2. 🇬🇧 **雅思** —— 每科 7.0+,申请 TU9/精英大学英语项目硬门槛
-3. 📐 **A-levels** —— Edexcel IAL 全科(33 科),学术深度证明
+**已实现的核心功能：**
 
-**目标用户**:中德班 / 雨中国高类型学生(初三毕业 → 10-11 年级 → 申请德国)
+- 🗺️ **PMTiles 矢量地图** — 德国全境 zoom 0–16，9.2GB 数据，HTTP Range 按需加载，实时渲染道路/建筑/水系/公园
+- 📍 **POI 系统** — 从 OpenStreetMap 提取真实坐标和属性，SQLite 存储，素材生成器导出后地图自动显示
+- 🏗️ **素材生成器** — Vue 3 卡片式 UI，LLM 自动生成 NPC/对话/知识卡/剧情，拖拽发布到地图
+- 🎨 **16-bit 像素渲染** — Canvas + SVG 叠加，建筑用 OSM 真实颜色，像素化处理，暗蓝/金 RPG UI 面板
+- 🧠 **多模型接入** — Qwen-Plus/Qwen3-Max (LLM) + MiniMax/ARK/OpenRouter/DashScope (图像)
 
-## 三大核心体验
+---
 
-1. 🎮 **三轨道对话训练** —— 德语 / 雅思口语 → NPC 语音对话;A-levels → 题库关卡
-2. 🌍 **文化认知** —— 解锁城市百科卡(德国 16 州 + 英国文化对照)
-3. 🗺️ **RPG 体验** —— 地图点亮、关卡解锁、城市征服(走遍德国 + 闯荡英美 + 学术塔)
+## 快速启动
+
+```bash
+# 1. 地图前端（http://localhost:8081）
+cd frontend && node server.cjs
+
+# 2. 后端 API（http://127.0.0.1:8000）
+cd /Volumes/NewDisk/GermanLearning
+source /Volumes/NewDisk/.agent-secrets/secrets.env
+uvicorn backend.poi-generator.main:app --reload --port 8000
+
+# 3. 素材生成器（http://localhost:5173）
+cd frontend/poi-generator && npx vite --port 5173
+```
+
+**三个服务必须同时运行**，地图才能从 SQLite 加载 POI 数据。
+
+---
+
+## 架构
+
+```
+┌──────────────────────────────────────────────────┐
+│  素材生成器 (Vue 3 + Vite :5173)                   │
+│  ├─ 卡片网格 (11 张 POI)                          │
+│  ├─ 弹窗编辑 (基础信息/NPC/对话/知识卡/剧情)        │
+│  ├─ LLM 生成 (Qwen-Plus/Qwen3-Max)                │
+│  └─ 拖拽发布 → POST /api/save/package              │
+└──────────────┬───────────────────────────────────┘
+               │
+               ▼
+┌──────────────────────────────────────────────────┐
+│  后端 API (FastAPI :8000)                         │
+│  ├─ /api/generate/*    LLM/图片生成               │
+│  ├─ /api/save/package  写入 drafts + SQLite       │
+│  ├─ /api/v2/pois       地图 POI 数据查询          │
+│  └─ /api/osm/extract   OSM 地图数据提取           │
+└──────────────┬───────────────────────────────────┘
+               │
+               ▼
+┌──────────────────────────────────────────────────┐
+│  SQLite (game_data.db)                            │
+│  ├─ pois             POI 基础信息                 │
+│  ├─ poi_scenes       场景图片路径                 │
+│  ├─ poi_content      导出内容 (NPC/对话/知识卡)   │
+│  └─ export_logs      导出历史                     │
+└──────────────┬───────────────────────────────────┘
+               │
+               ▼
+┌──────────────────────────────────────────────────┐
+│  地图前端 (Node.js :8081)                         │
+│  ├─ Canvas 渲染 (PMTiles → MVT → 道路/建筑/水系) │
+│  ├─ SVG 叠加 (POI 标记 + 路线动画)                │
+│  └─ fetch API → 动态加载 SQLite POI 数据          │
+└──────────────────────────────────────────────────┘
+```
+
+---
+
+## 目录结构
+
+```
+project/
+├── frontend/
+│   ├── index.html         # 地图主页（Canvas + SVG + 三栏 UI）
+│   ├── server.cjs         # 静态文件服务器 (Range 支持)
+│   └── poi-generator/     # 素材生成器 (Vue 3 + Vite)
+│       └── src/
+│           ├── App.vue           # 卡片网格 + 拖拽发布 + 弹窗编辑
+│           ├── stores/           # Pinia 状态管理
+│           └── components/       # POIInfoForm, ImagePanel, NPCPanel 等
+├── backend/
+│   └── poi-generator/
+│       ├── main.py              # FastAPI 入口
+│       ├── config.py            # 配置 (模型、路径、CORS)
+│       ├── routers/             # text, image, save, pois_v2, osm
+│       └── services/            # db_service, file_service, llm_service, ...
+├── assets/
+│   └── scenes/munich/           # AI 生成的场景图 (frauenkirche 等)
+├── docs/
+│   ├── ARCHITECTURE.md          # 架构文档
+│   ├── GAME_DESIGN.md           # 游戏设计
+│   ├── MVP_TASKS.md             # MVP 任务清单
+│   └── curriculum/              # 教学大纲
+└── scripts/
+    └── map/                     # PMTiles 生成脚本 (planetiler)
+```
+
+---
+
+## 核心工作流
+
+### 制作 POI → 地图显示
+
+```
+1. 在生成器卡片网格选中 POI → 弹出编辑弹窗
+2. 🤖 一键生成 NPC/对话/知识卡/剧情
+3. 拖拽卡片到右侧「已发布」栏（或弹窗内点 📤 发布）
+   → POST /api/save/package → 写入 SQLite
+4. 刷新地图 → 自动从 API 拉取新 POI → 地图上出现新标记
+```
+
+### OSM 数据提取
+
+```
+生成器「基础信息」标签 → 自动 GET /api/osm/extract
+→ Node.js 脚本读取 PMTiles 瓦片
+→ 提取 5x5 瓦片网格内的所有特征
+→ 返回主 POI（名称/多语言/分类/rank/距离）
+```
+
+---
+
+## 接入的大模型
+
+| 类型 | 模型 | 提供商 |
+|------|------|--------|
+| LLM 日常 | `qwen-plus` | 阿里云 DashScope (通义千问) |
+| LLM 复杂 | `qwen3-max` | 阿里云 DashScope |
+| 图像 默认 | `minimax` | MiniMax/海螺 AI |
+| 图像 备选 | `doubao-seedream` | 火山引擎 ARK |
+| 图像 备选 | `openai/gpt-5.4-image-2` | OpenRouter |
+| 图像 备选 | `qwen-image-edit-plus` | 阿里云 DashScope |
+
+---
 
 ## 技术栈
 
-| 层级 | 选型 | 理由 |
-|------|------|------|
-| 客户端 | Vite + React + TypeScript + Phaser 3 | Web 优先,后期 Tauri 打包 Desktop |
-| 后端 | FastAPI (Python) | 对接 DashScope SDK 方便 |
-| LLM | 阿里云 Qwen-Plus / Qwen3-Max | 中文友好,德语强,价格便宜 |
-| TTS | CosyVoice 3.5 Plus | 流式,150ms 首包,德语,音色克隆 |
-| ASR | Fun-ASR 1.5 / Qwen3-ASR | 30-52 语种,德语支持 |
-| 发音评估 | Qwen2-Audio-7B-Instruct | 直接吃音频,自然语言评估 |
-| 美术 | Aseprite / LibreSprite | 像素艺术标准 |
-
-## 路线图
-
-- **Phase 0** (1-2 周): 技术验证 + 选教材 + 拆第 1 关
-- **Phase 1** (4-6 周): MVP - 柏林 1 关完整闭环
-- **Phase 2** (6-8 周): 柏林 5 关 + 慕尼黑/汉堡 + 城市百科
-- **Phase 3** (8-12 周): 用户系统 + 跨设备 + 5-10 城市
-- **Phase 4** (8-12 周): 德福备考专题(B2-C1)
-- **Phase 5** (6-12 月): 完整 16 州 60-100 关
-
-## 成本估算
-
-- 单关完整对话: **¥0.08-0.15**
-- 完整 1 城市 5 关: **¥0.4-0.75**
-- 完整 A1(柏林 5 关): **¥0.4-0.75**
-- Phase 2(3 城市 15 关): **¥1.2-2.3**
+| 层级 | 技术 |
+|------|------|
+| 前端地图 | Vanilla JS (Canvas + SVG + PMTiles) |
+| 生成器 UI | Vue 3 + Pinia + Vite |
+| 后端 | FastAPI (Python) |
+| 数据库 | SQLite (WAL 模式) |
+| 地图数据 | PMTiles (zoom 5–16, 9.2GB, Planetiler 生成) |
+| 矢量渲染 | @mapbox/vector-tile + pbf |
+| LLM | Qwen-Plus / Qwen3-Max |
+| 图像 | MiniMax / ARK / OpenRouter / DashScope |
 
 几乎可忽略,无需优化成本。
 
