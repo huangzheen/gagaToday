@@ -8,7 +8,7 @@
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                    素材生成器 (:5173)                        │
+│                    素材生成器 (:5174)                        │
 │  Vue 3 + Pinia + Vite                                       │
 │  ├─ 卡片网格 (11 张 POI)                                    │
 │  ├─ 弹窗编辑 (基础信息 / NPC / 对话 / 知识卡 / 剧情)        │
@@ -133,7 +133,7 @@
 |------|------|---------|
 | 8081 | 地图前端 | `cd frontend && node server.cjs` |
 | 8000 | 后端 API | `uvicorn backend.poi-generator.main:app --reload --port 8000` |
-| 5173 | 素材生成器 | `cd frontend/poi-generator && npx vite --port 5173` |
+| 5174 | 素材生成器 | `cd frontend/poi-generator && npx vite` |
 
 ---
 

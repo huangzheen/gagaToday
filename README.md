@@ -28,8 +28,8 @@ cd /Volumes/NewDisk/GermanLearning
 source /Volumes/NewDisk/.agent-secrets/secrets.env
 uvicorn backend.poi-generator.main:app --reload --port 8000
 
-# 3. 素材生成器（http://localhost:5173）
-cd frontend/poi-generator && npx vite --port 5173
+# 3. 素材生成器（http://localhost:5174）
+cd frontend/poi-generator && npx vite
 ```
 
 **三个服务必须同时运行**，地图才能从 SQLite 加载 POI 数据。
@@ -40,7 +40,7 @@ cd frontend/poi-generator && npx vite --port 5173
 
 ```
 ┌──────────────────────────────────────────────────┐
-│  素材生成器 (Vue 3 + Vite :5173)                   │
+│  素材生成器 (Vue 3 + Vite :5174)                   │
 │  ├─ 卡片网格 (11 张 POI)                          │
 │  ├─ 弹窗编辑 (基础信息/NPC/对话/知识卡/剧情)        │
 │  ├─ LLM 生成 (Qwen-Plus/Qwen3-Max)                │
