@@ -1,3 +1,10 @@
+> ⚠️ **本文档当前未在实现中跟进**（标记于 2026-06-25 文档收敛）
+>
+> 描述的是 **B 方案：慕尼黑 30 天生活模拟**（时间/金钱/体力/日历/NPC 关系/做饭小游戏等）。
+> 当前实现是 **A 方案：POI 探索 + 素材生成器**——见 [README.md](../../README.md) 和 [docs/ARCHITECTURE.md](../ARCHITECTURE.md)。
+>
+> 本文档保留作为远景参考。下一阶段决定是否启动 B 方案。
+>
 # gagaToday MVP Implementation Plan
 
 版本：v0.1  

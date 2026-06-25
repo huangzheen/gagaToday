@@ -1,3 +1,7 @@
+> ⚠️ **本文档为历史参考，未反映当前实现**（标记于 2026-06-25 文档收敛）
+>
+> 当前架构见 [README.md](../../README.md) 和 [docs/ARCHITECTURE.md](../ARCHITECTURE.md)。
+>
 # 架构设计(ARCHITECTURE)
 
 > Web → Desktop 迁移设计 + 用户系统预留 + 业务层与渲染层分离

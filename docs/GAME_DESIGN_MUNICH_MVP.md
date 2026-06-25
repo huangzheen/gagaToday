@@ -1,3 +1,7 @@
+> ⚠️ **本文档为历史参考，未反映当前实现**（标记于 2026-06-25 文档收敛）
+>
+> 当前架构见 [README.md](../../README.md) 和 [docs/ARCHITECTURE.md](../ARCHITECTURE.md)。
+>
 # gagaToday — Munich MVP Game Design
 
 > 当前第一版实际基线 · v0.1.0 · 2026-06-22
