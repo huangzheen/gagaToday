@@ -19,7 +19,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from .config import CORS_ORIGINS
-from .routers import text, image, save, pois_v2
+from .routers import text, image, save, pois_v2, osm
 from .services.db_service import init_db
 
 app = FastAPI(
@@ -42,6 +42,7 @@ app.include_router(text.router)
 app.include_router(image.router)
 app.include_router(save.router)
 app.include_router(pois_v2.router)
+app.include_router(osm.router)
 
 
 @app.on_event("startup")
