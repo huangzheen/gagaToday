@@ -239,9 +239,35 @@ def add_scene(
     file_path: str = None,
     sort_order: int = 0,
 ):
-    """记录一个场景图片"""
+    """覆盖式写入场景图片(同 poi_id+scene_type+variant 只留最新)
+
+    场景图重新生成时 URL 路径不变,只是覆盖;避免重复发布后 poi_scenes
+    表里同一条图片有多行。
+    """
     conn = get_conn()
     try:
+        # 删同 (poi_id, city, scene_type, variant) 的旧行
+        # 用 COALESCE 处理 NULL(NULL 在 SQLite unique 索引里视为不同)
+        if scene_type is None and variant is None:
+            conn.execute(
+                "DELETE FROM poi_scenes WHERE poi_id=? AND city=? AND scene_type IS NULL AND variant IS NULL",
+                (poi_id, city),
+            )
+        elif scene_type is None:
+            conn.execute(
+                "DELETE FROM poi_scenes WHERE poi_id=? AND city=? AND scene_type IS NULL AND variant=?",
+                (poi_id, city, variant),
+            )
+        elif variant is None:
+            conn.execute(
+                "DELETE FROM poi_scenes WHERE poi_id=? AND city=? AND scene_type=? AND variant IS NULL",
+                (poi_id, city, scene_type),
+            )
+        else:
+            conn.execute(
+                "DELETE FROM poi_scenes WHERE poi_id=? AND city=? AND scene_type=? AND variant=?",
+                (poi_id, city, scene_type, variant),
+            )
         conn.execute(
             """INSERT INTO poi_scenes (poi_id, city, scene_type, variant, url_path, file_path, sort_order)
                VALUES (?, ?, ?, ?, ?, ?, ?)""",
@@ -275,21 +301,24 @@ def add_content(
     export_batch: str = None,
     file_path: str = None,
 ):
-    """记录一次导出内容"""
+    """覆盖式写入导出内容(同一 poi_id+content_type 只保留最新一份)
+
+    之前用 INSERT + version+1,会导致每次发布都累积一行。
+    改为 DELETE 旧的 + INSERT 新的(版本号重置 1),符合 '发布即覆盖' 语义。
+    """
     conn = get_conn()
     try:
-        # 检查是否已有同类型内容，有则 version+1
-        existing = conn.execute(
-            "SELECT MAX(version) as mv FROM poi_content WHERE poi_id=? AND city=? AND content_type=?",
+        # 同 (poi_id, city, content_type) 的旧记录全部删掉
+        conn.execute(
+            "DELETE FROM poi_content WHERE poi_id=? AND city=? AND content_type=?",
             (poi_id, city, content_type),
-        ).fetchone()
-        version = (existing["mv"] or 0) + 1
-
+        )
+        # 插新的,version=1
         conn.execute(
             """INSERT INTO poi_content (poi_id, city, content_type, data, export_batch, file_path, version)
-               VALUES (?, ?, ?, ?, ?, ?, ?)""",
+               VALUES (?, ?, ?, ?, ?, ?, 1)""",
             (poi_id, city, content_type, json.dumps(data, ensure_ascii=False),
-             export_batch, file_path, version),
+             export_batch, file_path),
         )
         conn.commit()
     finally:

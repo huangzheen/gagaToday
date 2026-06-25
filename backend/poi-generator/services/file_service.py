@@ -161,26 +161,36 @@ def save_poi_package(
     is_draft: bool = True,
 ) -> dict:
     """
-    保存一组 POI 相关 JSON 文件到草稿目录
+    保存一组 POI 相关 JSON 文件到草稿目录(覆盖式)
+
+    同一 POI 多次发布 → 写入同一个目录,文件 in-place 覆盖。
+    如果之前有过带 date_suffix 的旧目录,会自动清掉,避免累积。
 
     Args:
         files: [{"relative_path": "poi_info.draft.json", "data": {...}}, ...]
         city: 城市名
         poi_id: POI ID
-        date_suffix: 可选日期后缀，用于避免覆盖并体现批次
+        date_suffix: 可选。传了就用 (例如导出历史快照);不传就用稳定目录
         source_records: optional list of source records
         is_draft: 是否保存为草稿
 
     Returns:
         {"saved_files": [...], "source_path": ...}
     """
+    import shutil
     if not poi_id:
         raise ValueError("poi_id is required for save_poi_package")
 
-    if date_suffix is None:
-        date_suffix = datetime.now().strftime("%Y%m%d")
+    if date_suffix:
+        package_dir = CONTENT_DRAFTS_ROOT / f"{city}_{poi_id}_{date_suffix}"
+    else:
+        # 稳定目录:同一 POI 永远写到 munich_{poi_id}/
+        package_dir = CONTENT_DRAFTS_ROOT / f"{city}_{poi_id}"
+        # 清掉之前累积的 {city}_{poi_id}_* 旧目录(发布日期版本)
+        for old_dir in CONTENT_DRAFTS_ROOT.glob(f"{city}_{poi_id}_*"):
+            if old_dir.is_dir() and old_dir != package_dir:
+                shutil.rmtree(old_dir, ignore_errors=True)
 
-    package_dir = CONTENT_DRAFTS_ROOT / f"{city}_{poi_id}_{date_suffix}"
     package_dir.mkdir(parents=True, exist_ok=True)
 
     saved_files = []
