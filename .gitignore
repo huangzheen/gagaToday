@@ -29,6 +29,10 @@ env/
 .mypy_cache/
 .ruff_cache/
 
+# ── SQLite WAL mode temp files (主 db 文件仍 tracked) ──
+*.db-shm
+*.db-wal
+
 # ── Logs / runtime ──
 *.log
 npm-debug.log*
@@ -46,7 +50,9 @@ secrets.env
 scripts/__pycache__/
 scripts/curriculum/__pycache__/
 scripts/*.log
-art_generation.logassets/munich_map/munich.geojson
+art_generation.log
+
+# assets/munich_map/munich.geojson 已在 commit 8685e53,不再排除
 scripts/map/pmtiles/data/
 scripts/map/pmtiles/germany-zoom16.pmtiles
 assets/munich_map/pmtiles/
@@ -63,8 +69,6 @@ scripts/map/pmtiles/germany-hires.pmtiles
 scripts/map/pmtiles/germany.pmtiles
 scripts/map/pmtiles/bayern.pmtiles
 scripts/map/pmtiles/*.jar
-frontend/poi-generator/
-backend/
 .vite/
 
 # 旧 Vue 项目 (已废弃)
