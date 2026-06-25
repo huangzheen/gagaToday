@@ -116,6 +116,18 @@
 
     <!-- 错误 -->
     <div v-if="store.error" style="margin-top:8px;padding:6px;background:#330000;border:1px solid #ff4444;color:#ff4444;font-size:10px">⚠️ {{ store.error }}</div>
+
+    <!-- 空状态提示(还没生成也没上传) -->
+    <div v-if="!referenceUrl && !existingRefUrl && !referenceLocked" class="stage-box" style="text-align:center;padding:24px 12px;border-style:dashed">
+      <div style="font-size:24px;margin-bottom:6px;opacity:0.5">📸</div>
+      <div style="font-size:11px;color:var(--gold2);margin-bottom:4px">还没有定妆照</div>
+      <div style="font-size:9px;color:var(--text-dim);line-height:1.5">
+        在上方输入框写一段地点描述(或留空用默认),点 🎨 生成定妆照<br/>
+        <span style="color:var(--gold)">或</span> 直接拖放 / 上传一张现有图<br/>
+        <br/>
+        <span style="opacity:0.7">注:定妆照用 photorealistic 实景 → 变体自动转 16-bit 像素</span>
+      </div>
+    </div>
   </div>
 </template>
 

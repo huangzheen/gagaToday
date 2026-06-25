@@ -74,13 +74,13 @@
           <div class="modal-header">
             <span class="modal-title">{{ editingPoi?.icon }} {{ editingPoi?.name_zh }}</span>
             <div class="modal-actions">
-              <button class="btn primary" @click="generateAll" :disabled="store.isGenerating" style="font-size:9px;padding:2px 6px">
+              <button class="btn primary" @click="generateAll" :disabled="store.isGenerating" style="padding:4px 10px">
                 {{ store.isGenerating ? '⏳' : '🤖 一键生成' }}
               </button>
-              <button class="btn success" @click="publishCurrent" style="font-size:9px;padding:2px 6px">
+              <button class="btn success" @click="publishCurrent" style="padding:4px 10px">
                 📤 发布
               </button>
-              <button class="btn" @click="closeEditor" style="font-size:9px;padding:2px 6px">✕</button>
+              <button class="btn" @click="closeEditor" style="padding:4px 10px">✕</button>
             </div>
           </div>
           <div class="tab-bar">
