@@ -120,6 +120,7 @@
 import { onMounted, computed, ref } from 'vue'
 import { useGeneratorStore, KNOWN_POIS, TABS } from '@/stores/generator'
 import { api } from '@/core/apiClient'
+import { buildAllInOnePrompt } from '@/core/prompts'
 import POIInfoForm from '@/components/POIInfoForm.vue'
 import ImagePanel from '@/components/ImagePanel.vue'
 import NPCPanel from '@/components/NPCPanel.vue'
@@ -249,29 +250,63 @@ onMounted(() => {
   loadPublished()
 })
 
+// 1-shot 全量生成:1 次 LLM 调用产出 7 类内容(npc / dialogue_hooks / dialogues / knowledge / quests / checkin / scene_events)
+// info 和 scenes 单独走(info 走 OSM extract,scenes 走 ImagePanel)
 async function generateAll() {
   store.isGenerating = true
   store.error = null
-  store.log('🚀 开始批量生成...')
+  store.log('🚀 开始一键全量生成...')
   const poi = store.currentPoi
   if (!poi) { store.isGenerating = false; return }
   try {
-    store.log('📝 生成基础信息...'); store.markGenerated('info')
-    store.log('🖼️ 生成图片...'); store.markGenerated('images')
-    store.log('👤 生成 NPC...')
-    const npcPrompt = `为 gagaToday 游戏生成 1-2 个 NPC。POI: ${poi.name_de}(${poi.name_zh}), 类型: ${poi.type}。JSON 数组，每项含 id/name_de/name_zh/role/personality/background_zh。只返回 JSON。`
-    const npcRes = await api.generateJson(npcPrompt)
-    store.setPoiData('npc_profiles', Array.isArray(npcRes.data) ? npcRes.data : [npcRes.data])
-    store.markGenerated('npc')
-    store.log('💬 生成对话...')
-    const diaPrompt = `为 POI ${poi.name_de} 生成 2-3 个对话场景，德语 A1/A2 水平。JSON 数组。`
-    const diaRes = await api.generateJson(diaPrompt)
-    store.setPoiData('dialogues', Array.isArray(diaRes.data) ? diaRes.data : [diaRes.data])
-    store.markGenerated('dialogue')
-    store.log('📚 生成知识卡...'); store.markGenerated('knowledge')
-    store.log('🎯 生成剧情...'); store.markGenerated('quests')
-    store.log('📍 生成打卡...'); store.markGenerated('checkin')
-    store.log('✅ 全部生成完成！')
+    const prompt = buildAllInOnePrompt(poi, store.osmData)
+    store.log('🤖 调用 LLM (1-shot,7 类内容)...')
+    const res = await api.generateJson(prompt)
+    const data = res.data
+
+    // 分发到 store (覆盖原值,保证每次都是最新一次)
+    if (data.npc_profiles?.length) {
+      store.setPoiData('npc_profiles', data.npc_profiles)
+      store.markGenerated('npc')
+      store.log(`✅ NPC: ${data.npc_profiles.length} 个`)
+    }
+    if (data.dialogue_hooks?.length) {
+      // hook 是用来给 dialogue 做索引的,存在 dialogue_hooks key
+      store.setPoiData('dialogue_hooks', data.npc_dialogue_hooks)
+    }
+    if (data.dialogues?.length) {
+      // 标准化 dialogues:确保每条都有 hook_id/turns
+      const normalized = data.dialogues.map(d => ({
+        hook_id: d.hook_id,
+        label: data.dialogue_hooks?.find(h => h.id === d.hook_id)?.label || d.hook_id,
+        difficulty: d.difficulty || '?',
+        turns: d.turns || [],
+      }))
+      store.setPoiData('dialogues', normalized)
+      store.markGenerated('dialogue')
+      store.log(`✅ 对话: ${normalized.length} 棵`)
+    }
+    if (data.knowledge_cards?.length) {
+      store.setPoiData('knowledge_cards', data.knowledge_cards)
+      store.markGenerated('knowledge')
+      store.log(`✅ 知识卡: ${data.knowledge_cards.length} 张`)
+    }
+    if (data.quests?.length) {
+      store.setPoiData('quests', data.quests)
+      store.markGenerated('quests')
+      store.log(`✅ 任务: ${data.quests.length} 个`)
+    }
+    if (data.checkin_targets?.length) {
+      store.setPoiData('checkin_targets', data.checkin_targets)
+      store.markGenerated('checkin')
+      store.log(`✅ 打卡: ${data.checkin_targets.length} 个`)
+    }
+    if (data.scene_events?.length) {
+      store.setPoiData('scene_events', data.scene_events)
+      store.markGenerated('events')
+      store.log(`✅ 场景事件: ${data.scene_events.length} 个`)
+    }
+    store.log('✅ 全部生成完成!切到预览 tab')
     store.selectTab('preview')
   } catch (e) {
     store.error = e.message

@@ -51,6 +51,9 @@ export const useGeneratorStore = defineStore('generator', {
     // 后端状态
     backendConnected: false,
 
+    // OSM 提取的真实数据(POIInfoForm 写入,其他 tab 共享)
+    osmData: null,
+
     // 错误
     error: null,
   }),
@@ -131,6 +134,11 @@ export const useGeneratorStore = defineStore('generator', {
 
     setImageModel(modelId) {
       this.imageModel = modelId
+    },
+
+    setOsmData(data) {
+      this.osmData = data
+      this.error = null
     },
   },
 })
