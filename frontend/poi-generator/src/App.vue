@@ -30,12 +30,32 @@
           @dragstart="onDragStart($event, poi)"
           @click="openEditor(poi.id)"
         >
-          <span class="poi-card-icon">{{ poi.icon }}</span>
-          <span class="poi-card-name">{{ poi.name_zh }}</span>
-          <span class="poi-card-de">{{ poi.name_de }}</span>
+          <!-- 场景主图(16:9) -->
+          <div class="poi-card-img-wrap">
+            <img
+              v-if="primaryImageExists(poi.id)"
+              :src="`/assets/scenes/munich/${poi.id}/_reference/ref_${poi.id}.png?t=${cardCacheBust}`"
+              :alt="poi.name_zh"
+              @error="onCardImgError(poi.id)"
+            />
+            <span v-else class="placeholder-icon">{{ poi.icon }}</span>
+          </div>
+          <!-- 名称 -->
+          <div class="poi-card-name">{{ poi.name_zh }}</div>
+          <div class="poi-card-de">{{ poi.name_de }}</div>
+          <!-- 信息(国家 · 城市 · 类型) -->
+          <div class="poi-card-info">
+            <span class="info-flag">🇩🇪</span>
+            <span>慕尼黑</span>
+            <span class="info-sep">·</span>
+            <span>{{ poi.type }}</span>
+          </div>
         </div>
         <div class="poi-card add-card" @click="showAddDialog = true">
-          <span class="add-icon">➕</span>
+          <div class="poi-card-img-wrap">
+            <span class="add-icon">＋</span>
+          </div>
+          <span class="poi-card-name" style="text-align:center;opacity:.6">添加新 POI</span>
         </div>
       </div>
     </div>
@@ -73,10 +93,28 @@
         <div class="modal-panel panel">
           <div class="modal-header">
             <span class="modal-title">{{ editingPoi?.icon }} {{ editingPoi?.name_zh }}</span>
+
+            <!-- 全局模型选择器(整个弹窗内的 AI 调用都读这两个) -->
+            <div class="modal-models">
+              <label class="model-select">
+                <span class="model-label">🎨 图像</span>
+                <select v-model="store.imageModel" :disabled="!store.availableImageModels.length">
+                  <option v-for="m in store.availableImageModels" :key="m.id" :value="m.id">
+                    {{ m.name || m.id }}
+                  </option>
+                </select>
+              </label>
+              <label class="model-select">
+                <span class="model-label">📝 文本</span>
+                <select v-model="store.textModel" :disabled="!store.availableTextModels.length">
+                  <option v-for="m in store.availableTextModels" :key="m.id" :value="m.id">
+                    {{ m.name || m.id }}
+                  </option>
+                </select>
+              </label>
+            </div>
+
             <div class="modal-actions">
-              <button class="btn primary" @click="generateAll" :disabled="store.isGenerating" style="padding:4px 10px">
-                {{ store.isGenerating ? '⏳' : '🤖 一键生成' }}
-              </button>
               <button class="btn success" @click="publishCurrent" style="padding:4px 10px">
                 📤 发布
               </button>
@@ -89,15 +127,10 @@
             </button>
           </div>
           <div class="content-area">
-            <POIInfoForm v-if="store.activeTab === 'info'" />
+            <POIInfoForm v-if="store.activeTab === 'info'" ref="poiInfoFormRef" />
             <RefWorkflow v-else-if="store.activeTab === 'refworkflow'" />
-            <ImagePanel v-else-if="store.activeTab === 'images'" />
+            <UploadsPanel v-else-if="store.activeTab === 'uploads'" />
             <NPCPanel v-else-if="store.activeTab === 'npc'" />
-            <DialoguePanel v-else-if="store.activeTab === 'dialogue'" />
-            <KnowledgePanel v-else-if="store.activeTab === 'knowledge'" />
-            <QuestPanel v-else-if="store.activeTab === 'quests'" />
-            <CheckinPanel v-else-if="store.activeTab === 'checkin'" />
-            <PreviewPanel v-else-if="store.activeTab === 'preview'" />
           </div>
         </div>
       </div>
@@ -106,8 +139,7 @@
     <!-- 底部栏 -->
     <footer class="bottombar panel">
       <div class="model-info">
-        <span title="文本生成 LLM">{{ store.llmModels.length ? '🧠 ' + store.llmDefault + ' / ' + store.llmComplex : '' }}</span>
-        <span title="图片生成" style="margin-left:12px">{{ store.availableImageModels.length ? '🎨 ' + store.imageModel : '' }}</span>
+        <span title="图片生成">{{ store.availableImageModels.length ? '🎨 ' + store.imageModel : '' }}</span>
       </div>
       <span>📍 {{ currentPoi?.name_zh || '未选择' }} · {{ currentPoi?.name_de || '' }}</span>
       <span>✅ {{ store.statusSummary }} 已生成</span>
@@ -117,25 +149,36 @@
 </template>
 
 <script setup>
-import { onMounted, computed, ref } from 'vue'
+import { onMounted, onUnmounted, computed, ref } from 'vue'
 import { useGeneratorStore, KNOWN_POIS, TABS } from '@/stores/generator'
 import { api } from '@/core/apiClient'
-import { buildAllInOnePrompt } from '@/core/prompts'
 import POIInfoForm from '@/components/POIInfoForm.vue'
-import ImagePanel from '@/components/ImagePanel.vue'
-import NPCPanel from '@/components/NPCPanel.vue'
-import DialoguePanel from '@/components/DialoguePanel.vue'
-import KnowledgePanel from '@/components/KnowledgePanel.vue'
-import QuestPanel from '@/components/QuestPanel.vue'
-import CheckinPanel from '@/components/CheckinPanel.vue'
-import PreviewPanel from '@/components/PreviewPanel.vue'
 import RefWorkflow from '@/components/RefWorkflow.vue'
+import UploadsPanel from '@/components/UploadsPanel.vue'
+import NPCPanel from '@/components/NPCPanel.vue'
 
 const store = useGeneratorStore()
 const currentPoi = computed(() => store.currentPoi)
 const showAddDialog = ref(false)
 const editingPoi = ref(null)
 const dragOver = ref(false)
+const poiInfoFormRef = ref(null)  // 弹窗关闭前调 saveInfo() 自动保存
+
+// 卡片场景图缓存破坏
+const cardCacheBust = ref(Date.now())
+const cardBrokenImgs = ref(new Set())  // 加载失败的 poi_id 集合(用 emoji 占位)
+
+function primaryImageExists(poiId) {
+  // 已经在 probe 时确认失败的,直接 false
+  if (cardBrokenImgs.value.has(poiId)) return false
+  // 假设存在(让 <img> 加载,vite proxy + 8081 server.cjs 会 serve)
+  return true
+}
+
+function onCardImgError(poiId) {
+  // 加载失败 → 标记,显示 emoji 占位
+  cardBrokenImgs.value.add(poiId)
+}
 
 // 已发布的 POI 列表（从 SQLite 拉取）
 const publishedPois = ref([])
@@ -165,8 +208,23 @@ function openEditor(poiId) {
   editingPoi.value = poi
 }
 
-function closeEditor() {
+async function closeEditor() {
+  // 弹窗任何方式关闭前,自动保存 info tab 里的基础信息(如果用户在那个 tab)
+  if (poiInfoFormRef.value && typeof poiInfoFormRef.value.saveInfo === 'function') {
+    try {
+      await poiInfoFormRef.value.saveInfo()
+    } catch (e) {
+      console.warn('[closeEditor] 自动保存失败:', e)
+    }
+  }
   editingPoi.value = null
+}
+
+// ESC 键关闭弹窗
+function onGlobalKeydown(e) {
+  if (e.key === 'Escape' && editingPoi.value) {
+    closeEditor()
+  }
 }
 
 function onDragStart(e, poi) {
@@ -196,7 +254,8 @@ async function onDrop(e) {
             lat: poi.lat,
             lng: poi.lng,
             icon: poi.icon,
-            acts: [],
+            description: poi.description || '',
+            acts: poi.acts || [],
           }
         }],
         poi_id: poi.id,
@@ -230,7 +289,8 @@ async function publishCurrent() {
             lat: poi.lat,
             lng: poi.lng,
             icon: poi.icon,
-            acts: [],
+            description: poi.description || '',
+            acts: poi.acts || [],
           }
         }],
         poi_id: poi.id,
@@ -248,69 +308,10 @@ async function publishCurrent() {
 onMounted(() => {
   store.checkBackend()
   loadPublished()
+  window.addEventListener('keydown', onGlobalKeydown)
 })
 
-// 1-shot 全量生成:1 次 LLM 调用产出 7 类内容(npc / dialogue_hooks / dialogues / knowledge / quests / checkin / scene_events)
-// info 和 scenes 单独走(info 走 OSM extract,scenes 走 ImagePanel)
-async function generateAll() {
-  store.isGenerating = true
-  store.error = null
-  store.log('🚀 开始一键全量生成...')
-  const poi = store.currentPoi
-  if (!poi) { store.isGenerating = false; return }
-  try {
-    const prompt = buildAllInOnePrompt(poi, store.osmData)
-    store.log('🤖 调用 LLM (1-shot,7 类内容)...')
-    const res = await api.generateJson(prompt)
-    const data = res.data
-
-    // 分发到 store (覆盖原值,保证每次都是最新一次)
-    if (data.npc_profiles?.length) {
-      store.setPoiData('npc_profiles', data.npc_profiles)
-      store.markGenerated('npc')
-      store.log(`✅ NPC: ${data.npc_profiles.length} 个`)
-    }
-    if (data.dialogue_hooks?.length) {
-      // hook 是用来给 dialogue 做索引的,存在 dialogue_hooks key
-      store.setPoiData('dialogue_hooks', data.npc_dialogue_hooks)
-    }
-    if (data.dialogues?.length) {
-      // 标准化 dialogues:确保每条都有 hook_id/turns
-      const normalized = data.dialogues.map(d => ({
-        hook_id: d.hook_id,
-        label: data.dialogue_hooks?.find(h => h.id === d.hook_id)?.label || d.hook_id,
-        difficulty: d.difficulty || '?',
-        turns: d.turns || [],
-      }))
-      store.setPoiData('dialogues', normalized)
-      store.markGenerated('dialogue')
-      store.log(`✅ 对话: ${normalized.length} 棵`)
-    }
-    if (data.knowledge_cards?.length) {
-      store.setPoiData('knowledge_cards', data.knowledge_cards)
-      store.markGenerated('knowledge')
-      store.log(`✅ 知识卡: ${data.knowledge_cards.length} 张`)
-    }
-    if (data.quests?.length) {
-      store.setPoiData('quests', data.quests)
-      store.markGenerated('quests')
-      store.log(`✅ 任务: ${data.quests.length} 个`)
-    }
-    if (data.checkin_targets?.length) {
-      store.setPoiData('checkin_targets', data.checkin_targets)
-      store.markGenerated('checkin')
-      store.log(`✅ 打卡: ${data.checkin_targets.length} 个`)
-    }
-    if (data.scene_events?.length) {
-      store.setPoiData('scene_events', data.scene_events)
-      store.markGenerated('events')
-      store.log(`✅ 场景事件: ${data.scene_events.length} 个`)
-    }
-    store.log('✅ 全部生成完成!切到预览 tab')
-    store.selectTab('preview')
-  } catch (e) {
-    store.error = e.message
-    store.log(`❌ ${e.message}`)
-  } finally { store.isGenerating = false }
-}
+onUnmounted(() => {
+  window.removeEventListener('keydown', onGlobalKeydown)
+})
 </script>

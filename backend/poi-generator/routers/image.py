@@ -21,6 +21,10 @@ class ImageRequest(BaseModel):
     target_dir: str = None
     reference_image: str = None
     prompt_type: str = "scene"      # "scene" | "npc" | "ui"
+    # 像素级尺寸(可选)。MCP 实际只给 1K/2K/4K 档位,但用户可能想要精确像素
+    # 后端会按 aspect_ratio 选最近档位生成,然后 Pillow resize 到 target 像素
+    target_width: int = None
+    target_height: int = None
 
 
 @router.get("/models")
@@ -62,6 +66,27 @@ async def api_generate_image(req: ImageRequest):
         if result_path is None:
             raise HTTPException(status_code=500, detail=f"图片生成失败（模型: {req.model}）")
 
+        # ════════════════════════════════════════════════════════════
+        # 如果前端传了 target_width/target_height,按目标像素 Pillow resize
+        # MCP 实际只能给 1K(~1500w) / 2K(~2700w) / 4K(~5500w) 三档
+        # 用 LANCZOS 高质量缩放
+        # ════════════════════════════════════════════════════════════
+        if req.target_width and req.target_height:
+            try:
+                from PIL import Image
+                with Image.open(result_path) as img:
+                    orig_w, orig_h = img.size
+                    if (orig_w, orig_h) != (req.target_width, req.target_height):
+                        try:
+                            resample = Image.Resampling.LANCZOS
+                        except AttributeError:
+                            resample = Image.LANCZOS
+                        resized = img.resize((req.target_width, req.target_height), resample=resample)
+                        resized.save(result_path, format=img.format or "PNG", optimize=True)
+                        print(f"  [resize] {orig_w}×{orig_h} → {req.target_width}×{req.target_height}: {result_path}")
+            except Exception as e:
+                print(f"  [resize] WARN: {e}")
+
         web_url = f"/generated/{result_path.name}"
 
         return {
@@ -70,6 +95,7 @@ async def api_generate_image(req: ImageRequest):
             "path": str(result_path),
             "url": web_url,
             "prompt": raw_prompt,
+            "final_size": f"{req.target_width}×{req.target_height}" if (req.target_width and req.target_height) else None,
         }
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))

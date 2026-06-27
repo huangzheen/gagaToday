@@ -3,9 +3,9 @@
 """
 
 import json
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Query
 from pydantic import BaseModel
-from ..services.file_service import save_json, save_image, save_source_record, save_poi_package, list_draft_pois
+from ..services.file_service import save_json, save_image, save_source_record, save_poi_package, list_draft_pois, save_upload_asset, list_uploaded_assets, delete_uploaded_asset
 from ..services.db_service import (
     upsert_poi, add_scene, add_content, log_export, list_scenes,
 )
@@ -35,6 +35,14 @@ class SaveSourceRequest(BaseModel):
     poi_id: str = None
 
 
+class UploadAssetRequest(BaseModel):
+    """前端 base64 上传直存 game assets。文件名由后端自动决定。"""
+    data: str                  # base64 encoded image data
+    poi_id: str
+    asset_kind: str            # "scene_main" | "icon"
+    city: str = "munich"
+
+
 class SavePackageRequest(BaseModel):
     files: list[dict]  # [{"relative_path": "xxx.draft.json", "data": {...}}, ...]
     poi_id: str
@@ -57,6 +65,38 @@ async def api_save_json(req: SaveJsonRequest):
             is_draft=req.is_draft,
         )
         return {"success": True, **result}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/save/json")
+async def api_load_json(
+    relative_path: str = Query(..., description="相对路径,如 'poi_info.draft.json'"),
+    poi_id: str = Query(None),
+    city: str = Query("munich"),
+    is_draft: bool = Query(True),
+):
+    """读取已保存的 JSON 文件(draft 目录或正式目录)"""
+    import json as _json
+    from pathlib import Path
+    from ..config import CONTENT_DRAFTS_ROOT
+
+    if is_draft:
+        if poi_id:
+            base_dir = CONTENT_DRAFTS_ROOT / f"{city}_{poi_id}"
+        else:
+            base_dir = CONTENT_DRAFTS_ROOT / city
+    else:
+        base_dir = Path("/Volumes/NewDisk/GermanLearning/frontend/src/content") / city
+
+    file_path = base_dir / relative_path
+    if not file_path.exists():
+        # 404 表示没有这个 draft,前端用 fallback(KNOWN_POIS)
+        raise HTTPException(status_code=404, detail=f"文件不存在: {relative_path}")
+    try:
+        with open(file_path, "r", encoding="utf-8") as f:
+            data = _json.load(f)
+        return {"success": True, "data": data, "path": str(file_path)}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
@@ -124,6 +164,140 @@ async def api_save_source(req: SaveSourceRequest):
         raise HTTPException(status_code=500, detail=str(e))
 
 
+class DeleteAssetRequest(BaseModel):
+    """删除某个 POI 的某个已上传资源。"""
+    filename: str
+    poi_id: str
+    asset_kind: str            # "scene_main" | "icon" | "npc_head" | "npc_half"
+    city: str = "munich"
+
+
+class NpcContentRequest(BaseModel):
+    """保存/覆盖 NPC 列表(JSON)到 poi_content 表 content_type='npc'"""
+    poi_id: str
+    data: list[dict]           # NPC 数组
+    city: str = "munich"
+
+
+class TransparentRequest(BaseModel):
+    """把已上传的白底 PNG 转成透明底(覆盖原文件,备份到 .bak-white.png)"""
+    filename: str
+    poi_id: str
+    asset_kind: str            # scene_main / icon / npc_head / npc_half
+    city: str = "munich"
+
+
+@router.post("/save/npc-content")
+async def api_save_npc_content(req: NpcContentRequest):
+    """覆盖式写入 NPC 列表(JSON)到 poi_content 表"""
+    from ..services.db_service import add_content
+    add_content(
+        poi_id=req.poi_id,
+        city=req.city,
+        content_type='npc',
+        data=req.data,
+        file_path=None,
+    )
+    return {"success": True, "count": len(req.data)}
+
+
+@router.post("/white-to-transparent")
+async def api_white_to_transparent(req: TransparentRequest):
+    """把 game assets 下的某张白底 PNG 转成透明底(复用 scripts/white_to_transparent.py)"""
+    import sys, asyncio
+    from pathlib import Path as _Path
+    from ..config import PROJECT_ROOT
+    script = PROJECT_ROOT / "scripts" / "white_to_transparent.py"
+    if not script.exists():
+        raise HTTPException(status_code=500, detail="scripts/white_to_transparent.py not found")
+
+    # 计算目标文件路径(复用 file_service 的路径规则)
+    from ..services.file_service import ASSETS_ROOT
+    if req.asset_kind == "scene_main":
+        target_dir = ASSETS_ROOT / "scenes" / req.city / req.poi_id / "_reference"
+    elif req.asset_kind == "icon":
+        target_dir = ASSETS_ROOT / "icons" / req.city
+    elif req.asset_kind in ("npc_head", "npc_half"):
+        target_dir = ASSETS_ROOT / "characters" / req.city / f"npc_{req.poi_id}"
+    else:
+        raise HTTPException(status_code=400, detail=f"unsupported asset_kind: {req.asset_kind}")
+    target = target_dir / req.filename
+    if not target.exists():
+        raise HTTPException(status_code=404, detail=f"{req.filename} 不存在")
+
+    # 跑脚本(子进程同步执行,简单可靠)
+    proc = await asyncio.create_subprocess_exec(
+        sys.executable, str(script), str(target),
+        stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE,
+    )
+    stdout, stderr = await proc.communicate()
+    if proc.returncode != 0:
+        raise HTTPException(status_code=500, detail=f"脚本失败: {stderr.decode()[:300]}")
+
+    return {
+        "success": True,
+        "path": str(target),
+        "filename": req.filename,
+        "log": stdout.decode().strip(),
+    }
+
+
+@router.get("/list-assets")
+async def api_list_assets(
+    poi_id: str,
+    asset_kind: str,
+    city: str = "munich",
+):
+    """列出某 POI 的某类已上传资源。返回 [{filename, url, size_bytes}]"""
+    from ..services.file_service import list_uploaded_assets
+    try:
+        files = list_uploaded_assets(poi_id=poi_id, asset_kind=asset_kind, city=city)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    return {"success": True, "files": files}
+
+
+@router.post("/upload-asset")
+async def api_upload_asset(req: UploadAssetRequest):
+    """接收 base64 图片直存 game assets(scene_main → _reference/ | icon → assets/icons/)"""
+    import base64 as b64
+    try:
+        # 兼容 data:image/png;base64,XXX 格式
+        payload = req.data.split(",", 1)[-1] if req.data.startswith("data:") else req.data
+        raw = b64.b64decode(payload)
+    except Exception:
+        raise HTTPException(status_code=400, detail="invalid base64 image data")
+
+    try:
+        result = save_upload_asset(
+            data=raw,
+            poi_id=req.poi_id,
+            asset_kind=req.asset_kind,
+            city=req.city,
+        )
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+    return {"success": True, **result}
+
+
+@router.delete("/upload-asset")
+async def api_delete_asset(req: DeleteAssetRequest):
+    """删除某个 POI 的某个已上传资源文件(scene 图 / 图标)"""
+    try:
+        result = delete_uploaded_asset(
+            filename=req.filename,
+            poi_id=req.poi_id,
+            asset_kind=req.asset_kind,
+            city=req.city,
+        )
+        return {"success": True, **result}
+    except FileNotFoundError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
 @router.post("/save/package")
 async def api_save_package(req: SavePackageRequest):
     """批量保存 POI 全套内容到 drafts 目录，并同步到 SQLite"""
@@ -177,9 +351,6 @@ async def api_save_package(req: SavePackageRequest):
                     lat=data.get("lat"),
                     lng=data.get("lng"),
                     icon=data.get("icon"),
-                    walk_minutes=data.get("walk_minutes") or data.get("walk"),
-                    cost=data.get("cost"),
-                    ubahn=data.get("ubahn"),
                     description=data.get("description") or data.get("d"),
                     acts=data.get("acts"),
                     unlocked=True,

@@ -117,9 +117,6 @@ def upsert_poi(
     lat: float = None,
     lng: float = None,
     icon: str = None,
-    walk_minutes: int = None,
-    cost: str = None,
-    ubahn: str = None,
     description: str = None,
     acts: list = None,
     unlocked: bool = False,
@@ -135,9 +132,6 @@ def upsert_poi(
         "lat": lat,
         "lng": lng,
         "icon": icon,
-        "walk_minutes": walk_minutes,
-        "cost": cost,
-        "ubahn": ubahn,
         "description": description,
         "acts": json.dumps(acts, ensure_ascii=False) if acts else None,
         "unlocked": 1 if unlocked else 0,
@@ -147,19 +141,15 @@ def upsert_poi(
 
     sql = """
         INSERT INTO pois (id, city, name_de, name_zh, type, lat, lng, icon,
-                          walk_minutes, cost, ubahn, description, acts,
-                          unlocked, is_published, updated_at)
+                          description, acts, unlocked, is_published, updated_at)
         VALUES (:id, :city, :name_de, :name_zh, :type, :lat, :lng, :icon,
-                :walk_minutes, :cost, :ubahn, :description, :acts,
-                :unlocked, :is_published, :updated_at)
+                :description, :acts, :unlocked, :is_published, :updated_at)
         ON CONFLICT(id) DO UPDATE SET
             city=excluded.city, name_de=excluded.name_de, name_zh=excluded.name_zh,
             type=excluded.type, lat=excluded.lat, lng=excluded.lng,
-            icon=excluded.icon, walk_minutes=excluded.walk_minutes,
-            cost=excluded.cost, ubahn=excluded.ubahn,
-            description=excluded.description, acts=excluded.acts,
-            unlocked=excluded.unlocked, is_published=excluded.is_published,
-            updated_at=excluded.updated_at
+            icon=excluded.icon, description=excluded.description,
+            acts=excluded.acts, unlocked=excluded.unlocked,
+            is_published=excluded.is_published, updated_at=excluded.updated_at
     """
     conn = get_conn()
     try:
@@ -394,13 +384,11 @@ def _row_to_poi(row: sqlite3.Row) -> dict:
     # 加前端友好别名
     d["name"] = d.pop("name_zh", "")
     d["t"] = d.pop("type", "")
-    d["walk"] = d.pop("walk_minutes", None)
     d["d"] = d.pop("description", "")
     d["de"] = d.pop("name_de", "")
-    # 只保留前端需要的字段
+    # 只保留前端需要的字段(导航字段 walk/cost/ubahn 已清除)
     frontend_fields = ["id", "name", "de", "t", "lat", "lng", "icon",
-                       "walk", "cost", "ubahn", "d", "acts", "unlocked",
-                       "is_published", "city"]
+                       "d", "acts", "unlocked", "is_published", "city"]
     filtered = {k: d.get(k) for k in frontend_fields if k in d}
     # 补充 imgs 字段（后续由 API 填充）
     filtered["imgs"] = []

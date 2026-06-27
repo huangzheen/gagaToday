@@ -81,8 +81,12 @@ def save_image(
 
     target_path = target_dir / filename
 
+    # 文件已在目标位置(源=目标),跳过 copy,直接复用。
+    # 这样 RefWorkflow/UploadsPanel 已经把图放在 _reference/ 后,再调 save/image
+    # 注册到 poi_scenes 表也不会报 "are the same file"。
     import shutil
-    shutil.copy2(str(source_path), str(target_path))
+    if source_path.resolve() != target_path.resolve():
+        shutil.copy2(str(source_path), str(target_path))
 
     return {"path": str(target_path), "size_bytes": target_path.stat().st_size}
 
@@ -216,3 +220,168 @@ def save_poi_package(
         source_path = str(source_file)
 
     return {"saved_files": saved_files, "source_path": source_path}
+
+def save_upload_asset(
+    data: bytes,
+    poi_id: str,
+    asset_kind: str,
+    city: str = "munich",
+) -> dict:
+    """
+    直接写上传的图片到 game assets 目录(base64 解码后的 bytes)。
+
+    文件名自动决定,前端不需要传:
+        - scene_main:
+            - 第一个上传 → ref_{poi_id}.png  (跟 RefWorkflow 的定妆照同名,可互替)
+            - 之后上传   → scene_{poi_id}_{N}.png  (N 递增,跳过已存在的序号)
+        - icon:
+            - {poi_id}_icon_64.png  (单文件,覆盖)
+
+    Args:
+        data: 已解码的图片 bytes
+        poi_id: POI ID
+        asset_kind: "scene_main" | "icon"
+        city: 城市名
+
+    Returns:
+        {"path": ..., "filename": ..., "url": ..., "size_bytes": ...}
+    """
+    import re
+
+    if asset_kind == "scene_main":
+        target_dir = ASSETS_ROOT / "scenes" / city / poi_id / "_reference"
+    elif asset_kind == "icon":
+        target_dir = ASSETS_ROOT / "icons" / city
+    elif asset_kind in ("npc_head", "npc_half"):
+        if not poi_id:
+            raise ValueError(f"{asset_kind} 需要 poi_id(=npc_id)")
+        target_dir = ASSETS_ROOT / "characters" / city / f"npc_{poi_id}"
+    else:
+        raise ValueError(f"unsupported asset_kind: {asset_kind}")
+
+    target_dir.mkdir(parents=True, exist_ok=True)
+
+    # ── 自动命名 ──
+    if asset_kind == "npc_head":
+        filename = f"npc_{poi_id}_head.png"
+    elif asset_kind == "npc_half":
+        filename = f"npc_{poi_id}_half.png"
+    elif asset_kind == "scene_main":
+        primary = f"ref_{poi_id}.png"
+        if not (target_dir / primary).exists():
+            filename = primary
+        else:
+            # 找当前最大 N,生成 scene_{poi_id}_{N+1}.png
+            existing = sorted(
+                int(m.group(1))
+                for f in target_dir.iterdir()
+                if (m := re.match(rf"scene_{re.escape(poi_id)}_(\d+)\.png$", f.name))
+            )
+            next_n = (existing[-1] + 1) if existing else 1
+            filename = f"scene_{poi_id}_{next_n}.png"
+    else:  # icon
+        filename = f"{poi_id}_icon_64.png"
+
+    target_path = target_dir / filename
+    target_path.write_bytes(data)
+
+    url = "/" + str(target_path.relative_to(ASSETS_ROOT.parent))  # /assets/...
+    return {
+        "path": str(target_path),
+        "filename": filename,
+        "url": url,
+        "size_bytes": len(data),
+    }
+
+def list_uploaded_assets(
+    poi_id: str,
+    asset_kind: str,
+    city: str = "munich",
+) -> list[dict]:
+    """
+    列出某 POI 的某类已上传资源。
+
+    Args:
+        poi_id: POI ID
+        asset_kind: "scene_main" | "icon"
+        city: 城市名
+
+    Returns:
+        [{"filename": "ref_X.png", "url": "/assets/...", "size_bytes": N, "mtime": iso}, ...]
+    """
+    from datetime import datetime
+    if asset_kind == "scene_main":
+        target_dir = ASSETS_ROOT / "scenes" / city / poi_id / "_reference"
+    elif asset_kind == "icon":
+        target_dir = ASSETS_ROOT / "icons" / city
+    elif asset_kind in ("npc_head", "npc_half"):
+        target_dir = ASSETS_ROOT / "characters" / city / f"npc_{poi_id}"
+    else:
+        raise ValueError(f"unsupported asset_kind: {asset_kind}")
+
+    if not target_dir.exists():
+        return []
+
+    # 按 asset_kind 过滤文件名后缀(npc_head/npc_half 共用目录,只过滤文件名区分)
+    suffix_filter = None
+    if asset_kind == "npc_head":
+        suffix_filter = "_head"
+    elif asset_kind == "npc_half":
+        suffix_filter = "_half"
+
+    files = []
+    for f in target_dir.iterdir():
+        if not f.is_file():
+            continue
+        if f.suffix.lower() not in (".png", ".jpg", ".jpeg", ".webp"):
+            continue
+        if suffix_filter and suffix_filter not in f.stem:
+            continue
+        files.append({
+            "filename": f.name,
+            "url": "/assets/" + str(f.relative_to(ASSETS_ROOT.parent / "assets")),
+            "size_bytes": f.stat().st_size,
+            "mtime": datetime.fromtimestamp(f.stat().st_mtime).isoformat(),
+        })
+    # 主图优先(ref_* 在前,作为定妆照锚定),其余按 mtime 正序(老 → 新,新生成的追加到末尾)
+    # 这样文件名编号(scene_X_1, _2, _3)和视觉顺序一致,不会"夹"在中间
+    files.sort(key=lambda x: (not x["filename"].startswith("ref_"), __import__("os").stat(target_dir / x["filename"]).st_mtime))
+    return files
+
+def delete_uploaded_asset(
+    filename: str,
+    poi_id: str,
+    asset_kind: str,
+    city: str = "munich",
+) -> dict:
+    """
+    删除某个 POI 的某类已上传资源文件。
+
+    Args:
+        filename: 要删除的文件名(如 ref_X.png 或 scene_X_1.png)
+        poi_id: POI ID
+        asset_kind: "scene_main" | "icon"
+        city: 城市名
+
+    Returns:
+        {"deleted": True, "filename": "..."}
+    """
+    if asset_kind == "scene_main":
+        target_dir = ASSETS_ROOT / "scenes" / city / poi_id / "_reference"
+    elif asset_kind == "icon":
+        target_dir = ASSETS_ROOT / "icons" / city
+    elif asset_kind in ("npc_head", "npc_half"):
+        target_dir = ASSETS_ROOT / "characters" / city / f"npc_{poi_id}"
+    else:
+        raise ValueError(f"unsupported asset_kind: {asset_kind}")
+
+    target = target_dir / filename
+    if not target.exists():
+        raise FileNotFoundError(f"{filename} 不存在")
+
+    # 安全检查:filename 不能包含路径分隔符(防止 ../ 越权)
+    if "/" in filename or "\\" in filename or filename.startswith("."):
+        raise ValueError("invalid filename")
+
+    target.unlink()
+    return {"deleted": True, "filename": filename}

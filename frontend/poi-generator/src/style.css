@@ -96,61 +96,131 @@ body {
   color: var(--text-dim);
 }
 
-.card-container .card-grid {
+/* ── 主页 POI 卡片网格(2026-06-27 完全重设计) ── */
+/*
+ * 设计原则:
+ *   - 3 列自适应(auto-fill,min 220px / max 1fr)
+ *   - 16:9 横图,卡片高度由图主导(随列宽算)
+ *   - max-height 160px 兜底,防止窗口超宽时图过高
+ *   - 卡片间距 gap 12px,看着舒服
+ *   - 图片+名称+meta 一行内三层,信息紧凑
+ */
+.card-grid {
   display: grid;
-  /* 2026-06-25: 横排 + 卡片高度锁 1/3 视口
-     - grid-template-columns: auto-fill 让多张卡横向铺开
-     - grid-auto-rows: 33vh 让每行卡片高度 = 1/3 视口
-     - 选择器加 .card-container 前缀是为了避开 line 346 通用 .card-grid 规则 */
-  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-  grid-auto-rows: 33vh;
-  gap: 5px;
-  padding: 6px;
-  overflow-y: auto;
-  flex: 1;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+  padding: 4px;
 }
 
-/* ── POI 卡片 ── */
+/* 卡片容器 */
 .poi-card {
   background: var(--navy2);
   border: 2px solid var(--border);
-  padding: 7px 8px;
+  border-radius: 4px;
+  padding: 6px;
   cursor: grab;
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  transition: all .12s;
-  border-radius: 3px;
+  gap: 5px;
+  transition: border-color .12s, transform .12s;
   position: relative;
   user-select: none;
+  overflow: hidden;
 }
 .poi-card:active { cursor: grabbing; }
-.poi-card:hover { border-color: var(--gold); }
+.poi-card:hover { border-color: var(--gold); transform: translateY(-1px); }
 .poi-card.selected { border-color: var(--gold2); background: var(--navy3); }
 .poi-card.published { border-color: var(--success); }
-.poi-card.published::after {
-  content: '✅';
-  position: absolute;
-  top: 2px;
-  right: 4px;
-  font-size: 8px;
-}
-.poi-card-icon { font-size: 18px; line-height: 1; }
-.poi-card-name { font-size: 10px; color: var(--gold2); font-weight: bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.poi-card-de { font-size: 7px; color: #4a6a8a; font-style: italic; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-/* ── 新增卡片 ── */
+/* ✅ 发布徽章 */
+.poi-card.published::after {
+  content: '✓';
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 18px;
+  height: 18px;
+  background: var(--success);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 11px;
+  line-height: 18px;
+  text-align: center;
+  z-index: 2;
+  box-shadow: 0 1px 3px rgba(0,0,0,.4);
+}
+
+/* 场景图区(16:9 + max-height 160 防过高) */
+.poi-card-img-wrap {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-height: 160px;
+  background: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 3px;
+  border: 1px solid #1a2a3a;
+  flex-shrink: 0;
+}
+.poi-card-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  image-rendering: pixelated;
+  display: block;
+}
+.poi-card-img-wrap .placeholder-icon {
+  font-size: 36px;
+  opacity: .35;
+}
+
+/* 名称区 */
+.poi-card-name {
+  font-size: 12px;
+  color: var(--gold2);
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.2;
+}
+.poi-card-de {
+  font-size: 9px;
+  color: #5a7a9a;
+  font-style: italic;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.2;
+}
+
+/* 信息行(国家 · 城市 · 类型)— 小图标 + 文字 */
+.poi-card-info {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 9px;
+  color: var(--text-dim);
+  line-height: 1.2;
+}
+.poi-card-info .info-flag { font-size: 10px; }
+.poi-card-info .info-sep { opacity: .4; }
+
+/* ── 新增卡片(跟场景图卡片同高) ── */
 .add-card {
   border-style: dashed;
   border-color: var(--text-dim);
   background: transparent;
-  justify-content: center;
-  align-items: center;
-  min-height: 60px;
   opacity: .4;
 }
 .add-card:hover { opacity: 1; border-color: var(--gold); }
-.add-icon { font-size: 16px; }
+.add-card .add-icon {
+  font-size: 28px;
+  display: block;
+  margin: auto;
+}
 
 /* ── 右侧发布栏 ── */
 .publish-bar {
@@ -213,11 +283,14 @@ body {
   justify-content: center;
 }
 .modal-panel {
-  width: min(720px, 90vw);
-  max-height: 85vh;
+  /* 2026-06-27 固定大尺寸 — 1280×820,容纳所有 tab(NPC 6 段介绍 + 头像 + 表单 / 场景图网格 / 角色编辑器) */
+  width: 1280px;
+  max-width: 96vw;       /* 窄屏响应式兜底 */
+  height: 820px;
+  max-height: 94vh;       /* 短屏响应式兜底 */
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow: hidden;       /* 内容超出 tab 内容区内部滚动 */
 }
 .modal-header {
   display: flex;
@@ -234,6 +307,38 @@ body {
   font-weight: bold;
 }
 .modal-actions { display: flex; gap: 8px; align-items: center; }
+
+/* 全局模型选择器(在标题栏中间) */
+.modal-models {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex: 1;
+  justify-content: center;
+  padding: 0 16px;
+}
+.model-select {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 9px;
+  color: var(--text-dim);
+}
+.model-select .model-label {
+  white-space: nowrap;
+  letter-spacing: 0.3px;
+}
+.model-select select {
+  background: #0a0a1a;
+  color: var(--gold2);
+  border: 1px solid var(--border);
+  font-size: 9px;
+  padding: 3px 6px;
+  font-family: inherit;
+  min-width: 130px;
+}
+.model-select select:focus { outline: none; border-color: var(--gold); }
+.model-select select:disabled { opacity: 0.5; }
 
 /* ── 旧编辑面板（已替换为弹窗 + 发布栏） ── */
 
@@ -376,7 +481,7 @@ body {
 /* ── 卡片网格 ── */
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(8, 1fr);   /* 固定 8 列 — 高度跟随列宽自动算 */
   gap: 8px;
 }
 

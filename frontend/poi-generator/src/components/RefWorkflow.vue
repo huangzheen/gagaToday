@@ -67,11 +67,7 @@
       <!-- 锁定后的参考图缩略 -->
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;background:var(--navy);padding:4px 8px">
         <img :src="referenceUrl" style="width:60px;height:45px;object-fit:cover;border:1px solid var(--gold)" />
-        <span style="font-size:9px;color:var(--gold)">🔒 已锁定 · 变体模型:</span>
-        <select v-model="variantModel" style="font-size:9px;padding:3px;background:#0a0a1a;color:var(--gold2);border:1px solid var(--border)">
-          <option value="doubao-seedream-4-5-251128">火山 · Seedream 4.5</option>
-          <option value="openai/gpt-5.4-image-2">OpenRouter · Image 2</option>
-        </select>
+        <span style="font-size:9px;color:var(--gold)">🔒 已锁定 · 模型:<span style="color:var(--gold2)">{{ store.imageModel }}</span>(全局)</span>
         <button class="btn" @click="resetReference" style="font-size:8px;padding:3px 6px;margin-left:auto">🔄 换定妆照</button>
       </div>
 
@@ -151,7 +147,7 @@ const refImgFailed = ref(false)
 const existingRefUrl = ref(null)   // auto-detected
 
 // ── Stage 2 variants ──
-const variantModel = ref('doubao-seedream-4-5-251128')
+
 
 const variants = ref([
   { id: 'spring', icon: '🌷', label: '春天', desc: '新绿嫩叶，粉色花绽，柔暖阳光', url: null, path: null, generating: false },
@@ -297,7 +293,7 @@ async function generateVariant(v) {
         reference_path: referencePath.value,
         description: prompt,
         output_name: `${poiId.value}_${v.id}.png`,
-        model: variantModel.value,
+        model: store.imageModel,
       }),
     })
     const d = await res.json()

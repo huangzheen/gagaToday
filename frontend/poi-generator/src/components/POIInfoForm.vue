@@ -65,8 +65,54 @@
       </div>
 
       <div class="field">
-        <label>游戏内角色描述</label>
-        <textarea v-model="gameRole" rows="3" placeholder="这个 POI 在游戏中扮演什么角色？"></textarea>
+        <label>
+          场景介绍
+          <button
+            type="button"
+            class="btn-ai"
+            @click="aiGenerateIntro"
+            :disabled="aiGenerating"
+          >{{ aiGenerating ? '⏳ 生成中...' : '✨ AI 生成' }}</button>
+        </label>
+
+        <!-- 语言 tab 切换 -->
+        <div class="lang-tabs">
+          <button
+            type="button"
+            :class="['lang-tab', { active: introLang === 'de' }]"
+            @click="introLang = 'de'"
+          >🇩🇪 Deutsch</button>
+          <button
+            type="button"
+            :class="['lang-tab', { active: introLang === 'zh' }]"
+            @click="introLang = 'zh'"
+          >🇨🇳 中文</button>
+          <button
+            type="button"
+            :class="['lang-tab', { active: introLang === 'en' }]"
+            @click="introLang = 'en'"
+          >🇬🇧 English</button>
+        </div>
+
+        <!-- 当前语言的 textarea -->
+        <textarea
+          v-model="intro[introLang]"
+          rows="6"
+          :placeholder="introPlaceholder[introLang]"
+        />
+
+        <!-- 字数统计 + 状态 + 音频 -->
+        <div class="intro-meta">
+          <span>{{ introWordCount }} 词</span>
+          <span class="intro-meta-sep">·</span>
+          <span class="intro-meta-hint">
+            {{ introLang === 'de' ? '维基百科原文' : '维基百科原文 / AI 忠实翻译' }}
+          </span>
+          <span v-if="aiGenerating" class="intro-meta-spin">⟳ 正在生成 {{ aiStage }}</span>
+          <span v-if="audioUrls[introLang]" class="audio-badge" :title="`音频约 ${audioUrls[introLang].duration_estimate}s`">
+            🔊 音频就绪
+          </span>
+        </div>
       </div>
 
       <button class="btn primary" @click="saveInfo" :disabled="saving">
@@ -77,7 +123,7 @@
 </template>
 
 <script setup>
-import { ref, watch, onMounted } from 'vue'
+import { ref, computed, watch, onMounted } from 'vue'
 import { useGeneratorStore } from '@/stores/generator'
 import { api } from '@/core/apiClient'
 
@@ -90,7 +136,26 @@ const type = ref('church')
 const lat = ref(0)
 const lng = ref(0)
 const gameRole = ref('')
+// ── 场景介绍:三语言,以德语为原文 ──
+const intro = ref({ de: '', zh: '', en: '' })
+const introLang = ref('zh')   // 默认显示中文
+const aiGenerating = ref(false)
+const aiStage = ref('')        // '生成德语原文...' / '翻译中英...'
 const saving = ref(false)
+const audioUrls = ref({})       // TTS 预生成的 {de: {url, duration_estimate}, ...}
+
+const introPlaceholder = {
+  de: '场景介绍(德语,维基百科原文)…',
+  zh: '场景介绍(中文,维基百科原文 / AI 翻译)…',
+  en: 'Scene introduction (English, Wikipedia original)…',
+}
+// 字数统计:中英文按"非空白 token 数",德语按"空格分词数"
+// 简单起见统一按空格分词,中文 char-only 显示 word count 偏低但够用
+const introWordCount = computed(() => {
+  const text = intro.value[introLang.value] || ''
+  if (!text.trim()) return 0
+  return text.trim().split(/\s+/).filter(Boolean).length
+})
 
 // OSM 数据
 const osm = ref(null)
@@ -121,10 +186,45 @@ async function fetchOsmData(latVal, lngVal) {
   }
 }
 
-watch(() => store.currentPoiId, (id) => {
+// ── 加载已保存的 draft(覆盖 KNOWN_POIS 默认值) ──
+async function loadDraftIfExists(poiId) {
+  try {
+    const resp = await api.loadJson('poi_info.draft.json', poiId, 'munich', true)
+    if (resp.success && resp.data) {
+      const d = resp.data
+      if (d.name_de) nameDe.value = d.name_de
+      if (d.name_zh) nameZh.value = d.name_zh
+      if (d.type) type.value = d.type
+      if (d.coordinates) {
+        if (d.coordinates.lat != null) lat.value = d.coordinates.lat
+        if (d.coordinates.lng != null) lng.value = d.coordinates.lng
+      }
+      if (d.intro_de || d.intro_zh || d.intro_en) {
+        intro.value = {
+          de: d.intro_de || '',
+          zh: d.intro_zh || '',
+          en: d.intro_en || '',
+        }
+      }
+      if (d.game_role) gameRole.value = d.game_role
+      if (d.audio && typeof d.audio === 'object') audioUrls.value = d.audio
+      if (d.osm_data) {
+        osm.value = { primary_poi: d.osm_data, building: {}, transport: [], roads: [], all_layers: d.osm_data.all_layers }
+      }
+      return true
+    }
+  } catch (e) {
+    // 404 = 没有 draft,正常情况
+    if (e?.status !== 404) console.warn(`[loadDraft] ${poiId} 失败:`, e?.message || e)
+  }
+  return false
+}
+
+watch(() => store.currentPoiId, async (id) => {
   const poi = store.currentPoi
   if (!poi) return
   poiId.value = poi.id
+  // 先用 KNOWN_POIS 默认值初始化
   nameDe.value = poi.name_de
   nameZh.value = poi.name_zh
   type.value = poi.type
@@ -133,12 +233,82 @@ watch(() => store.currentPoiId, (id) => {
   lat.value = newLat
   lng.value = newLng
   gameRole.value = ''
+  intro.value = { de: '', zh: '', en: '' }
+  introLang.value = 'zh'
   osm.value = null
   store.setOsmData(null)
+  // 异步加载已保存的 draft,如果有就覆盖默认值
+  await loadDraftIfExists(poi.id)
   if (newLat && newLng) {
     fetchOsmData(newLat, newLng)
   }
 }, { immediate: true })
+
+
+// ── AI 生成场景介绍 ──
+// 流程(走 /api/wiki/intro 后端编排):
+//   1) Wikipedia DE 拿摘要(主要来源)
+//   2) 查 Wikidata QID → 拿 ZH/EN sitelink → 各拉摘要
+//   3) 缺失语言 → LLM 翻译 DE 补齐
+//   4) DE Wikipedia 无 → Brave Search 搜德语内容
+//   5) 每种语言 LLM 改写成 ~100 词 RPG 风
+async function aiGenerateIntro() {
+  if (!poiId.value || !nameDe.value) {
+    store.error = '请先填写德语名称'
+    return
+  }
+  aiGenerating.value = true
+  store.error = null
+  try {
+    aiStage.value = '查 Wikipedia + Wikidata...'
+    store.log(`✨ AI 生成场景介绍 (${store.textModel})...`)
+    const resp = await api.fetchWikiIntro(nameDe.value, nameZh.value || null)
+    if (!resp.success) throw new Error(resp.detail || 'wiki/intro 失败')
+
+    // 填回三语言 textarea
+    intro.value.de = resp.de || ''
+    intro.value.zh = resp.zh || ''
+    intro.value.en = resp.en || ''
+
+    // 来源摘要显示在日志
+    const rawSources = []
+    if (resp.sources?.de_raw === 'wikipedia') rawSources.push('🇩🇪 维基')
+    else if (resp.sources?.de_raw === 'brave_search') rawSources.push('🇩🇪 Brave')
+    if (resp.sources?.zh_raw === 'wikipedia') rawSources.push('🇨🇳 维基')
+    if (resp.sources?.en_raw === 'wikipedia') rawSources.push('🇬🇧 维基')
+    const generated = []
+    if (resp.sources?.de === 'llm_rewrite') generated.push('🇩🇪 改写')
+    if (resp.sources?.zh === 'llm_translate') generated.push('🇨🇳 翻译')
+    if (resp.sources?.zh === 'llm_rewrite') generated.push('🇨🇳 改写')
+    if (resp.sources?.en === 'llm_translate') generated.push('🇬🇧 翻译')
+    if (resp.sources?.en === 'llm_rewrite') generated.push('🇬🇧 改写')
+    const qid = resp.wikidata_qid ? ` · QID=${resp.wikidata_qid}` : ''
+    store.log(`✅ 来源: ${rawSources.join(' + ') || '无'}; LLM: ${generated.join(' / ')}${qid}`)
+    if (resp.urls?.de) store.log(`  DE: ${resp.urls.de}`)
+
+    // 切到中文 tab 让用户立刻看到结果
+    introLang.value = 'zh'
+
+    // 音频就绪状态(后端在生成三语维基百科内容时同步跑 TTS 预生成 MP3)
+    if (resp.audio && Object.keys(resp.audio).length > 0) {
+      const langs = Object.keys(resp.audio).map(l => l.toUpperCase()).join(' ')
+      store.log(`🔊 TTS 已就绪: ${langs} · 时长约 ${Object.values(resp.audio)[0].duration_estimate}s`)
+      audioUrls.value = resp.audio  // 暂存,saveInfo 时落盘
+    } else {
+      audioUrls.value = {}
+    }
+
+    aiStage.value = '完成 ✓'
+    setTimeout(() => { aiStage.value = '' }, 1500)
+  } catch (e) {
+    store.error = e.message
+    store.log(`❌ AI 场景介绍失败: ${e.message}`)
+    aiStage.value = `失败: ${e.message}`
+    setTimeout(() => { aiStage.value = '' }, 3000)
+  } finally {
+    aiGenerating.value = false
+  }
+}
 
 async function saveInfo() {
   saving.value = true
@@ -154,6 +324,12 @@ async function saveInfo() {
     visit_duration_minutes: 30,
     student_fit: 'high',
     game_role: gameRole.value,
+    // 新版:三语言场景介绍
+    intro_de: intro.value.de,
+    intro_zh: intro.value.zh,
+    intro_en: intro.value.en,
+    // TTS 预生成音频(地图页 🔊 播放按钮用)
+    audio: Object.keys(audioUrls.value).length > 0 ? audioUrls.value : null,
     osm_data: osm.value ? {
       name_de: osm.value.primary_poi?.name_de,
       name_zh: osm.value.primary_poi?.name_zh,
@@ -180,6 +356,9 @@ async function saveInfo() {
     saving.value = false
   }
 }
+
+// 暴露给父组件(App.vue)在弹窗关闭前调用
+defineExpose({ saveInfo })
 </script>
 
 <style scoped>
@@ -264,5 +443,100 @@ async function saveInfo() {
   color: #aab8bf;
   background: rgba(0,0,0,.15);
   border-radius: 2px;
+}
+
+/* ── 场景介绍 (三语言 tab + AI 生成) ── */
+.field label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.btn-ai {
+  background: var(--gold);
+  color: #000;
+  border: 1px solid var(--gold);
+  font-size: 9px;
+  padding: 3px 10px;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+.btn-ai:hover:not(:disabled) {
+  background: #ffd86b;
+  border-color: #ffd86b;
+}
+.btn-ai:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.lang-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 4px;
+  border-bottom: 1px solid var(--navy3);
+}
+.lang-tab {
+  flex: 1;
+  background: transparent;
+  border: 1px solid var(--navy2);
+  border-bottom: none;
+  color: var(--text-dim);
+  font-size: 10px;
+  padding: 5px 4px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all .15s;
+  border-radius: 2px 2px 0 0;
+  margin-right: 2px;
+}
+.lang-tab:last-child {
+  margin-right: 0;
+}
+.lang-tab:hover {
+  color: var(--gold2);
+  border-color: var(--navy3);
+}
+.lang-tab.active {
+  background: var(--gold);
+  color: #000;
+  border-color: var(--gold);
+  font-weight: bold;
+}
+.intro-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 9px;
+  color: var(--text-dim);
+  margin-top: 4px;
+  font-family: monospace;
+}
+.intro-meta .over-limit {
+  color: var(--danger);
+  font-weight: bold;
+}
+.intro-meta-sep {
+  opacity: 0.5;
+}
+.intro-meta-hint {
+  flex: 1;
+  font-family: inherit;
+  font-style: italic;
+}
+.intro-meta-spin {
+  color: var(--gold);
+  animation: blink 1s infinite;
+}
+.audio-badge {
+  background: rgba(232, 184, 92, 0.15);
+  border: 1px solid var(--gold);
+  color: var(--gold2);
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 9px;
+}
+@keyframes blink {
+  50% { opacity: 0.4; }
 }
 </style>

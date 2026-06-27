@@ -31,13 +31,28 @@ body{background:radial-gradient(circle at 50% 12%,#183b67,#06101f 58%,#030812);f
 .detail-empty{color:#4a6a8a;font-size:9px;text-align:center;padding-top:30px}
 .dh h2{font-size:14px;color:var(--gold2);margin-bottom:1px}
 .dh .de{font-size:9px;color:#6a8aaa;font-style:italic}
-.dd{font-size:9px;color:#aab8bf;line-height:1.5}
-.dm{font-size:8px;color:#8aaac8;display:flex;flex-direction:column;gap:3px;padding:6px;background:rgba(0,0,0,.3);border:1px solid var(--navy2)}.dm b{color:var(--gold2)}
-.route-line{fill:none;stroke:#d85f45;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:8 7;filter:drop-shadow(0 0 4px rgba(255,207,114,.7));animation:dash 1.2s linear infinite}
-@keyframes dash{to{stroke-dashoffset:-30}}
-.da{display:flex;flex-wrap:wrap;gap:4px}.act{background:var(--navy2);border:2px solid #3a5a7a;color:var(--gold2);font-size:8px;padding:3px 8px;cursor:pointer;font-family:inherit}.act:hover{border-color:var(--gold)}
-.di{position:relative;background:rgba(0,0,0,.4);border:2px solid var(--navy3);margin-bottom:8px;text-align:center;overflow:hidden;aspect-ratio:16/9}
-.di img{width:100%;height:100%;object-fit:cover;image-rendering:pixelated;image-rendering:crisp-edges;display:block}
+/* 场景介绍文字区:可上下滚动(图片+标题+旗帜固定) */
+.dd{font-size:9px;color:#aab8bf;line-height:1.5;white-space:pre-wrap;margin-top:8px;flex:1 1 0;min-height:0;overflow-y:auto;padding:6px 4px;background:rgba(0,0,0,.15);border:1px solid var(--navy2);border-radius:3px}
+/* 自定义滚动条 */
+.dd::-webkit-scrollbar{width:6px}
+.dd::-webkit-scrollbar-track{background:rgba(0,0,0,.2);border-radius:3px}
+.dd::-webkit-scrollbar-thumb{background:var(--navy3);border-radius:3px}
+.dd::-webkit-scrollbar-thumb:hover{background:var(--gold)}
+/* 固定图片/标题/旗帜,不被压缩 */
+.di,.dh,.flags{flex-shrink:0}
+/* 国旗切换按钮 */
+.flags{display:flex;gap:4px;margin:8px 0 4px;padding:4px 0;border-top:1px solid var(--navy2);border-bottom:1px solid var(--navy2)}
+.flag-btn{background:transparent;border:2px solid var(--navy2);border-radius:3px;padding:3px 6px;font-size:16px;cursor:pointer;line-height:1;transition:all .15s;opacity:.5}
+.flag-btn:hover{opacity:.85;border-color:var(--gold)}
+.flag-btn.active{opacity:1;border-color:var(--gold);background:rgba(232,184,92,.15);box-shadow:0 0 6px rgba(232,184,92,.4)}
+/* 语音播放按钮 */
+.audio-row{margin-top:4px}
+.audio-btn{background:linear-gradient(180deg,#1a3a66,#0a1f3d);color:var(--gold2);border:2px solid var(--gold);border-radius:3px;padding:4px 10px;font-size:10px;font-weight:bold;cursor:pointer;font-family:inherit;width:100%;text-align:center;transition:all .15s}
+.audio-btn:hover{background:linear-gradient(180deg,#214d83,#0c274d);box-shadow:0 0 8px rgba(232,184,92,.5);transform:translateY(-1px)}
+.audio-hint{font-size:9px;color:#6a8aaa;font-style:italic;display:block;text-align:center;padding:4px}
+/* 显示路线 + acts 按钮 CSS 移除(MVP 不接路线 API,改用预设 routes.json 时再回来) */
+.di{position:relative;background:rgba(0,0,0,.4);border:2px solid var(--navy3);margin-bottom:8px;text-align:center;overflow:hidden;aspect-ratio:16/9;flex-shrink:0}
+.di img{width:100%;height:100%;object-fit:contain;image-rendering:pixelated;image-rendering:crisp-edges;display:block}
 .di .din{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.7));padding:4px 6px;display:flex;justify-content:space-between;align-items:center}
 .din .dil{font-size:7px;color:var(--gold2)}.din .dir{font-size:7px;color:#8aaac8}
 .dib{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.6);border:2px solid var(--gold);color:var(--gold2);font-size:9px;width:18px;height:18px;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;padding:0}
@@ -267,14 +282,14 @@ function renderGamePois(){
 svg.setAttribute('width',cw);svg.setAttribute('height',ch);svg.setAttribute('viewBox','0 0 '+cw+' '+ch);
 }
 
-function selP(poi){
+async function selP(poi){
   selPoi=poi;
   var gs=document.querySelectorAll('.poi-g');
   for(var i=0;i<gs.length;i++){var g=gs[i];g.querySelector('path:nth-child(2)').setAttribute('stroke','#06142a');g.querySelector('path:nth-child(2)').setAttribute('stroke-width','1.5')}
   var g=document.querySelector('.poi-g[data-id="'+poi.id+'"]');
   if(g){g.querySelector('path:nth-child(2)').setAttribute('stroke','#ffcf72');g.querySelector('path:nth-child(2)').setAttribute('stroke-width','3')}
   var clr={home:'#2d6fb3',school:'#3f7f56',shop:'#c98238',church:'#7d5fb2',market:'#c98238',castle:'#8b5e3c',landmark:'#d85f45',museum:'#7d5fb2',stadium:'#8b8b8b',station:'#1e6eb8',park:'#70a95e',library:'#7d5fb2'}[poi.t]||'#d85f45';
-  var actions=poi.acts.map(function(a){return '<button class="act" onclick="da(\\\''+poi.id+'\\\',\\\''+a+'\\\')">'+a+'</button>'}).join('');
+  // (var actions removed — poi.acts no longer rendered as buttons)
   var ih='';
   if(poi.imgs&&poi.imgs.length>0){
     var ii=poi._imgIdx||0,s=poi.imgs[ii];
@@ -282,10 +297,108 @@ function selP(poi){
     if(poi.imgs.length>1)ih+='<button class="dib dib-l" onclick="pimg(-1)">\u25c0</button><button class="dib dib-r" onclick="pimg(1)">\u25b6</button>';
     ih+='</div>'
   }
-  document.getElementById('dp').innerHTML=ih+'<div class="dh"><h2><span style="color:'+clr+'">'+poi.icon+'</span> '+poi.name+'</h2><div class="de">'+poi.de+'</div></div><div class="dd">'+poi.d+'</div><div class="da">'+actions+'</div><div class="dm"><div>\u{1f6b6} 步行: <b>'+poi.walk+' min</b></div><div>\u{1f687} '+poi.ubahn+'</div><div>\u{1f4b0} 花费: <b>'+poi.cost+'</b></div></div><button class="pbtn" onclick="srt(\\\''+poi.id+'\\\')">\u2197 显示路线</button>';
+  // 加载 draft 拿三语言 intro(de/zh/en)+ audio URLs,fallback 到 poi.d
+  var intros = {de: poi.d || '', zh: poi.d || '', en: poi.d || ''};
+  var audioMap = {};  // {de: {url, duration_estimate}, ...}
+  try {
+    var qs = 'relative_path=poi_info.draft.json&poi_id='+encodeURIComponent(poi.id)+'&city=munich&is_draft=true';
+    var r = await fetch('http://127.0.0.1:8000/api/save/json?'+qs, { signal: AbortSignal.timeout(2000) });
+    if(r.ok){
+      var j = await r.json();
+      if(j.success && j.data) {
+        if(j.data.intro_de) intros.de = j.data.intro_de;
+        if(j.data.intro_zh) intros.zh = j.data.intro_zh;
+        if(j.data.intro_en) intros.en = j.data.intro_en;
+        if(j.data.audio && typeof j.data.audio === 'object') audioMap = j.data.audio;
+      }
+    }
+  } catch(e) { /* 后端没起/timeout → fallback poi.d */ }
+  // 缓存当前 POI 的三语言 + 音频,供国旗按钮切换
+  window.__curIntros = intros;
+  window.__curAudio = audioMap;
+  window.__curIntroLang = 'de';  // 默认显示德语
+  var flagsHtml = '<div class="flags">'
+    + '<button class="flag-btn active" data-lang="de" onclick="setIntroLang(\'de\')" title="Deutsch">🇩🇪</button>'
+    + '<button class="flag-btn" data-lang="zh" onclick="setIntroLang(\'zh\')" title="中文">🇨🇳</button>'
+    + '<button class="flag-btn" data-lang="en" onclick="setIntroLang(\'en\')" title="English">🇬🇧</button>'
+    + '</div>';
+  // 🔊 播放按钮:有当前语言音频才显示
+  var hasAudio = audioMap['de'];
+  var audioBtn = hasAudio
+    ? '<button class="audio-btn" id="dp-audio-btn" onclick="playIntroAudio()" title="播放场景介绍语音">🔊 播放 ('+hasAudio.duration_estimate+'s)</button>'
+    : '<span class="audio-hint" title="AI 生成场景介绍后才会预生成音频">🔇 无音频</span>';
+  var audioContainer = '<div class="audio-row">'+audioBtn+'</div>';
+  var descHtml = intros.de ? '<div class="dd" data-intro-de="1">'+intros.de+'</div>' : '';
+  document.getElementById('dp').innerHTML=ih+'<div class="dh"><h2><span style="color:'+clr+'">'+poi.icon+'</span> '+poi.name+'</h2><div class="de">'+poi.de+'</div></div>'+flagsHtml+audioContainer+descHtml;
 }
 
-window.srt=function srt(pid){var from=gamePois.find(function(p){return p.id==='home'}),to=gamePois.find(function(p){return p.id===pid});if(!from||!to)return;var cW=wm(vp.centerLng,vp.centerLat,vp.zoom),p1w=wm(from.lng,from.lat,vp.zoom),p2w=wm(to.lng,to.lat,vp.zoom),p1={x:p1w.x-cW.x+vp.worldX+cw/2,y:p1w.y-cW.y+vp.worldY+ch/2},p2={x:p2w.x-cW.x+vp.worldX+cw/2,y:p2w.y-cW.y+vp.worldY+ch/2};svg.setAttribute('width',cw);svg.setAttribute('height',ch);svg.setAttribute('viewBox','0 0 '+cw+' '+ch);var rg=document.getElementById('rg');rg.innerHTML='<path d="M'+pxi(p1.x)+','+pxi(p1.y)+' Q'+pxi((p1.x+p2.x)/2+30)+','+pxi((p1.y+p2.y)/2-40)+' '+pxi(p2.x)+','+pxi(p2.y)+'" class="route-line"/><circle cx="'+pxi(p1.x)+'" cy="'+pxi(p1.y)+'" r="6" fill="#3f7f56" stroke="#06142a" stroke-width="2"/><circle cx="'+pxi(p2.x)+'" cy="'+pxi(p2.y)+'" r="6" fill="#d85f45" stroke="#06142a" stroke-width="2"/>';}
+// 切换场景介绍语言(只改 .dd 内容,不高亮按钮)
+window.setIntroLang=function(lang){
+  if(!window.__curIntros) return;
+  window.__curIntroLang = lang;
+  var text = window.__curIntros[lang] || '';
+  var dd = document.querySelector('#dp .dd');
+  if(dd) dd.textContent = text;
+  // 更新按钮高亮
+  document.querySelectorAll('#dp .flag-btn').forEach(function(b){
+    b.classList.toggle('active', b.dataset.lang === lang);
+  });
+  // 同步更新 🔊 按钮(指向当前语言的音频)
+  updateAudioButton();
+}
+
+// 切换播放/暂停(单一按钮 toggle)
+window.playIntroAudio=function(){
+  if(!window.__curAudio) return;
+  var lang = window.__curIntroLang || 'de';
+  var a = window.__curAudio[lang];
+  if(!a || !a.url){ alert('该语言暂无音频,请先在生成器里点 AI 生成'); return; }
+  // 全局单例 audio 元素
+  if(!window.__introAudio) window.__introAudio = new Audio();
+  var ad = window.__introAudio;
+  var btn = document.getElementById('dp-audio-btn');
+  var setBtn = function(state){
+    if(!btn) return;
+    if(state === 'playing') btn.textContent = '⏸ 暂停 ('+a.duration_estimate+'s)';
+    else if(state === 'paused') btn.textContent = '▶ 继续 ('+a.duration_estimate+'s)';
+    else btn.textContent = '🔊 播放 ('+a.duration_estimate+'s)';
+  };
+  // 切换 URL(选了不同语言)→ 重置
+  if(ad.src !== a.url){
+    ad.src = a.url;
+    ad.onended = function(){ setBtn('idle'); };
+    ad.onpause = function(){ if(!ad.ended) setBtn('paused'); };
+    ad.onplay = function(){ setBtn('playing'); };
+  }
+  // toggle 核心: 正在播就暂停,否则播
+  if(!ad.paused && !ad.ended && ad.currentTime > 0){
+    ad.pause();
+  } else {
+    // 第一次 / 播完了重播
+    if(ad.ended) ad.currentTime = 0;
+    ad.play().catch(function(e){
+      console.warn('[audio] play failed:', e);
+      setBtn('paused');  // 浏览器拦了自动播放,让用户再点
+    });
+  }
+}
+
+// 切换语言时,同步 🔊 按钮的 URL/时长
+window.updateAudioButton=function(){
+  if(!window.__curAudio) return;
+  var lang = window.__curIntroLang || 'de';
+  var a = window.__curAudio[lang];
+  var btn = document.getElementById('dp-audio-btn');
+  var row = document.querySelector('#dp .audio-row');
+  if(!row) return;
+  if(a){
+    if(btn){ btn.textContent = '🔊 播放 ('+a.duration_estimate+'s)'; btn.title='播放'+lang.toUpperCase()+'场景介绍语音'; }
+  } else {
+    row.innerHTML = '<span class="audio-hint">🔇 该语言暂无音频</span>';
+  }
+}
+
+// 显示路线功能已移除(MVP 不接路线 API,改用预设 routes.json 时再回来)
 
 window.pimg=function(dir){if(!selPoi||!selPoi.imgs||!selPoi.imgs.length)return;var im=selPoi.imgs;selPoi._imgIdx=((selPoi._imgIdx||0)+dir+im.length)%im.length;selP(selPoi)}
 window.da=function(id,act){console.log(act,'@',id);var p=gamePois.find(function(p2){return p2.id===id});if(p){document.getElementById('di').textContent='已选择：'+p.name+' · '+act}}

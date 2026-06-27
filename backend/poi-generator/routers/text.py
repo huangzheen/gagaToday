@@ -1,10 +1,10 @@
 """
-文本生成路由 — 调用 Qwen LLM
+文本生成路由 — 调用 Qwen / DeepSeek LLM
 """
 
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
-from ..config import LLM_MODEL_DEFAULT, LLM_MODEL_COMPLEX
+from ..config import LLM_MODEL_DEFAULT, LLM_MODEL_COMPLEX, DEEPSEEK_API_KEY
 from ..services.llm_service import generate_text, generate_json
 
 router = APIRouter(prefix="/api/generate", tags=["text"])
@@ -13,12 +13,22 @@ router = APIRouter(prefix="/api/generate", tags=["text"])
 @router.get("/llm-models")
 async def api_list_llm_models():
     """列出可用的 LLM 模型"""
+    models = [
+        {"id": "deepseek-v4-flash", "name": "DeepSeek V4 Flash", "provider": "DeepSeek", "usage": "快速对话/翻译/轻量写作(默认)"},
+        {"id": "qwen-plus", "name": "通义千问 Qwen-Plus", "provider": "阿里云 DashScope", "usage": "日常生成"},
+        {"id": "qwen3-max", "name": "通义千问 Qwen3-Max", "provider": "阿里云 DashScope", "usage": "复杂任务(知识卡/剧情)"},
+    ]
+    # DeepSeek Pro 仅在 key 已配置时列出(否则用户选了也跑不通)
+    if DEEPSEEK_API_KEY:
+        models.append({
+            "id": "deepseek-v4-pro",
+            "name": "DeepSeek V4 Pro",
+            "provider": "DeepSeek",
+            "usage": "深度推理/复杂任务",
+        })
     return {
         "success": True,
-        "models": [
-            {"id": LLM_MODEL_DEFAULT, "name": "通义千问 Qwen-Plus", "provider": "阿里云 DashScope", "usage": "日常生成"},
-            {"id": LLM_MODEL_COMPLEX, "name": "通义千问 Qwen3-Max", "provider": "阿里云 DashScope", "usage": "复杂任务"},
-        ],
+        "models": models,
         "default": LLM_MODEL_DEFAULT,
         "complex": LLM_MODEL_COMPLEX,
     }
@@ -27,7 +37,7 @@ async def api_list_llm_models():
 class TextRequest(BaseModel):
     prompt: str
     system_prompt: str = None
-    model: str = "qwen-plus"
+    model: str = LLM_MODEL_DEFAULT
     temperature: float = 0.7
     max_tokens: int = 4096
 
@@ -35,7 +45,7 @@ class TextRequest(BaseModel):
 class JsonRequest(BaseModel):
     prompt: str
     system_prompt: str = None
-    model: str = "qwen3-max"
+    model: str = LLM_MODEL_COMPLEX
     temperature: float = 0.3
 
 
