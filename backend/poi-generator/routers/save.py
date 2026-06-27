@@ -42,6 +42,7 @@ class SavePackageRequest(BaseModel):
     date_suffix: str = None
     source_records: list[dict] = None
     is_draft: bool = True
+    register_published: bool = True  # False = 纯草稿保存,不动 pois.is_published
 
 
 @router.post("/save/json")
@@ -165,7 +166,8 @@ async def api_save_package(req: SavePackageRequest):
             content_types.append(ct)
 
             # 如果是 poi_info，先 upsert POI（外键约束要求 pois 表先有记录）
-            if ct == "info" and isinstance(data, dict):
+            # 仅在 register_published=True 时才标记为已发布,纯草稿保存不动 pois 表
+            if req.register_published and ct == "info" and isinstance(data, dict):
                 upsert_poi(
                     poi_id=poi_id,
                     city=city,

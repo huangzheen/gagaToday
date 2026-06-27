@@ -70,13 +70,15 @@ export const api = {
   },
 
   // ── 批量保存 ──
-  savePackage(files, poiId, city = 'munich', dateSuffix = null, sourceRecords = null) {
+  // registerPublished=false 表示纯草稿保存(不写入 pois.is_published)
+  savePackage(files, poiId, city = 'munich', dateSuffix = null, sourceRecords = null, registerPublished = true) {
     return request('POST', '/save/package', {
       files,
       poi_id: poiId,
       city,
       date_suffix: dateSuffix,
       source_records: sourceRecords,
+      register_published: registerPublished,
     })
   },
 
