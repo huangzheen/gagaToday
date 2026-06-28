@@ -9,6 +9,7 @@ from ..services.file_service import save_json, save_image, save_source_record, s
 from ..services.db_service import (
     upsert_poi, add_scene, add_content, log_export, list_scenes,
 )
+from ..config import CONTENT_DRAFTS_ROOT
 
 router = APIRouter(prefix="/api", tags=["save"])
 
@@ -79,7 +80,6 @@ async def api_load_json(
     """读取已保存的 JSON 文件(draft 目录或正式目录)"""
     import json as _json
     from pathlib import Path
-    from ..config import CONTENT_DRAFTS_ROOT
 
     if is_draft:
         if poi_id:
@@ -87,7 +87,7 @@ async def api_load_json(
         else:
             base_dir = CONTENT_DRAFTS_ROOT / city
     else:
-        base_dir = Path("/Volumes/NewDisk/GermanLearning/frontend/src/content") / city
+        base_dir = CONTENT_DRAFTS_ROOT / city
 
     file_path = base_dir / relative_path
     if not file_path.exists():

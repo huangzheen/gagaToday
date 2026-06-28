@@ -41,6 +41,20 @@ const BUILTIN_POIS = [
     acts: ['看钟琴表演', '逛市集摊位', '参观新市政厅'],
     key_features: 'the central tall New Town Hall (Neues Rathaus) with its iconic Gothic Revival tower, the famous Glockenspiel carillon balcony with tiny painted wooden figures, the gilded golden Mariensäule column with a radiant Virgin Mary statue on a dark marble Corinthian base. Surrounding: red-roofed Munich townhouses with dormer windows and painted facades (warm cream, ochre, terracotta, ivory). Distant background: Fraunhofer church tower or Frauenkirche onion-dome twin towers visible behind. NOT a generic European plaza.',
   },
+  {
+    // 2026-06-28 加入 — 之前用户发布的 München Hauptbahnhof 已在 SQLite pois 表 + 地图端可见,
+    // 但 generator 看不到这张卡片(只能从 AddPoiDialog 重新创建)。补齐后编辑器入口打通。
+    id: 'munchen_hauptbahnhof',
+    name_de: 'München Hauptbahnhof',
+    name_zh: '慕尼黑中央火车站',
+    type: 'train_station',
+    lat: 48.1407259739359,
+    lng: 11.5569412708282,
+    icon: '🚉',
+    description: '慕尼黑火车总站,德国铁路 21 座一等站之一,日均客流约 45 万人次,德国第三繁忙的铁路枢纽。',
+    acts: ['看车站建筑', '拍照打卡', '了解铁路历史'],
+    key_features: 'large historic terminal station with monumental arched glass-and-iron train shed roof, multiple parallel railway platforms with overhead catenary lines, grand neoclassical stone facade with columned portico, busy station forecourt (Bahnhofsplatz) with tram lines and red S-Bahn trains, urban backdrop of Munich mid-rise buildings. NOT a modern airport, NOT a generic train platform, NOT underground metro only — surface terminal with massive train shed visible.',
+  },
 ]
 
 

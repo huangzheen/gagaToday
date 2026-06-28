@@ -278,37 +278,6 @@ def _looks_like_disambig(summary: dict) -> bool:
         if marker in head:
             return True
     return False
-    """按"词数"截断到目标长度(英文/德语按空格,中文按字符)
-    优先在句末(。！？.!?\n)切,不切碎半句。
-    """
-    if not text:
-        return ""
-    # 中文按字符计 ~60 字(对应 ~100 词)
-    is_chinese = any('\u4e00' <= c <= '\u9fff' for c in text)
-    if is_chinese:
-        max_chars = max_words * 0.6  # 100 词 ≈ 60 中文字
-        if len(text) <= max_chars:
-            return text
-        # 找最近的句末
-        cut = text[:int(max_chars)]
-        for sep in ["。", "！", "?", "\n"]:
-            idx = cut.rfind(sep)
-            if idx > max_chars * 0.6:  # 至少保留 60%
-                return cut[:idx + 1].strip()
-        return cut.strip() + "..."
-    else:
-        # 英文/德语按空格分词
-        words = text.split()
-        if len(words) <= max_words:
-            return text
-        cut_words = words[:max_words]
-        # 在最后一个完整句子截止
-        cut_text = " ".join(cut_words)
-        for sep in [". ", "! ", "? ", "\n"]:
-            idx = cut_text.rfind(sep)
-            if idx > len(cut_text) * 0.6:
-                return cut_text[:idx + len(sep)].strip()
-        return cut_text.strip() + "..."
 
 
 def truncate_to_words(text: str, max_words: int = 120) -> str:
@@ -466,17 +435,36 @@ def fetch_intro(name_de: str, name_zh: str = None, name_en: str = None) -> dict:
 
 def _slugify_poi_id(name: str) -> str:
     """从德语名生成 POI ID slug,用于 audio 文件路径
-    'Marienplatz' → 'marienplatz'
-    'Schloss Nymphenburg' → 'schloss-nymphenburg'
+
+    与 frontend `stores/generator.js:generateId` 保持完全一致:
+    'München Hauptbahnhof' → 'munchen_hauptbahnhof'
+    'Marienplatz'          → 'marienplatz'
+    'Schloss Nymphenburg'  → 'schloss_nymphenburg'
+
+    规则:
+    1. lowercase + normalize NFD 去重音符号 (ü → u, ä → a, ö → o)
+    2. 显式映射 ä→ae / ö→oe / ü→ue / ß→ss (normalize 后已经只剩 ASCII,
+       但保留映射以防输入是 pre-composed ü 之外的字符)
+    3. 非 [a-z0-9] 替换为 '_' (下划线分隔)
+    4. 去掉首尾 '_'
+    5. 截断 40 字符
+
+    ⚠️ 2026-06-28 修复: 之前用 'ü→ue, 连字符分隔',与 frontend 'NFD strip
+    + 下划线分隔' 不一致,导致带 umlaut 的 POI (如 München Hauptbahnhof)
+    的 audio 文件落到 `muenchen-hauptbahnhof/`,而 POI id 和参考图是
+    `munchen_hauptbahnhof/`,同一个 POI 拆成两个目录。
     """
     import re
+    import unicodedata
     s = name.strip().lower()
-    s = re.sub(r"ä", "ae", s)
-    s = re.sub(r"ö", "oe", s)
-    s = re.sub(r"ü", "ue", s)
-    s = re.sub(r"ß", "ss", s)
-    s = re.sub(r"[^a-z0-9]+", "-", s)
-    return s.strip("-") or "unknown"
+    # NFD 分解: ü → u + combining diaeresis, 然后去掉 combining marks
+    s = unicodedata.normalize('NFD', s)
+    s = ''.join(ch for ch in s if not unicodedata.combining(ch))
+    # 兜底: 处理一些不通过 NFD 分解的字符(理论上 redundant,但安全)
+    s = s.replace('ä', 'ae').replace('ö', 'oe').replace('ü', 'ue').replace('ß', 'ss')
+    s = re.sub(r"[^a-z0-9]+", "_", s)
+    s = s.strip("_")
+    return s[:40] or "unknown"
 
 
 def _generate_intro_audio(poi_id: str, intros: dict) -> dict:

@@ -12,6 +12,8 @@ Thumbs.db
 node_modules/
 frontend/dist/
 frontend/dist-ssr/
+frontend/poi-generator/dist
+frontend/poi-generator/public/generated
 frontend/.vite/
 *.local
 

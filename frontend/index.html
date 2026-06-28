@@ -357,29 +357,37 @@ window.playIntroAudio=function(){
   if(!window.__introAudio) window.__introAudio = new Audio();
   var ad = window.__introAudio;
   var btn = document.getElementById('dp-audio-btn');
-  var setBtn = function(state){
+  // 同步按钮文字:始终从 audio 元素真实状态推导,杜绝"按钮显示暂停但点了重播"
+  var syncBtn = function(){
     if(!btn) return;
-    if(state === 'playing') btn.textContent = '⏸ 暂停 ('+a.duration_estimate+'s)';
-    else if(state === 'paused') btn.textContent = '▶ 继续 ('+a.duration_estimate+'s)';
-    else btn.textContent = '🔊 播放 ('+a.duration_estimate+'s)';
+    if(ad.ended){
+      btn.textContent = '🔊 播放 ('+a.duration_estimate+'s)';
+    } else if(ad.paused){
+      btn.textContent = ad.currentTime > 0
+        ? '▶ 继续 ('+a.duration_estimate+'s)'
+        : '🔊 播放 ('+a.duration_estimate+'s)';
+    } else {
+      btn.textContent = '⏸ 暂停 ('+a.duration_estimate+'s)';
+    }
   };
-  // 切换 URL(选了不同语言)→ 重置
+  // 切换 URL(选了不同语言)→ 重置 + 重绑事件(从源头同步按钮)
   if(ad.src !== a.url){
     ad.src = a.url;
-    ad.onended = function(){ setBtn('idle'); };
-    ad.onpause = function(){ if(!ad.ended) setBtn('paused'); };
-    ad.onplay = function(){ setBtn('playing'); };
+    ad.onended = syncBtn;
+    ad.onpause = syncBtn;
+    ad.onplay = syncBtn;
+    syncBtn();
   }
-  // toggle 核心: 正在播就暂停,否则播
-  if(!ad.paused && !ad.ended && ad.currentTime > 0){
-    ad.pause();
-  } else {
-    // 第一次 / 播完了重播
+  // toggle 核心: paused/ended → 播放,其他 → 暂停
+  // 不依赖 currentTime 是否 > 0 (避免点击过早被当 "还没播" 而误判)
+  if(ad.paused || ad.ended){
     if(ad.ended) ad.currentTime = 0;
     ad.play().catch(function(e){
       console.warn('[audio] play failed:', e);
-      setBtn('paused');  // 浏览器拦了自动播放,让用户再点
+      syncBtn();  // 浏览器拦了自动播放,刷新按钮
     });
+  } else {
+    ad.pause();
   }
 }
 

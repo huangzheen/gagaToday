@@ -4,6 +4,7 @@
 """
 
 import json
+import os
 from datetime import datetime
 from pathlib import Path
 from ..config import ASSETS_ROOT, CONTENT_DRAFTS_ROOT
@@ -353,7 +354,10 @@ def list_uploaded_assets(
         })
     # 主图优先(ref_* 在前,作为定妆照锚定),其余按 mtime 正序(老 → 新,新生成的追加到末尾)
     # 这样文件名编号(scene_X_1, _2, _3)和视觉顺序一致,不会"夹"在中间
-    files.sort(key=lambda x: (not x["filename"].startswith("ref_"), __import__("os").stat(target_dir / x["filename"]).st_mtime))
+    files.sort(key=lambda x: (
+        not x["filename"].startswith("ref_"),
+        os.stat(target_dir / x["filename"]).st_mtime,
+    ))
     return files
 
 def delete_uploaded_asset(
