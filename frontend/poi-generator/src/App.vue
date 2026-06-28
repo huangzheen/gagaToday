@@ -18,11 +18,11 @@
     <div class="card-container panel">
       <div class="card-header">
         <span class="card-header-title">📍 慕尼黑 POI</span>
-        <span class="card-header-count">{{ KNOWN_POIS.length }} 个</span>
+        <span class="card-header-count">{{ store.knownPois.length }} 个</span>
       </div>
       <div class="card-grid">
         <div
-          v-for="poi in KNOWN_POIS"
+          v-for="poi in store.knownPois"
           :key="poi.id"
           class="poi-card"
           :class="{ selected: store.currentPoiId === poi.id, published: isPublished(poi.id) }"
@@ -38,7 +38,7 @@
               :alt="poi.name_zh"
               @error="onCardImgError(poi.id)"
             />
-            <span v-else class="placeholder-icon">{{ poi.icon }}</span>
+            <span v-else class="placeholder-icon">{{ poi.icon || '📍' }}</span>
           </div>
           <!-- 名称 -->
           <div class="poi-card-name">{{ poi.name_zh }}</div>
@@ -92,7 +92,9 @@
       <div class="modal-overlay" v-if="editingPoi" @click.self="closeEditor">
         <div class="modal-panel panel">
           <div class="modal-header">
-            <span class="modal-title">{{ editingPoi?.icon }} {{ editingPoi?.name_zh }}</span>
+            <span class="modal-title">
+              {{ editingPoi?.icon }} {{ editingPoi?.name_zh }}
+            </span>
 
             <!-- 全局模型选择器(整个弹窗内的 AI 调用都读这两个) -->
             <div class="modal-models">
@@ -127,7 +129,7 @@
             </button>
           </div>
           <div class="content-area">
-            <POIInfoForm v-if="store.activeTab === 'info'" ref="poiInfoFormRef" />
+            <POIInfoForm v-if="store.activeTab === 'info'" ref="poiInfoFormRef" @auto-fill-done="onAutoFillDone" />
             <RefWorkflow v-else-if="store.activeTab === 'refworkflow'" />
             <UploadsPanel v-else-if="store.activeTab === 'uploads'" />
             <NPCPanel v-else-if="store.activeTab === 'npc'" />
@@ -135,6 +137,13 @@
         </div>
       </div>
     </Teleport>
+
+    <!-- 添加新 POI 弹窗 (2026-06-27 新增) -->
+    <AddPoiDialog
+      v-if="showAddDialog"
+      @close="showAddDialog = false"
+      @created="onPoiCreated"
+    />
 
     <!-- 底部栏 -->
     <footer class="bottombar panel">
@@ -149,13 +158,14 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted, computed, ref } from 'vue'
-import { useGeneratorStore, KNOWN_POIS, TABS } from '@/stores/generator'
+import { onMounted, onUnmounted, computed, ref, nextTick } from 'vue'
+import { useGeneratorStore, TABS } from '@/stores/generator'
 import { api } from '@/core/apiClient'
 import POIInfoForm from '@/components/POIInfoForm.vue'
 import RefWorkflow from '@/components/RefWorkflow.vue'
 import UploadsPanel from '@/components/UploadsPanel.vue'
 import NPCPanel from '@/components/NPCPanel.vue'
+import AddPoiDialog from '@/components/AddPoiDialog.vue'
 
 const store = useGeneratorStore()
 const currentPoi = computed(() => store.currentPoi)
@@ -169,14 +179,11 @@ const cardCacheBust = ref(Date.now())
 const cardBrokenImgs = ref(new Set())  // 加载失败的 poi_id 集合(用 emoji 占位)
 
 function primaryImageExists(poiId) {
-  // 已经在 probe 时确认失败的,直接 false
   if (cardBrokenImgs.value.has(poiId)) return false
-  // 假设存在(让 <img> 加载,vite proxy + 8081 server.cjs 会 serve)
   return true
 }
 
 function onCardImgError(poiId) {
-  // 加载失败 → 标记,显示 emoji 占位
   cardBrokenImgs.value.add(poiId)
 }
 
@@ -204,7 +211,7 @@ async function loadPublished() {
 
 function openEditor(poiId) {
   store.selectPoi(poiId)
-  const poi = KNOWN_POIS.find(p => p.id === poiId)
+  const poi = store.knownPois.find(p => p.id === poiId)
   editingPoi.value = poi
 }
 
@@ -220,10 +227,35 @@ async function closeEditor() {
   editingPoi.value = null
 }
 
+// 创建新 POI 后(从 AddPoiDialog emit): 自动打开编辑器 + 触发 AI 流程
+async function onPoiCreated(poi) {
+  // 编辑器已经 store.selectPoi(poi.id),activeTab='info'
+  editingPoi.value = poi
+  // 等 POIInfoForm mount 完
+  await nextTick()
+  await nextTick()
+  // 触发自动 AI 填第一页(场景介绍 + 周边 OSM)
+  if (poiInfoFormRef.value && typeof poiInfoFormRef.value.aiGenerateIntro === 'function') {
+    store.log('🤖 自动触发 AI 场景介绍生成...')
+    poiInfoFormRef.value.aiGenerateIntro().catch(e => {
+      store.error = 'AI 自动填充失败: ' + e.message
+    })
+  }
+}
+
+// AI 填充完成事件 (POIInfoForm emit)
+function onAutoFillDone() {
+  store.log('✅ AI 自动填充完成,可以查看第一页')
+}
+
 // ESC 键关闭弹窗
 function onGlobalKeydown(e) {
-  if (e.key === 'Escape' && editingPoi.value) {
-    closeEditor()
+  if (e.key === 'Escape') {
+    if (showAddDialog.value) {
+      showAddDialog.value = false
+    } else if (editingPoi.value) {
+      closeEditor()
+    }
   }
 }
 
@@ -236,9 +268,8 @@ async function onDrop(e) {
   dragOver.value = false
   const poiId = e.dataTransfer.getData('poiId')
   if (!poiId) return
-  const poi = KNOWN_POIS.find(p => p.id === poiId)
+  const poi = store.knownPois.find(p => p.id === poiId)
   if (!poi) return
-  // 发布：调用 save/package 写入 SQLite
   try {
     await fetch('http://127.0.0.1:8000/api/save/package', {
       method: 'POST',
@@ -262,7 +293,6 @@ async function onDrop(e) {
         city: 'munich',
       }),
     })
-    // 刷新列表
     await loadPublished()
     store.log(`📤 已发布 ${poi.name_zh}`)
     store.markGenerated('info')
@@ -315,3 +345,6 @@ onUnmounted(() => {
   window.removeEventListener('keydown', onGlobalKeydown)
 })
 </script>
+
+<style scoped>
+</style>

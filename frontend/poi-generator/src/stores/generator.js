@@ -6,16 +6,17 @@
  * - 图像模型选择 (RefWorkflow 用)
  * - 基础信息编辑 (POIInfoForm 用)
  * - 定妆照→变体工作流 (RefWorkflow 用)
+ * - 添加新 POI (AddPoiDialog 用,2026-06-27 新增)
  */
 
 import { defineStore } from 'pinia'
+import { ref as vRef } from 'vue'
 import { api } from '@/core/apiClient'
 
-// 已发布的慕尼黑 POI 列表(含坐标和类型)
-// key_features: 可选,该 POI 的关键建筑特征(用于场景图 prompt 强化细节)。
-//   新加 POI 时,如果不写,prompt 会用通用"按 name_de 自行推断真实特征"指令,模型也会给出合理结果。
-// description/acts: 用于地图端 POI 详情卡片(右栏)显示
-export const KNOWN_POIS = [
+// ── 内置 POI (项目原本就在 KNOWN_POIS 里的) ──
+// 注意: 这不再是 const export,而是 store 里的 reactive 数组
+// 外部用 useGeneratorStore().knownPois 访问
+const BUILTIN_POIS = [
   {
     id: 'frauenkirche',
     name_de: 'Frauenkirche',
@@ -41,6 +42,41 @@ export const KNOWN_POIS = [
     key_features: 'the central tall New Town Hall (Neues Rathaus) with its iconic Gothic Revival tower, the famous Glockenspiel carillon balcony with tiny painted wooden figures, the gilded golden Mariensäule column with a radiant Virgin Mary statue on a dark marble Corinthian base. Surrounding: red-roofed Munich townhouses with dormer windows and painted facades (warm cream, ochre, terracotta, ivory). Distant background: Fraunhofer church tower or Frauenkirche onion-dome twin towers visible behind. NOT a generic European plaza.',
   },
 ]
+
+
+// localStorage key 用于持久化用户创建的 POI
+const STORAGE_KEY = 'gagaToday.customPois.v1'
+
+function loadCustomPois() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY)
+    if (!raw) return []
+    const list = JSON.parse(raw)
+    return Array.isArray(list) ? list : []
+  } catch (e) {
+    return []
+  }
+}
+
+function saveCustomPois(list) {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(list))
+  } catch (e) {
+    // localStorage 可能满或禁 — 静默失败
+  }
+}
+
+function generateId(nameDe) {
+  // 用 name_de 生成 slug-like id
+  const slug = nameDe
+    .toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')  // 去重音符号
+    .replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss')
+    .replace(/[^a-z0-9]+/g, '_')
+    .replace(/^_+|_+$/g, '')
+    .slice(0, 40)
+  return slug || `poi_${Date.now()}`
+}
 
 
 export const TABS = [
@@ -76,10 +112,20 @@ export const useGeneratorStore = defineStore('generator', {
     // 错误 + 日志
     error: null,
     generationLog: [],
+
+    // 用户创建的 POI 列表(持久化到 localStorage)
+    customPois: loadCustomPois(),
   }),
 
   getters: {
-    currentPoi: (state) => KNOWN_POIS.find(p => p.id === state.currentPoiId),
+    /** 所有 POI = 内置 + 用户创建 */
+    knownPois(state) {
+      return [...BUILTIN_POIS, ...state.customPois]
+    },
+    currentPoi(state) {
+      const all = [...BUILTIN_POIS, ...state.customPois]
+      return all.find(p => p.id === state.currentPoiId)
+    },
     isComplete: (state) => Object.keys(state.generated).length >= 4,
     statusSummary: (state) => {
       const sections = ['info', 'refworkflow', 'uploads', 'npc']
@@ -152,5 +198,84 @@ export const useGeneratorStore = defineStore('generator', {
       this.osmData = data
       this.error = null
     },
+
+    /**
+     * 添加一个新 POI (来自 AddPoiDialog 用户确认后)
+     *
+     * 流程:
+     * 1. 生成 id (从 name_de slug)
+     * 2. 检查 id 不冲突,冲突就加后缀
+     * 3. 写入 store.customPois + localStorage
+     * 4. 自动 selectPoi(id) + activeTab='info'
+     *
+     * @param {object} data - { name_de, name_zh, lat, lng, type, icon, osm_class, ... }
+     * @returns {object} 创建的 POI
+     */
+    createNewPoi(data) {
+      let id = generateId(data.name_de)
+      // 防 id 冲突
+      const existingIds = new Set([...BUILTIN_POIS, ...this.customPois].map(p => p.id))
+      let suffix = 2
+      while (existingIds.has(id)) {
+        id = `${generateId(data.name_de)}_${suffix++}`
+      }
+
+      const newPoi = {
+        id,
+        name_de: data.name_de,
+        name_zh: data.name_zh || data.name_de,
+        name_en: data.name_de,
+        type: data.type || 'attraction',
+        lat: data.lat,
+        lng: data.lng,
+        icon: data.icon || '📍',
+        description: data.description || '',
+        acts: data.acts || [],
+        key_features: data.key_features || '',
+        // OSM 来源(供 prompt 增强用)
+        osm_class: data.osm_class,
+        osm_subclass: data.osm_subclass,
+        osm_rank: data.osm_rank,
+        osm_all_names: data.osm_all_names,
+        created_at: new Date().toISOString(),
+      }
+
+      this.customPois = [...this.customPois, newPoi]
+      saveCustomPois(this.customPois)
+
+      // 自动选中新 POI + 切到 info tab
+      this.selectPoi(id)
+      // 注意: selectPoi 会 reset generated/poiData,但这里新 POI 还没生成任何东西,所以正合适
+
+      return newPoi
+    },
+
+    /**
+     * 删除用户创建的 POI(2026-06-28:数据结构统一后,内置 POI 仍受保护,
+     * 因为 BUILTIN_POIS 是项目预设,误删会破坏基础数据)
+     */
+    deletePoi(id) {
+      // 保护 BUILTIN_POIS
+      if (BUILTIN_POIS.find(p => p.id === id)) {
+        console.warn(`[deletePoi] 内置 POI "${id}" 受保护,不能删除`)
+        return false
+      }
+      this.customPois = this.customPois.filter(p => p.id !== id)
+      saveCustomPois(this.customPois)
+      if (this.currentPoiId === id) {
+        this.selectPoi('frauenkirche')
+      }
+      return true
+    },
+  },
+})
+
+// 保留旧的 KNOWN_POIS 兼容 export — 但这是个 getter 函数,不是数组
+// 调用方请用 useGeneratorStore().knownPois
+export const KNOWN_POIS = new Proxy([], {
+  get(target, prop) {
+    // 警告: 这个 proxy 永远是空的 — 真正的列表在 store getter
+    if (prop === 'length') return BUILTIN_POIS.length
+    return undefined
   },
 })

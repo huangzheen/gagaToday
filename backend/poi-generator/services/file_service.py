@@ -313,6 +313,8 @@ def list_uploaded_assets(
     if asset_kind == "scene_main":
         target_dir = ASSETS_ROOT / "scenes" / city / poi_id / "_reference"
     elif asset_kind == "icon":
+        # icon 是扁平目录(assets/icons/<city>/<poi_id>_icon_64.png),
+        # 不同 POI 的 icon 文件放在同一目录,必须按 poi_id 过滤文件名
         target_dir = ASSETS_ROOT / "icons" / city
     elif asset_kind in ("npc_head", "npc_half"):
         target_dir = ASSETS_ROOT / "characters" / city / f"npc_{poi_id}"
@@ -328,6 +330,9 @@ def list_uploaded_assets(
         suffix_filter = "_head"
     elif asset_kind == "npc_half":
         suffix_filter = "_half"
+    # icon 按 poi_id 前缀过滤(2026-06-28 修复:之前不过滤导致新 POI 误读 marienplatz 的图标)
+    # 文件名约定: <poi_id>_icon_64.png,所以前缀就是 "<poi_id>_icon"
+    icon_prefix = f"{poi_id}_icon" if asset_kind == "icon" else None
 
     files = []
     for f in target_dir.iterdir():
@@ -336,6 +341,9 @@ def list_uploaded_assets(
         if f.suffix.lower() not in (".png", ".jpg", ".jpeg", ".webp"):
             continue
         if suffix_filter and suffix_filter not in f.stem:
+            continue
+        # icon: 严格按 poi_id 前缀过滤(防止新 POI 误读其他 POI 的 icon)
+        if icon_prefix and not f.stem.startswith(icon_prefix):
             continue
         files.append({
             "filename": f.name,

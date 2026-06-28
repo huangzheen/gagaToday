@@ -50,6 +50,14 @@
           <option value="shop">商店</option>
           <option value="library">图书馆</option>
           <option value="home">住所</option>
+          <!-- ── 交通枢纽(AddPoiDialog 的 OSM class 映射会用到,UI 必须同步) ── -->
+          <option value="train_station">火车站</option>
+          <option value="subway">地铁站</option>
+          <option value="tram">电车站</option>
+          <option value="bus_stop">公交站</option>
+          <!-- ── OSM tourism/attraction / historic fallback ── -->
+          <option value="attraction">景点</option>
+          <option value="historic">历史建筑</option>
         </select>
       </div>
 
@@ -127,6 +135,7 @@ import { ref, computed, watch, onMounted } from 'vue'
 import { useGeneratorStore } from '@/stores/generator'
 import { api } from '@/core/apiClient'
 
+const emit = defineEmits(['auto-fill-done'])
 const store = useGeneratorStore()
 
 const poiId = ref('')
@@ -300,6 +309,7 @@ async function aiGenerateIntro() {
 
     aiStage.value = '完成 ✓'
     setTimeout(() => { aiStage.value = '' }, 1500)
+    emit('auto-fill-done')
   } catch (e) {
     store.error = e.message
     store.log(`❌ AI 场景介绍失败: ${e.message}`)
@@ -357,8 +367,8 @@ async function saveInfo() {
   }
 }
 
-// 暴露给父组件(App.vue)在弹窗关闭前调用
-defineExpose({ saveInfo })
+// 暴露给父组件(App.vue)在弹窗关闭前调用 + 添加新 POI 后自动 AI 填第一页
+defineExpose({ saveInfo, aiGenerateIntro })
 </script>
 
 <style scoped>

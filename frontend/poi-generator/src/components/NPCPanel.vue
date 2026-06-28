@@ -315,17 +315,20 @@ async function generateAll() {
 
   store.error = null
   llmError.value = ''
+  const results = { llm: false, head: null, half: null }   // null=跳过, true=成功, false=失败
 
   // 步骤 1:LLM 文字生成
   llmLoading.value = true
   store.log('🤖 LLM 生成文字中...')
   try {
     await runLLMGenerate()
+    results.llm = true
   } catch (e) {
     llmError.value = e.message
     store.error = `LLM 生成失败: ${e.message}`
     llmLoading.value = false
-    return
+    store.log(`❌ LLM 失败: ${e.message} — 已中断,后面步骤不跑`)
+    return  // LLM 失败直接返回(后续步骤依赖 LLM 生成的 name_de/role_de)
   }
   llmLoading.value = false
   store.log(`🤖 LLM 完成: ${editing.value.name_zh || editing.value.id}`)
@@ -334,21 +337,49 @@ async function generateAll() {
   if (!editing.value.head_image) {
     store.log('🎨 生成头像...')
     aiGenerating.value = 'head'
-    try { await runPortraitGenerate('head') }
-    catch (e) { store.log(`❌ 头像: ${e.message}`) }
+    try {
+      await runPortraitGenerate('head')
+      results.head = true
+    } catch (e) {
+      store.log(`❌ 头像失败: ${e.message}`)
+      store.error = `头像生成失败: ${e.message}`
+      results.head = false
+    }
     aiGenerating.value = null
+  } else {
+    results.head = true  // 已有图,跳过视为成功
   }
 
   // 步骤 3:半身像 AI(只在没图时生成)
   if (!editing.value.half_image) {
     store.log('🎨 生成半身像...')
     aiGenerating.value = 'half'
-    try { await runPortraitGenerate('half') }
-    catch (e) { store.log(`❌ 半身像: ${e.message}`) }
+    try {
+      await runPortraitGenerate('half')
+      results.half = true
+    } catch (e) {
+      store.log(`❌ 半身像失败: ${e.message}`)
+      store.error = `半身像生成失败: ${e.message}`
+      results.half = false
+    }
     aiGenerating.value = null
+  } else {
+    results.half = true  // 已有图,跳过视为成功
   }
 
-  store.log('✅ 全部生成完成!点 保存 写入 SQLite')
+  // ── 总结(2026-06-28 修复:不打印假"全部完成"误导用户) ──
+  const llmOK = results.llm
+  const headOK = results.head === true   // null 视为 ok (跳过)
+  const halfOK = results.half === true
+  if (llmOK && headOK && halfOK) {
+    store.log('✅ 全部生成完成!点 保存 写入 SQLite')
+  } else {
+    const fails = []
+    if (!llmOK) fails.push('LLM 文字')
+    if (results.head === false) fails.push('头像')
+    if (results.half === false) fails.push('半身像')
+    store.log(`⚠️ 部分完成:LLM✓ 头像${results.head ? '✓' : '✗'} 半身像${results.half ? '✓' : '✗'} — 失败项: ${fails.join('、')}`)
+  }
 }
 
 // ── 🤖 LLM 一键生成(只被 generateAll 调用) ──
@@ -406,45 +437,56 @@ ${roleHint ? `# 用户已指定角色: ${roleHint}
 - 广场 → Straßenmusikant(街头艺人) / Marktbesucher(游客) / Polizist
 - 公园/城堡 → Gärtner(园丁) / Schlosspächter(管理员) / Jogger
 - 商店/超市 → Kassiererin(收银员) / Verkäuferin(店员) / Bäcker
-- 餐厅/咖啡 → Wirt(店主) / Kellner(服务员) / Koch(厨师)`}
+- 餐厅/咖啡 → Wirt(店主) / Kellner(服务员) / Koch(厨师)
+- 火车站 → Bahnhofspersonal(站务员) / Schaffner(列车员) / DB-Information(问讯员) / Brezel-Verkäufer(车站餐车店员)
+- 地铁站/电车站/公交站 → Fahrkartenverkäufer(售票员) / Schaffner(检票员) / Wartender-Pendler(通勤乘客,可作为剧情 NPC)
+- 景点/历史建筑 → Touristenführer(导游) / Souvenir-Verkäufer(纪念品商) / Museumswärter(看护员)`}
 
 # NPC 背景要求(本 prompt 最关键,2026-06-27 升级:6 段完整成长经历)
 "background_zh" 字段必须是 **250-350 字中文,6 段式完整成长故事**,每段 1-3 句,6 段用换行分隔:
 
 1. **【童年背景】** 在哪里出生/成长?家庭背景/父母职业?什么性格底色?
-   例:"1962 年生于巴伐利亚小城 Landsberg am Lech,父亲是面包师,母亲在幼儿园工作。童年在面包房后厨帮工,养成了勤劳和面团般的耐心"
+   例(结构参考,不要照抄具体内容):"YYYY 年生于<巴伐利亚/北德/东德某具体小城>...<童年某段具体经历>...养成了<某种具体性格>"
 
-2. **【教育经历】** 学校/学位/重要学习阶段?哪些人或事影响了你?
-   例:"1981 年慕尼黑大学神学系本科,1988 年在罗马格里高利大学进修获硕士学位。导师 Pater Schmidt 的严谨治学影响至今"
+2. **【教育经历】** 学校/学位/重要学习经历?哪些人或事影响了你?
+   例(结构参考):"YYYY 年<某具体德国大学>...<某具体学位>...导师/同学 <某姓氏> 的<某种影响>"
 
 3. **【职业路径】** 之前做过什么工作?如何一步步进入现在的领域?
-   例:"毕业后在雷根斯堡教区做助理神父 5 年,1995 年调回慕尼黑,先后在 St. Peter 和 Frauenkirche 服务。2008 年获高级神父职称"
+   例(结构参考):"毕业后在<某具体地点>做<某具体初级岗位> X 年...调回/转到<某具体地方>...Y 年获<某具体职称/认证>"
 
-4. **【为何在此景点】** 为什么选择 / 被分配到这个具体的 POI?具体动机是什么?
-   例:"主动申请到 Frauenkirche,因为这里能接触到最多国际游客和留学生,想在退休前把'跨文化交流'做成自己的事工方向"
+4. **【为何在此景点】** 为什么选择 / 被分配到这个具体的 POI(${poi?.name_zh || poi?.name_de || '?'})?具体动机是什么?
+   例(结构参考):"主动申请到 <${poi?.name_de || '该地点'}> 因为<某个跟该 POI 类型强相关的具体动机>"
 
 5. **【现状与日常】** 现在的典型工作日是什么样?有什么小习惯?
-   例:"每天 7 点开教堂侧门,8 点晨祷,9 点和 17 点敲钟。上午在告解室接待,下午处理邮件和教区文件。周三下午专门接听 Seelsorge 倾诉电话"
+   例(结构参考,必须跟角色强相关):"每天 <具体时间点> 做 <具体动作 1>, <具体时间点> 做 <具体动作 2>...<某个具体小习惯>"
 
 6. **【与中国学生】** 你怎么跟中国留学生互动?展示什么性格特点?愿意聊什么?
-   例:"对中文母语学生会主动放慢语速,准备英文版教堂历史册。曾在春节带 5 个中国学生看管风琴内部构造,还请他们吃了慕尼黑白香肠"
+   例(结构参考):"对中文母语学生会<某种具体行为>...曾在<某个具体节日/场合>做了<某件具体互动小事>"
+
+# ⚠️ 关键约束(2026-06-28 修复):禁止照抄示例!
+上面所有示例**仅作结构参考**,你必须:
+- 把示例中的 YYYY、某具体、<占位符> 替换成**真实、具体、与当前 POI 类型匹配的**内容
+- **绝不能**在生成内容里保留 <...> 占位符或 YYYY 这种占位文字
+- 必须根据当前 POI(类型=${poi?.type || '?'},名称=${poi?.name_de || '?'})生成对应职业的具体背景
+- 如果示例是火车站 NPC,背景必须跟火车站/列车员/售票相关;不能还在讲神父/教堂
+- 如果示例是博物馆 NPC,背景必须跟馆藏/策展/导览相关;不能还在讲烘焙/面包
 
 # 输出 Schema(严格遵守,只返回合法 JSON,不要 markdown 包裹)
 
 {
   "id": "npc_${poi?.id || 'x'}_${(partial.id?.split('_').pop()) || '1'}",
-  "name_de": "典型德国姓名(名+姓,反映年龄段的常见姓氏)",
+  "name_de": "典型德国姓名(名+姓,反映年龄段)",
   "name_zh": "中文译名(音译为主,不意译)",
-  "role_de": "德文职业(如 Pfarrer / Kurator)",
-  "role_zh": "中文职业",
+  "role_de": "德文职业(根据 POI 类型自动选,不要照抄示例里的职业)",
+  "role_zh": "中文职业(对应德文职业)",
   "age_band": "adult 或 teen 或 senior(根据角色推导合理年龄)",
   "personality": ["2-3 个英文形容词,如 warm / patient / thoughtful / playful / gruff"],
-  "background_zh": "按上述 6 段式完整成长故事,250-350 字,6 段用换行分隔",
+  "background_zh": "按上述 6 段式完整成长故事,250-350 字,6 段用换行分隔(具体内容必须跟当前 POI 强相关)",
   "language_profile": {
     "default_language": "de",
     "lang_pref": { "de": 0.8, "en": 0.2 },
     "can_speak_english": true,
-    "english_level": "B1(神父/馆长) 或 A2(店员/园丁)",
+    "english_level": "根据角色自动推断(管理层/专业岗 = B1,服务/体力岗 = A2)",
     "patience_with_beginners": "high 或 medium(根据角色)"
   }
 }
@@ -453,11 +495,12 @@ ${roleHint ? `# 用户已指定角色: ${roleHint}
 1. **绝不编造**:不确定的地址、电话、具体历史年份、家人姓名 — 一律不写或泛化
 2. **基于 OSM 真实数据**:上面的 OSM 字段如果存在,必须用作背景细节来源
 3. **德国文化准确性**:德文姓名/职业/场所名称必须用标准德语(注意大小写、变音 ä ö ü ß)
-4. **POI 类型一致性**:NPC 工作内容必须跟 POI 类型强相关(教堂 NPC 不能讲咖啡)
+4. **POI 类型一致性**:NPC 工作内容必须跟当前 POI(${poi?.type || '?'})强相关(教堂 NPC 不能讲咖啡,火车站 NPC 不能讲教堂)
 5. **不要空洞形容词**:背景里禁止"热情友好专业"等套话 — 必须给具体场景、具体动作
 6. **personality 2-3 个**:多一个词 LLM 就开始凑数,严控数量
-7. **language_profile.english_level**:根据角色推断(教堂/博物馆/酒店 = B1,商店/超市 = A2)
-8. **只返回 JSON**:不要任何 markdown 包裹(我已用 schema 标结构)`
+7. **language_profile.english_level**:根据角色推断(管理层/教育/医疗 = B1,体力/零售/餐饮 = A2)
+8. **只返回 JSON**:不要任何 markdown 包裹(我已用 schema 标结构)
+9. **禁止保留占位符**:最终输出里不能有 <...> 或 YYYY 等占位符文字`
 
     const res = await api.generateJson(prompt, null, 'qwen3-max')
     const d = res.data
@@ -598,6 +641,8 @@ async function runPortraitGenerate(kind) {
   } catch (e) {
     store.error = e.message
     store.log(`❌ AI 生成 ${kind} 失败: ${e.message}`)
+    // 2026-06-28 修复:rethrow 让 generateAll 感知失败(不再静默吞)
+    throw e
   } finally {
     aiGenerating.value = null
   }

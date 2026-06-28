@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 从 OpenStreetMap 获取慕尼黑市中心真实地图数据 → 像素 tilemap
-输出: frontend/public/assets/munich_map/tilemap.json + pois.json
+输出: frontend/public/assets/munich_map/tilemap.json
 
 FF6 风格像素地图 (16x16 tiles)
 """
@@ -386,9 +386,7 @@ def main():
         json.dump(tilemap, f)
     print(f"💾 tilemap.json 已写入 {out_dir}/", flush=True)
 
-    with open(f"{out_dir}/pois.json", "w") as f:
-        json.dump(pois, f, ensure_ascii=False, indent=2)
-    print(f"💾 pois.json 已写入 {out_dir}/", flush=True)
+    # POI 列表不再单独导出 pois.json (前端通过 /api/v2/pois 读取,不走静态文件)
 
     # 7. 输出文本版地图 (调试用)
     # chars = {T_GRASS: '.', T_ROAD: '#', T_BUILDING: '█', T_SIDEWALK: '░',

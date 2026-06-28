@@ -316,6 +316,14 @@ function buildSceneImagePrompt(extraRequirements = '') {
     park: 'Composition is GREEN-DOMINANT — trees, lawns, and paths occupy most of the frame, the landmark (fountain / pavilion / monument) is the focal point within the greenery.',
     museum: 'Composition is FACADE-DOMINANT — symmetrical institutional facade as the main subject, plaza or steps in foreground.',
     monument: 'Composition is VERTICAL SINGLE-OBJECT — the monument/statue is the clear focal point with sky and minimal ground framing it.',
+    // 交通枢纽(2026-06-28 新增,跟 POIInfoForm/AddPoiDialog 对齐)
+    train_station: 'Composition is HUB-DOMINANT — a grand historic train station facade with arched train shed roof and prominent clock tower as focal point; visible train platforms with rail tracks and overhead catenary lines in mid-ground; travelers with luggage and DB signage; foreground plaza with taxis/buses/trams.',
+    subway: 'Composition is UNDERGROUND-ENTRANCE-DOMINANT — the U-Bahn/S-Bahn entrance pillar with the iconic "U" or "S" roundel sign as focal point, stairs descending into ground, street context above.',
+    tram: 'Composition is STREET-LEVEL — a vintage or modern tram at a tram stop with overhead electric wires, urban street context.',
+    bus_stop: 'Composition is STREET-LEVEL — a city bus at a marked bus stop with Haltestelle sign, urban pavement context.',
+    // 通用兜底
+    attraction: 'Composition is LANDMARK-DOMINANT — the tourist attraction is the central focal point, recognizable architectural or scenic features clearly visible, foreground plaza or approach path.',
+    historic: 'Composition is FACADE-DOMINANT — the historic building/structure occupies the central frame, classical or period architectural details emphasized.',
   }[landmarkType] || 'Composition frames the landmark as the clear focal point with appropriate surroundings.'
   const keyFeaturesClause = poi?.key_features
     ? ` KEY FEATURES (must include all of these): ${poi.key_features}`
