@@ -93,14 +93,17 @@ export const NpcSchema = z.object({
 export type Npc = z.infer<typeof NpcSchema>
 
 // ── Dialogue 节点 ──
+// nextNodeId 接受 string | null | undefined(后端 audit P0-01 用 exclude_none
+// 会让 None 字段省略,所以这里同时接受 missing)
 export const DialogueChoiceSchema = z.object({
   id: z.string().min(1),
   text: LocalizedTextSchema,
-  nextNodeId: z.string().min(1).nullable(),
+  nextNodeId: z.string().min(1).nullable().optional(),
   learningRefs: z.array(z.string()).default([]),
 })
 export type DialogueChoice = z.infer<typeof DialogueChoiceSchema>
 
+// terminal / result 同理
 export const DialogueNodeSchema = z.object({
   id: z.string().min(1),
   npcText: LocalizedTextSchema,

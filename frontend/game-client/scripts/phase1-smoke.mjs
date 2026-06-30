@@ -114,8 +114,8 @@ async function main() {
     { path: '/src/App.vue', allowEmpty: false },
     { path: '/src/components/MapView.vue', allowEmpty: false },
     { path: '/src/components/HUD.vue', allowEmpty: false },  // Phase 3
-    { path: '/src/components/PoiDialog.vue', allowEmpty: false },  // Phase 3
-    { path: '/src/store/player.ts', allowEmpty: false },  // Phase 3
+    { path: '/src/components/PoiDialog.vue', allowEmpty: false },  // Phase 3 / Phase 4 dialogue
+    { path: '/src/store/player.ts', allowEmpty: false },  // Phase 3 / Phase 4 dialogue state
     { path: '/src/composables/useGameClock.ts', allowEmpty: false },  // Phase 3
     { path: '/src/api/bundle.ts', allowEmpty: false },
     { path: '/src/map/createMap.ts', allowEmpty: false },
@@ -124,6 +124,10 @@ async function main() {
     { path: '/src/schemas/content.ts', allowEmpty: false },
     { path: '/src/schemas/save.ts', allowEmpty: false },  // Phase 3 扩展
     { path: '/src/data/munich-bundle.json', allowEmpty: false },
+    { path: '/src/data/phase4-fixture.ts', allowEmpty: false },  // Phase 4 fixture
+    { path: '/src/core/dialogueEngine.ts', allowEmpty: false },  // Phase 4
+    { path: '/src/core/rewardEngine.ts', allowEmpty: false },  // Phase 4
+    { path: '/src/core/questEngine.ts', allowEmpty: false },  // Phase 4
   ]
   for (const { path: m, allowEmpty } of modules) {
     const r = await get(DEV_URL + m)
@@ -168,8 +172,9 @@ async function main() {
     const hasPlayerStore = appSrc.body.includes('usePlayerStore')
     const hasHud = appSrc.body.includes('HUD')
     const hasDialog = appSrc.body.includes('PoiDialog')
-    if (hasFetch && hasCv && hasFallback && hasPlayerStore && hasHud && hasDialog) {
-      ok('App.vue 含 fetchCityBundle + contentVersion + fallback + player store + HUD + PoiDialog')
+    const hasQuestCompleted = appSrc.body.includes('onQuestCompleted')
+    if (hasFetch && hasCv && hasFallback && hasPlayerStore && hasHud && hasDialog && hasQuestCompleted) {
+      ok('App.vue 含 fetchCityBundle + contentVersion + fallback + player store + HUD + PoiDialog + quest-completed')
     } else {
       const missing = []
       if (!hasFetch) missing.push('fetchCityBundle')
@@ -178,10 +183,32 @@ async function main() {
       if (!hasPlayerStore) missing.push('usePlayerStore')
       if (!hasHud) missing.push('HUD')
       if (!hasDialog) missing.push('PoiDialog')
+      if (!hasQuestCompleted) missing.push('quest-completed')
       bad(`App.vue 缺关键标记: ${missing.join(', ')}`)
     }
   } else {
     bad(`App.vue 源码不可读: ${appSrc.status}`)
+  }
+
+  // ── 5d. Phase 4: PoiDialog 含 dialogue mode + dialogueEngine 调用 ──
+  const poiDialogSrc = await get(DEV_URL + '/src/components/PoiDialog.vue')
+  if (poiDialogSrc.status === 200) {
+    const hasDialogueMode = poiDialogSrc.body.includes('currentDialogue') && poiDialogSrc.body.includes('dialogue-header')
+    const hasChooseNode = poiDialogSrc.body.includes('chooseNode') && poiDialogSrc.body.includes('onChoose')
+    const hasQuestHook = poiDialogSrc.body.includes('tryCompleteQuest')
+    const hasExpose = poiDialogSrc.body.includes('openDialogueForCurrentPoi')
+    if (hasDialogueMode && hasChooseNode && hasQuestHook && hasExpose) {
+      ok('PoiDialog 含 dialogue mode + chooseNode + tryCompleteQuest + exposed ref')
+    } else {
+      const missing = []
+      if (!hasDialogueMode) missing.push('dialogue mode')
+      if (!hasChooseNode) missing.push('chooseNode')
+      if (!hasQuestHook) missing.push('tryCompleteQuest')
+      if (!hasExpose) missing.push('openDialogueForCurrentPoi')
+      bad(`PoiDialog 缺 Phase 4 标记: ${missing.join(', ')}`)
+    }
+  } else {
+    bad(`PoiDialog 源码不可读: ${poiDialogSrc.status}`)
   }
 
   // ── 6. PMTiles server (8081) 仍可达 + Range 206 ──

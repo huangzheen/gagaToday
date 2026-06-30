@@ -1,9 +1,10 @@
 /**
- * Phase 3: Pinia player store
+ * Phase 3 + Phase 4: Pinia player store
  *
  * 职责:
  * - 持有 PlayerState(reactive)
  * - 提供 actions: move / discover / openPoi / closePoi / tickTime
+ *   Phase 4: startDialogue / chooseDialogue / completeQuestById
  * - 提供 getters: timeOfDay, isInVision, discoveredPOIs
  * - 自动持久化到 localStorage(SAVE_KEY),损坏存档备份
  * - 自动迁移 v1 → v2 schema
@@ -23,7 +24,9 @@ import {
   type PlayerPosition,
   type PlayerState,
 } from '../schemas/save'
-import type { Poi as RuntimePoi } from '../schemas/content'
+import type { Poi as RuntimePoi, Quest } from '../schemas/content'
+
+import { completeQuest } from '../core/questEngine'
 
 /** 安全 localStorage 访问(Safari 隐私模式 / SSR 会抛) */
 function getStorage(): Storage | null {
@@ -156,6 +159,81 @@ export const usePlayerStore = defineStore('player', () => {
   ): { added: string[]; total: number } {
     setPosition(pos)
     return discoverInVision(pois)
+  }
+
+  // ── Phase 4:对话 + Quest 状态机 ──
+  /** 当前正在进行的对话 id(由 startDialogue 设置) */
+  const currentDialogueId = ref<string | null>(null)
+  /** 当前对话的当前节点 id */
+  const currentNodeId = ref<string | null>(null)
+  /** 已访问节点 id 集合(用于判定 quest 完成条件,如到达 success 节点) */
+  const visitedNodeIds = ref<Set<string>>(new Set())
+
+  /**
+   * 启动一段对话
+   *
+   * - 如果已有对话,先关闭(自动完成上一段,不计奖励)
+   * - 设置 currentDialogueId + 跳到 startNodeId
+   * - 时间继续暂停(POI dialog 打开时暂停的延续)
+   */
+  function startDialogue(dialogueId: string, startNodeId: string): void {
+    currentDialogueId.value = dialogueId
+    currentNodeId.value = startNodeId
+    visitedNodeIds.value = new Set([startNodeId])
+  }
+
+  /**
+   * 在当前对话里选一个选项
+   *
+   * - 找不到当前节点或选项 → 无变化
+   * - 下一节点存在 → 跳过去并记录
+   * - nextNodeId 为 null → 关闭对话(不算 quest 完成)
+   */
+  function chooseDialogue(
+    choiceId: string,
+    pickNextNode: (currentNodeId: string, choiceId: string) => string | null,
+  ): { nodeId: string | null; terminated: boolean } {
+    const curId = currentNodeId.value
+    if (!curId) return { nodeId: null, terminated: true }
+
+    const nextId = pickNextNode(curId, choiceId)
+    if (nextId === null) {
+      // 终止
+      closeDialogue()
+      return { nodeId: null, terminated: true }
+    }
+    currentNodeId.value = nextId
+    visitedNodeIds.value.add(nextId)
+    return { nodeId: nextId, terminated: false }
+  }
+
+  /** 关闭当前对话(不算 quest 完成) */
+  function closeDialogue(): void {
+    currentDialogueId.value = null
+    currentNodeId.value = null
+    visitedNodeIds.value = new Set()
+  }
+
+  /**
+   * 用 quest engine 完成任务并应用 reward
+   *
+   * 失败(已完成的)/前置缺失 → 返回 ok=false,state 不变
+   * 成功 → state 更新,completedQuestIds 加进去,XP/金钱/能量变化由 reward engine 处理
+   */
+  function completeQuestById(
+    quest: Quest,
+    visitedNodes: Set<string>,
+    successPredicate: (visited: Set<string>) => boolean,
+  ): { ok: boolean; rewarded: boolean; reason?: string } {
+    if (!successPredicate(visitedNodes)) {
+      return { ok: false, rewarded: false, reason: 'success-not-reached' }
+    }
+    const result = completeQuest(player.value, quest)
+    if (!result.ok) {
+      return { ok: false, rewarded: false, reason: result.reason }
+    }
+    player.value = result.state
+    return { ok: true, rewarded: result.rewarded }
   }
 
   /** 关闭 POI dialog */
@@ -296,6 +374,10 @@ export const usePlayerStore = defineStore('player', () => {
     player,
     currentPoiId,
     isPaused,
+    // Phase 4 dialogue state
+    currentDialogueId,
+    currentNodeId,
+    visitedNodeIds,
     // getters
     timeOfDay,
     isDaytime,
@@ -310,6 +392,10 @@ export const usePlayerStore = defineStore('player', () => {
     markDiscovered,
     openPoi,
     closePoi,
+    startDialogue,
+    chooseDialogue,
+    closeDialogue,
+    completeQuestById,
     tickTime,
     addXp,
     spendMoney,

@@ -42,6 +42,8 @@ const state = ref<AppState>({ status: 'loading', cityLabel: '…', poiCount: 0 }
 const bundle = ref<CityBundle | null>(null)
 /** P1-01 反馈:玩家点击视野外 POI 时的 toast(临时横幅) */
 const feedback = ref<string | null>(null)
+/** PoiDialog ref(Phase 4:让 App 能调 PoiDialog 的 openDialogueForCurrentPoi) */
+const poiDialogRef = ref<{ openDialogueForCurrentPoi?: () => void } | null>(null)
 
 const player = usePlayerStore()
 
@@ -177,7 +179,25 @@ function onPoiDialogClose() {
 
 function onPoiStartDialog(poi: RuntimePoi) {
   console.info('[App] start dialog:', poi.id)
-  alert(`Phase 4 实现对话系统: 与 ${poi.name.zh} 对话\n(Phase 3 仅占位,Phase 4 接 Dialogue engine)`)
+  // Phase 4: 让 PoiDialog 启动对应 NPC 的对话
+  // 通过 ref 拿到 PoiDialog 暴露的 openDialogueForCurrentPoi
+  const dlg = poiDialogRef.value
+  if (dlg && typeof dlg.openDialogueForCurrentPoi === 'function') {
+    dlg.openDialogueForCurrentPoi()
+  } else {
+    console.warn('[App] PoiDialog ref 未就绪')
+  }
+}
+
+function onQuestCompleted(questId: string, xpDelta: number) {
+  console.info(`[App] quest 完成: ${questId} (+${xpDelta} XP)`)
+  feedback.value = `🎉 Quest 完成! +${xpDelta} XP`
+  // 5s 后清掉
+  window.setTimeout(() => {
+    if (feedback.value?.startsWith('🎉 Quest 完成')) {
+      feedback.value = null
+    }
+  }, 5000)
 }
 </script>
 
@@ -232,10 +252,12 @@ function onPoiStartDialog(poi: RuntimePoi) {
       <!-- Phase 3: HUD + PoiDialog(在地图之上) -->
       <HUD v-if="state.status === 'ready'" />
       <PoiDialog
+        ref="poiDialogRef"
         :poi="currentPoi"
         :distance-meters="currentPoiDistance"
         @close="onPoiDialogClose"
         @start-dialog="onPoiStartDialog"
+        @quest-completed="onQuestCompleted"
       />
     </main>
   </div>
