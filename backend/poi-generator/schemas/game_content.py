@@ -205,5 +205,15 @@ class CityBundle(BaseModel):
         return self
 
     def to_runtime_json(self) -> Dict:
-        """导出成可直接发给客户端的 dict(JSON 序列化友好)"""
-        return self.model_dump(mode="json")
+        """导出成可直接发给客户端的 dict(JSON 序列化友好)
+
+        Phase 3 P0-01 修复:用 exclude_none=True 省略 None 字段。
+        原因:前端 Zod schema 用 .optional() 而不是 .nullish(),null 会被拒绝。
+        API 单一规范 = 字段省略代表"无值",客户端只需处理 missing。
+        例外:Dialogue.choice.nextNodeId 这类"业务合法 null"字段保留(下面说明)。
+
+        Pydantic 的 exclude_none=True 对所有 None 字段一视同仁(包括显式 None),
+        所以"区分显式 None 和未设值"在此 API 不可表达。
+        若未来必须区分,应引入新的字段(如 'hasNextNode': bool)而非 null。
+        """
+        return self.model_dump(mode="json", exclude_none=True)

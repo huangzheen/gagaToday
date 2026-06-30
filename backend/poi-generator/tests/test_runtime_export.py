@@ -250,6 +250,57 @@ class TestGetCityBundle:
         poi = data["pois"][0]
         for key in ("id", "city", "type", "name", "position", "icon", "sceneUrls", "audioUrls"):
             assert key in poi, f"POI 缺字段: {key}"
-        # audioUrls 三语
+        # audioUrls 必须是 dict(exclude_none 后可能为 {})
+        assert isinstance(poi["audioUrls"], dict)
+        # 实际有音频的语言必须有非空字符串 URL
+        for lang, url in poi["audioUrls"].items():
+            assert isinstance(url, str) and url, f"audioUrls.{lang} 应为非空 str,实际: {url!r}"
+
+
+class TestP001ExcludeNone:
+    """P0-01:POI 可选字段不能输出 null(否则前端 Zod .optional() 会拒绝)
+
+    修复:CityBundle.to_runtime_json 用 exclude_none=True。
+    验收:poi.name.en / poi.description / poi.iconUrl / poi.audioUrls.* 都不应是 null。
+    """
+
+    def test_poi_name_en_not_null_when_absent(self, client):
+        r = client.get("/api/game/v1/cities/munich/bundle")
+        poi = r.json()["pois"][0]
+        # name.en 应该被省略(不是 null)
+        assert "en" not in poi["name"] or poi["name"]["en"] is not None, \
+            f"poi.name.en 应该是 missing 或 str,实际: {poi['name'].get('en')!r}"
+
+    def test_poi_description_not_null_when_absent(self, client):
+        r = client.get("/api/game/v1/cities/munich/bundle")
+        poi = r.json()["pois"][0]
+        if "description" in poi:
+            assert poi["description"] is not None, \
+                f"poi.description 应该是 missing 或 dict,实际: None"
+
+    def test_poi_iconUrl_not_null_when_absent(self, client):
+        r = client.get("/api/game/v1/cities/munich/bundle")
+        poi = r.json()["pois"][0]
+        if "iconUrl" in poi:
+            assert poi["iconUrl"] is not None, \
+                f"poi.iconUrl 应该是 missing 或 str,实际: None"
+
+    def test_poi_audioUrls_languages_not_null(self, client):
+        r = client.get("/api/game/v1/cities/munich/bundle")
+        poi = r.json()["pois"][0]
+        for lang, url in poi["audioUrls"].items():
+            assert url is not None, f"poi.audioUrls.{lang} 应该是 missing 或 str,实际: None"
+
+    def test_export_result_to_runtime_json_excludes_none(self, conn):
+        """直接验证 to_runtime_json 不输出 None(exclude_none=True 让字段直接不存在)"""
+        from poi_generator.services.runtime_export_service import export_city
+        r = export_city("munich", conn)
+        bundle_dict = r.bundle.to_runtime_json()
+        poi = bundle_dict["pois"][0]
+        # exclude_none=True:None 字段应该完全不存在
+        assert "en" not in poi["name"], f"name.en 应该被排除,实际: {poi['name']!r}"
+        assert "description" not in poi, f"description 应该被排除,keys: {list(poi.keys())!r}"
+        assert "iconUrl" not in poi, f"iconUrl 应该被排除,keys: {list(poi.keys())!r}"
+        # audioUrls 的 None 语言应该不出现在 dict 里
         for lang in ("de", "zh", "en"):
-            assert lang in poi["audioUrls"]
+            assert lang not in poi["audioUrls"], f"audioUrls.{lang} 应该被排除,实际: {poi['audioUrls']!r}"

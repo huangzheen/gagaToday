@@ -12,6 +12,7 @@ Thumbs.db
 node_modules/
 frontend/dist/
 frontend/dist-ssr/
+frontend/game-client/dist/        # vite build 产物(game-client)
 frontend/poi-generator/dist
 frontend/poi-generator/public/generated
 frontend/.vite/
