@@ -34,6 +34,8 @@ env/
 # ── SQLite WAL mode temp files (主 db 文件仍 tracked) ──
 *.db-shm
 *.db-wal
+# backend/ 根的 0 字节 db 是早期误生成,不跟踪;真正的 db 在 poi-generator/
+/backend/game_data.db
 
 # ── Logs / runtime ──
 *.log

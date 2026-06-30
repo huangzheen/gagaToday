@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "0.1.0",
+  "city": "munich",
+  "generatedAt": "2026-06-28T15:58:05.419023+00:00",
+  "pois": [
+    {
+      "id": "frauenkirche",
+      "city": "munich",
+      "type": "church",
+      "name": {
+        "de": "Frauenkirche",
+        "zh": "圣母教堂"
+      },
+      "position": {
+        "lat": 48.1385,
+        "lng": 11.5737
+      },
+      "icon": "⛪",
+      "sceneUrls": [
+        "/assets/scenes/munich/frauenkirche/_reference/ref_frauenkirche.png"
+      ],
+      "audioUrls": {},
+      "questIds": [],
+      "npcIds": [],
+      "published": true
+    },
+    {
+      "id": "marienplatz",
+      "city": "munich",
+      "type": "square",
+      "name": {
+        "de": "Marienplatz",
+        "zh": "玛利亚广场"
+      },
+      "position": {
+        "lat": 48.1374,
+        "lng": 11.5755
+      },
+      "icon": "🏛️",
+      "sceneUrls": [
+        "/assets/scenes/munich/marienplatz/_reference/ref_marienplatz.png",
+        "/assets/scenes/munich/marienplatz/_reference/scene_marienplatz_1.png",
+        "/assets/scenes/munich/marienplatz/_reference/scene_marienplatz_2.png"
+      ],
+      "audioUrls": {},
+      "questIds": [],
+      "npcIds": [],
+      "published": true
+    },
+    {
+      "id": "munchen_hauptbahnhof",
+      "city": "munich",
+      "type": "train_station",
+      "name": {
+        "de": "München Hauptbahnhof",
+        "zh": "慕尼黑中央火车站（主火车站）"
+      },
+      "position": {
+        "lat": 48.14072597393587,
+        "lng": 11.556941270828247
+      },
+      "icon": "🚉",
+      "sceneUrls": [
+        "/assets/scenes/munich/munchen_hauptbahnhof/_reference/ref_munchen_hauptbahnhof.png",
+        "/assets/scenes/munich/munchen_hauptbahnhof/_reference/scene_munchen_hauptbahnhof_1.png"
+      ],
+      "audioUrls": {
+        "de": "/assets/scenes/munich/munchen_hauptbahnhof/audio/intro_de.mp3",
+        "zh": "/assets/scenes/munich/munchen_hauptbahnhof/audio/intro_zh.mp3",
+        "en": "/assets/scenes/munich/munchen_hauptbahnhof/audio/intro_en.mp3"
+      },
+      "questIds": [],
+      "npcIds": [],
+      "published": true
+    }
+  ],
+  "npcs": [],
+  "dialogues": [],
+  "quests": [],
+  "knowledgeCards": []
+}
