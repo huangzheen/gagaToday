@@ -39,6 +39,11 @@ function getStorage(): Storage | null {
   }
 }
 
+/** P1-01:打开 POI dialog 的结果(用于 App.vue 反馈) */
+export type OpenPoiResult =
+  | { ok: true }
+  | { ok: false; reason: 'out-of-vision' }
+
 export const usePlayerStore = defineStore('player', () => {
   // ── state ──
   const player = ref<PlayerState>(createNewGameState())
@@ -115,12 +120,42 @@ export const usePlayerStore = defineStore('player', () => {
     }
   }
 
-  /** 打开 POI dialog */
-  function openPoi(poiId: string): void {
-    // 自动 discover(点开就算真正"看到")
-    markDiscovered(poiId)
-    currentPoiId.value = poiId
-    isPaused.value = true  // 暂停时间推进
+  /**
+   * 打开 POI dialog
+   *
+   * 审计 P1-01 修复:
+   * - 未发现 + 视野外 → 拒绝(不打开 dialog,不改 discoveredPoiIds)
+   * - 未发现 + 视野内 → 自动 discover + 打开
+   * - 已发现 → 直接打开
+   *
+   * 注意:必须传整个 poi 对象,因为 store 需要 position 判断视野。
+   * 旧签名 openPoi(poiId: string) 已移除,避免误用。
+   */
+  function openPoi(poi: RuntimePoi): OpenPoiResult {
+    const discovered = player.value.discoveredPoiIds.includes(poi.id)
+    if (!discovered && !isInVision(poi)) {
+      return { ok: false, reason: 'out-of-vision' }
+    }
+    if (!discovered) {
+      markDiscovered(poi.id)
+    }
+    currentPoiId.value = poi.id
+    isPaused.value = true
+    return { ok: true }
+  }
+
+  /**
+   * 高阶 action:移动玩家 + 触发视野发现
+   *
+   * 审计 P1-01 推荐:不要让调用者记住额外调 discoverInVision。
+   * setPosition() 只改坐标;moveTo() 改坐标 + 自动发现。
+   */
+  function moveTo(
+    pos: PlayerPosition,
+    pois: RuntimePoi[],
+  ): { added: string[]; total: number } {
+    setPosition(pos)
+    return discoverInVision(pois)
   }
 
   /** 关闭 POI dialog */
@@ -270,6 +305,7 @@ export const usePlayerStore = defineStore('player', () => {
     // actions
     setPosition,
     setCurrentCity,
+    moveTo,
     discoverInVision,
     markDiscovered,
     openPoi,

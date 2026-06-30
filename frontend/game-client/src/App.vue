@@ -40,6 +40,8 @@ interface AppState {
 
 const state = ref<AppState>({ status: 'loading', cityLabel: '…', poiCount: 0 })
 const bundle = ref<CityBundle | null>(null)
+/** P1-01 反馈:玩家点击视野外 POI 时的 toast(临时横幅) */
+const feedback = ref<string | null>(null)
 
 const player = usePlayerStore()
 
@@ -149,8 +151,24 @@ function onMapError(msg: string) {
 
 function onPoiClick(poi: PoiMarker) {
   console.info('[App] POI clicked:', poi)
-  // Phase 3: 打开 dialog + 自动 discover + 暂停时间
-  player.openPoi(poi.id)
+  // 审计 P1-01 修复:openPoi 接收完整 POI,store 判断视野
+  const fullPoi = bundle.value?.pois.find((p) => p.id === poi.id)
+  if (!fullPoi) {
+    console.warn('[App] POI not in bundle:', poi.id)
+    return
+  }
+  const result = player.openPoi(fullPoi)
+  if (!result.ok) {
+    // 视野外未发现 — 给用户明确反馈
+    feedback.value = `📍 ${fullPoi.name.zh} 距离太远,先移动到附近吧`
+    console.info('[App] out-of-vision:', fullPoi.id)
+    // 5 秒后清掉
+    window.setTimeout(() => {
+      if (feedback.value?.startsWith(`📍 ${fullPoi.name.zh}`)) {
+        feedback.value = null
+      }
+    }, 5000)
+  }
 }
 
 function onPoiDialogClose() {
@@ -189,6 +207,13 @@ function onPoiStartDialog(poi: RuntimePoi) {
       </div>
     </header>
     <main class="map-wrap">
+      <!-- P1-01:反馈 toast(视野外 POI 点击) -->
+      <Transition name="gaga-feedback">
+        <div v-if="feedback" class="gaga-feedback" data-testid="poi-feedback" role="status">
+          {{ feedback }}
+        </div>
+      </Transition>
+
       <MapView
         v-if="state.status !== 'error' && envUrl"
         :pmtiles-url="envUrl"
@@ -308,5 +333,32 @@ body { background: var(--navy); color: #fff; font-family: 'Courier New', monospa
   line-height: 1.5;
   max-width: 80%;
   white-space: pre-wrap;
+}
+
+/* P1-01:POI 反馈 toast */
+.gaga-feedback {
+  position: absolute;
+  top: 76px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 30;
+  background: #14305c;
+  border: 2px solid #ff6b6b;
+  border-radius: 6px;
+  box-shadow: 3px 3px 0 #06142a;
+  padding: 10px 18px;
+  color: #ffcf72;
+  font-family: 'Courier New', 'VT323', monospace;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+.gaga-feedback-enter-active, .gaga-feedback-leave-active {
+  transition: all 0.2s ease;
+}
+.gaga-feedback-enter-from, .gaga-feedback-leave-to {
+  opacity: 0;
+  transform: translate(-50%, -10px);
 }
 </style>
