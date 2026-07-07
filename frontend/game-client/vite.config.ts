@@ -31,7 +31,17 @@ export default defineConfig({
   },
   build: {
     target: 'es2022',
-    sourcemap: true,
+    sourcemap: false,
+    chunkSizeWarningLimit: 600,
+    rollupOptions: {
+      output: {
+        // 把 maplibre-gl + pmtiles 拆成独立 chunk,首屏主 chunk 不背 ~700KB
+        manualChunks: {
+          'maplibre-gl': ['maplibre-gl'],
+          'pmtiles': ['pmtiles'],
+        },
+      },
+    },
   },
   test: {
     globals: true,

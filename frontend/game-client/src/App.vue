@@ -161,12 +161,12 @@ function onPoiClick(poi: PoiMarker) {
   }
   const result = player.openPoi(fullPoi)
   if (!result.ok) {
-    // 视野外未发现 — 给用户明确反馈
-    feedback.value = `📍 ${fullPoi.name.zh} 距离太远,先移动到附近吧`
+    // 视野外未发现 — 给用户明确反馈(B2:emoji 用 aria-hidden + sr-only 文本)
+    feedback.value = `距离太远,先移动到 ${fullPoi.name.zh} 附近吧`
     console.info('[App] out-of-vision:', fullPoi.id)
     // 5 秒后清掉
     window.setTimeout(() => {
-      if (feedback.value?.startsWith(`📍 ${fullPoi.name.zh}`)) {
+      if (feedback.value === `距离太远,先移动到 ${fullPoi.name.zh} 附近吧`) {
         feedback.value = null
       }
     }, 5000)
@@ -191,10 +191,10 @@ function onPoiStartDialog(poi: RuntimePoi) {
 
 function onQuestCompleted(questId: string, xpDelta: number) {
   console.info(`[App] quest 完成: ${questId} (+${xpDelta} XP)`)
-  feedback.value = `🎉 Quest 完成! +${xpDelta} XP`
+  feedback.value = `任务完成! +${xpDelta} XP`
   // 5s 后清掉
   window.setTimeout(() => {
-    if (feedback.value?.startsWith('🎉 Quest 完成')) {
+    if (feedback.value?.startsWith('任务完成')) {
       feedback.value = null
     }
   }, 5000)
@@ -206,15 +206,21 @@ function onQuestCompleted(questId: string, xpDelta: number) {
     <header class="topbar">
       <div class="ttl">
         <span class="game-name">gagaToday</span>
-        <span class="city">München</span>
+        <span class="city" lang="de">München</span>
         <span v-if="state.contentVersion" class="cv" :title="`dataSource: ${state.dataSource}`">
           v{{ state.contentVersion }}
         </span>
       </div>
       <div class="status" :class="`status-${state.status}`">
-        <template v-if="state.status === 'loading'">⏳ 加载中…</template>
+        <template v-if="state.status === 'loading'">
+          <span aria-hidden="true">⏳</span>
+          <span class="sr-only">加载中</span>
+          加载中…
+        </template>
         <template v-else-if="state.status === 'ready'">
-          ✓ 地图就绪 · 城市 <b>{{ state.cityLabel }}</b> · {{ state.poiCount }} 个 POI
+          <span aria-hidden="true">✓</span>
+          <span class="sr-only">地图就绪</span>
+          地图就绪 · 城市 <b>{{ state.cityLabel }}</b> · {{ state.poiCount }} 个 POI
           <span class="data-source" :class="`ds-${state.dataSource}`">[{{ state.dataSource }}]</span>
           <span v-if="envUrl" class="pmtiles-hint">({{ envUrl.split('/').pop() }})</span>
           <span v-if="player.discoveredPoiIds.size > 0" class="discovered-hint" data-testid="discovered-count">
@@ -222,14 +228,16 @@ function onQuestCompleted(questId: string, xpDelta: number) {
           </span>
         </template>
         <template v-else>
-          ✗ {{ state.message }}
+          <span aria-hidden="true">✗</span>
+          <span class="sr-only">错误</span>
+          {{ state.message }}
         </template>
       </div>
     </header>
     <main class="map-wrap">
       <!-- P1-01:反馈 toast(视野外 POI 点击) -->
       <Transition name="gaga-feedback">
-        <div v-if="feedback" class="gaga-feedback" data-testid="poi-feedback" role="status">
+        <div v-if="feedback" class="gaga-feedback" data-testid="poi-feedback" role="status" aria-live="polite">
           {{ feedback }}
         </div>
       </Transition>
@@ -382,5 +390,70 @@ body { background: var(--navy); color: #fff; font-family: 'Courier New', monospa
 .gaga-feedback-enter-from, .gaga-feedback-leave-to {
   opacity: 0;
   transform: translate(-50%, -10px);
+}
+
+/* ── B2:sr-only 工具类 ── */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ── B5:focus-visible ── */
+button:focus-visible,
+a:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid #ffcf72;
+  outline-offset: 2px;
+}
+
+/* ── A2:移动端 topbar 紧凑(< 640px) ── */
+@media (max-width: 640px) {
+  .app-shell {
+    grid-template-rows: 52px 1fr;
+  }
+  .topbar {
+    padding: 0 12px;
+    border-bottom-width: 2px;
+  }
+  .game-name { font-size: 16px; letter-spacing: 2px; }
+  .city { font-size: 11px; }
+  .cv { font-size: 9px; padding: 1px 4px; }
+  .ttl { gap: 8px; flex-wrap: wrap; }
+  .status { font-size: 10px; max-width: 50%; }
+  .status .data-source { font-size: 8px; }
+  .gaga-feedback {
+    top: 60px;
+    font-size: 11px;
+    padding: 8px 14px;
+    max-width: 90vw;
+    white-space: normal;
+    text-align: center;
+  }
+}
+
+@supports (padding: max(0px)) {
+  @media (max-width: 640px) {
+    .topbar {
+      padding-left: max(12px, env(safe-area-inset-left));
+      padding-right: max(12px, env(safe-area-inset-right));
+    }
+  }
+}
+
+/* ── B1:prefers-reduced-motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .gaga-feedback-enter-active, .gaga-feedback-leave-active {
+    transition: none;
+  }
+  .gaga-feedback-enter-from, .gaga-feedback-leave-to {
+    transform: translate(-50%, 0);
+  }
 }
 </style>

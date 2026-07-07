@@ -7,12 +7,20 @@
  * 2. 对话模式(player.currentDialogueId 存在):显示 NPC + 对话节点 + 选项
  *
  * 设计:
- * - 右下角 panel(不覆盖地图中心,留视野)
+ * - 桌面:右下角悬浮面板(不覆盖地图中心,留视野)
+ * - 移动端(<=640px):底部 sheet,从底部弹出,占满宽,max-height 70vh
  * - POI 模式:icon + 名字(de/zh) + type + 主图 + 描述 + audio + 开始对话
  * - 对话模式:替换上面大部分区域,显示 NPC 名 + 节点文本 + 选择按钮
+ *
+ * a11y(A3):
+ * - role="dialog" + aria-modal
+ * - 打开时:焦点移到 dialog 内第一个可聚焦元素,记录 previousActiveElement
+ * - Escape 关闭:onKeydown 监听
+ * - 关闭时:焦点还给 previousActiveElement
+ * - sr-only 文本为 emoji-only 指示器提供文字说明
  */
 
-import { computed, ref, watch } from 'vue'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
 import { usePlayerStore } from '../store/player'
 import type { Poi as RuntimePoi } from '../schemas/content'
@@ -156,6 +164,73 @@ function tryCompleteQuest() {
   }
 }
 
+// ── A3:焦点管理 + Escape 关闭 ──
+const dialogRef = ref<HTMLElement | null>(null)
+let previousActiveElement: HTMLElement | null = null
+
+function onKeydown(e: KeyboardEvent) {
+  if (e.key === 'Escape') {
+    e.preventDefault()
+    onClose()
+    return
+  }
+  // 简单焦点 trap:Tab 在 dialog 内的可聚焦元素之间循环
+  if (e.key === 'Tab' && dialogRef.value) {
+    const focusable = dialogRef.value.querySelectorAll<HTMLElement>(
+      'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+    )
+    if (focusable.length === 0) return
+    const first = focusable[0]!
+    const last = focusable[focusable.length - 1]!
+    const active = document.activeElement as HTMLElement | null
+    if (e.shiftKey && active === first) {
+      e.preventDefault()
+      last.focus()
+    } else if (!e.shiftKey && active === last) {
+      e.preventDefault()
+      first.focus()
+    }
+  }
+}
+
+watch(() => props.poi, async (poi) => {
+  if (poi) {
+    // 打开 dialog:记录触发元素,等渲染后把焦点移进来
+    previousActiveElement = (document.activeElement as HTMLElement | null) ?? null
+    await nextTick()
+    if (dialogRef.value) {
+      const firstFocusable = dialogRef.value.querySelector<HTMLElement>(
+        'button:not([disabled]), [href], [tabindex]:not([tabindex="-1"])',
+      )
+      if (firstFocusable) {
+        firstFocusable.focus()
+      } else {
+        dialogRef.value.focus()
+      }
+    }
+    document.addEventListener('keydown', onKeydown)
+  } else {
+    // 关闭 dialog:还焦点 + 清理 keydown 监听
+    document.removeEventListener('keydown', onKeydown)
+    if (previousActiveElement && typeof previousActiveElement.focus === 'function') {
+      previousActiveElement.focus()
+    }
+    previousActiveElement = null
+  }
+})
+
+onMounted(() => {
+  // 首次挂载时如果已经有 poi(罕见,但要兜住)
+  if (props.poi) {
+    previousActiveElement = (document.activeElement as HTMLElement | null) ?? null
+    document.addEventListener('keydown', onKeydown)
+  }
+})
+
+onBeforeUnmount(() => {
+  document.removeEventListener('keydown', onKeydown)
+})
+
 // 暴露给 App.vue
 defineExpose({ openDialogueForCurrentPoi })
 </script>
@@ -164,9 +239,11 @@ defineExpose({ openDialogueForCurrentPoi })
   <Transition name="gaga-poi-dialog">
     <div
       v-if="poi"
+      ref="dialogRef"
       class="gaga-poi-dialog"
       role="dialog"
       aria-modal="false"
+      tabindex="-1"
       :aria-label="currentDialogue
         ? `对话: ${currentNpc?.name.zh}`
         : `POI: ${poi.name.zh}`"
@@ -183,14 +260,14 @@ defineExpose({ openDialogueForCurrentPoi })
       <!-- ── 对话模式 ── -->
       <template v-if="currentDialogue && currentNode && !dialogueEnded">
         <div class="gaga-dialog-header" data-testid="dialogue-header">
-          <span class="gaga-dialog-icon">
+          <span class="gaga-dialog-icon" aria-hidden="true">
             {{ currentNpc?.name?.de?.[0] ?? '👤' }}
           </span>
           <div class="gaga-dialog-titles">
-            <div class="gaga-dialog-title-zh">
+            <div class="gaga-dialog-title-zh" lang="zh-CN">
               {{ currentNpc?.name?.zh }}
             </div>
-            <div class="gaga-dialog-title-de">
+            <div class="gaga-dialog-title-de" lang="de">
               {{ currentNpc?.name?.de }}
               <span v-if="currentNpc?.role?.zh" class="gaga-dialog-role">
                 · {{ currentNpc.role.zh }}
@@ -201,12 +278,12 @@ defineExpose({ openDialogueForCurrentPoi })
 
         <!-- NPC 说话内容(德语优先,中文为翻译) -->
         <div class="gaga-dialogue-bubble" data-testid="dialogue-npc-text">
-          <div class="gaga-dialogue-lang-de">
-            <span class="gaga-dialogue-lang-tag">DE</span>
+          <div class="gaga-dialogue-lang-de" lang="de">
+            <span class="gaga-dialogue-lang-tag" aria-hidden="true">DE</span>
             {{ currentNode.npcText.de }}
           </div>
-          <div class="gaga-dialogue-lang-zh">
-            <span class="gaga-dialogue-lang-tag">ZH</span>
+          <div class="gaga-dialogue-lang-zh" lang="zh-CN">
+            <span class="gaga-dialogue-lang-tag" aria-hidden="true">ZH</span>
             {{ currentNode.npcText.zh }}
           </div>
         </div>
@@ -221,8 +298,8 @@ defineExpose({ openDialogueForCurrentPoi })
             :data-testid="`dialogue-choice-${choice.id}`"
             @click="onChoose(choice.id)"
           >
-            <span class="gaga-choice-de">{{ choice.text.de }}</span>
-            <span class="gaga-choice-zh">{{ choice.text.zh }}</span>
+            <span class="gaga-choice-de" lang="de">{{ choice.text.de }}</span>
+            <span class="gaga-choice-zh" lang="zh-CN">{{ choice.text.zh }}</span>
           </button>
         </div>
       </template>
@@ -230,14 +307,14 @@ defineExpose({ openDialogueForCurrentPoi })
       <!-- 对话结束(terminal 节点)— 显示知识卡 + 完成反馈 -->
       <template v-else-if="currentDialogue && dialogueEnded">
         <div class="gaga-dialog-header" data-testid="dialogue-end">
-          <span class="gaga-dialog-icon">🎉</span>
+          <span class="gaga-dialog-icon" aria-hidden="true">🎉</span>
           <div class="gaga-dialog-titles">
-            <div class="gaga-dialog-title-zh">对话完成</div>
-            <div class="gaga-dialog-title-de">Dialogue abgeschlossen</div>
+            <div class="gaga-dialog-title-zh" lang="zh-CN">对话完成</div>
+            <div class="gaga-dialog-title-de" lang="de">Dialogue abgeschlossen</div>
           </div>
         </div>
         <div class="gaga-dialogue-end-msg">
-          感谢与 {{ currentNpc?.name?.zh }} 的对话!
+          感谢与 <span lang="zh-CN">{{ currentNpc?.name?.zh }}</span> 的对话!
         </div>
         <div class="gaga-dialog-actions">
           <button
@@ -255,10 +332,10 @@ defineExpose({ openDialogueForCurrentPoi })
       <template v-else>
         <!-- 标题 -->
         <div class="gaga-dialog-header">
-          <span class="gaga-dialog-icon">{{ poi.icon }}</span>
+          <span class="gaga-dialog-icon" aria-hidden="true">{{ poi.icon }}</span>
           <div class="gaga-dialog-titles">
-            <div class="gaga-dialog-title-zh">{{ poi.name.zh }}</div>
-            <div class="gaga-dialog-title-de">{{ poi.name.de }}</div>
+            <div class="gaga-dialog-title-zh" lang="zh-CN">{{ poi.name.zh }}</div>
+            <div class="gaga-dialog-title-de" lang="de">{{ poi.name.de }}</div>
           </div>
         </div>
 
@@ -266,7 +343,9 @@ defineExpose({ openDialogueForCurrentPoi })
         <div class="gaga-dialog-meta">
           <span class="gaga-dialog-type" data-testid="poi-type">{{ poi.type }}</span>
           <span v-if="distanceLabel" class="gaga-dialog-distance" data-testid="poi-distance">
-            📏 {{ distanceLabel }}
+            <span aria-hidden="true">📏</span>
+            <span class="sr-only">距离</span>
+            {{ distanceLabel }}
           </span>
         </div>
 
@@ -275,11 +354,13 @@ defineExpose({ openDialogueForCurrentPoi })
           <img
             :src="mainSceneUrl"
             :alt="poi.name.zh"
+            loading="lazy"
+            decoding="async"
             @error="imageErrored = true"
           />
         </div>
         <div v-else class="gaga-dialog-image-placeholder">
-          <span class="gaga-dialog-placeholder-icon">{{ poi.icon }}</span>
+          <span class="gaga-dialog-placeholder-icon" aria-hidden="true">{{ poi.icon }}</span>
           <span class="gaga-dialog-placeholder-text">场景图暂缺</span>
         </div>
 
@@ -290,21 +371,27 @@ defineExpose({ openDialogueForCurrentPoi })
             :key="lang"
             class="gaga-dialog-desc-line"
             :class="`gaga-dialog-desc-${lang}`"
+            :lang="lang === 'de' ? 'de' : 'zh-CN'"
           >
-            <span class="gaga-dialog-desc-lang">{{ lang }}</span>
+            <span class="gaga-dialog-desc-lang" aria-hidden="true">{{ lang }}</span>
             <span>{{ text }}</span>
           </p>
         </div>
 
         <!-- 音频 -->
         <div v-if="availableAudio.length > 0" class="gaga-dialog-audio">
-          <span class="gaga-dialog-audio-label">🔊 Audio</span>
+          <span class="gaga-dialog-audio-label">
+            <span aria-hidden="true">🔊</span>
+            <span class="sr-only">音频</span>
+            Audio
+          </span>
           <audio
             v-for="audio in availableAudio"
             :key="audio.lang"
             controls
             preload="none"
             :src="audio.url"
+            :aria-label="`音频 (${audio.lang})`"
           >
             <track kind="captions" />
           </audio>
@@ -319,7 +406,9 @@ defineExpose({ openDialogueForCurrentPoi })
             data-testid="poi-start-dialog"
             @click="onStartDialog"
           >
-            💬 与 {{ currentNpc.name.zh }} 对话
+            <span aria-hidden="true">💬</span>
+            <span class="sr-only">开始与</span>
+            与 {{ currentNpc.name.zh }} 对话
           </button>
           <button
             v-else
@@ -329,7 +418,9 @@ defineExpose({ openDialogueForCurrentPoi })
             data-testid="poi-start-dialog-disabled"
             title="此 POI 暂无可用 NPC"
           >
-            💬 暂无可对话 NPC
+            <span aria-hidden="true">💬</span>
+            <span class="sr-only">无可用 NPC</span>
+            暂无可对话 NPC
           </button>
           <button
             type="button"
@@ -348,7 +439,7 @@ defineExpose({ openDialogueForCurrentPoi })
 .gaga-poi-dialog {
   position: absolute;
   right: 12px;
-  bottom: 220px;  /* 在 HUD 上方 */
+  bottom: 220px;  /* 桌面端:在 HUD 上方 */
   z-index: 20;
   width: 320px;
   max-height: calc(100vh - 280px);
@@ -362,6 +453,56 @@ defineExpose({ openDialogueForCurrentPoi })
   font-family: 'Courier New', 'VT323', monospace;
   font-size: 13px;
   user-select: none;
+}
+
+/* ── A2:移动端底部 sheet(<= 640px) ── */
+@media (max-width: 640px) {
+  .gaga-poi-dialog {
+    /* 底部 sheet:贴底、占满宽、限高,拇指操作 */
+    left: 8px;
+    right: 8px;
+    width: auto;
+    bottom: 12px;
+    max-height: 70vh;
+    border-radius: 12px 12px 8px 8px;
+    padding: 18px 16px 18px;
+    font-size: 14px;
+    /* 提升到 HUD 之上 */
+    z-index: 25;
+  }
+  .gaga-dialog-close {
+    /* Apple HIG 推荐 44x44 触控目标 */
+    width: 44px;
+    height: 44px;
+    top: 8px;
+    right: 8px;
+    font-size: 18px;
+  }
+  .gaga-dialog-title-zh { font-size: 18px; }
+  .gaga-dialog-title-de { font-size: 12px; }
+  .gaga-dialog-btn {
+    /* 触控目标加大 */
+    min-height: 44px;
+    font-size: 14px;
+  }
+  .gaga-dialogue-choice {
+    /* 选项行高更大,拇指好按 */
+    padding: 12px 12px;
+    min-height: 56px;
+  }
+  .gaga-choice-de { font-size: 14px; }
+  .gaga-choice-zh { font-size: 12px; }
+}
+
+/* safe-area 内边距(iPhone 刘海/底部 home indicator) */
+@supports (padding: max(0px)) {
+  @media (max-width: 640px) {
+    .gaga-poi-dialog {
+      padding-bottom: max(18px, env(safe-area-inset-bottom));
+      padding-left: max(16px, env(safe-area-inset-left));
+      padding-right: max(16px, env(safe-area-inset-right));
+    }
+  }
 }
 
 .gaga-dialog-close {
@@ -475,17 +616,16 @@ defineExpose({ openDialogueForCurrentPoi })
   font-size: 11px;
   text-align: left;
   cursor: pointer;
-  transition: all 0.1s ease;
+  transition: background 0.1s ease;
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
 .gaga-dialogue-choice:hover {
   background: #2a578a;
-  transform: translateX(2px);
 }
 .gaga-dialogue-choice:active {
-  transform: translateX(2px) translateY(1px);
+  transform: translateY(1px);
 }
 .gaga-choice-de {
   font-size: 12px;
@@ -650,12 +790,41 @@ defineExpose({ openDialogueForCurrentPoi })
   background: #1f4576;
 }
 
-/* transition */
+/* ── A3:焦点可见性 ── */
+.gaga-dialog-close:focus-visible,
+.gaga-dialogue-choice:focus-visible,
+.gaga-dialog-btn:focus-visible {
+  outline: 2px solid #ffcf72;
+  outline-offset: 2px;
+}
+.gaga-poi-dialog:focus-visible {
+  outline: 2px solid #ffcf72;
+  outline-offset: -2px;
+}
+
+/* transition(默认开启,B1 在 reduced-motion 下整体关掉) */
 .gaga-poi-dialog-enter-active, .gaga-poi-dialog-leave-active {
-  transition: all 0.2s ease;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 .gaga-poi-dialog-enter-from, .gaga-poi-dialog-leave-to {
   opacity: 0;
   transform: translateY(20px);
+}
+
+/* ── B1:prefers-reduced-motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .gaga-poi-dialog-enter-active, .gaga-poi-dialog-leave-active {
+    transition: none;
+  }
+  .gaga-poi-dialog-enter-from, .gaga-poi-dialog-leave-to {
+    transform: none;
+  }
+  .gaga-dialogue-choice,
+  .gaga-dialog-btn--primary {
+    transition: none;
+  }
+  .gaga-dialogue-choice:hover {
+    transform: none;
+  }
 }
 </style>

@@ -196,7 +196,9 @@ function isPublished(poiId) {
 
 async function loadPublished() {
   try {
-    const resp = await fetch('http://127.0.0.1:8000/api/v2/pois?city=munich')
+    // 用相对路径 /api,部署时由前端 nginx 反代到后端容器:8000
+    // (dev 模式由 Vite proxy 反代,prod 模式由容器 nginx 反代)
+    const resp = await fetch('/api/v2/pois?city=munich')
     const data = await resp.json()
     if (data.success) {
       publishedPois.value = data.pois.map(p => ({
@@ -271,7 +273,7 @@ async function onDrop(e) {
   const poi = store.knownPois.find(p => p.id === poiId)
   if (!poi) return
   try {
-    await fetch('http://127.0.0.1:8000/api/save/package', {
+    await fetch('/api/save/package', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -305,7 +307,7 @@ async function publishCurrent() {
   if (!editingPoi.value) return
   const poi = editingPoi.value
   try {
-    await fetch('http://127.0.0.1:8000/api/save/package', {
+    await fetch('/api/save/package', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

@@ -423,4 +423,54 @@ onBeforeUnmount(() => {
 .gaga-ctrl-btn--arrow {
   font-size: 18px;
 }
+
+/* ── B5:focus-visible ── */
+.gaga-ctrl-btn:focus-visible,
+.gaga-poi-marker:focus-visible {
+  outline: 2px solid #ffcf72;
+  outline-offset: 2px;
+}
+
+/* ── A2:移动端控件加大(< 640px) — 触控目标 >= 44px ── */
+@media (max-width: 640px) {
+  .gaga-map-controls {
+    top: 8px;
+    right: 8px;
+    grid-template-columns: repeat(3, 44px);
+    grid-template-rows: repeat(2, 44px);
+    gap: 6px;
+    padding: 6px;
+  }
+  .gaga-ctrl-btn {
+    width: 44px;
+    height: 44px;
+    font-size: 22px;
+  }
+  .gaga-ctrl-btn--arrow {
+    font-size: 20px;
+  }
+}
+
+@supports (padding: max(0px)) {
+  @media (max-width: 640px) {
+    .gaga-map-controls {
+      top: max(8px, env(safe-area-inset-top));
+      right: max(8px, env(safe-area-inset-right));
+    }
+  }
+}
+
+/* ── B1:prefers-reduced-motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .gaga-poi-marker,
+  .gaga-ctrl-btn {
+    transition: none;
+  }
+  .gaga-poi-marker:hover {
+    transform: none;
+  }
+  .gaga-ctrl-btn:active {
+    transform: none;
+  }
+}
 </style>

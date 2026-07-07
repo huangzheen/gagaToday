@@ -7,7 +7,15 @@
  * - Energy bar(10 格)
  * - Money (€X.XX)
  * - German XP
- * - Player position(可选)
+ * - Player position(可选,仅 dev 环境显示)
+ *
+ * 响应式(A2):
+ * - 桌面(> 640px):220px 宽,3 行布局
+ * - 移动端(<= 640px):紧凑 icon row,能量格缩小、字号减小
+ *
+ * a11y:
+ * - sr-only 文本为 emoji-only 指示器提供文字说明(B2)
+ * - 调试行 import.meta.env.DEV gate(B4)— 生产环境隐藏
  */
 
 import { computed } from 'vue'
@@ -15,6 +23,8 @@ import { computed } from 'vue'
 import { usePlayerStore } from '../store/player'
 
 const player = usePlayerStore()
+
+const isDev = import.meta.env.DEV
 
 const energyDots = computed(() => {
   // 10 个格子,每格代表 10 体力
@@ -28,6 +38,10 @@ const moneyEuro = computed(() => {
 const timeIcon = computed(() => {
   return player.isDaytime ? '☀' : '🌙'
 })
+
+const timeLabel = computed(() => {
+  return player.isDaytime ? '白天' : '夜晚'
+})
 </script>
 
 <template>
@@ -36,7 +50,9 @@ const timeIcon = computed(() => {
     <div class="hud-row hud-row--top">
       <span class="hud-day" data-testid="hud-day">Day {{ player.player.day }}</span>
       <span class="hud-time" :class="{ 'hud-time--night': !player.isDaytime }" data-testid="hud-time">
-        {{ timeIcon }} {{ player.timeOfDay }}
+        <span aria-hidden="true">{{ timeIcon }}</span>
+        <span class="sr-only">{{ timeLabel }}</span>
+        {{ player.timeOfDay }}
       </span>
     </div>
 
@@ -57,20 +73,34 @@ const timeIcon = computed(() => {
     <!-- 底行:金钱 + XP -->
     <div class="hud-row hud-row--stats">
       <span class="hud-stat" data-testid="hud-money">
-        <span class="hud-stat-icon">€</span>{{ moneyEuro }}
+        <span class="hud-stat-icon" aria-hidden="true">€</span>
+        <span class="sr-only">金钱</span>
+        {{ moneyEuro }}
       </span>
       <span class="hud-stat" data-testid="hud-xp">
-        <span class="hud-stat-icon">★</span>{{ player.player.germanXp }} XP
+        <span class="hud-stat-icon" aria-hidden="true">★</span>
+        <span class="sr-only">德语经验</span>
+        {{ player.player.germanXp }} XP
       </span>
     </div>
 
-    <!-- 调试:玩家位置 -->
-    <div v-if="player.player.playerPosition" class="hud-row hud-row--debug" data-testid="hud-position">
-      📍 {{ player.player.playerPosition.lat.toFixed(4) }}, {{ player.player.playerPosition.lng.toFixed(4) }}
+    <!-- B4:调试行 — 仅 dev 环境显示 -->
+    <div
+      v-if="isDev && player.player.playerPosition"
+      class="hud-row hud-row--debug"
+      data-testid="hud-position"
+    >
+      <span aria-hidden="true">📍</span>
+      <span class="sr-only">玩家位置</span>
+      {{ player.player.playerPosition.lat.toFixed(4) }}, {{ player.player.playerPosition.lng.toFixed(4) }}
     </div>
 
     <!-- 暂停指示 -->
-    <div v-if="player.isPaused" class="hud-paused" data-testid="hud-paused">⏸ Paused</div>
+    <div v-if="player.isPaused" class="hud-paused" data-testid="hud-paused">
+      <span aria-hidden="true">⏸</span>
+      <span class="sr-only">已暂停</span>
+      Paused
+    </div>
   </div>
 </template>
 
@@ -90,6 +120,34 @@ const timeIcon = computed(() => {
   color: #ffcf72;
   font-size: 13px;
   user-select: none;
+}
+
+/* ── A2:移动端紧凑布局(<= 640px) ── */
+@media (max-width: 640px) {
+  .gaga-hud {
+    /* 紧凑 icon row */
+    right: 8px;
+    bottom: 8px;
+    min-width: 0;
+    padding: 8px 10px;
+    font-size: 11px;
+  }
+  .hud-row--top { font-size: 12px; padding-bottom: 4px; }
+  .hud-label { font-size: 9px; width: 18px; }
+  .hud-energy-cell { width: 8px; height: 8px; }
+  .hud-stat-icon { width: 14px; height: 14px; font-size: 9px; }
+  .hud-value { font-size: 9px; }
+  .hud-row--debug { display: none; }  /* 移动端调试信息更不友好,直接隐藏 */
+}
+
+/* safe-area */
+@supports (padding: max(0px)) {
+  @media (max-width: 640px) {
+    .gaga-hud {
+      padding-right: max(10px, env(safe-area-inset-right));
+      padding-bottom: max(8px, env(safe-area-inset-bottom));
+    }
+  }
 }
 
 .hud-row {
@@ -180,5 +238,11 @@ const timeIcon = computed(() => {
   font-size: 9px;
   font-weight: bold;
   border: 1px solid #06142a;
+}
+
+/* ── B5:focus-visible ── */
+.gaga-hud:focus-visible {
+  outline: 2px solid #ffcf72;
+  outline-offset: 2px;
 }
 </style>
